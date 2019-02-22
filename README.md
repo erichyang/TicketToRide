@@ -1,12 +1,16 @@
-# Ticket2Die
+# Ticket to Ride
+
+## Game Instructions
+[Game Instructions](/resources/instructions.pdf)
+
+# Description
 Our Java program attempts to digitally emulate the popular board game Ticket to Ride. In this repository, we will detail our process of care coordination to build this complex program. The instructions to the board game will be listed in the repository or the link following.
-[Game Instructions](/)
 
-# Graphics Board
+# User Interface
+[UI](/resources/UI.png)
 
-![Board](info/board.png)
+# Schedule
+[Schedule](does not exist yet)
 
-## Schedule
-
-![Schedule](info/Schedule.PNG)
-
+# Project status
+Currently in planning phase of the project. 
