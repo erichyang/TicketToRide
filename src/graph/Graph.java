@@ -24,6 +24,7 @@ public class Graph {
 			cityMap.put(cityName, rails);
 		}else {
 			//i want it to throw something because this should never happen
+			throw new IllegalArgumentException();
 		}
 	}
 }
