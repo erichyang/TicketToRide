@@ -1,3 +1,4 @@
+![Title](resources/title.png)
 # Ticket to Ride
 
 ## Game Instructions
