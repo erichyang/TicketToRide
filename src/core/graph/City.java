@@ -1,4 +1,4 @@
-package graph;
+package core.graph;
 
 public class City {
 
