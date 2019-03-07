@@ -1,4 +1,19 @@
+4
 A B 3 false red
 B D 2 false red
 D C 2 false red
 C B 4 false red
+3
+E F 2 false red
+F G 4 false red
+F H 3 false red
+3
+I J 2 false red
+J K 3 false red
+J L 4 false red
+5
+M N 1 false red
+N O 1 false red 
+O P 1 false red 
+P Q 1 false red 
+Q M 1 false red 
