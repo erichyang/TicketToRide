@@ -1,7 +1,5 @@
 package core.graph;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,16 +7,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 public class Graph {
 	final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();// Trying a map sortta adjacency list maybe
 																	// TreeMap(prob not)?
-
-	public Graph(){
-	}
-
 	// want to make this recursive
 	public void add(String cityName, Rail rail) {
 		LinkedList<Rail> rails;
@@ -52,11 +45,6 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
-
-	}
-
-	public void correctCycle() {
-
 	}
 
 	public LinkedList<Rail> EdgeList() {
