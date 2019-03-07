@@ -19,17 +19,64 @@ public class Graph {
 		}
 		System.out.println(cityMap);
 	}
-	
+	//want to make this recursive
 	public void add(String cityName, Rail rail) {
 		LinkedList<Rail> rails;
 		if(!cityMap.containsKey(cityName)) {
-			 rails = new LinkedList<Rail>();
+			rails = new LinkedList<Rail>();
 			rails.add(rail);
 			cityMap.put(cityName, rails);
 		}else {
 			rails = cityMap.get(cityName);
-			if(!rails.contains(rail))rails.add(rail);
+			if(!rails.contains(rail)) {
+				rails.add(rail);
+				//return;
+			}
 			cityMap.put(cityName,  rails);
+		}
+		addInverse(rail.getCityB(),rail.inverse());
+		//add(rail.getCityB(),rail.inverse());
+	}
+	
+	//Real janky implementation, might change in the actual thing
+	public void addInverse(String cityName, Rail rail) {
+		LinkedList<Rail> rails;
+		if(!cityMap.containsKey(cityName)) {
+			rails = new LinkedList<Rail>();
+			rails.add(rail);
+			cityMap.put(cityName, rails);
+		}else {
+			rails = cityMap.get(cityName);
+			if(!rails.contains(rail)) {
+				rails.add(rail);
+			}
+			cityMap.put(cityName,  rails);
+		}
+		
+	}
+	
+	public void correctCycle() {
+		
+	}
+	
+	public LinkedList<Rail> EdgeList(){
+		LinkedList<Rail> RailList = new LinkedList<Rail>();
+		for(String key: cityMap.keySet()) {
+			RailList.addAll(cityMap.get(key));
+		}
+		System.out.println(RailList);
+		return RailList;
+	}
+	
+	public void detectCycle() {
+		Map<String,Boolean> visited = new HashMap<String,Boolean>();
+		for(String key: cityMap.keySet()) {
+			visited.put(key, false);
+		}
+		for(String city: visited.keySet()) {
+			if(!visited.get(city)) {
+				
+			}
 		}
 	}
 //	public void add(String cityName, LinkedList<Rail> rails) {

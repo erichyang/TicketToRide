@@ -27,6 +27,62 @@ public class Rail {
 		ownerName = owner;
 	}
 	
+	public Rail inverse() {
+		return new Rail(cityB, cityA, length,isDouble,color);
+	}
+	
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public String getCityA() {
+		return cityA;
+	}
+
+	public void setCityA(String cityA) {
+		this.cityA = cityA;
+	}
+
+	public String getCityB() {
+		return cityB;
+	}
+
+	public void setCityB(String cityB) {
+		this.cityB = cityB;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public boolean isDouble() {
+		return isDouble;
+	}
+
+	public void setDouble(boolean isDouble) {
+		this.isDouble = isDouble;
+	}
+
+	public boolean isSeen() {
+		return seen;
+	}
+
 	public String toString() {
 		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+"\n";
 	}

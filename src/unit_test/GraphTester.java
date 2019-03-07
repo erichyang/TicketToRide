@@ -7,6 +7,8 @@ import core.graph.Graph;
 
 public class GraphTester {
 	public static void main(String[ ]args) throws FileNotFoundException {
-		Graph g = new Graph(new File("game_files\\cities\\graph.in"));
+		//Graph g = new Graph(new File("game_files\\cities\\graph.in"));
+		Graph simpleGraph = new Graph(new File("game_files\\cities\\testGraphs.in"));
+		//simpleGraph.EdgeList();
 	}
 }
