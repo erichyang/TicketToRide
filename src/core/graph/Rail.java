@@ -82,6 +82,18 @@ public class Rail {
 	public boolean isSeen() {
 		return seen;
 	}
+	
+	public boolean isInverse(Rail otherRail) {
+		return this.getCityA().equals(otherRail.getCityB()) && 
+				this.getCityB().equals(otherRail.getCityA());
+	}
+	
+	public boolean equals(Rail otherRail) {
+		return this.getCityA().equals(otherRail.getCityA()) && 
+				this.getCityB().equals(otherRail.getCityB()) &&
+				this.getLength() == otherRail.getLength() &&
+				this.getColor().equals(otherRail.getColor());
+	}
 
 	public String toString() {
 		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+"\n";

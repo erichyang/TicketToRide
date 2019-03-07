@@ -3,6 +3,7 @@ package core.graph;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
@@ -17,7 +18,7 @@ public class Graph {
 			String[] input = sc.nextLine().split(" ");
 			add(input[0],new Rail(input[0],input[1],Integer.parseInt(input[2]),Boolean.parseBoolean(input[3]),input[4]));
 		}
-		System.out.println(cityMap);
+		//System.out.println(cityMap);
 	}
 	//want to make this recursive
 	public void add(String cityName, Rail rail) {
@@ -64,14 +65,31 @@ public class Graph {
 		for(String key: cityMap.keySet()) {
 			RailList.addAll(cityMap.get(key));
 		}
-		System.out.println(RailList);
+		//System.out.println(RailList);
 		return RailList;
 	}
 	
-	public void DFS() {
+	public void DFS(String city) {
 		Map<Rail,Boolean> visited = new HashMap<>();
 		EdgeList().forEach(key->{visited.put(key, false);});
 		
+		DFSVisit(cityMap.get(city).get(0),visited);
+	}
+	
+	public void DFSVisit(Rail rail, Map<Rail,Boolean> visited) {
+		visited.put(rail, true);
+		//Rail inverse = cityMap.get(rail.getCityB())
+		visited.put(rail.inverse(), true);
+		
+		System.out.println(rail);
+		
+		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
+		while(edgeIterator.hasNext()) {
+			Rail r = edgeIterator.next();
+			if(!visited.get(r)) {
+				DFSVisit(r,visited);
+			}
+		}
 	}
 //	public void add(String cityName, LinkedList<Rail> rails) {
 //		if(!cityMap.containsKey(cityName)) {

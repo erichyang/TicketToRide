@@ -10,5 +10,6 @@ public class GraphTester {
 		//Graph g = new Graph(new File("game_files\\cities\\graph.in"));
 		Graph simpleGraph = new Graph(new File("game_files\\cities\\testGraphs.in"));
 		//simpleGraph.EdgeList();
+		simpleGraph.DFS("A");
 	}
 }
