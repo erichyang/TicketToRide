@@ -88,11 +88,69 @@ public class Rail {
 				this.getCityB().equals(otherRail.getCityA());
 	}
 	
-	public boolean equals(Rail otherRail) {
-		return this.getCityA().equals(otherRail.getCityA()) && 
-				this.getCityB().equals(otherRail.getCityB()) &&
-				this.getLength() == otherRail.getLength() &&
-				this.getColor().equals(otherRail.getColor());
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cityA == null) ? 0 : cityA.hashCode());
+		result = prime * result + ((cityB == null) ? 0 : cityB.hashCode());
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + (isDouble ? 1231 : 1237);
+		result = prime * result + length;
+		result = prime * result + ((ownerName == null) ? 0 : ownerName.hashCode());
+		result = prime * result + (seen ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Rail)) {
+			return false;
+		}
+		Rail other = (Rail) obj;
+		if (cityA == null) {
+			if (other.cityA != null) {
+				return false;
+			}
+		} else if (!cityA.equals(other.cityA)) {
+			return false;
+		}
+		if (cityB == null) {
+			if (other.cityB != null) {
+				return false;
+			}
+		} else if (!cityB.equals(other.cityB)) {
+			return false;
+		}
+		if (color == null) {
+			if (other.color != null) {
+				return false;
+			}
+		} else if (!color.equals(other.color)) {
+			return false;
+		}
+		if (isDouble != other.isDouble) {
+			return false;
+		}
+		if (length != other.length) {
+			return false;
+		}
+		if (ownerName == null) {
+			if (other.ownerName != null) {
+				return false;
+			}
+		} else if (!ownerName.equals(other.ownerName)) {
+			return false;
+		}
+		if (seen != other.seen) {
+			return false;
+		}
+		return true;
 	}
 
 	public String toString() {
