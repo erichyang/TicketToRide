@@ -68,16 +68,10 @@ public class Graph {
 		return RailList;
 	}
 	
-	public void detectCycle() {
-		Map<String,Boolean> visited = new HashMap<String,Boolean>();
-		for(String key: cityMap.keySet()) {
-			visited.put(key, false);
-		}
-		for(String city: visited.keySet()) {
-			if(!visited.get(city)) {
-				
-			}
-		}
+	public void DFS() {
+		Map<Rail,Boolean> visited = new HashMap<>();
+		EdgeList().forEach(key->{visited.put(key, false);});
+		
 	}
 //	public void add(String cityName, LinkedList<Rail> rails) {
 //		if(!cityMap.containsKey(cityName)) {
