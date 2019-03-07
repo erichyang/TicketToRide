@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Graph {
-	final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();// Trying a map sortta adjacency list maybe
+	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();// Trying a map sortta adjacency list maybe
 																	// TreeMap(prob not)?
 	// want to make this recursive
 	public void add(String cityName, Rail rail) {
