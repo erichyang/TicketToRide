@@ -24,7 +24,7 @@ public class GraphTester {
 				simpleGraph.add(input[0],
 						new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), input[4]));
 			}
-			System.out.println(simpleGraph.DFS("A"));
+			System.out.println("longest Path"+ simpleGraph.LongestPath("A"));
 		}
 		//
 	}
