@@ -17,3 +17,30 @@ B C 1 false red
 C D 1 false red 
 D E 1 false red 
 E A 1 false red 
+9
+A B 2 false red
+B C 4 false red
+C D 1 false red
+D E 2 false red
+E C 1 false red
+B F 3 false red
+F G 3 false red
+G H 1 false red
+H F 2 false red
+4
+A B 1 false red
+A C 2 false red
+A D 3 false red
+A E 4 false red
+11
+A B 1 false red
+A C 1 false red
+B C 1 false red
+C I 3 false red
+C H 2 false red
+B K 6 false red
+B J 7 false red
+A D 5 false red
+A E 4 false red
+E F 3 false red
+E G 2 false red

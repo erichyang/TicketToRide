@@ -56,11 +56,17 @@ public class Graph {
 		return RailList;
 	}
 
-	public Holds3Things DFS(String city) {
-		Holds3Things max = new Holds3Things(null, -1, null);
+	public int LongestPath(String city) {
+		result pathEndPointSearch = DFS(city);
+		result nT = DFS(pathEndPointSearch.path.get(pathEndPointSearch.path.size()-1).getCityB());
+		return nT.dis;
+	}
+	
+	public result DFS(String city) {
+		result max = new result(null, -1, null);
 		List<Rail> list = cityMap.get(city);
 		for(Rail r : list) {
-			Holds3Things a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength());
+			result a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength());
 			if(a.dis > max.dis) {
 				max = a;
 			}
@@ -68,7 +74,11 @@ public class Graph {
 		return max;
 	}
 
-	public Holds3Things DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum) {
+<<<<<<< HEAD
+	
+=======
+	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> f, int sum) {
+>>>>>>> 22181b9e551205e59926acbb2183884ce5e2633a
 		if(visited.contains(rail)) {
 			throw new AssertionError();
 		}
@@ -77,12 +87,20 @@ public class Graph {
 		visited.add(rail.inverse());
 		path.add(rail);
 
-		Holds3Things s = new Holds3Things(new ArrayList<>(path), sum, new HashSet<>(visited));
+<<<<<<< HEAD
+		
+=======
+		result s = new result(new ArrayList<>(f), sum, new HashSet<>(visited));
+>>>>>>> 22181b9e551205e59926acbb2183884ce5e2633a
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext()) {
 			Rail r = edgeIterator.next();
 			if (!visited.contains(r)) {
-				Holds3Things a = DFSVisit(r, visited, path, sum + r.getLength());
+<<<<<<< HEAD
+				
+=======
+				result a = DFSVisit(r, visited, f, sum + r.getLength());
+>>>>>>> 22181b9e551205e59926acbb2183884ce5e2633a
 				if(a.dis > s.dis) {
 					s = a;
 				}
@@ -96,22 +114,22 @@ public class Graph {
 		return s;
 	}
 	
-	static class Holds3Things {
-		public List<Rail> fff;
+	static class result {
+		public List<Rail> path;
 		public int dis;
 		public Set<Rail> set;
-		public Holds3Things(List<Rail> fff, int dis, Set<Rail> set) {
-			this.fff = fff;
+		public result(List<Rail> path, int dis, Set<Rail> set) {
+			this.path = path;
 			this.dis = dis;
 			this.set = set;
 		}
 		@Override
 		public String toString() {
-			return "Holds3Things [fff=" + fff + ", dis=" + dis + ", set=" + set + "]";
+			return "result [path=" + path + ", dis=" + dis + ", set=" + set + "]";
 		}
 	}
 	
-//	public static List<Rail> fff;
+//	public static List<Rail> path;
 //	public static int dis;
 //	public static Set<Rail> set;
 //	public void DFSVisit(Rail rail, Set<Rail> visited, List<Rail> f, int sum) {
@@ -125,7 +143,7 @@ public class Graph {
 //		
 //		if(sum > dis) {
 //			dis = sum;
-//			fff = new ArrayList<>(f);
+//			path = new ArrayList<>(f);
 //			set = new HashSet<>(visited);
 //		}
 //
