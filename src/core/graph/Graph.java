@@ -68,21 +68,21 @@ public class Graph {
 		return max;
 	}
 
-	public Holds3Things DFSVisit(Rail rail, Set<Rail> visited, List<Rail> f, int sum) {
+	public Holds3Things DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum) {
 		if(visited.contains(rail)) {
 			throw new AssertionError();
 		}
 		
 		visited.add(rail);
 		visited.add(rail.inverse());
-		f.add(rail);
+		path.add(rail);
 
-		Holds3Things s = new Holds3Things(new ArrayList<>(f), sum, new HashSet<>(visited));
+		Holds3Things s = new Holds3Things(new ArrayList<>(path), sum, new HashSet<>(visited));
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext()) {
 			Rail r = edgeIterator.next();
 			if (!visited.contains(r)) {
-				Holds3Things a = DFSVisit(r, visited, f, sum + r.getLength());
+				Holds3Things a = DFSVisit(r, visited, path, sum + r.getLength());
 				if(a.dis > s.dis) {
 					s = a;
 				}
@@ -91,7 +91,7 @@ public class Graph {
 		
 		visited.remove(rail);
 		visited.remove(rail.inverse());
-		f.remove(rail);
+		path.remove(rail);
 		
 		return s;
 	}
