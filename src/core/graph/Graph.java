@@ -74,11 +74,7 @@ public class Graph {
 		return max;
 	}
 
-<<<<<<< HEAD
-	
-=======
-	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> f, int sum) {
->>>>>>> 22181b9e551205e59926acbb2183884ce5e2633a
+	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum) {
 		if(visited.contains(rail)) {
 			throw new AssertionError();
 		}
@@ -87,20 +83,12 @@ public class Graph {
 		visited.add(rail.inverse());
 		path.add(rail);
 
-<<<<<<< HEAD
-		
-=======
-		result s = new result(new ArrayList<>(f), sum, new HashSet<>(visited));
->>>>>>> 22181b9e551205e59926acbb2183884ce5e2633a
+		result s = new result(new ArrayList<>(path), sum, new HashSet<>(visited));
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext()) {
 			Rail r = edgeIterator.next();
 			if (!visited.contains(r)) {
-<<<<<<< HEAD
-				
-=======
-				result a = DFSVisit(r, visited, f, sum + r.getLength());
->>>>>>> 22181b9e551205e59926acbb2183884ce5e2633a
+				result a = DFSVisit(r, visited, path, sum + r.getLength());
 				if(a.dis > s.dis) {
 					s = a;
 				}
