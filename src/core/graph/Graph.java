@@ -56,10 +56,18 @@ public class Graph {
 		return RailList;
 	}
 
-	public int LongestPath(String city) {
-		result pathEndPointSearch = DFS(city);
-		result nT = DFS(pathEndPointSearch.path.get(pathEndPointSearch.path.size()-1).getCityB());
-		return nT.dis;
+//	public int LongestPath(String city) {
+//		result firstPass = DFS(city);
+//		return DFS(firstPass.path.get(firstPass.path.size()-1).getCityB()).dis;
+//	}
+	
+	public int LongestPath() {
+		int maxDis = Integer.MIN_VALUE;
+		for (String key : cityMap.keySet()) {
+			int distance = DFS(key).dis;
+			if(distance > maxDis) maxDis = distance;
+		}
+		return maxDis;
 	}
 	
 	public result DFS(String city) {

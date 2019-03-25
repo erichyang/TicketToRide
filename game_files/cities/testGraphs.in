@@ -44,3 +44,12 @@ A D 5 false red
 A E 4 false red
 E F 3 false red
 E G 2 false red
+8
+A B 1 false red
+B C 5 false red
+C D 5 false red
+D E 5 false red
+E F 5 false red
+C H 5 false red
+D I 5 false red
+B E 5 false red
