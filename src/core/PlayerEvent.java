@@ -10,11 +10,14 @@ public class PlayerEvent extends AWTEvent{
 	public static final int PLAYER_DRAW_FOUR =3;
 	public static final int PLAYER_DRAW_FIVE =4;
 	public static final int PLAYER_DRAW_DECK =5;
-	public static final int PLAYER_PLACE_TRACK = 6;
-	public static final int PLAYER_DRAW_TICKET = 7;
-	public static final int PLAYER_DISCARD_TICKET =8;
+//	public static final int PLAYER_PLACE_TRACK = 6;
+	public static final int PLAYER_DRAW_TICKET = 6;
+	public static final int PLAYER_DISCARD_TICKET =7;
 	
-	private int eventWeight;
+	private String[] rails;
+	private static File graphData;
+	
+	private static int eventWeight;
 	
 	public PlayerEvent(Object source, int id,int weight) {
 		super(source, id);
