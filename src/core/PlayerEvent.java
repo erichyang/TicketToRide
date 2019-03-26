@@ -1,6 +1,7 @@
 package core;
 
 import java.awt.AWTEvent;
+import java.io.File;
 
 public class PlayerEvent extends AWTEvent{
 	
@@ -14,9 +15,7 @@ public class PlayerEvent extends AWTEvent{
 	public static final int PLAYER_DRAW_TICKET = 6;
 	public static final int PLAYER_DISCARD_TICKET =7;
 	
-	private String[] rails;
-	private static File graphData;
-	
+	//remember to add seven to the ID for rails
 	private static int eventWeight;
 	
 	public PlayerEvent(Object source, int id,int weight) {
