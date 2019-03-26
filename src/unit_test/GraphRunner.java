@@ -24,6 +24,7 @@ public class GraphRunner
 				addRoute(input, simpleGraph);
 			}
 			printLongest(simpleGraph);
+			printMap(simpleGraph);
 		}
 	}
 
@@ -34,6 +35,11 @@ public class GraphRunner
 	
 	private static void printLongest(Graph tempGraph)
 	{
-		System.out.println("longest Path" + tempGraph.LongestPath());
+		System.out.println("Longest Path: " + tempGraph.LongestPath());
+	}
+	
+	private static void printMap(Graph tempGraph)
+	{
+		System.out.println(tempGraph.toString());
 	}
 }

@@ -1,5 +1,6 @@
 package core.graph;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -123,6 +124,14 @@ public class Graph {
 		public String toString() {
 			return "result [path=" + path + ", dis=" + dis + ", set=" + set + "]";
 		}
+	}
+	
+	public String toString()
+	{
+		Iterator iter = cityMap.keySet().iterator();
+		for( int i = 0; i < cityMap.keySet().size(); i++ )
+			System.out.println(cityMap.get(iter.next()));
+		return "";
 	}
 	
 //	public static List<Rail> path;
