@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Graph {
+	private int c;
 	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();// Trying a map sortta adjacency list maybe
 																	// TreeMap(prob not)?
 	// want to make this recursive
@@ -84,6 +85,7 @@ public class Graph {
 	}
 
 	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum) {
+//		System.out.println(c++);
 		if(visited.contains(rail)) {
 			throw new AssertionError();
 		}
@@ -103,11 +105,7 @@ public class Graph {
 				}
 			}
 		}
-		
-		visited.remove(rail);
-		visited.remove(rail.inverse());
-		path.remove(rail);
-		
+
 		return s;
 	}
 	
