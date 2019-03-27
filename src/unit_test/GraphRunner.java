@@ -11,7 +11,7 @@ public class GraphRunner
 {
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		Scanner sc = new Scanner(new File("game_files\\cities\\testGraphs.in"));
+		Scanner sc = new Scanner(new File("game_files\\cities\\graph.in"));
 
 		while (sc.hasNextLine())
 		{
