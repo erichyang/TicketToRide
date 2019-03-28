@@ -1,5 +1,5 @@
 package core;
 
 public interface GameEventListener {
-	public abstract void onGameEvent( int eventID);
+	public abstract void onGameEvent( GameEvent e);
 }
