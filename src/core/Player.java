@@ -67,12 +67,12 @@ public class Player {
 			
 			cities.remove(aLocation);
 			cities.remove(bLocation);
-			
 			cities.add(mergeGroup);
 		}
 	}
 	
 	private int findCity(String city) {
+		
 		for(int i=0; i< cities.size();i++) {
 			if(cities.get(i).contains(city)) return i;
 		}
@@ -89,6 +89,10 @@ public class Player {
 	
 	public void addTicket(Ticket newTicket) {
 		tickets.add(newTicket);
+	}
+	
+	public void removeTicket(Ticket ticektName) {
+		tickets.remove(tickets.)
 	}
 	
 	public String getName() {
