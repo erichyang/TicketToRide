@@ -7,12 +7,17 @@ public class Deck
 {
 	private static Stack<String> discard;
 	private static Stack<String> deck;
+	private GameEventListener listen;
 	
 	public Deck()
 	{
 		deck = new Stack<String>();
 	}
 	
+	public void setListener(GameEventListener GEL)
+	{
+		listen = GEL;
+	}
 	public void addDiscardedCard(String card)
 	{
 		discard.add(card);
