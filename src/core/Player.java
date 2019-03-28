@@ -5,8 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import graph.Rail;
+import core.graph.Rail;
 
 public class Player {
 	

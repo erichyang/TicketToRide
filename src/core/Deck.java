@@ -18,10 +18,12 @@ public class Deck
 	{
 		listen = GEL;
 	}
+	
 	public void addDiscardedCard(String card)
 	{
 		discard.add(card);
 	}
+	
 	public String getCard()
 	{
 		return deck.pop();
