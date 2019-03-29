@@ -12,6 +12,21 @@ public class Deck
 	public Deck()
 	{
 		deck = new Stack<String>();
+		for( int i = 0; i < 11; i++ )
+		{
+			deck.push("Pink");
+			deck.push("White");
+			deck.push("Blue");
+			deck.push("Yellow");
+			deck.push("Orange");
+			deck.push("Black");
+			deck.push("Red");
+			deck.push("Green");
+			deck.push("Wild");
+		}
+		deck.push("Wild");
+		deck.push("Wild");
+		shuffle();
 	}
 	
 	public void setListener(GameEventListener GEL)
@@ -26,7 +41,9 @@ public class Deck
 	
 	public String getCard()
 	{
-		return deck.pop();
+		String card = deck.pop();
+		if(deck.isEmpty()) listen.onGameEvent(new GameEvent(1,this));
+		return card;
 	}
 	
 	public String[] getVisibleCards()
