@@ -47,6 +47,7 @@ public class Player {
 	}
 	
 	public void addRail(Rail rail) {
+		
 		String cityA = rail.getCityA();
 		String cityB = rail.getCityB();
 		
@@ -91,8 +92,12 @@ public class Player {
 		tickets.add(newTicket);
 	}
 	
-	public void removeTicket(Ticket ticektName) {
-		tickets.remove(tickets.)
+	public void removeTicket(String ticketName) {
+		for(int i=tickets.size()-1; i>=0; i--) {
+			if(tickets.get(i).getCities().equals(ticketName)) {
+				tickets.remove(i);
+			}
+		}
 	}
 	
 	public String getName() {
