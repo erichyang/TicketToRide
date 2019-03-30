@@ -21,7 +21,7 @@ public class GraphicsGraph
 	{
 		try
 		{
-			map = ImageIO.read(new File("game_files\\cards\\ttr_board.jpg"));
+			map = ImageIO.read(new File("game_files\\cards\\ttr_board.png"));
 		}
 		catch(IOException e)
 		{
@@ -41,10 +41,7 @@ public class GraphicsGraph
 		{
 			rails[in.nextInt()-1] = new GraphicsRail(in.nextInt(),in.nextInt(),in.nextInt(), in.nextBoolean(), in.nextDouble());
 			in.nextLine();
-//			rails[i].setColor(in.next());
-//			rails[i].setCords(in.nextDouble(), in.nextDouble(), in.nextDouble(), in.nextDouble(), in.nextDouble(),in.nextDouble());
-//			System.out.println(Arrays.toString(rails[i].getCords()[0]));
-//			System.out.println(in.nextLine());
+
 			for(int j = 0 + ((rails[i].getDoubles()) ? 0:1); j < 2; j++)
 			{
 				rails[i].setColor(in.next());
@@ -57,7 +54,7 @@ public class GraphicsGraph
 	
 	public void draw(Graphics2D g)
 	{
-		g.drawImage(map, 0, 0, 1300,840, null);
+		g.drawImage(map, 0, 0, 940,600, null);
 		g.setStroke(new BasicStroke(3));
 		for(int i = 0; i < cities.length; i++)
 			cities[i].draw(g);

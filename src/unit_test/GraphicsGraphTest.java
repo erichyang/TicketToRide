@@ -23,7 +23,7 @@ public class GraphicsGraphTest extends JPanel
 		GraphicsGraphTest test = new GraphicsGraphTest();
 		JFrame window = new JFrame("Graphics Graph");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(1600, 1200);
+		window.setSize(1920, 1080);
 		window.setVisible(true);
 		window.add(test);
 //		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -31,7 +31,7 @@ public class GraphicsGraphTest extends JPanel
 //		while(true)
 //			test.repaint();
 		test.rail = new GraphicsRail(0, 0, 2, false, 0);
-		test.rail.setCords(0, 0, 1, 1, 2, 2);
+		test.rail.setCords(100, 100, 200, 200, 2, 2);
 		test.rail.setColor("Red");
 		test.city = new GraphicsCity("A", new Point2D.Float(100, 100));
 		
@@ -41,7 +41,7 @@ public class GraphicsGraphTest extends JPanel
 	@Override
 	protected void paintComponent(Graphics fakeG)
 	{
-		super.paintComponent(fakeG);
+//		super.paintComponent(fakeG);
 		Graphics2D g = (Graphics2D)fakeG;
 		
 //		city.draw(g);

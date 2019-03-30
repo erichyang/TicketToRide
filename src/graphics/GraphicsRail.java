@@ -1,5 +1,6 @@
 package graphics;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
@@ -54,9 +55,9 @@ public class GraphicsRail
 		cords[a][3] = y2;
 		cords[a][4] = x3;
 		cords[a][5] = y3;
+		path[a] = new Path2D.Double();
 		path[a].moveTo(cords[a][0], cords[a][1]);
-		path[a].lineTo(cords[a][2], cords[a][3]);
-		path[a].lineTo(cords[a][4], cords[a][5]);
+		path[a].quadTo(cords[a][2], cords[a][3],cords[a][4],cords[a][5]);
 		path[a].closePath();
 	}
 
@@ -68,11 +69,18 @@ public class GraphicsRail
 	public void draw(Graphics2D g)
 	{
 //		g.setStroke(new BasicStroke(3));
+		g.setStroke(new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
+				{ 33, 3 }, 22));
+//		g.drawString(""+path.length, 1000, 500);
 		for (int i = 0; i < ((doubles) ? 1 : 0); i++)
 		{
 			g.setColor(string2Color(colors[i]));
 			g.fill(path[i]);
 		}
+		
+		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
+		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
+		g.drawOval((int)cords[0][4], (int)cords[0][5], 5,5);
 	}
 
 	private Color string2Color(String color)

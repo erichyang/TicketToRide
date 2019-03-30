@@ -14,11 +14,16 @@ public class GraphicsCity
 	{
 		this.name = name;
 		this.cord = cord;
+//		this.cord.x *= 1.25;
+//		this.cord.y *= 1.5;
+		this.cord.x -= 50;
+		this.cord.y -= 50;
+//		this.cord.x *= ;
 	}
 	
 	public void draw(Graphics2D g)
 	{
-		g.setColor(Color.orange);
+		g.setColor(Color.green);
 		g.fill(new Ellipse2D.Double(cord.getX(), cord.getY(),20,20));
 //		g.drawString(name, (float)cord.getX()+10, (float)cord.getY()+10);
 	}
