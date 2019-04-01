@@ -14,6 +14,7 @@ public class Graph {
 	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();// Trying a map sortta adjacency list maybe
 																	// TreeMap(prob not)?
 	// want to make this recursive
+	
 	public void add(String cityName, Rail rail) {
 		LinkedList<Rail> rails;
 		if (!cityMap.containsKey(cityName)) {
@@ -30,6 +31,10 @@ public class Graph {
 		}
 		addInverse(rail.getCityB(), rail.inverse());
 		// add(rail.getCityB(),rail.inverse());
+	}
+	
+	public Map<String, LinkedList<Rail>> getMap(){
+		return cityMap;
 	}
 
 	// Real janky implementation, might change in the actual thing

@@ -54,26 +54,21 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
-		if (eventID <= 4 && eventID >= 0)
-		{
+		if (eventID <= 4 && eventID >= 0) {
 			int index = eventID;
 			currentPlayer.addCard(visibleCards[index]);
 			visibleCards[index] = GameDeck.getCard();
-		} else if (eventID == 5)
-		{
+		} else if (eventID == 5) {
 			currentPlayer.addCard(GameDeck.getCard());
-		} else if (eventID == 6)
-		{
+		} else if (eventID == 6) {
 			currentPlayer.addTicket(tickets.pop());
-		} else if (eventID == 7)
-		{
+		} else if (eventID == 7) {
 			// currentPlayer.removeTicket(eventID);
 			// IDK how to do this yet Ill wait for eric
-		} else if (eventID <= Graph.keySet().size() + 7)
-		{
+		} else if (eventID <= graph.getMap().keySet().size() + 7) {
 			// hashtable stuff neeeded
 			Player source = (Player) e.getSource();
-			source.addRail();
+			graph.claimRail(eventID-7,source.getName());
 		} else
 			throw new IllegalArgumentException("invalid GameEvent ID number");
 
@@ -81,6 +76,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		if (roundWeight == 2)
 		{
+			roundWeight =0;
 			nextRound();
 		}
 
