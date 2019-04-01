@@ -67,7 +67,7 @@ public class TicketToRide implements GameEventListener,PlayerEventListener{
 		else if(eventID <= Graph.keySet().size()+7) {
 			//hashtable stuff neeeded
 			Player source = (Player)e.getSource();
-			
+			source.addRail(rail);
 		}
 		else throw new IllegalArgumentException("invalid GameEvent ID number");
 		
