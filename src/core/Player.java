@@ -7,10 +7,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import core.graph.Graph;
 import core.graph.Rail;
 
 public class Player
 {
+	private Graph playerGraph;
 	private GameEventListener listen;
 	private int trains;
 	private int points;
@@ -69,6 +71,7 @@ public class Player
 		hand.put(color, hand.get(color)+1);
 	}
 	
+	
 	public void setListener(GameEventListener GEL)
 	{
 		listen = GEL;
@@ -86,7 +89,8 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
-
+		playerGraph.add(rail.getCityA(), rail);
+		
 		String cityA = rail.getCityA();
 		String cityB = rail.getCityB();
 
@@ -126,11 +130,6 @@ public class Player
 	public void addPoints(int value)
 	{
 		points += value;
-	}
-
-	public void addCard(String newTrainCard)
-	{
-		hand.add(newTrainCard);
 	}
 
 	public void addTicket(Ticket newTicket)
