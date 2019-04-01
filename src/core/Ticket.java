@@ -26,4 +26,8 @@ public class Ticket {
 	public int getPointCount() {
 		return points;
 	}
+	
+	public String toString() {
+		return city1 + " " + city2 + " " + points;
+	}
 }
