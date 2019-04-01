@@ -33,42 +33,41 @@ public class Player
 		hand.put("Yellow", 0);
 		hand.put("Green", 0);
 		hand.put("Wild", 0);
-		//pink, red, black, blue, orange, white, yellow, green, wild
+		// pink, red, black, blue, orange, white, yellow, green, wild
 		tickets = new ArrayList<>();
 		name = playerName;
 	}
-	
+
 	public int getNumCards()
 	{
 		int sum = 0;
-		for(Integer val : hand.values())
-			sum+=val;
+		for (Integer val : hand.values())
+			sum += val;
 		return sum;
 	}
-	
+
 	public boolean useCards(String color, int num)
 	{
-		//if not enough cards return false
-		//if enough cards, first draw from normal color, then draw from wild
+		// if not enough cards return false
+		// if enough cards, first draw from normal color, then draw from wild
 		int amount = hand.get(color);
-		if(amount + hand.get("Wild") < num)
+		if (amount + hand.get("Wild") < num)
 			return false;
-		if(num == amount)
+		if (num == amount)
 			hand.put(color, 0);
-		if(num > amount)
+		if (num > amount)
 		{
-			hand.put("Wild", hand.get("Wild")-num+hand.get(color));
+			hand.put("Wild", hand.get("Wild") - num + hand.get(color));
 			hand.put(color, 0);
 		}
 		return true;
 	}
-	
-	
+
 	public void addCards(String color)
 	{
-		hand.put(color, hand.get(color)+1);
+		hand.put(color, hand.get(color) + 1);
 	}
-	
+
 	public void setListener(GameEventListener GEL)
 	{
 		listen = GEL;
@@ -126,11 +125,6 @@ public class Player
 	public void addPoints(int value)
 	{
 		points += value;
-	}
-
-	public void addCard(String newTrainCard)
-	{
-		hand.add(newTrainCard);
 	}
 
 	public void addTicket(Ticket newTicket)
