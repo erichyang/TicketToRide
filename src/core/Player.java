@@ -12,7 +12,7 @@ import core.graph.Rail;
 
 public class Player
 {
-	private Graph playerGraph;
+	//private Graph playerGraph;
 	private GameEventListener listen;
 	private int trains;
 	private int points;
@@ -20,6 +20,7 @@ public class Player
 	private ArrayList<Ticket> tickets;
 	private String name;
 	private ArrayList<Set<String>> cities;
+	private boolean isFinalTurn;
 
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets)
 	{
@@ -38,6 +39,15 @@ public class Player
 		//pink, red, black, blue, orange, white, yellow, green, wild
 		tickets = new ArrayList<>();
 		name = playerName;
+		isFinalTurn = false;
+	}
+	
+	public boolean isFinalTurn() {
+		return isFinalTurn;
+	}
+	
+	public void finalTurn() {
+		isFinalTurn = true;
 	}
 	
 	public int getNumCards()
@@ -89,7 +99,7 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
-		playerGraph.add(rail.getCityA(), rail);
+		//playerGraph.add(rail.getCityA(), rail);
 		
 		String cityA = rail.getCityA();
 		String cityB = rail.getCityB();

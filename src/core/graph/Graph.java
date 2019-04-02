@@ -11,8 +11,8 @@ import java.util.Set;
 
 public class Graph {
 	private int c;
-	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();// Trying a map sortta adjacency list maybe
-	private final Set<Rail> MasterSet = new HashSet<Rail>();																// TreeMap(prob not)?
+	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();
+	//private final Set<Rail> MasterSet = new HashSet<Rail>();					
 	// want to make this recursive
 	
 	public void add(String cityName, Rail rail) {
@@ -29,7 +29,7 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
-		MasterSet.add(rail);
+		//MasterSet.add(rail);
 		addInverse(rail.getCityB(), rail.inverse());
 		// add(rail.getCityB(),rail.inverse());
 	}
@@ -52,12 +52,12 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
-		MasterSet.add(rail);
+		//MasterSet.add(rail);
 	}
 
 	
 	public Rail getRail(int index) {
-		
+		return EdgeList().get(index);
 	}
 	
 	public LinkedList<Rail> EdgeList() {
