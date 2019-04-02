@@ -22,7 +22,7 @@ public class Player
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets)
 	{
 		trains = 45;
-		points = 0;
+		setPoints(0);
 		hand = new HashMap<>();
 		hand.put("Pink", 0);
 		hand.put("Red", 0);
@@ -124,7 +124,7 @@ public class Player
 
 	public void addPoints(int value)
 	{
-		points += value;
+		setPoints(getPoints() + value);
 	}
 
 	public void addTicket(Ticket newTicket)
@@ -151,5 +151,15 @@ public class Player
 	public HashMap<String, Integer> getHand()
 	{
 		return hand;
+	}
+
+	public int getPoints()
+	{
+		return points;
+	}
+
+	public void setPoints(int points)
+	{
+		this.points = points;
 	}
 }

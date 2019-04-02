@@ -55,12 +55,12 @@ public class Deck
 		return drawCards;
 	}
 
-	public static void shuffle()
+	public void shuffle()
 	{
 		Collections.shuffle(deck);
 	}
 
-	public static void refillDeck()
+	public void refillDeck()
 	{
 		deck.addAll(discard);
 		shuffle();
