@@ -78,9 +78,9 @@ public class GraphicsRail
 			g.fill(path[i]);
 		}
 		
-		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
-		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
-		g.drawOval((int)cords[0][4], (int)cords[0][5], 5,5);
+//		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
+//		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
+//		g.drawOval((int)cords[0][4], (int)cords[0][5], 5,5);
 	}
 
 	private Color string2Color(String color)

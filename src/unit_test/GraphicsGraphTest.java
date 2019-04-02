@@ -45,7 +45,7 @@ public class GraphicsGraphTest extends JPanel
 		Graphics2D g = (Graphics2D)fakeG;
 		
 //		city.draw(g);
-		rail.draw(g);
-//		gGraph.draw(g);
+//		rail.draw(g);
+		gGraph.draw(g);
 	}
 }
