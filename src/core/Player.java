@@ -147,4 +147,9 @@ public class Player
 	{
 		return name;
 	}
+	
+	public HashMap<String, Integer> getHand()
+	{
+		return hand;
+	}
 }
