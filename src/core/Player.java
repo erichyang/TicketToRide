@@ -137,10 +137,6 @@ public class Player
 		return -1;
 	}
 
-	public void addPoints(int value)
-	{
-		points += value;
-	}
 
 	public void addTicket(Ticket newTicket)
 	{
@@ -158,6 +154,15 @@ public class Player
 		}
 	}
 
+	public void addPoints(int value)
+	{
+		points += value;
+	}
+	
+	public int points() {
+		return points;
+	}
+	
 	public String getName()
 	{
 		return name;
