@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -37,6 +38,7 @@ public class GraphicsGraph
 		for(int i = 0; i < cities.length; i++)
 			cities[in.nextInt()] = new GraphicsCity(in.next().replaceAll("_", " "), new Point2D.Float(in.nextInt(),in.nextInt()));
 		rails = new GraphicsRail[in.nextInt()];
+//		System.out.println(rails.length);
 		for(int i = 0; i < rails.length; i++)
 		{
 			rails[in.nextInt()-1] = new GraphicsRail(in.nextInt(),in.nextInt(),in.nextInt(), in.nextBoolean());
@@ -56,11 +58,12 @@ public class GraphicsGraph
 	
 	public void draw(Graphics2D g)
 	{
-		g.drawImage(map, 0, 0, 1200,805, null);
+		//g.drawImage(map, 0, 0, 1200,805, null);
 		g.setStroke(new BasicStroke(3));
-		for(int i = 0; i < cities.length; i++)
-			cities[i].draw(g);
 		for(int i = 0; i < rails.length; i++)
 			rails[i].draw(g);
+			//System.out.println(i);
+		for(int i = 0; i < cities.length; i++)
+			cities[i].draw(g);
 	}
 }

@@ -25,7 +25,7 @@ public class GraphicsRail
 		this.doubles = doubles;
 //		this.curvature = curvature;
 		colors = new String[(doubles) ? 2 : 1];
-		cords = new double[(doubles) ? 2 : 1][6];
+		cords = new double[(doubles) ? 2 : 1][4];
 		Arrays.fill(cords[0], -1);
 		if (cords.length == 2)
 			Arrays.fill(cords[1], -1);
@@ -53,6 +53,7 @@ public class GraphicsRail
 		cords[a][1] = y1;
 		cords[a][2] = x2;
 		cords[a][3] = y2;
+		
 //		cords[a][4] = x3;
 //		cords[a][5] = y3;
 //		path[a] = new Path2D.Double();
@@ -72,10 +73,12 @@ public class GraphicsRail
 		g.setStroke(new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 				{ 33, 3 }, 22));
 //		g.drawString(""+path.length, 1000, 500);
-		for (int i = 0; i < ((doubles) ? 1 : 0); i++)
+		for (int i = 0; i < ((doubles) ? 2 : 1); i++)
 		{
 			g.setColor(string2Color(colors[i]));
-			g.fill(path[i]);
+			System.out.println(Arrays.toString(cords[i]));
+			g.drawLine((int)cords[i][0],(int) cords[i][1], (int)cords[i][2],(int) cords[i][3]);
+//			g.fill(path[i]);
 		}
 		
 //		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
