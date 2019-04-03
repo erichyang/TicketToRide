@@ -1,5 +1,7 @@
 package core;
 
+import java.util.Arrays;
+
 public class Ticket {
 
 	private String city1;
@@ -7,10 +9,11 @@ public class Ticket {
 	private int points;
 	
 	public Ticket(String ticketsLine){
-		String[] lineData = ticketsLine.split("|");
+		String[] lineData = ticketsLine.split("\\|");
 		points = Integer.parseInt(lineData[0]);
 		city1 = lineData[1];
 		city2 = lineData[2];
+		System.out.println(Arrays.toString(lineData));
 	}
 	
 	public Ticket(int pointNum,String cityOne,String cityTwo) {
@@ -28,6 +31,6 @@ public class Ticket {
 	}
 	
 	public String toString() {
-		return city1 + " " + city2 + " " + points;
+		return getCities() + " " + getPointCount();
 	}
 }

@@ -36,6 +36,7 @@ public class Player
 		// pink, red, black, blue, orange, white, yellow, green, wild
 		tickets = new ArrayList<>();
 		name = playerName;
+		cities = new ArrayList<Set<String>>();
 	}
 
 	public int getNumCards()
@@ -161,5 +162,9 @@ public class Player
 	public void setPoints(int points)
 	{
 		this.points = points;
+	}
+	public ArrayList<Set<String>> getCities()
+	{
+		return cities;
 	}
 }
