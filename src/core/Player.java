@@ -178,6 +178,10 @@ public class Player
 	{
 		this.points = points;
 	}
+	public HashMap<String, Integer> getHand()
+	{
+		return hand;
+	}
 	public ArrayList<Set<String>> getCities()
 	{
 		return cities;

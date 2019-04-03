@@ -13,7 +13,7 @@ public class PlayerRunner
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		Scanner input = new Scanner(System.in);
-		System.out.println("1 - Ticket, 2 - Train, 3 - Points, 4 - Rails");
+		System.out.println("1 - Ticket, 2 - Train, 3 - Points, 4 - Rails, 5 - ");
 		Player player = new Player("Gamer", new ArrayList<String>(), new ArrayList<Ticket>());
 		do
 		{
