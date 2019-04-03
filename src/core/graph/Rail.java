@@ -154,6 +154,6 @@ public class Rail {
 	}
 
 	public String toString() {
-		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+"";
+		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+"\n";
 	}
 }

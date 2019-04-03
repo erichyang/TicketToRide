@@ -1,6 +1,5 @@
 package core.graph;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,8 +11,8 @@ import java.util.Set;
 
 public class Graph {
 	private int c;
-	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();// Trying a map sortta adjacency list maybe
-																	// TreeMap(prob not)?
+	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();
+	//private final Set<Rail> MasterSet = new HashSet<Rail>();					
 	// want to make this recursive
 	
 	public void add(String cityName, Rail rail) {
@@ -30,6 +29,7 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
+		//MasterSet.add(rail);
 		addInverse(rail.getCityB(), rail.inverse());
 		// add(rail.getCityB(),rail.inverse());
 	}
@@ -39,7 +39,7 @@ public class Graph {
 	}
 
 	// Real janky implementation, might change in the actual thing
-	public void addInverse(String cityName, Rail rail) {
+	private void addInverse(String cityName, Rail rail) {
 		LinkedList<Rail> rails;
 		if (!cityMap.containsKey(cityName)) {
 			rails = new LinkedList<Rail>();
@@ -52,8 +52,14 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
+		//MasterSet.add(rail);
 	}
 
+	
+	public Rail getRail(int index) {
+		return EdgeList().get(index);
+	}
+	
 	public LinkedList<Rail> EdgeList() {
 		LinkedList<Rail> RailList = new LinkedList<Rail>();
 		for (String key : cityMap.keySet()) {
@@ -127,14 +133,6 @@ public class Graph {
 		public String toString() {
 			return "result [path=" + path + ", dis=" + dis + ", set=" + set + "]";
 		}
-	}
-	
-	public String toString()
-	{
-		Iterator iter = cityMap.keySet().iterator();
-		for( int i = 0; i < cityMap.keySet().size(); i++ )
-			System.out.println(cityMap.get(iter.next()));
-		return "";
 	}
 	
 //	public static List<Rail> path;

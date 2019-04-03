@@ -1,6 +1,7 @@
 package core;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -8,13 +9,14 @@ import java.util.Scanner;
 import java.util.Stack;
 
 import core.graph.Graph;
+import core.graph.Rail;
+import graphics.View;
 
-public class TicketToRide implements GameEventListener, PlayerEventListener
-{
+public class TicketToRide implements GameEventListener, PlayerEventListener {
 
-	private static final int[] pointValues =
-	{ 0, 1, 2, 4, 7, 15, 21 };
+	private static final int[] pointValues = { 0, 1, 2, 4, 7, 15, 21 };
 
+	private View observer;
 	private Graph graph;
 	private Queue<Player> players;
 	private int roundWeight;
@@ -22,8 +24,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	private Stack<Ticket> tickets;
 	private String[] visibleCards;
 
-	public TicketToRide()
-	{
+	public TicketToRide() throws FileNotFoundException {
 
 		players = new LinkedList<Player>();
 		players.add(new Player("Rhail island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
@@ -35,6 +36,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		roundWeight = 0;
 
 		GameDeck = new Deck();
+		GameDeck.setListener(this);
 
 		tickets = new Stack<Ticket>();
 		Scanner sc = new Scanner(new File("game_files//tickets.in"));
@@ -44,22 +46,27 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		visibleCards = new String[5];
 	}
+	
+	public void setView(View observe) {
+		observer = observe;
+	}
 
-	public void onPlayerEvent(PlayerEvent e)
-	{
-
-		if ((roundWeight + e.getWeight()) > 2)
+	public void onPlayerEvent(PlayerEvent e) {
+		if ((roundWeight + e.getWeight()) > 2) {
+			System.out.println("invalid action");
 			return;
+		}
 
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
 		if (eventID <= 4 && eventID >= 0) {
 			int index = eventID;
-			currentPlayer.addCard(visibleCards[index]);
+			currentPlayer.addCards(visibleCards[index]);
 			visibleCards[index] = GameDeck.getCard();
+			checkVis();
 		} else if (eventID == 5) {
-			currentPlayer.addCard(GameDeck.getCard());
+			currentPlayer.addCards(GameDeck.getCard());
 		} else if (eventID == 6) {
 			currentPlayer.addTicket(tickets.pop());
 		} else if (eventID == 7) {
@@ -68,18 +75,30 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		} else if (eventID <= graph.getMap().keySet().size() + 7) {
 			// hashtable stuff neeeded
 			Player source = (Player) e.getSource();
-			graph.claimRail(eventID-7,source.getName());
+			Rail rail = graph.getRail(eventID - 7);
+			if (!source.useCards(rail.getColor(), rail.getLength())) {
+				System.out.println("not enough cards");
+				return;
+			}
+			source.addRail(rail);
 		} else
 			throw new IllegalArgumentException("invalid GameEvent ID number");
 
 		roundWeight += e.getWeight();
 
-		if (roundWeight == 2)
-		{
-			roundWeight =0;
+		if (roundWeight == 2) {
+			roundWeight = 0;
 			nextRound();
 		}
-
+		observer.observe(new ViewEvent());
+	}
+	
+	private void checkVis() {
+		int count =0;
+		for(String card : visibleCards)
+			if(card.equals("wild")) count++;
+		if(count>=3) 
+			this.onGameEvent(new GameEvent(3, this));
 	}
 
 	public void onGameEvent(GameEvent e)
@@ -88,40 +107,51 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		if (eventID == 0)
 		{// wating on eric
-			endGame(players.peek());
+			players.peek().finalTurn();
 		}
-		if (eventID == 1)
+		else if (eventID == 1)
 		{
 			if (e.getSource() instanceof Deck)
 			{
-				e.getSource().refillDeck();
+				((Deck)e.getSource()).refillDeck();
 			} else
 				throw new IllegalArgumentException("Not Deck");
 		}
-		if (eventID == 2)
+		else if (eventID == 2)
 		{
-
-		} else
+			for(int i=0; i< visibleCards.length; i++) {
+				GameDeck.addDiscardedCard(visibleCards[i]);
+				visibleCards[i] = GameDeck.getCard();
+			}
+		}
+		else if(eventID == 3) {
+			endGame();
+		}
+		else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 	}
 
-	public void nextRound()
-	{
+	public void nextRound() {
 		players.offer(players.poll());
 	}
 
-	public Graph getGraph()
-	{
+	public Graph getGraph() {
 		return graph;
 	}
 
-	public Player endGame(Player current)
-	{
-
+	public Player endGame() {
+		Player winner = null;
+		int mostPoints = Integer.MIN_VALUE;
+		for(Player p: players) {
+			if(p.points()>mostPoints) {
+				mostPoints = p.points();
+				winner = p;
+			}
+		}		
+		return winner;			
 	}
 
-	public Player getCurrentPlayer()
-	{
+	public Player getCurrentPlayer() {
 		return players.peek();
 	}
 }
