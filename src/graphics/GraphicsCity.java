@@ -28,8 +28,11 @@ public class GraphicsCity
 		g.setColor(new Color(244, 164, 66));
 		g.fill(new Ellipse2D.Double(cord.getX()-10, cord.getY()-10,20,20));
 		g.setColor(Color.BLACK);
+		g.setStroke(new BasicStroke(2));
+		g.drawOval((int)cord.getX()-11, (int)cord.getY()-11, 22, 22);
+		g.setColor(Color.MAGENTA);
 		g.setFont(new Font("Seriff",Font.BOLD,12));
-		g.drawString(name, (float)cord.getX()+10, (float)cord.getY()+10);
+		g.drawString(name, (float)cord.getX()+20, (float)cord.getY());
 	}
 	
 	public Point2D.Float getCord()
