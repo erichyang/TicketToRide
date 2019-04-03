@@ -60,7 +60,11 @@ Gray
 11 30 7 3 false 1.00
 Gray
 12 30 32 2 false 3.00
+<<<<<<< HEAD
 Gray
+=======
+Gray 
+>>>>>>> 5f00035fa0f1f7dd166c207fc8d55afbe2d7ff4e
 13 30 16 5 false -55.00
 Black
 14 32 16 3 false -35.00
@@ -82,7 +86,11 @@ Orange
 20 34 23 2 false -5.00
 Gray
 21 32 23 2 false -5.00
+<<<<<<< HEAD
 Gray
+=======
+Gray 
+>>>>>>> 5f00035fa0f1f7dd166c207fc8d55afbe2d7ff4e
 22 4 23 3 true -24.00
 Black
 Orange

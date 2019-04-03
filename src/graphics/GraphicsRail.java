@@ -12,18 +12,18 @@ public class GraphicsRail
 	private int cityB;
 	private int trains;
 	private boolean doubles;
-	private double curvature;
+//	private double curvature;
 	private String[] colors;
 	private double[][] cords;
 	private Path2D[] path;
 
-	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles, double curvature)
+	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
 		this.cityA = cityA;
 		this.cityB = cityB;
 		this.trains = trains;
 		this.doubles = doubles;
-		this.curvature = curvature;
+//		this.curvature = curvature;
 		colors = new String[(doubles) ? 2 : 1];
 		cords = new double[(doubles) ? 2 : 1][6];
 		Arrays.fill(cords[0], -1);
@@ -46,19 +46,19 @@ public class GraphicsRail
 			colors[1] = color;
 	}
 
-	public void setCords(double x1, double y1, double x2, double y2, double x3, double y3)
+	public void setCords(double x1, double y1, double x2, double y2)
 	{
 		int a = (cords[0][0] == -1) ? 0 : 1;
 		cords[a][0] = x1;
 		cords[a][1] = y1;
 		cords[a][2] = x2;
 		cords[a][3] = y2;
-		cords[a][4] = x3;
-		cords[a][5] = y3;
-		path[a] = new Path2D.Double();
-		path[a].moveTo(cords[a][0], cords[a][1]);
-		path[a].quadTo(cords[a][2], cords[a][3],cords[a][4],cords[a][5]);
-		path[a].closePath();
+//		cords[a][4] = x3;
+//		cords[a][5] = y3;
+//		path[a] = new Path2D.Double();
+//		path[a].moveTo(cords[a][0], cords[a][1]);
+//		path[a].quadTo(cords[a][2], cords[a][3],cords[a][4],cords[a][5]);
+//		path[a].closePath();
 	}
 
 	public double[][] getCords()
@@ -109,11 +109,15 @@ public class GraphicsRail
 			return null;
 		}
 	}
-
-	@Override
-	public String toString()
+	
+	public int getCityA()
 	{
-		return "[" + cityA + "," + cityB + "," + trains + "," + doubles + "," + curvature + ","
-				+ Arrays.toString(colors) + Arrays.toString(cords[0]) + "]";
+		return cityA;
 	}
+	
+	public int getCityB()
+	{
+		return cityB;
+	}
+	
 }

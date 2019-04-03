@@ -30,8 +30,8 @@ public class GraphicsGraphTest extends JPanel
 		test.gGraph = new GraphicsGraph();
 //		while(true)
 //			test.repaint();
-		test.rail = new GraphicsRail(0, 0, 2, false, 0);
-		test.rail.setCords(100, 100, 200, 200, 2, 2);
+		test.rail = new GraphicsRail(0, 0, 2, false);
+		test.rail.setCords(100, 100, 200, 200);
 		test.rail.setColor("Red");
 		test.city = new GraphicsCity("A", new Point2D.Float(100, 100));
 		
@@ -45,7 +45,7 @@ public class GraphicsGraphTest extends JPanel
 		Graphics2D g = (Graphics2D)fakeG;
 		
 //		city.draw(g);
-//		rail.draw(g);
-		gGraph.draw(g);
+		rail.draw(g);
+//		gGraph.draw(g);
 	}
 }
