@@ -1,76 +1,40 @@
 36
-java.awt.Point[x=963,y=532]
-java.awt.Point[x=1180,y=134]
-java.awt.Point[x=243,y=62]
-java.awt.Point[x=1085,y=539]
-java.awt.Point[x=835,y=318]
-java.awt.Point[x=665,y=667]
-java.awt.Point[x=446,y=454]
-java.awt.Point[x=677,y=234]
-java.awt.Point[x=431,y=701]
-java.awt.Point[x=372,y=241]
-java.awt.Point[x=718,y=721]
-java.awt.Point[x=664,y=430]
-java.awt.Point[x=206,y=562]
-java.awt.Point[x=756,y=554]
-java.awt.Point[x=124,y=641]
-java.awt.Point[x=1125,y=756]
-java.awt.Point[x=1088,y=52]
-java.awt.Point[x=896,y=483]
-java.awt.Point[x=838,y=704]
-java.awt.Point[x=1113,y=237]
-java.awt.Point[x=639,y=545]
-java.awt.Point[x=637,y=360]
-java.awt.Point[x=278,y=648]
-java.awt.Point[x=1003,y=300]
-java.awt.Point[x=41,y=228]
-java.awt.Point[x=1049,y=452]
-java.awt.Point[x=777,y=431]
-java.awt.Point[x=279,y=409]
-java.awt.Point[x=26,y=499]
-java.awt.Point[x=440,y=577]
-java.awt.Point[x=840,y=145]
-java.awt.Point[x=71,y=160]
-java.awt.Point[x=981,y=174]
-java.awt.Point[x=74,y=82]
-java.awt.Point[x=1122,y=362]
-java.awt.Point[x=533,y=75]
-0 Atlanta 798 432
-1 Boston 968 141
-2 Calgary 240 88
-3 Charleston 892 440
-4 Chicago 700 276
-5 Dallas 568 532
-6 Denver 399 375
-7 Duluth 576 213
-8 El_Paso 387 557
-9 Helena 340 220
-10 Houston 610 572
-11 Kansas_City 568 356
-12 Las_Vegas 212 452
-13 Little_Rock 639 447
-14 Los_Angeles 148 513
-15 Miami 926 598
-16 Montreal 897 83
-17 Nashville 749 397
-18 New_Orleans 704 559
-19 New_York 915 215
-20 Oklahoma_City 548 444
-21 Omaha 546 306
-22 Phoenix 267 517
-23 Pittsburgh 831 260
-24 Portland 84 210
-25 Raleigh 866 374
-26 Saint_Louis 655 359
-27 Salt_Lake_City 269 344
-28 San_Francisco 69 408
-29 Santa_Fe 392 466
-30 Sault_St._Marie 704 147
-31 Seattle 106 160
-32 Toronto 814 170
-33 Vancouver 110 105
-34 Washington 925 307
-35 Winnipeg 465 98
+0 Atlanta 963 532
+1 Boston 1180 134
+2 Calgary 243 62
+3 Charleston 1085 539
+4 Chicago 835 318
+5 Dallas 665 667
+6 Denver 446 454
+7 Duluth 677 234
+8 El_Paso 431 701
+9 Helena 372 241
+10 Houston 718 721
+11 Kansas_City 664 430
+12 Las_Vegas 206 562
+13 Little_Rock 756 554
+14 Los_Angeles 124 641
+15 Miami 1125 756
+16 Montreal 1088 52
+17 Nashville 896 483
+18 New_Orleans 838 704
+19 New_York 1113 237
+20 Oklahoma_City 639 545
+21 Omaha 637 360
+22 Phoenix 278 648
+23 Pittsburgh 1003 300
+24 Portland 41 228
+25 Raleigh 1049 452
+26 Saint_Louis 777 431
+27 Salt_Lake_City 279 409
+28 San_Francisco 26 499
+29 Santa_Fe 440 577
+30 Sault_St._Marie 840 145
+31 Seattle 71 160
+32 Toronto 981 174
+33 Vancouver 74 82
+34 Washington 1122 362
+35 Winnipeg 533 75
 78
 1 2 31 4 false 55.00
 Gray
