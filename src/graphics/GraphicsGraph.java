@@ -21,7 +21,7 @@ public class GraphicsGraph
 	{
 		try
 		{
-			map = ImageIO.read(new File("game_files\\cards\\ttr_board.png"));
+			map = ImageIO.read(new File("game_files\\cards\\ttr_board.jpg"));
 		}
 		catch(IOException e)
 		{
@@ -54,7 +54,7 @@ public class GraphicsGraph
 	
 	public void draw(Graphics2D g)
 	{
-		g.drawImage(map, 0, 0, 1200,756, null);
+		g.drawImage(map, 0, 0, 1200,805, null);
 		g.setStroke(new BasicStroke(3));
 		for(int i = 0; i < cities.length; i++)
 			cities[i].draw(g);
