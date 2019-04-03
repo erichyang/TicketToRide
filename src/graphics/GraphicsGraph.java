@@ -39,13 +39,15 @@ public class GraphicsGraph
 		rails = new GraphicsRail[in.nextInt()];
 		for(int i = 0; i < rails.length; i++)
 		{
-			rails[in.nextInt()-1] = new GraphicsRail(in.nextInt(),in.nextInt(),in.nextInt(), in.nextBoolean(), in.nextDouble());
+			rails[in.nextInt()-1] = new GraphicsRail(in.nextInt(),in.nextInt(),in.nextInt(), in.nextBoolean());
 			in.nextLine();
 
 			for(int j = 0 + ((rails[i].getDoubles()) ? 0:1); j < 2; j++)
 			{
 				rails[i].setColor(in.next());
-				rails[i].setCords(in.nextDouble(), in.nextDouble(), in.nextDouble(), in.nextDouble(), in.nextDouble(),in.nextDouble());
+				GraphicsCity cityA = cities[rails[i].getCityA()];
+				GraphicsCity cityB = cities[rails[i].getCityB()];
+				rails[i].setCords(cityA.getCord().getX(),cityA.getCord().getY(),cityB.getCord().getX(),cityB.getCord().getY());
 			}
 //			System.out.println(rails[i]);
 			

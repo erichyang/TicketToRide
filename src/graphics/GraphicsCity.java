@@ -25,4 +25,9 @@ public class GraphicsCity
 		g.fill(new Ellipse2D.Double(cord.getX(), cord.getY(),20,20));
 //		g.drawString(name, (float)cord.getX()+10, (float)cord.getY()+10);
 	}
+	
+	public Point2D.Float getCord()
+	{
+		return cord;
+	}
 }
