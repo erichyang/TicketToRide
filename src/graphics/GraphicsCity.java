@@ -32,7 +32,7 @@ public class GraphicsCity
 		g.drawOval((int)cord.getX()-11, (int)cord.getY()-11, 22, 22);
 		g.setColor(Color.MAGENTA);
 		g.setFont(new Font("Seriff",Font.BOLD,12));
-		g.drawString(name, (float)cord.getX()+20, (float)cord.getY());
+		g.drawString(name, (float)cord.getX()+20, (float)cord.getY()+10);
 	}
 	
 	public Point2D.Float getCord()

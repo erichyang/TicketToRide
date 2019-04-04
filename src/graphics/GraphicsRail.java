@@ -15,7 +15,6 @@ public class GraphicsRail
 //	private double curvature;
 	private String[] colors;
 	private double[][] cords;
-	private Path2D[] path;
 
 	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
@@ -29,7 +28,7 @@ public class GraphicsRail
 		Arrays.fill(cords[0], -1);
 		if (cords.length == 2)
 			Arrays.fill(cords[1], -1);
-		path = new Path2D[doubles ? 2 : 1];
+//		path = new Path2D[doubles ? 2 : 1];
 	}
 
 	public boolean getDoubles()
@@ -70,11 +69,15 @@ public class GraphicsRail
 	public void draw(Graphics2D g)
 	{
 //		g.setStroke(new BasicStroke(3));
-		g.setStroke(new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
-				{ 33, 3 }, 22));
+//		g.setStroke(new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
+//				{ 33, 3 }, 22));
 //		g.drawString(""+path.length, 1000, 500);
 		for (int i = 0; i < ((doubles) ? 2 : 1); i++)
 		{
+			double result = Math.sqrt(Math.pow(cords[i][0] - cords[i][2], 2) + Math.pow(cords[i][1] - cords[i][3], 2));
+			int length = (int)(result/trains);
+			g.setStroke(new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
+					{ length-2, 2 }, 0));
 			g.setColor(string2Color(colors[i]));
 			System.out.println(Arrays.toString(cords[i]));
 			g.drawLine((int)cords[i][0],(int) cords[i][1], (int)cords[i][2],(int) cords[i][3]);
