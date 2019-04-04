@@ -7,7 +7,7 @@ Calgary Helena 4 false Gray
 Seattle Helena 6 false Yellow
 Winnipeg Helena 4 false Blue
 Helena Duluth 6 false Orange
-Winnipeg Duluth 4 false Gray
+Winnipeg Duluth 4 false Black
 Sault_St._Marie Duluth 3 false Gray
 Sault_St._Marie Toronto 2 false Gray
 Sault_St._Marie Montreal 5 false Black
@@ -42,7 +42,7 @@ Omaha Chicago 4 false Blue
 Omaha Duluth 2 true Gray Gray
 Omaha Helena 5 false Red
 Salt_Lake_City Helena 3 false Pink
-Salt_Lake_City Portland 5 false Blue
+Salt_Lake_City Portland 6 false Blue
 Salt_Lake_City San_Francisco 5 true Orange White
 Salt_Lake_City Denver 3 true Yellow Red
 Helena Denver 4 false Green
@@ -73,6 +73,6 @@ Las_Vegas Salt_Lake_City 3 false Orange
 Dallas El_Paso 4 false Red
 Oklahoma_City El_Paso 5 false Yellow
 Oklahoma_City Dallas 2 true Gray Gray
-Houston Dallas 2 true Gray Gray
+Houston Dallas 1 true Gray Gray
 Little_Rock Dallas 2 false Gray
 Atlanta New_Orleans 4 true Yellow Orange

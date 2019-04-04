@@ -56,7 +56,7 @@ Blue
 9 9 7 6 false 1.00
 Orange
 10 35 7 4 false 1.00
-Gray
+Black
 11 30 7 3 false 1.00
 Gray
 12 30 32 2 false 3.00
@@ -136,7 +136,7 @@ Gray
 Red
 44 27 9 3 false -4.00
 Pink
-45 27 24 5 false 63.00
+45 27 24 6 false 63.00
 Blue
 46 27 28 5 true 1.00
 Orange
@@ -206,7 +206,7 @@ Yellow
 75 20 5 2 true -1.00
 Gray
 Gray
-76 10 5 2 true -2.00
+76 10 5 1 true -2.00
 Gray
 Gray
 77 13 5 2 false -2.00
