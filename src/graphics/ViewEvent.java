@@ -13,7 +13,13 @@ public class ViewEvent extends AWTEvent{
 	private Deck gameDeck;
 	private Graph map;
 	
-	public ViewEvent(int ID, Object source, Queue<Players>) {
+	public static int ROUND_END = 0;
+	public static int GAME_END = 1;
+	
+	public ViewEvent(int ID, Object source, Queue<Player> playerQueue, Deck GameDeck, Graph graph) {
 		super(source,ID);
+		map = graph;
+		gameDeck = GameDeck;
+		players = playerQueue;
 	}
 }

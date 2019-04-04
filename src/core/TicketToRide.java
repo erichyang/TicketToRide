@@ -11,6 +11,7 @@ import java.util.Stack;
 import core.graph.Graph;
 import core.graph.Rail;
 import graphics.View;
+import graphics.ViewEvent;
 
 public class TicketToRide implements GameEventListener, PlayerEventListener {
 
@@ -90,7 +91,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 			roundWeight = 0;
 			nextRound();
 		}
-		observer.observe(new ViewEvent());
+		observer.observe(new ViewEvent(0,this,players,GameDeck,graph));
 	}
 	
 	private void checkVis() {
@@ -125,7 +126,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 			}
 		}
 		else if(eventID == 3) {
-			endGame();
+//			endGame();
+			System.out.println(endGame());
 		}
 		else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
@@ -147,7 +149,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 				mostPoints = p.points();
 				winner = p;
 			}
-		}		
+		}
+		observer.observe(new ViewEvent(1, this, players, GameDeck, graph));
 		return winner;			
 	}
 
