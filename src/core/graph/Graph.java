@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import core.Player;
+
 public class Graph {
 	private int c;
 	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();
@@ -29,9 +31,7 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
-		//MasterSet.add(rail);
 		addInverse(rail.getCityB(), rail.inverse());
-		// add(rail.getCityB(),rail.inverse());
 	}
 	
 	public Map<String, LinkedList<Rail>> getMap(){
@@ -52,7 +52,6 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
-		//MasterSet.add(rail);
 	}
 
 	
@@ -74,20 +73,20 @@ public class Graph {
 //		return DFS(firstPass.path.get(firstPass.path.size()-1).getCityB()).dis;
 //	}
 	
-	public int LongestPath() {
+	public int LongestPath(Player p) {
 		int maxDis = Integer.MIN_VALUE;
 		for (String key : cityMap.keySet()) {
-			int distance = DFS(key).dis;
+			int distance = DFS(key,p).dis;
 			if(distance > maxDis) maxDis = distance;
 		}
 		return maxDis;
 	}
 	
-	public result DFS(String city) {
+	public result DFS(String city,Player p) {
 		result max = new result(null, -1, null);
 		List<Rail> list = cityMap.get(city);
 		for(Rail r : list) {
-			result a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength());
+			result a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength(),p);
 			if(a.dis > max.dis) {
 				max = a;
 			}
@@ -95,8 +94,7 @@ public class Graph {
 		return max;
 	}
 
-	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum) {
-//		System.out.println(c++);
+	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum,Player p) {
 		if(visited.contains(rail)) {
 			throw new AssertionError();
 		}
@@ -109,8 +107,8 @@ public class Graph {
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext()) {
 			Rail r = edgeIterator.next();
-			if (!visited.contains(r)) {
-				result a = DFSVisit(r, visited, path, sum + r.getLength());
+			if (!visited.contains(r) || !p.contains(r)) {
+				result a = DFSVisit(r, visited, path, sum + r.getLength(),p);
 				if(a.dis > s.dis) {
 					s = a;
 				}
