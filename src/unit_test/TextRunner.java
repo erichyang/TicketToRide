@@ -18,7 +18,6 @@ public class TextRunner
 	
 	private static void printPlayerHand(Player pl)
 	{
-
 		System.out.println("Cards: " + pl.getHand().toString() + "\nTickets: " + pl.getTickets().toString()
 				+ "\nPoints: " + pl.getPoints() + "\nCities: " + pl.getCities());
 	}
