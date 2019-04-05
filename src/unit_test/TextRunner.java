@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import core.Player;
+import core.PlayerEvent;
 import core.TicketToRide;
 
 public class TextRunner
@@ -12,10 +13,21 @@ public class TextRunner
 	{
 		TicketToRide game = new TicketToRide();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Current Player: " + game.getCurrentPlayer().getName());
-		printPlayerHand(game.getCurrentPlayer());
+		do
+		{
+			Player pl = game.getCurrentPlayer();
+			System.out.println("Current Player: " + pl.getName());
+			System.out.println("5 cards: " + game.getVisCards());
+			System.out.print("PlayerEvent: ");
+
+			int choice = sc.nextInt();
+			sc.nextLine();
+			game.onPlayerEvent(new PlayerEvent(pl, choice, 1));
+
+			printPlayerHand(pl);
+		} while (sc.hasNext());
 	}
-	
+
 	private static void printPlayerHand(Player pl)
 	{
 		System.out.println("Cards: " + pl.getHand().toString() + "\nTickets: " + pl.getTickets().toString()

@@ -157,4 +157,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	public Player getCurrentPlayer() {
 		return players.peek();
 	}
+	
+	//testing methods
+	public String getVisCards()
+	{
+		return visibleCards.toString();
+	}
 }

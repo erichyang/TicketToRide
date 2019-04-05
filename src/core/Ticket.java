@@ -13,7 +13,7 @@ public class Ticket {
 		points = Integer.parseInt(lineData[0]);
 		city1 = lineData[1];
 		city2 = lineData[2];
-		System.out.println(Arrays.toString(lineData));
+//		System.out.println(Arrays.toString(lineData));
 	}
 	
 	public Ticket(int pointNum,String cityOne,String cityTwo) {
