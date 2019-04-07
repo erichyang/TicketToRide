@@ -74,15 +74,38 @@ public class GraphicsRail
 //		g.drawString(""+path.length, 1000, 500);
 		for (int i = 0; i < ((doubles) ? 2 : 1); i++)
 		{
-			double result = Math.sqrt(Math.pow(cords[i][0] - cords[i][2], 2) + Math.pow(cords[i][1] - cords[i][3], 2));
+			double x = cords[i][0] - cords[i][2];
+			double y = cords[i][1] - cords[i][3];
+		
+			double result = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 			int length = (int)(result/trains);
-			g.setStroke(new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
+			
+			double alpha = Math.atan(y/x);
+			
+			double deltaX = 4*Math.sin(alpha);
+			double deltaY = 4*Math.cos(alpha);
+
+			g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 					{ length-2, 2 }, 0));
 			g.setColor(string2Color(colors[i]));
-			System.out.println(Arrays.toString(cords[i]));
-			g.drawLine((int)cords[i][0],(int) cords[i][1], (int)cords[i][2],(int) cords[i][3]);
-//			g.fill(path[i]);
+			//System.out.println(Arrays.toString(cords[i]));
+			//g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
+			//if(doubles && cords[i][0]> 1150 && cords[i][2]<1090) {
+			if(doubles) {
+//				System.out.println(Arrays.toString(cords[i]));
+//				g.setColor(Color.CYAN);
+//				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
+				g.setColor(string2Color(colors[i]));
+				
+				g.drawLine((int)(cords[i][0] + (-deltaX+2*deltaX*(i))),(int) (cords[i][1] -(-deltaY+2*deltaY*(i))),
+						(int)(cords[i][2]-deltaX+2*deltaX*(i)),(int)(cords[i][3]-(-deltaY+2*deltaY*(i))));
+//				System.out.println(Math.toDegrees(alpha) +"("+ deltaX+ ","+deltaY+")"+" "+"("+x+","+y+")");
+			}
+			else {
+				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
+			}
 		}
+		
 		
 //		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
 //		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
