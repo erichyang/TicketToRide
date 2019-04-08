@@ -59,10 +59,16 @@ public class Player
 		return sum;
 	}
 	
-	public boolean useCards(String color, int num)
+	public boolean useCards(Rail rail)
 	{
 		//if not enough cards return false
 		//if enough cards, first draw from normal color, then draw from wild
+		if(contains(rail)) return false;
+		
+		String color = rail.getColor();
+		int num = rail.getLength();
+		
+		if(trains<num) return false;
 		int amount = hand.get(color);
 		if(amount + hand.get("Wild") < num)
 			return false;
@@ -138,6 +144,14 @@ public class Player
 		return -1;
 	}
 
+	public boolean contains(Rail rail) {
+		int aLoc = findCity(rail.getCityA());
+		int bLoc = findCity(rail.getCityB());
+		
+		if(aLoc == bLoc && aLoc != -1) {
+			return true;
+		}else return false;
+	}
 
 	public void addTicket(Ticket newTicket)
 	{
