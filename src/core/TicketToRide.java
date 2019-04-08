@@ -141,6 +141,11 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		return graph;
 	}
 
+	public String getVisCards()
+	{
+		return visibleCards.toString();
+	}
+	
 	public Player endGame() {
 		Player winner = null;
 		int mostPoints = Integer.MIN_VALUE;
@@ -156,11 +161,5 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 	public Player getCurrentPlayer() {
 		return players.peek();
-	}
-	
-	//testing methods
-	public String getVisCards()
-	{
-		return visibleCards.toString();
 	}
 }
