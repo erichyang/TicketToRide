@@ -32,7 +32,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.forEach(player -> player.setListener(this));
+		players.forEach(player -> {
+			player.setListener(this);
+			for(int i=0; i<4; i++) player.addCards(GameDeck.getCard());
+			});
 
 		roundWeight = 0;
 
@@ -45,7 +48,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		while (sc.hasNextLine())
 			tickets.add(new Ticket(sc.nextLine()));
 
-		visibleCards = new String[5];
+		visibleCards = GameDeck.getVisibleCards();	
 	}
 	
 	public void setView(View observe) {
@@ -77,7 +80,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 			// hashtable stuff neeeded
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail(eventID - 7);
-			if (!source.useCards(rail.getColor(), rail.getLength())) {
+			if (!source.useCards(rail)) {
 				System.out.println("not enough cards");
 				return;
 			}
@@ -141,11 +144,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		return graph;
 	}
 
-	public String getVisCards()
-	{
-		return visibleCards.toString();
-	}
-	
 	public Player endGame() {
 		Player winner = null;
 		int mostPoints = Integer.MIN_VALUE;
