@@ -13,9 +13,11 @@ import core.graph.Rail;
 import graphics.View;
 import graphics.ViewEvent;
 
-public class TicketToRide implements GameEventListener, PlayerEventListener {
+public class TicketToRide implements GameEventListener, PlayerEventListener
+{
 
-	private static final int[] pointValues = { 0, 1, 2, 4, 7, 15, 21 };
+	private static final int[] pointValues =
+	{ 0, 1, 2, 4, 7, 15, 21 };
 
 	private View observer;
 	private Graph graph;
@@ -25,22 +27,24 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	private Stack<Ticket> tickets;
 	private String[] visibleCards;
 
-	public TicketToRide() throws FileNotFoundException {
-
+	public TicketToRide() throws FileNotFoundException
+	{
+		GameDeck = new Deck();
+		GameDeck.setListener(this);
 		players = new LinkedList<Player>();
 		players.add(new Player("Rhail island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.forEach(player -> {
+
+		players.forEach(player ->
+		{
 			player.setListener(this);
-			for(int i=0; i<4; i++) player.addCards(GameDeck.getCard());
-			});
+			for (int i = 0; i < 4; i++)
+				player.addCards(GameDeck.getCard());
+		});
 
 		roundWeight = 0;
-
-		GameDeck = new Deck();
-		GameDeck.setListener(this);
 
 		tickets = new Stack<Ticket>();
 		Scanner sc = new Scanner(new File("game_files//tickets.in"));
@@ -48,15 +52,18 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		while (sc.hasNextLine())
 			tickets.add(new Ticket(sc.nextLine()));
 
-		visibleCards = GameDeck.getVisibleCards();	
+		visibleCards = GameDeck.getVisibleCards();
 	}
-	
-	public void setView(View observe) {
+
+	public void setView(View observe)
+	{
 		observer = observe;
 	}
 
-	public void onPlayerEvent(PlayerEvent e) {
-		if ((roundWeight + e.getWeight()) > 2) {
+	public void onPlayerEvent(PlayerEvent e)
+	{
+		if ((roundWeight + e.getWeight()) > 2)
+		{
 			System.out.println("invalid action");
 			return;
 		}
@@ -64,23 +71,29 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
-		if (eventID <= 4 && eventID >= 0) {
+		if (eventID <= 4 && eventID >= 0)
+		{
 			int index = eventID;
 			currentPlayer.addCards(visibleCards[index]);
 			visibleCards[index] = GameDeck.getCard();
 			checkVis();
-		} else if (eventID == 5) {
+		} else if (eventID == 5)
+		{
 			currentPlayer.addCards(GameDeck.getCard());
-		} else if (eventID == 6) {
+		} else if (eventID == 6)
+		{
 			currentPlayer.addTicket(tickets.pop());
-		} else if (eventID == 7) {
+		} else if (eventID == 7)
+		{
 			// currentPlayer.removeTicket(eventID);
 			// IDK how to do this yet Ill wait for eric
-		} else if (eventID <= graph.getMap().keySet().size() + 7) {
+		} else if (eventID <= graph.getMap().keySet().size() + 7)
+		{
 			// hashtable stuff neeeded
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail(eventID - 7);
-			if (!source.useCards(rail)) {
+			if (!source.useCards(rail))
+			{
 				System.out.println("not enough cards");
 				return;
 			}
@@ -90,18 +103,21 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 		roundWeight += e.getWeight();
 
-		if (roundWeight == 2) {
+		if (roundWeight == 2)
+		{
 			roundWeight = 0;
 			nextRound();
 		}
-		observer.observe(new ViewEvent(0,this,players,GameDeck,graph));
+		//observer.observe(new ViewEvent(0, this, players, GameDeck, graph));
 	}
-	
-	private void checkVis() {
-		int count =0;
-		for(String card : visibleCards)
-			if(card.equals("wild")) count++;
-		if(count>=3) 
+
+	private void checkVis()
+	{
+		int count = 0;
+		for (String card : visibleCards)
+			if (card.equals("wild"))
+				count++;
+		if (count >= 3)
 			this.onGameEvent(new GameEvent(3, this));
 	}
 
@@ -112,52 +128,66 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		if (eventID == 0)
 		{// wating on eric
 			players.peek().finalTurn();
-		}
-		else if (eventID == 1)
+		} else if (eventID == 1)
 		{
 			if (e.getSource() instanceof Deck)
 			{
-				((Deck)e.getSource()).refillDeck();
+				((Deck) e.getSource()).refillDeck();
 			} else
 				throw new IllegalArgumentException("Not Deck");
-		}
-		else if (eventID == 2)
+		} else if (eventID == 2)
 		{
-			for(int i=0; i< visibleCards.length; i++) {
+			for (int i = 0; i < visibleCards.length; i++)
+			{
 				GameDeck.addDiscardedCard(visibleCards[i]);
 				visibleCards[i] = GameDeck.getCard();
 			}
-		}
-		else if(eventID == 3) {
+		} else if (eventID == 3)
+		{
 //			endGame();
 			System.out.println(endGame());
-		}
-		else
+		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 	}
 
-	public void nextRound() {
+	public void nextRound()
+	{
 		players.offer(players.poll());
 	}
 
-	public Graph getGraph() {
+	public Graph getGraph()
+	{
 		return graph;
 	}
 
-	public Player endGame() {
+	public String[] getVisCards()
+	{
+		return visibleCards;
+	}
+
+	public Player endGame()
+	{
 		Player winner = null;
 		int mostPoints = Integer.MIN_VALUE;
-		for(Player p: players) {
-			if(p.points()>mostPoints) {
+		for (Player p : players)
+		{
+			if (p.points() > mostPoints)
+			{
 				mostPoints = p.points();
 				winner = p;
 			}
 		}
 		observer.observe(new ViewEvent(1, this, players, GameDeck, graph));
-		return winner;			
+		return winner;
 	}
 
-	public Player getCurrentPlayer() {
+	public Player getCurrentPlayer()
+	{
 		return players.peek();
+	}
+
+	public Deck getDeck()
+	{
+		return GameDeck;
 	}
 }

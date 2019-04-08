@@ -66,4 +66,14 @@ public class Deck
 		shuffle();
 		discard.clear();
 	}
+
+	public Stack<String> getDeck()
+	{
+		return deck;
+	}
+
+	public Stack<String> getDiscard()
+	{
+		return discard;
+	}
 }
