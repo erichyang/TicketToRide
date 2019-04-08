@@ -3,32 +3,27 @@ package graphics;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
-
-import javax.imageio.ImageIO;
 
 public class GraphicsGraph
 {
 	private GraphicsCity[] cities;
 	private GraphicsRail[] rails;
-	private static BufferedImage map;
+//	private static BufferedImage map;
 	
-	static
-	{
-		try
-		{
-			map = ImageIO.read(new File("game_files\\cards\\ttr_board.jpg"));
-		}
-		catch(IOException e)
-		{
-		
-		}
-	}
+//	static
+//	{
+//		try
+//		{
+////			map = ImageIO.read(new File("game_files\\cards\\ttr_board.jpg"));
+//		}
+//		catch(IOException e)
+//		{
+//		
+//		}
+//	}
 	
 	public GraphicsGraph() throws FileNotFoundException
 	{
