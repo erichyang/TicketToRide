@@ -58,10 +58,15 @@ public class Player
 		return sum;
 	}
 	
-	public boolean useCards(String color, int num)
+	public boolean useCards(Rail rail)
 	{
 		//if not enough cards return false
 		//if enough cards, first draw from normal color, then draw from wild
+		if(contains(rail)) return false;
+		
+		String color = rail.getColor();
+		int num = rail.getLength();
+		
 		if(trains<num) return false;
 		int amount = hand.get(color);
 		if(amount + hand.get("Wild") < num)
