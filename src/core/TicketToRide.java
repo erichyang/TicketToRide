@@ -32,7 +32,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.forEach(player -> player.setListener(this));
+		players.forEach(player -> {
+			player.setListener(this);
+			for(int i=0; i<4; i++) player.addCards(GameDeck.getCard());
+			});
 
 		roundWeight = 0;
 
