@@ -25,16 +25,21 @@ public class TextRunner
 			System.out.println("Current Player: " + pl.getName());
 			printPlayerHand(pl);
 			System.out.println("5 cards: " + Arrays.toString(game.getVisCards()));
-			System.out.println("Deck: " + Arrays.toString((decks.getDeck().toArray())));
+			System.out.println("Deck: " + decks.getDeck().size() + " " + Arrays.toString((decks.getDeck().toArray())));
 			System.out.println("Discard: " + Arrays.toString((decks.getDiscard().toArray())));
 			System.out.print("PlayerEvent: ");
 
 			int choice = sc.nextInt();
-			sc.nextLine();
-			game.onPlayerEvent(new PlayerEvent(pl, choice, 1));
+
+			if (choice == -1)
+				break;
+
+			PlayerEvent plEv = new PlayerEvent(pl, choice);
+			game.onPlayerEvent(plEv);
 
 			printPlayerHand(pl);
-		} while (sc.next() != "finish");
+			System.out.println(plEv.getWeight() + "\n");
+		} while (true);
 	}
 
 	private static void printPlayerHand(Player pl)

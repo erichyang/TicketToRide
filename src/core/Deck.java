@@ -28,7 +28,6 @@ public class Deck
 		deck.push("Wild");
 		discard = new Stack<String>();
 		shuffle();
-		discard = new Stack<String>();
 	}
 
 	public void setListener(GameEventListener GEL)
