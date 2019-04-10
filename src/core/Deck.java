@@ -26,6 +26,7 @@ public class Deck
 		}
 		deck.push("Wild");
 		deck.push("Wild");
+		discard = new Stack<String>();
 		shuffle();
 	}
 
