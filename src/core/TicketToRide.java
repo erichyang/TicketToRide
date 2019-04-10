@@ -67,7 +67,12 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 		if (eventID <= 4 && eventID >= 0) {
 			int index = eventID;
-			currentPlayer.addCards(visibleCards[index]);
+			String card = visibleCards[index];
+			if(card == "Wild") {
+				this.onPlayerEvent(e.reEvent());
+				return;
+			}
+			currentPlayer.addCards(card);
 			visibleCards[index] = GameDeck.getCard();
 			checkVis();
 		} else if (eventID == 5) {
@@ -101,7 +106,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	private void checkVis() {
 		int count =0;
 		for(String card : visibleCards)
-			if(card.equals("wild")) count++;
+			if(card.equals("Wild")) count++;
 		if(count>=3) 
 			this.onGameEvent(new GameEvent(3, this));
 	}
