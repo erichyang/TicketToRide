@@ -116,7 +116,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	{
 		int count = 0;
 		for (String card : visibleCards)
-			if (card.equals("wild"))
+			if (card.equals("Wild"))
 				count++;
 		if (count >= 3)
 			this.onGameEvent(new GameEvent(3, this));
