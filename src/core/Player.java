@@ -62,7 +62,7 @@ public class Player
 	{
 		//if not enough cards return false
 		//if enough cards, first draw from normal color, then draw from wild
-		if(contains(rail)) return false;
+		if(contains(rail.getCityA(),rail.getCityB())) return false;
 		
 		String color = rail.getColor();
 		int num = rail.getLength();
@@ -131,6 +131,11 @@ public class Player
 			cities.add(mergeGroup);
 		}
 	}
+	
+	public void countTickets() {
+		tickets.forEach(ticket ->{this.addPoints((this.contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])
+				? ticket.getPointCount() : -ticket.getPointCount()));});
+	}
 
 	private int findCity(String city)
 	{
@@ -143,9 +148,9 @@ public class Player
 		return -1;
 	}
 
-	public boolean contains(Rail rail) {
-		int aLoc = findCity(rail.getCityA());
-		int bLoc = findCity(rail.getCityB());
+	public boolean contains(String cityA, String cityB) {
+		int aLoc = findCity(cityA);
+		int bLoc = findCity(cityB);
 		
 		if(aLoc == bLoc && aLoc != -1) {
 			return true;

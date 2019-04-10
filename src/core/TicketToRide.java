@@ -120,7 +120,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		int eventID = e.getID();
 
 		if (eventID == 0)
-		{// wating on eric
+		{
 			players.peek().finalTurn();
 		}
 		else if (eventID == 1)
@@ -155,6 +155,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	}
 
 	public Player endGame() {
+		
+		players.forEach(player -> player.countTickets());
+		
 		Player winner = null;
 		int mostPoints = Integer.MIN_VALUE;
 		for(Player p: players) {
