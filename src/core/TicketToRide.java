@@ -68,9 +68,13 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		if (eventID <= 4 && eventID >= 0) {
 			int index = eventID;
 			String card = visibleCards[index];
+			
 			if(card == "Wild") {
-				this.onPlayerEvent(e.reEvent());
-				return;
+				if(roundWeight >0) {
+					this.onPlayerEvent(e.reEvent());
+					return;
+				}
+				roundWeight++;
 			}
 			currentPlayer.addCards(card);
 			visibleCards[index] = GameDeck.getCard();
