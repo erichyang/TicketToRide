@@ -36,13 +36,8 @@ public class PlayerEvent extends AWTEvent{
 	}
 	
 	public PlayerEvent reEvent() {
-		 PlayerEvent clone = null;
-		try {
-			clone = (PlayerEvent)this.clone();
-			clone.setWeight(-1);
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		 PlayerEvent clone = new PlayerEvent(this.getSource(),this.getID());
+		 clone.setWeight(-1);	
 		 this.consume();
 		 return clone;
 	}
