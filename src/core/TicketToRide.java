@@ -165,7 +165,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		return visibleCards;
 	}
 
-	public Player endGame()
+	public Player endGame()	
 	{
 		Player winner = null;
 		int mostPoints = Integer.MIN_VALUE;
