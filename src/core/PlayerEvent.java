@@ -29,14 +29,25 @@ public class PlayerEvent extends AWTEvent
 	{
 		return eventWeight;
 	}
-
-	private void setWeight(int id)
-	{
-
-		if (id >= 0 && id < 6)
+	
+	public void setWeight(int id) {
+		
+		if(id >= 0 && id<6) 
 			eventWeight = 1;
 		else
 			eventWeight = 2;
+	}
+	
+	public PlayerEvent reEvent() {
+		 PlayerEvent clone = null;
+		try {
+			clone = (PlayerEvent)this.clone();
+			clone.setWeight(-1);
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		 this.consume();
+		 return clone;
 	}
 
 }
