@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import graphics.GraphicsCity;
+import graphics.GraphicsGraph;
 
 public class cordsCreator extends JPanel implements MouseListener
 {
@@ -35,6 +36,8 @@ public class cordsCreator extends JPanel implements MouseListener
 	public JFrame window;
 //	private double x;
 //	private double y;
+	
+	private GraphicsGraph graph;
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
@@ -67,7 +70,7 @@ public class cordsCreator extends JPanel implements MouseListener
 	
 	public cordsCreator() throws FileNotFoundException
 	{
-		
+		graph = new GraphicsGraph();
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(new File("game_files\\cities\\map.ttr"));
 		cities = new GraphicsCity[in.nextInt()];

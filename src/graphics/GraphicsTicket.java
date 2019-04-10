@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
-public class GraphicsTicket
+public class GraphicsTicket implements Graphics
 {
 	private Point2D.Float cord;
 	private int val;

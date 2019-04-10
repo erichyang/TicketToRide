@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
-public class GraphicsCity
+public class GraphicsCity implements Graphics
 {
 	private String name;
 	private Point2D.Float cord;
@@ -30,9 +30,9 @@ public class GraphicsCity
 		g.setColor(Color.BLACK);
 		g.setStroke(new BasicStroke(2));
 		g.drawOval((int)cord.getX()-11, (int)cord.getY()-11, 22, 22);
-		g.setColor(Color.MAGENTA);
+		g.setColor(new Color(129, 9, 255));
 		g.setFont(new Font("Seriff",Font.BOLD,12));
-		g.drawString(name, (float)cord.getX()+20, (float)cord.getY()+10);
+		g.drawString(name, (float)cord.getX()+20, (float)cord.getY()+ 15);
 	}
 	
 	public Point2D.Float getCord()

@@ -3,10 +3,9 @@ package graphics;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Path2D;
 import java.util.Arrays;
 
-public class GraphicsRail
+public class GraphicsRail implements Graphics
 {
 	private int cityA;
 	private int cityB;
@@ -85,7 +84,7 @@ public class GraphicsRail
 			double deltaX = 5*Math.sin(alpha);
 			double deltaY = 5*Math.cos(alpha);
 
-			g.setStroke(new BasicStroke(6, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
+			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 					{ length-2, 2 }, 0));
 			g.setColor(string2Color(colors[i]));
 			//System.out.println(Arrays.toString(cords[i]));
