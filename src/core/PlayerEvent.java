@@ -18,13 +18,21 @@ public class PlayerEvent extends AWTEvent{
 	//remember to add seven to the ID for rails
 	private static int eventWeight;
 	
-	public PlayerEvent(Object source, int id,int weight) {
+	public PlayerEvent(Object source, int id) {
 		super(source, id);
-		eventWeight = weight;
+		setWeight(id);
 	}
 	
 	public int getWeight() {
 		return eventWeight;
+	}
+	
+	private void setWeight(int id) {
+		
+		if(id >0 && id<6) 
+			eventWeight = 1;
+		else 
+			eventWeight = 2;
 	}
 	
 }
