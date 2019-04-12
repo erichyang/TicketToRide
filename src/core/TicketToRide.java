@@ -52,7 +52,20 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		while (sc.hasNextLine())
 			tickets.add(new Ticket(sc.nextLine()));
 
-		visibleCards = GameDeck.getVisibleCards();
+		visibleCards = GameDeck.getVisibleCards();	
+		
+		sc = sc = new Scanner(new File("game_files\\cities\\graph.in"));
+		while (sc.hasNextLine()) {
+			sc.nextLine();
+			Graph simpleGraph = new Graph();
+			int num = sc.nextInt();
+			for(int i=0; i<num; i++) {
+				String[] input = sc.nextLine().split(" ");
+				simpleGraph.add(input[0],
+				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), input[4]));
+			}
+		}
+		System.out.println(graph);
 	}
 
 	public void setView(View observe)
@@ -101,9 +114,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		{
 			// currentPlayer.removeTicket(eventID);
 			// IDK how to do this yet Ill wait for eric
-		} else if (eventID <= graph.getMap().keySet().size() + 7)
-		{
-			// hashtable stuff neeeded
+
+		} else if (eventID <= graph.getMap().keySet().size() + 7) {
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail(eventID - 7);
 			if (!source.useCards(rail))
