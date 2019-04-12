@@ -18,7 +18,7 @@ public class TextRunner
 		TicketToRide game = new TicketToRide();
 		Deck decks = game.getDeck();
 		Scanner sc = new Scanner(System.in);
-		playerEvent(game,decks,sc);
+		playerEvent(game, decks, sc);
 	}
 
 	private static void printPlayerHand(Player pl)
@@ -29,12 +29,11 @@ public class TextRunner
 													 * pl.getPoints() + "\nCities: " + pl.getCities()
 													 */);
 	}
-	
+
 	private static void playerEvent(TicketToRide game, Deck decks, Scanner sc) throws FileNotFoundException
 	{
 		do
 		{
-
 			Player pl = game.getCurrentPlayer();
 
 			System.out.println("Current Player: " + pl.getName());
@@ -56,7 +55,7 @@ public class TextRunner
 			System.out.println(plEv.getWeight() + "\n");
 		} while (true);
 	}
-	
+
 	private static void gameEvent(TicketToRide game, Deck decks, Scanner sc) throws FileNotFoundException
 	{
 		do
@@ -74,8 +73,8 @@ public class TextRunner
 			GameEvent gaEv = new GameEvent(choice, pl);
 			game.onGameEvent(gaEv);
 
-			//printPlayerHand(pl);
-			//System.out.println(plEv.getWeight() + "\n");
+			// printPlayerHand(pl);
+			// System.out.println(plEv.getWeight() + "\n");
 		} while (true);
 	}
 
