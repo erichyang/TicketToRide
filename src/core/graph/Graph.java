@@ -107,7 +107,7 @@ public class Graph {
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext()) {
 			Rail r = edgeIterator.next();
-			if (!visited.contains(r) || !p.contains(r)) {
+			if (!visited.contains(r) || !p.contains(r.getCityA(),r.getCityB())) {
 				result a = DFSVisit(r, visited, path, sum + r.getLength(),p);
 				if(a.dis > s.dis) {
 					s = a;

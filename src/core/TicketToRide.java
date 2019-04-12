@@ -77,19 +77,12 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			System.out.println("RoundWeight: "+roundWeight);
 			int index = eventID;
 			String card = visibleCards[index];
+
 			System.out.println("Card:"+ card);
 			
-//			if(card == "Wild" && roundWeight != 0) {
-//				this.onPlayerEvent(e.reEvent());
-//				System.out.println("ReWeight:" + e.reEvent().getWeight());
-//				return;
-//			}else if(card == "Wild") {
-//				roundWeight++;
-//			}
 			if(card == "Wild") {
-				if(roundWeight != 0) {
+				if(roundWeight >0) {
 					this.onPlayerEvent(e.reEvent());
-//					System.out.println("ReWeight:" + e.reEvent().getWeight());
 					return;
 				}
 				roundWeight++;
@@ -145,7 +138,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int eventID = e.getID();
 
 		if (eventID == 0)
-		{// wating on eric
+		{
 			players.peek().finalTurn();
 		} else if (eventID == 1)
 		{
@@ -184,8 +177,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		return visibleCards;
 	}
 
-	public Player endGame()	
-	{
+	public Player endGame() {
+		
+		players.forEach(player -> player.countTickets());
+
 		Player winner = null;
 		int mostPoints = Integer.MIN_VALUE;
 		for (Player p : players)
