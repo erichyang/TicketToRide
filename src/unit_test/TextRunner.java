@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 import core.Deck;
+import core.GameEvent;
 import core.Player;
 import core.PlayerEvent;
 import core.TicketToRide;
@@ -17,6 +18,20 @@ public class TextRunner
 		TicketToRide game = new TicketToRide();
 		Deck decks = game.getDeck();
 		Scanner sc = new Scanner(System.in);
+		playerEvent(game,decks,sc);
+	}
+
+	private static void printPlayerHand(Player pl)
+	{
+		System.out.println(
+				"Cards: " + pl.getHand().toString() /*
+													 * + "\nTickets: " + pl.getTickets().toString() + "\nPoints: " +
+													 * pl.getPoints() + "\nCities: " + pl.getCities()
+													 */);
+	}
+	
+	private static void playerEvent(TicketToRide game, Deck decks, Scanner sc) throws FileNotFoundException
+	{
 		do
 		{
 
@@ -41,14 +56,27 @@ public class TextRunner
 			System.out.println(plEv.getWeight() + "\n");
 		} while (true);
 	}
-
-	private static void printPlayerHand(Player pl)
+	
+	private static void gameEvent(TicketToRide game, Deck decks, Scanner sc) throws FileNotFoundException
 	{
-		System.out.println(
-				"Cards: " + pl.getHand().toString() /*
-													 * + "\nTickets: " + pl.getTickets().toString() + "\nPoints: " +
-													 * pl.getPoints() + "\nCities: " + pl.getCities()
-													 */);
+		do
+		{
+
+			Player pl = game.getCurrentPlayer();
+
+			System.out.print("GameEvent: ");
+
+			int choice = sc.nextInt();
+
+			if (choice == -1)
+				break;
+
+			GameEvent gaEv = new GameEvent(choice, pl);
+			game.onGameEvent(gaEv);
+
+			//printPlayerHand(pl);
+			//System.out.println(plEv.getWeight() + "\n");
+		} while (true);
 	}
 
 }
