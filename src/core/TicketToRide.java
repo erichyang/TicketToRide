@@ -57,15 +57,15 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		Graph graph = new Graph();
 		sc = new Scanner(new File("game_files\\cities\\graph.in"));
 		while (sc.hasNextLine()) {
-			sc.nextLine();
 			int num = sc.nextInt();
+			sc.nextLine();
 			for(int i=0; i<num; i++) {
 				String[] input = sc.nextLine().split(" ");
 				graph.add(input[0],
 				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), input[4]));
 			}
 		}
-		System.out.println(graph);
+		System.out.println(graph.EdgeList().size() + 7);
 	}
 
 	public void setView(View observe)
@@ -114,8 +114,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		{
 			// currentPlayer.removeTicket(eventID);
 			// IDK how to do this yet Ill wait for eric
+		} else if (eventID <= graph.EdgeList().size() + 7) {
 
-		} else if (eventID <= graph.getMap().keySet().size() + 7) {
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail(eventID - 7);
 			if (!source.useCards(rail))

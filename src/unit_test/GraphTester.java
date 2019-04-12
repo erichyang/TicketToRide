@@ -18,13 +18,12 @@ public class GraphTester {
 			
 		while (sc.hasNextLine()) {
 			int num = sc.nextInt();
-//			sc.nextLine();
+			sc.nextLine();
 //			int sum = 0;
 //			for(int n = 0; n < num; n++) {
 //				sum += Integer.parseInt(sc.nextLine().replaceAll("\\D", ""));
 //			}
 //			System.out.println(sum);
-			sc.nextLine();
 			Graph simpleGraph = new Graph();
 			for(int i=0; i<num; i++) {
 				String[] input = sc.nextLine().split(" ");
