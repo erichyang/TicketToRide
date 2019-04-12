@@ -133,8 +133,7 @@ public class Player
 	}
 	
 	public void countTickets() {
-		tickets.forEach(ticket ->{this.addPoints((this.contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])
-				? ticket.getPointCount() : -ticket.getPointCount()));});
+		tickets.forEach(ticket->addPoints((contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])?ticket.getPointCount():-ticket.getPointCount())));
 	}
 
 	private int findCity(String city)
