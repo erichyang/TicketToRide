@@ -1,5 +1,7 @@
 package unit_test;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
@@ -33,7 +35,7 @@ public class GraphicsPlayerTest extends JPanel implements MouseListener
 		window.setVisible(true);
 		window.add(test);
 		window.addMouseListener(test);
-
+		window.setResizable(false);
 		window.getContentPane().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
 
@@ -53,14 +55,18 @@ public class GraphicsPlayerTest extends JPanel implements MouseListener
 		super.paintComponent(fakeG);
 		Graphics2D g = (Graphics2D) fakeG;
 		
-		double x = MouseInfo.getPointerInfo().getLocation().getX() - window.getLocationOnScreen().x;
-		double y = MouseInfo.getPointerInfo().getLocation().getY() - window.getLocationOnScreen().y;
-		g.draw(new Line2D.Double(x - 5, y, x + 5, y));
-		g.draw(new Line2D.Double(x, y - 5, x, y + 5));
-		
 		graph.draw(g);
 		
 		player.draw(g);
+		
+		double x = MouseInfo.getPointerInfo().getLocation().getX() - window.getLocationOnScreen().x;
+		double y = MouseInfo.getPointerInfo().getLocation().getY() - window.getLocationOnScreen().y;
+		g.setStroke(new BasicStroke(4));
+		g.setColor(new Color(129, 9, 255));
+		g.draw(new Line2D.Double(x - 5, y, x + 5, y));
+		g.draw(new Line2D.Double(x, y - 5, x, y + 5));
+		g.setStroke(new BasicStroke(3));
+		g.setColor(Color.BLACK);
 	}
 
 	@Override
