@@ -50,14 +50,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 		visibleCards = GameDeck.getVisibleCards();	
 		
-		sc = sc = new Scanner(new File("game_files\\cities\\graph.in"));
+		Graph graph = new Graph();
+		sc = new Scanner(new File("game_files\\cities\\graph.in"));
 		while (sc.hasNextLine()) {
 			sc.nextLine();
-			Graph simpleGraph = new Graph();
 			int num = sc.nextInt();
 			for(int i=0; i<num; i++) {
 				String[] input = sc.nextLine().split(" ");
-				simpleGraph.add(input[0],
+				graph.add(input[0],
 				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), input[4]));
 			}
 		}

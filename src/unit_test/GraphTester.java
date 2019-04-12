@@ -18,20 +18,20 @@ public class GraphTester {
 			
 		while (sc.hasNextLine()) {
 			int num = sc.nextInt();
-			sc.nextLine();
-			int sum = 0;
-			for(int n = 0; n < num; n++) {
-				sum += Integer.parseInt(sc.nextLine().replaceAll("\\D", ""));
-			}
-			System.out.println(sum);
 //			sc.nextLine();
-//			Graph simpleGraph = new Graph();
-//			for(int i=0; i<num; i++) {
-//				String[] input = sc.nextLine().split(" ");
-//				simpleGraph.add(input[0],
-//						new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), input[4]));
+//			int sum = 0;
+//			for(int n = 0; n < num; n++) {
+//				sum += Integer.parseInt(sc.nextLine().replaceAll("\\D", ""));
 //			}
-//			System.out.println("longest Path"+ simpleGraph.LongestPath());
+//			System.out.println(sum);
+			sc.nextLine();
+			Graph simpleGraph = new Graph();
+			for(int i=0; i<num; i++) {
+				String[] input = sc.nextLine().split(" ");
+				simpleGraph.add(input[0],
+						new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), input[4]));
+			}
+	//		System.out.println("longest Path"+ simpleGraph.LongestPath());
 		}
 		//
 	}
