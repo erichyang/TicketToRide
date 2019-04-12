@@ -69,6 +69,7 @@ public class Player
 		int num = rail.getLength();
 		
 		if(trains<num) return false;
+		//System.out.println(hand.get(color));
 		int amount = hand.get(color);
 		if(amount + hand.get("Wild") < num)
 			return false;

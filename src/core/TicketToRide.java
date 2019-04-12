@@ -54,7 +54,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		visibleCards = GameDeck.getVisibleCards();	
 		
-		Graph graph = new Graph();
+		graph = new Graph();
 		sc = new Scanner(new File("game_files\\cities\\graph.in"));
 		while (sc.hasNextLine()) {
 			int num = sc.nextInt();
@@ -65,7 +65,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), input[4]));
 			}
 		}
-		System.out.println(graph.EdgeList().size() + 7);
+		System.out.println(graph.EdgeList().size()/2 + 7);
 	}
 
 	public void setView(View observe)
@@ -118,6 +118,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail(eventID - 7);
+			System.out.println("rail: "+ rail+"source: "+ source);
 			if (!source.useCards(rail))
 			{
 				System.out.println("not enough cards");
