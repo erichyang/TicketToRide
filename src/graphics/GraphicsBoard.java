@@ -31,7 +31,7 @@ public class GraphicsBoard extends JPanel implements View, Graphics
 
 	public GraphicsBoard(ViewEvent event)
 	{
-
+		
 	}
 
 	@Override
