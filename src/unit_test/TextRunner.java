@@ -23,11 +23,10 @@ public class TextRunner
 
 	private static void printPlayerHand(Player pl)
 	{
-		System.out.println(
-				"Cards: " + pl.getHand().toString() /*
-													 * + "\nTickets: " + pl.getTickets().toString() + "\nPoints: " +
-													 * pl.getPoints() + "\nCities: " + pl.getCities()
-													 */);
+		System.out.println("Cards: " + pl.getHand().toString() + "\nPoints: "
+				+ pl.getPoints() /*
+									 * "\nTickets: " + pl.getTickets().toString() + "\nCities: " + pl.getCities()
+									 */);
 	}
 
 	private static void playerEvent(TicketToRide game, Deck decks, Scanner sc) throws FileNotFoundException
