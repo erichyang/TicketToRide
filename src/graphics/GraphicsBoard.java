@@ -4,11 +4,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Stack;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
-import core.PlayerEventListener;
 
 public class GraphicsBoard extends JPanel implements View, Graphics
 {
@@ -39,13 +38,6 @@ public class GraphicsBoard extends JPanel implements View, Graphics
 	public void draw(Graphics2D g)
 	{
 		g.drawImage(background, 0, 0, 1920, 1080, null);
-	}
-
-	@Override
-	public void observe(ViewEvent e)
-	{
-		// TODO Auto-generated method stub
-		
 	}
 
 //	- listener:PlayerEventListener
