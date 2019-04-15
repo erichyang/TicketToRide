@@ -65,6 +65,7 @@ public class Player
 		if(contains(rail.getCityA(),rail.getCityB())) return false;
 		
 		String color = rail.getColor();
+		
 		int num = rail.getLength();
 		
 		if(trains<num) return false;
