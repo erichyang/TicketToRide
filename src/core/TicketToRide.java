@@ -97,16 +97,18 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		} else if (eventID == 6) {
 			currentPlayer.addTicket(tickets.pop());
 		} else if (eventID == 7) {
-			// currentPlayer.removeTicket(eventID);
-			// IDK how to do this yet Ill wait for eric
-		} else if (eventID <= 10*(graph.EdgeList().size()-1) + 8 && eventID >= 8) {			
+			getCurrentPlayer().throwTicket();
+			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
+			//If it is 0, then it is the second rail of a double rail
+		} else if (eventID <= 10*(graph.EdgeList().size()-1) + 8 && eventID >= 8) {	
+			
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail(eventID - 7);
 			
-			if(eventID%10 == 1) {
+			if(eventID%10 == 9) {
 				rail.setColor(rail.getColor().split("\\|")[0]);
 			}
-			else if(eventID%10 == 2) {
+			else if(eventID%10 == 0) {
 				rail.setColor(rail.getColor().split("\\|")[1]);
 			}
 			
