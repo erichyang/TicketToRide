@@ -26,11 +26,15 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	private Deck GameDeck;
 	private Stack<Ticket> tickets;
 	private String[] visibleCards;
+	private Queue<Ticket> ticketQueue;
 
 	public TicketToRide() throws FileNotFoundException
 	{
 		GameDeck = new Deck();
 		GameDeck.setListener(this);
+		
+		ticketQueue = new LinkedList<Ticket>();
+		
 		players = new LinkedList<Player>();
 		players.add(new Player("Rhail island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
@@ -85,7 +89,12 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
-		if (eventID <= 4 && eventID >= 0)
+		if(eventID == -1) {
+			nextRound();
+			System.out.println("Foreced Next Turn");
+			return;
+		}		
+		else if (eventID <= 4 && eventID >= 0)
 		{
 			System.out.println("RoundWeight: "+roundWeight);
 			int index = eventID;
@@ -109,9 +118,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			currentPlayer.addCards(GameDeck.getCard());
 		} else if (eventID == 6)
 		{
-			currentPlayer.addTicket(tickets.pop());
+			getCurrentPlayer().addTicket(tickets.pop());
 		} else if (eventID == 7) {
-			getCurrentPlayer().throwTicket();
+			tickets.add(tickets.size()-1,getCurrentPlayer().throwTicket());
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
 		} else if (eventID <= 10*(graph.EdgeList().size()-1) + 8 && eventID >= 8) {	
@@ -143,10 +152,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		roundWeight += e.getWeight();
 
 		if (roundWeight == 2)
-		{
-			roundWeight = 0;
 			nextRound();
-		}
 		//observer.observe(new ViewEvent(0, this, players, GameDeck, graph));
 	}
 
@@ -189,6 +195,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void nextRound()
 	{
+		roundWeight = 0;
 		players.offer(players.poll());
 	}
 

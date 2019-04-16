@@ -37,6 +37,7 @@ public class TextRunner
 
 			System.out.println("Current Player: " + pl.getName());
 			printPlayerHand(pl);
+			System.out.println("Tickets: " + pl.getTickets().toString());
 			System.out.println("5 cards: " + Arrays.toString(game.getVisCards()));
 			System.out.println("Deck: " + decks.getDeck().size() + " " + Arrays.toString((decks.getDeck().toArray())));
 			System.out.println("Discard: " + Arrays.toString((decks.getDiscard().toArray())));
@@ -44,7 +45,7 @@ public class TextRunner
 
 			int choice = sc.nextInt();
 
-			if (choice == -1)
+			if (choice == -2)
 				break;
 
 			PlayerEvent plEv = new PlayerEvent(pl, choice);

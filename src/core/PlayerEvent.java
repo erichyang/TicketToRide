@@ -5,7 +5,7 @@ import java.io.File;
 
 public class PlayerEvent extends AWTEvent
 {
-
+	public static final int FORCE_NEXT_ROUND = -1;
 	public static final int PLAYER_DRAW_ONE = 0;
 	public static final int PLAYER_DRAW_TWO = 1;
 	public static final int PLAYER_DRAW_THREE = 2;
@@ -34,6 +34,8 @@ public class PlayerEvent extends AWTEvent
 		
 		if(id >= 0 && id<6) 
 			eventWeight = 1;
+		else if(id ==6 || id ==7 || id == 0)
+			eventWeight =0;
 		else
 			eventWeight = 2;
 	}
