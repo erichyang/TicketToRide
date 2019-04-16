@@ -66,6 +66,7 @@ public class Player
 		if(contains(rail.getCityA(),rail.getCityB())) return false;
 		
 		String color = rail.getColor();
+		
 		int num = rail.getLength();
 		
 		if(trains<num) return false;
@@ -108,6 +109,7 @@ public class Player
 	public void addRail(Rail rail)
 	{
 		//playerGraph.add(rail.getCityA(), rail);
+		addPoints(rail.getLength());
 		
 		String cityA = rail.getCityA();
 		String cityB = rail.getCityB();
@@ -172,6 +174,10 @@ public class Player
 				tickets.remove(i);
 			}
 		}
+	}
+	
+	public Ticket throwTicket() {
+		return tickets.remove(tickets.size()-1);
 	}
 
 	public void addPoints(int value)
