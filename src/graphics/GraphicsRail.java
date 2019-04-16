@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Arrays;
 
-public class GraphicsRail implements Graphics
+public class GraphicsRail extends Graphics
 {
 	private int cityA;
 	private int cityB;

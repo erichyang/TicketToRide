@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class GraphicsGraph implements Graphics
+public class GraphicsGraph extends Graphics
 {
 	private GraphicsCity[] cities;
 	private GraphicsRail[] rails;

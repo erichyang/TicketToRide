@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
-public class GraphicsCity implements Graphics
+public class GraphicsCity extends Graphics
 {
 	private String name;
 	private Point2D.Float cord;
