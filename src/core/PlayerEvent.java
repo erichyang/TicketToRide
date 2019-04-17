@@ -3,7 +3,6 @@ package core;
 import java.awt.AWTEvent;
 import java.io.File;
 
-<<<<<<< HEAD
 public class PlayerEvent extends AWTEvent
 {
 	public static final int FORCE_NEXT_ROUND = -1;
@@ -28,7 +27,6 @@ public class PlayerEvent extends AWTEvent
 
 	public int getWeight()
 	{
-=======
 public class PlayerEvent extends AWTEvent{
 	
 	public static final int PLAYER_DRAW_ONE =0;
