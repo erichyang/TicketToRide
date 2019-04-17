@@ -1,4 +1,3 @@
-![Title](resources/title.png)
 # Ticket to Ride
 
 ## Game Instructions
@@ -11,7 +10,7 @@ Our Java program attempts to digitally emulate the popular board game Ticket to 
 ![UI](resources/UI.png)
 
 # Schedule
-![Schedule](resources/planning.png)
+![Schedule](does not exist yet)
 
 # Project status
 Currently in planning phase of the project. 
