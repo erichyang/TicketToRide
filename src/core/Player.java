@@ -60,29 +60,38 @@ public class Player
 		return sum;
 	}
 	
-	public boolean useCards(Rail rail)
+	public ArrayList<String> useCards(Rail rail)
 	{
 		//if not enough cards return false
 		//if enough cards, first draw from normal color, then draw from wild
-		if(contains(rail.getCityA(),rail.getCityB())) return false;
+		if(contains(rail.getCityA(),rail.getCityB())) return null;
 		
 		String color = rail.getColor();
 		
 		int num = rail.getLength();
 		
-		if(trains<num) return false;
+		if(trains<num) return null;
 		//System.out.println(hand.get(color));
 		int amount = hand.get(color);
 		if(amount + hand.get("Wild") < num)
-			return false;
+			return null;
+		
+		ArrayList<String> usedCards = new ArrayList<>();
+		
 		if(num == amount)
+			for(int i =0; i < hand.get(color); i++)
+				usedCards.add(color);
 			hand.put(color, 0);
 		if(num > amount)
 		{
 			hand.put("Wild", hand.get("Wild")-num+hand.get(color));
+			for(int i =0; i < hand.get("Wild")-num+hand.get(color); i++)
+				usedCards.add("Wild");
 			hand.put(color, 0);
+			for(int i =0; i < hand.get(color); i++)
+				usedCards.add(color);
 		}
-		return true;
+		return usedCards;
 	}
 	
 	
