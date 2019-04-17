@@ -18,6 +18,7 @@ public class TextRunner
 		TicketToRide game = new TicketToRide();
 		Deck decks = game.getDeck();
 		Scanner sc = new Scanner(System.in);
+		//gameEvent(game, decks, sc);
 		playerEvent(game, decks, sc);
 	}
 
@@ -62,7 +63,6 @@ public class TextRunner
 		{
 
 			Player pl = game.getCurrentPlayer();
-
 			System.out.print("GameEvent: ");
 
 			int choice = sc.nextInt();
