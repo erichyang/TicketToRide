@@ -140,10 +140,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				rail.setColor(color);
 			}
 			
-			if (source.useCards(rail) == null) {
+			ArrayList<String> usedCards = source.useCards(rail);
+			
+			if (usedCards == null) {
 				System.out.println("not enough cards");
 				return;
 			}
+			
+			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			source.addRail(rail);
 			
 		} else
