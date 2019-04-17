@@ -41,7 +41,7 @@ public class TextRunner
 			System.out.println("Tickets: " + pl.getTickets().toString());
 			System.out.println("5 cards: " + Arrays.toString(game.getVisCards()));
 			System.out.println("Deck: " + decks.getDeck().size() + " " + Arrays.toString((decks.getDeck().toArray())));
-			System.out.println("Discard: " + Arrays.toString((decks.getDiscard().toArray())));
+			System.out.println("Discard: " + decks.getDiscard());
 			System.out.print("PlayerEvent: ");
 
 			int choice = sc.nextInt();
