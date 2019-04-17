@@ -78,19 +78,20 @@ public class Player
 		
 		ArrayList<String> usedCards = new ArrayList<>();
 		
-		if(num == amount)
-			for(int i =0; i < hand.get(color); i++)
+		if(num <= amount)
+			for(int i =0; i < num; i++)
 				usedCards.add(color);
-			hand.put(color, 0);
+			hand.put(color, amount-num);
 		if(num > amount)
 		{
-			hand.put("Wild", hand.get("Wild")-num+hand.get(color));
-			for(int i =0; i < hand.get("Wild")-num+hand.get(color); i++)
+			hand.put("Wild", hand.get("Wild")-num+amount);
+			for(int i =0; i < hand.get("Wild")-num+amount; i++)
 				usedCards.add("Wild");
 			hand.put(color, 0);
-			for(int i =0; i < hand.get(color); i++)
+			for(int i =0; i < amount; i++)
 				usedCards.add(color);
 		}
+		System.out.println(usedCards);
 		return usedCards;
 	}
 	
