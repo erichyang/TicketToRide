@@ -61,4 +61,9 @@ public class GraphicsGraph extends Graphics
 		for(int i = 0; i < cities.length; i++)
 			cities[i].draw(g);
 	}
+	
+	//smash boy - yellow
+	//rail island - green
+	//teewee - purple
+	//cleveland - red
 }

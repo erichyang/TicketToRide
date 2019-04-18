@@ -43,7 +43,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 
 	public GraphicsBoardTest() throws FileNotFoundException
 	{
-		board = new GraphicsBoard();
+		board = new GraphicsBoard(null);
 	}
 	
 	@Override

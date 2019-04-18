@@ -12,7 +12,6 @@ import core.graph.Rail;
 
 public class Player
 {
-	//thing changed
 	//private Graph playerGraph;
 	private GameEventListener listen;
 	private int trains;

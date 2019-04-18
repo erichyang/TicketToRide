@@ -9,6 +9,10 @@ import core.graph.Graph;
 
 public class ViewEvent extends AWTEvent{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2886537750102927307L;
 	private Queue<Player> players;
 	private Deck gameDeck;
 	private Graph map;
@@ -23,4 +27,5 @@ public class ViewEvent extends AWTEvent{
 		gameDeck = GameDeck;
 		players = playerQueue;
 	}
+	
 }

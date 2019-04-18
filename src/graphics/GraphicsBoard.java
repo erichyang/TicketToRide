@@ -7,31 +7,35 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Stack;
-
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
-public class GraphicsBoard extends Graphics
+public class GraphicsBoard extends Graphics implements View
 {
-	private static final long serialVersionUID = 1L;
 //	private PlayerEventListener listener;
 	private GraphicsGraph graph;
 	private GraphicsPlayer player;
 	private String[] visible;
 	private static BufferedImage background;
 	private static BufferedImage canvas;
-	
-	//leader board
+
+	// leader board
 	private int points[];
 	private int trains[];
 	private int tickets[];
 	private int trainCards[];
 
-	static{try{background = ImageIO.read(new File("game_files\\background.jpg")); canvas = ImageIO.read(new File("game_files\\canvas.jpg"));}catch (IOException e){}}
+	static
+	{
+		try
+		{
+			background = ImageIO.read(new File("game_files\\background.jpg"));
+			canvas = ImageIO.read(new File("game_files\\canvas.jpg"));
+		} catch (IOException e)
+		{
+		}
+	}
 
-	public GraphicsBoard() throws FileNotFoundException
+	public GraphicsBoard(ViewEvent event) throws FileNotFoundException
 	{
 		graph = new GraphicsGraph();
 		player = new GraphicsPlayer();
@@ -39,17 +43,9 @@ public class GraphicsBoard extends Graphics
 		trains = new int[4];
 		tickets = new int[4];
 		trainCards = new int[4];
-		Arrays.fill(points, 0);
-		Arrays.fill(trains, 45);
-		Arrays.fill(tickets, 0);
-		Arrays.fill(trainCards, 0);
-		Arrays.fill(visible, "Pink");
+		visible = new String[6];
 		visible[5] = "Back";
-	}
-	
-//	public GraphicsBoard(ViewEvent event)
-	{
-		
+		observe(event);
 	}
 
 	@Override
@@ -64,13 +60,25 @@ public class GraphicsBoard extends Graphics
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
 		player.draw(g);
-		
+
 		g.setStroke(new BasicStroke(15));
-		//1300, 25
-		for(int i = 0; i < visible.length; i++)
+		// 1300, 25
+		for (int i = 0; i < visible.length; i++)
 			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 	}
+
+	@Override
+	public void observe(ViewEvent event)
+	{
 		
+	}
+
+	@Override
+	public String color()
+	{
+		// return the color of the double rail
+		return "THIS ISNT DONE YET";
+	}
 
 //	- listener:PlayerEventListener
 //	- graph:GraphicsGraph
