@@ -35,7 +35,7 @@ public class GraphRunner
 	
 	private static void printLongest(Graph tempGraph)
 	{
-		System.out.println("Longest Path: " + tempGraph.LongestPath());
+//		System.out.println("Longest Path: " + tempGraph.LongestPath());
 	}
 	
 	private static void printMap(Graph tempGraph)

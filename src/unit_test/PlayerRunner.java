@@ -46,7 +46,7 @@ public class PlayerRunner
 			case 5:
 				System.out.print("Choose cards to remove: ");
 				String[] cardData = input.nextLine().split("\\|");
-				player.useCards(cardData[0], Integer.parseInt(cardData[1]));
+//				player.useCards(cardData[0], Integer.parseInt(cardData[1]));
 				break;
 			}
 			printPlayerHand(player);
