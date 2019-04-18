@@ -67,10 +67,6 @@ public class Rail {
 		return ownerName;
 	}
 
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
 	public boolean isDouble() {
 		return isDouble;
 	}

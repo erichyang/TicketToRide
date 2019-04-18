@@ -91,7 +91,7 @@ public class Player
 			for(int i =0; i < amount; i++)
 				usedCards.add(color);
 		}
-		System.out.println(usedCards);
+		System.out.println("usedCards: " + usedCards + "amount: "+ amount);
 		return usedCards;
 	}
 	
@@ -119,6 +119,7 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
+		rail.setOwner(this.name);
 		//playerGraph.add(rail.getCityA(), rail);
 		addPoints(rail.getLength());
 		
