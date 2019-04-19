@@ -40,6 +40,6 @@ public class GraphRunner
 	
 	private static void printMap(Graph tempGraph)
 	{
-		System.out.println(tempGraph.EdgeList());
+		System.out.println(tempGraph.EdgeList()+"\n"+tempGraph.indexList);
 	}
 }

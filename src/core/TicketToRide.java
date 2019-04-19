@@ -69,7 +69,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), (input.length ==5) ? input[4]: input[4]+";"+input[5]));
 			}
 		}
-		System.out.println(graph.EdgeList().size()/2 + 7);
+		System.out.println(graph.indexList().size()/2 + 7);
 	}
 
 	public void setView(View observe)
@@ -123,23 +123,28 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			tickets.add(tickets.size()-1,getCurrentPlayer().throwTicket());
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
-		} else if (eventID <= 10*(graph.EdgeList().size()-1) + 8 && eventID >= 8) {	
+		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8) {	
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail((eventID-8)/10);
+			
+			
+			if(eventID%10 == 8) {
+				rail.setColor(rail.getColor().split(";")[0]);
+				//System.out.println("A");
+			}
+			else if(eventID%10 == 9) {
+				rail.setColor(rail.getColor().split(";")[1]);
+				//System.out.println("B");
+			}
+			else throw new IllegalArgumentException("invalid GameEvent ID number"); 
+			
 			System.out.println(rail.toString());
-			
-			
-			if(eventID%10 == 9) {
-				rail.setColor(rail.getColor().split("\\|")[0]);
-			}
-			else if(eventID%10 == 0) {
-				rail.setColor(rail.getColor().split("\\|")[1]);
-			}
 			
 			if(rail.getColor().equals("Gray")) {
 				String color = observer.color();
 				rail.setColor(color);
 			}
+			
 			
 			ArrayList<String> usedCards = source.useCards(rail);
 			

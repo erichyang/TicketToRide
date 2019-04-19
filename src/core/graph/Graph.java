@@ -54,22 +54,25 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
-		indexList.add(rail);
+		//indexList.add(rail);
 	}
 
 	
 	public Rail getRail(int index) {
-		return EdgeList().get(index);
+		return indexList.get(index);
 	}
 	
-	public LinkedList<Rail> EdgeList() {
-		LinkedList<Rail> RailList = new LinkedList<Rail>();
-		for (String key : cityMap.keySet()) {
-			RailList.addAll(cityMap.get(key));
-		}
-		// System.out.println(RailList);
-		return RailList;
+	public ArrayList<Rail>indexList(){
+		return indexList;
 	}
+//	public LinkedList<Rail> EdgeList() {
+//		LinkedList<Rail> RailList = new LinkedList<Rail>();
+//		for (String key : cityMap.keySet()) {
+//			RailList.addAll(cityMap.get(key));
+//		}
+//		// System.out.println(RailList);
+//		return RailList;
+//	}
 
 //	public int LongestPath(String city) {
 //		result firstPass = DFS(city);
