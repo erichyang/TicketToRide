@@ -12,9 +12,10 @@ import java.util.Set;
 import core.Player;
 
 public class Graph {
-	private int c;
+
 	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();
-	//private final Set<Rail> MasterSet = new HashSet<Rail>();					
+	//private final Set<Rail> MasterSet = new HashSet<Rail>();
+	private final ArrayList<Rail> indexList = new ArrayList<Rail>();
 	// want to make this recursive
 	
 	public void add(String cityName, Rail rail) {
@@ -31,6 +32,7 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
+		indexList.add(rail);
 		addInverse(rail.getCityB(), rail.inverse());
 	}
 	
@@ -52,6 +54,7 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
+		indexList.add(rail);
 	}
 
 	
