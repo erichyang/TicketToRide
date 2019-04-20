@@ -126,13 +126,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8) {	
 			Player source = (Player) e.getSource();
 			Rail rail = graph.getRail((eventID-8)/10);
-			
+			String origColor = rail.getColor();
 			
 			if(eventID%10 == 8) {
 				rail.setColor(rail.getColor().split(";")[0]);
 				//System.out.println("A");
 			}
 			else if(eventID%10 == 9) {
+				System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 				//System.out.println("B");
 			}
@@ -147,6 +148,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			
 			
 			ArrayList<String> usedCards = source.useCards(rail);
+			rail.setColor(origColor);
 			
 			if (usedCards == null) {
 				System.out.println("not enough cards");
