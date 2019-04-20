@@ -31,9 +31,9 @@ public class PlayerEvent extends AWTEvent
 	
 	public void setWeight(int id) {
 		
-		if(id > 0 && id<6) 
+		if(id >= 0 && id<6) 
 			eventWeight = 1;
-		else if(id ==6 || id ==7 || id == 0)
+		else if(id ==6 || id ==7 || id == -1)
 			eventWeight =0;
 		else
 			eventWeight = 2;
