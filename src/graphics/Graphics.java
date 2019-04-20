@@ -45,6 +45,7 @@ public abstract class Graphics
 	
 	protected Image color2Image(String color)
 	{
+		if(color == null) return back;
 		switch(color)
 		{
 		case("Pink"): return pink;
@@ -58,5 +59,16 @@ public abstract class Graphics
 		case("Wild"): return wild;
 		default: return back;
 		}
+//		Image returned = back;
+//		if(color.equals("Pink")) returned = pink;
+//		else if(color.equals("White")) returned = white;
+//		else if(color.equals("Blue")) returned = blue;
+//		else if(color.equals("Yellow")) returned = yellow;
+//		else if(color.equals("Orange")) returned = orange;
+//		else if(color.equals("Black")) returned = black;
+//		else if(color.equals("Red")) returned = red;
+//		else if(color.equals("Green")) returned = green;
+//		else if(color.equals("Wild")) returned = wild;
+//		return returned;
 	}
 }
