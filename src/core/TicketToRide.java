@@ -91,7 +91,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		if(eventID == -1) {
 			nextRound();
-			System.out.println("Foreced Next Turn");
+			System.out.println("Forced Next Turn");
 			return;
 		}		
 		else if (eventID <= 4 && eventID >= 0)
