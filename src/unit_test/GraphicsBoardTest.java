@@ -49,7 +49,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 
 	public GraphicsBoardTest() throws FileNotFoundException
 	{
-		board = new GraphicsBoard(null);
+		board = new GraphicsBoard();
 		int[] pEvents = {1,2,3,1,2,3,1,2,3,158,159};
 		TicketToRide ttr = new TicketToRide();
 		ttr.setView(board);
