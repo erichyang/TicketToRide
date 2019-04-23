@@ -35,7 +35,7 @@ public class GraphicsBoard extends Graphics implements View
 		}
 	}
 
-	public GraphicsBoard(ViewEvent event) throws FileNotFoundException
+	public GraphicsBoard() throws FileNotFoundException
 	{
 		graph = new GraphicsGraph();
 		player = new GraphicsPlayer();
@@ -45,7 +45,6 @@ public class GraphicsBoard extends Graphics implements View
 		trainCards = new int[4];
 		visible = new String[6];
 		visible[5] = "Back";
-		observe(event);
 	}
 
 	@Override

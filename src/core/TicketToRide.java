@@ -69,7 +69,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), (input.length ==5) ? input[4]: input[4]+";"+input[5]));
 			}
 		}
-		System.out.println(graph.EdgeList().size()/2 + 7);
+		//System.out.println(graph.EdgeList().size()/2 + 7);
 	}
 
 	public void setView(View observe)
