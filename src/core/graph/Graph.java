@@ -12,9 +12,10 @@ import java.util.Set;
 import core.Player;
 
 public class Graph {
-	private int c;
+
 	private final Map<String, LinkedList<Rail>> cityMap = new HashMap<>();
-	//private final Set<Rail> MasterSet = new HashSet<Rail>();					
+	//private final Set<Rail> MasterSet = new HashSet<Rail>();
+	private final ArrayList<Rail> indexList = new ArrayList<Rail>();
 	// want to make this recursive
 	
 	public void add(String cityName, Rail rail) {
@@ -31,6 +32,7 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
+		indexList.add(rail);
 		addInverse(rail.getCityB(), rail.inverse());
 	}
 	
@@ -52,21 +54,25 @@ public class Graph {
 			}
 			cityMap.put(cityName, rails);
 		}
+		//indexList.add(rail);
 	}
 
 	
 	public Rail getRail(int index) {
-		return EdgeList().get(index);
+		return indexList.get(index);
 	}
 	
-	public LinkedList<Rail> EdgeList() {
-		LinkedList<Rail> RailList = new LinkedList<Rail>();
-		for (String key : cityMap.keySet()) {
-			RailList.addAll(cityMap.get(key));
-		}
-		// System.out.println(RailList);
-		return RailList;
+	public ArrayList<Rail>indexList(){
+		return indexList;
 	}
+//	public LinkedList<Rail> EdgeList() {
+//		LinkedList<Rail> RailList = new LinkedList<Rail>();
+//		for (String key : cityMap.keySet()) {
+//			RailList.addAll(cityMap.get(key));
+//		}
+//		// System.out.println(RailList);
+//		return RailList;
+//	}
 
 //	public int LongestPath(String city) {
 //		result firstPass = DFS(city);

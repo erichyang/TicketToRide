@@ -19,7 +19,6 @@ public class PlayerEvent extends AWTEvent
 	public static final int PLAYER_DRAW_TICKET = 6;
 	public static final int PLAYER_DISCARD_TICKET = 7;
 
-	// remember to add seven to the ID for rails
 	private static int eventWeight;
 
 	public PlayerEvent(Object source, int id)
@@ -37,9 +36,9 @@ public class PlayerEvent extends AWTEvent
 	{
 		if(id >= 0 && id<6) 
 			eventWeight = 1;
-		else if(id ==6 || id ==7 || id == 0)
-			eventWeight = 0;
-		else 
+		else if(id ==6 || id ==7 || id == -1)
+			eventWeight =0;
+		else
 			eventWeight = 2;
 	}
 	
