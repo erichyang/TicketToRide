@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -68,6 +69,15 @@ public class GraphicsBoard extends Graphics implements View
 		// 1300, 25
 		for (int i = 0; i < visible.length; i++)
 			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
+		//1500 - 1900, 130
+		g.setFont(new Font("Seriff",Font.BOLD,64));
+		for(int i = 0; i < 4; i++)
+		{
+			g.drawString("" + points[i], 1500 + i * 50, 100);
+			g.drawString("" + trains[i], 1500 + i * 50, 150);
+			g.drawString("" + tickets[i], 1500 + i * 50, 200);
+			g.drawString("" + trainCards[i], 1500 + i * 50, 250);
+		}
 	}
 
 	@Override
