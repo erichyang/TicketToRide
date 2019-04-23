@@ -103,6 +103,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			System.out.println("Card:"+ card);
 			
 			if(card == "Wild") {
+				//System.out.println("wils");
 				if(roundWeight >0) {
 					this.onPlayerEvent(e.reEvent());
 					return;

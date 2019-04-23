@@ -44,7 +44,7 @@ public class PlayerEvent extends AWTEvent
 	
 	public PlayerEvent reEvent() {
 		 PlayerEvent clone = new PlayerEvent(this.getSource(),this.getID());
-		 clone.setWeight(-1);	
+		 clone.setWeight(-2);	
 		 this.consume();
 		 return clone;
 	}
