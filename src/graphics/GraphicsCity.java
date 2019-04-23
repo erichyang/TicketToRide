@@ -16,11 +16,6 @@ public class GraphicsCity extends Graphics
 	{
 		this.name = name;
 		this.cord = cord;
-//		this.cord.x *= 1.25;
-//		this.cord.y *= 1.5;
-//		this.cord.x -= 50;
-//		this.cord.y -= 50;
-//		this.cord.x *= ;
 	}
 	
 	public void draw(Graphics2D g)
@@ -38,5 +33,11 @@ public class GraphicsCity extends Graphics
 	public Point2D.Float getCord()
 	{
 		return cord;
+	}
+
+	@Override
+	public void update(Object obj)
+	{
+		//nothing to update cities are final
 	}
 }

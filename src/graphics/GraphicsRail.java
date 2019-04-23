@@ -14,6 +14,7 @@ public class GraphicsRail extends Graphics
 //	private double curvature;
 	private String[] colors;
 	private double[][] cords;
+	private Color owner;
 
 	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
@@ -27,6 +28,7 @@ public class GraphicsRail extends Graphics
 		Arrays.fill(cords[0], -1);
 		if (cords.length == 2)
 			Arrays.fill(cords[1], -1);
+		owner = null;
 //		path = new Path2D[doubles ? 2 : 1];
 	}
 
@@ -51,7 +53,7 @@ public class GraphicsRail extends Graphics
 		cords[a][1] = y1;
 		cords[a][2] = x2;
 		cords[a][3] = y2;
-		
+
 //		cords[a][4] = x3;
 //		cords[a][5] = y3;
 //		path[a] = new Path2D.Double();
@@ -75,37 +77,56 @@ public class GraphicsRail extends Graphics
 		{
 			double x = cords[i][0] - cords[i][2];
 			double y = cords[i][1] - cords[i][3];
-		
+
 			double result = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-			int length = (int)(result/trains);
-			
-			double alpha = Math.atan(y/x);
-			
-			double deltaX = 5*Math.sin(alpha);
-			double deltaY = 5*Math.cos(alpha);
+			int length = (int) (result / trains);
+
+			double alpha = Math.atan(y / x);
+
+			double deltaX = 5 * Math.sin(alpha);
+			double deltaY = 5 * Math.cos(alpha);
 
 			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
-					{ length-2, 2 }, 0));
+			{ length - 2, 2 }, 0));
 			g.setColor(string2Color(colors[i]));
-			//System.out.println(Arrays.toString(cords[i]));
-			//g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
-			//if(doubles && cords[i][0]> 1150 && cords[i][2]<1090) {
-			if(doubles) {
+			// System.out.println(Arrays.toString(cords[i]));
+			// g.drawLine((int)(cords[i][0]),(int) (cords[i][1]),
+			// (int)(cords[i][2]),(int)(cords[i][3]));
+			// if(doubles && cords[i][0]> 1150 && cords[i][2]<1090) {
+			if (doubles)
+			{
 //				System.out.println(Arrays.toString(cords[i]));
 //				g.setColor(Color.CYAN);
 //				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
 				g.setColor(string2Color(colors[i]));
-				
-				g.drawLine((int)(cords[i][0] + (-deltaX+2*deltaX*(i))),(int) (cords[i][1] -(-deltaY+2*deltaY*(i))),
-						(int)(cords[i][2]-deltaX+2*deltaX*(i)),(int)(cords[i][3]-(-deltaY+2*deltaY*(i))));
+
+				g.drawLine((int) (cords[i][0] + (-deltaX + 2 * deltaX * (i))),
+						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
+						(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
+						(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
 //				System.out.println(Math.toDegrees(alpha) +"("+ deltaX+ ","+deltaY+")"+" "+"("+x+","+y+")");
+			} else
+			{
+				g.drawLine((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
 			}
-			else {
-				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
+
+			if (owner != null)
+			{
+				g.setColor(owner);
+				g.setStroke(new BasicStroke(3));
+				if (doubles)
+				{
+					g.drawLine((int) (cords[i][0] + (-deltaX + 2 * deltaX * (i))),
+							(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
+							(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
+							(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
+				} else
+				{
+					g.drawLine((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
+				}
 			}
 		}
-		
-		
+
 //		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
 //		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
 //		g.drawOval((int)cords[0][4], (int)cords[0][5], 5,5);
@@ -137,15 +158,26 @@ public class GraphicsRail extends Graphics
 			return null;
 		}
 	}
-	
+
 	public int getCityA()
 	{
 		return cityA;
 	}
-	
+
 	public int getCityB()
 	{
 		return cityB;
 	}
-	
+
+	@Override
+	public void update(Object obj)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setOwner(Color owner)
+	{
+		this.owner = owner;
+	}
 }

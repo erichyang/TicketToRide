@@ -1,11 +1,14 @@
 package graphics;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import core.graph.Graph;
 
 public class GraphicsGraph extends Graphics
 {
@@ -61,9 +64,20 @@ public class GraphicsGraph extends Graphics
 		for(int i = 0; i < cities.length; i++)
 			cities[i].draw(g);
 	}
-	
-	//smash boy - yellow
-	//rail island - green
-	//teewee - purple
-	//cleveland - red
+
+	@Override
+	public void update(Object e)
+	{
+		//take all claimed rails in graph and tell graphic rails that they r claimed
+		Graph update = (Graph)e;
+		for(int i = 0; i < rails.length; i++)
+			switch(update.getRail(i).getOwnerName())
+			{
+			case("Smash Boy"): rails[i].setOwner(Color.yellow); break;
+			case("Rail Island Z"): rails[i].setOwner(Color.green); break;
+			case("TeeWee"): rails[i].setOwner(new Color(142, 68, 173)); break;
+			case("Cleveland"): rails[i].setOwner(Color.red); break;
+			default: break;
+			}
+	}
 }

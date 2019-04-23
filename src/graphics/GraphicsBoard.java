@@ -18,7 +18,7 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage background;
 	private static BufferedImage canvas;
 
-	// leader board
+	// leader board 
 	private int points[];
 	private int trains[];
 	private int tickets[];
@@ -70,7 +70,7 @@ public class GraphicsBoard extends Graphics implements View
 	@Override
 	public void observe(ViewEvent event)
 	{
-		
+		update(event);
 	}
 
 	@Override
@@ -78,6 +78,17 @@ public class GraphicsBoard extends Graphics implements View
 	{
 		// return the color of the double rail
 		return "THIS ISNT DONE YET";
+	}
+
+	@Override
+	public void update(Object e)
+	{
+		ViewEvent update = (ViewEvent)e;
+		graph.update(update.map);
+		player.update(update.players);
+		visible = update.visible;
+		
+		
 	}
 
 //	- listener:PlayerEventListener

@@ -12,10 +12,15 @@ import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import core.Player;
+import core.PlayerEvent;
+import core.TicketToRide;
 import graphics.GraphicsBoard;
 
 @SuppressWarnings("serial")
@@ -39,11 +44,28 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 
 		while (true)
 			test.repaint();
+//		Set<Player> pSet = new TreeSet<Player>((a,b) -> b.getPoints()-a.getPoints());
+//		Player p1 = new Player("p1",null,null);
+//		p1.addPoints(1);
+//		Player p2 = new Player("p2",null,null);
+//		p2.addPoints(2);
+//		Player p3 = new Player("p3",null,null);
+//		p3.addPoints(3);
+//		pSet.add(p1);
+//		pSet.add(p2);
+//		pSet.add(p3);
+//		pSet.forEach((p)-> System.out.println(p.getPoints()));
 	}
 
 	public GraphicsBoardTest() throws FileNotFoundException
 	{
 		board = new GraphicsBoard(null);
+		int[] pEvents = {1,2,3,1,2,3,1,2,3,158,159};
+		TicketToRide ttr = new TicketToRide();
+		ttr.setView(board);
+		for(int i: pEvents) {
+			ttr.onPlayerEvent(new PlayerEvent(ttr.getCurrentPlayer(),i));
+		}
 	}
 	
 	@Override
