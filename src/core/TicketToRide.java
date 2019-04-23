@@ -91,7 +91,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		if(eventID == -1) {
 			nextRound();
-			System.out.println("Foreced Next Turn");
+			System.out.println("Forced Next Turn");
 			return;
 		}		
 		else if (eventID <= 4 && eventID >= 0)
@@ -123,17 +123,23 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			tickets.add(tickets.size()-1,getCurrentPlayer().throwTicket());
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
-		} else if (eventID <= 10*(graph.EdgeList().size()-1) + 8 && eventID >= 8) {	
-			
+		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8) {	
 			Player source = (Player) e.getSource();
-			Rail rail = graph.getRail(eventID - 7);
+			Rail rail = graph.getRail((eventID-8)/10);
+			String origColor = rail.getColor();
 			
-			if(eventID%10 == 9) {
-				rail.setColor(rail.getColor().split("\\|")[0]);
+			if(eventID%10 == 8) {
+				rail.setColor(rail.getColor().split(";")[0]);
+				//System.out.println("A");
 			}
-			else if(eventID%10 == 0) {
-				rail.setColor(rail.getColor().split("\\|")[1]);
+			else if(eventID%10 == 9) {
+				System.out.println(rail.getColor());
+				rail.setColor(rail.getColor().split(";")[1]);
+				//System.out.println("B");
 			}
+			else throw new IllegalArgumentException("invalid GameEvent ID number"); 
+			
+			System.out.println(rail.toString());
 			
 			if(rail.getColor().equals("Gray")) {
 				System.out.println("gray rail "+ rail);
@@ -141,7 +147,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				rail.setColor(color);
 			}
 			
+			
 			ArrayList<String> usedCards = source.useCards(rail);
+			rail.setColor(origColor);
 			
 			if (usedCards == null) {
 				System.out.println("not enough cards");

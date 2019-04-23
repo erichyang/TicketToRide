@@ -78,19 +78,27 @@ public class Player
 		
 		ArrayList<String> usedCards = new ArrayList<>();
 		
-		if(num == amount)
-			for(int i =0; i < hand.get(color); i++)
+		if(num <= amount) {
+			System.out.println("A");
+			for(int i =0; i < num; i++)
 				usedCards.add(color);
-			hand.put(color, 0);
+			hand.put(color, amount-num);
+		}
 		if(num > amount)
 		{
-			hand.put("Wild", hand.get("Wild")-num+hand.get(color));
-			for(int i =0; i < hand.get("Wild")-num+hand.get(color); i++)
+			System.out.println("B");
+			int wildNum =num-amount;
+			System.out.println("Wnum: "+wildNum);
+			hand.put("Wild", wildNum);
+			for(int i =0; i < wildNum; i++) {
+				System.out.println("i: "+i+ "Wnum: "+wildNum);
 				usedCards.add("Wild");
+			}
 			hand.put(color, 0);
-			for(int i =0; i < hand.get(color); i++)
+			for(int i =0; i < amount; i++)
 				usedCards.add(color);
 		}
+		System.out.println("usedCards: " + usedCards + "amount: "+ amount + "num: "+num);
 		return usedCards;
 	}
 	
@@ -118,6 +126,7 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
+		rail.setOwner(this.name);
 		//playerGraph.add(rail.getCityA(), rail);
 		addPoints(rail.getLength());
 		
@@ -222,4 +231,16 @@ public class Player
 		return cities;
 	}
 	
+	public int getTrains()
+	{
+		return trains;
+	}
+	
+	public int getTrainCardsNum()
+	{
+		int sum = 0;
+		for(Integer num : hand.values())
+			sum+=num;
+		return sum;
+	}
 }
