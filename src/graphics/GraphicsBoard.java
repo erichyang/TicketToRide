@@ -63,7 +63,7 @@ public class GraphicsBoard extends Graphics implements View
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
 		player.draw(g);
-
+		
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
 		for (int i = 0; i < visible.length; i++)
@@ -89,7 +89,10 @@ public class GraphicsBoard extends Graphics implements View
 		ViewEvent update = (ViewEvent)e;
 		graph.update(update.map);
 		player.update(update.players.peek());
-		visible = update.visible;
+//		visible = update.visible;
+		for(int i = 0; i < update.visible.length; i++)
+			visible[i] = update.visible[i];
+		visible[5] = "Back";
 		
 		Iterator<Player> iter = update.getSortedPlayer().iterator();
 		for(int i = 0; i < update.getSortedPlayer().size(); i++)
