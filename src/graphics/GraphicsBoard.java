@@ -91,7 +91,7 @@ public class GraphicsBoard extends Graphics implements View
 		player.update(update.players.peek());
 		visible = update.visible;
 		
-		Iterator<Player> iter = update.getSortedPlayer();
+		Iterator<Player> iter = update.getSortedPlayer().iterator();
 		for(int i = 0; i < update.getSortedPlayer().size(); i++)
 		{
 			Player temp = iter.next();
