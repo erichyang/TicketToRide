@@ -227,7 +227,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				winner = p;
 			}
 		}
-		observer.observe(new ViewEvent(1, this, players, GameDeck, graph));
+		observer.observe(new ViewEvent(1, this, players, GameDeck, graph,visibleCards));
 		return winner;
 	}
 
