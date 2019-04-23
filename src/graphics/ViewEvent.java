@@ -12,11 +12,11 @@ public class ViewEvent extends AWTEvent{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2886537750102927307L;
-	private Queue<Player> players;
-	private Deck gameDeck;
-	private Graph map;
-	private String[] visible;
+	public static final long serialVersionUID = 2886537750102927307L;
+	public Queue<Player> players;
+	public Deck gameDeck;
+	public Graph map;
+	public String[] visible;
 	
 	public static int ROUND_END = 0;
 	public static int GAME_END = 1;
