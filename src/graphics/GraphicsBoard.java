@@ -7,7 +7,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Iterator;
+
 import javax.imageio.ImageIO;
+
+import core.Player;
 
 public class GraphicsBoard extends Graphics implements View
 {
@@ -87,8 +91,15 @@ public class GraphicsBoard extends Graphics implements View
 		player.update(update.players.peek());
 		visible = update.visible;
 		
-		
-		
+		Iterator<Player> iter = update.getSortedPlayer();
+		for(int i = 0; i < update.getSortedPlayer().size(); i++)
+		{
+			Player temp = iter.next();
+			points[i] = temp.getPoints();
+			trains[i] = temp.getTrains();
+			tickets[i] = temp.getTickets().size();
+			trainCards[i] = temp.getTrainCardsNum();
+		}
 	}
 
 //	- listener:PlayerEventListener

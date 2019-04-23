@@ -221,4 +221,16 @@ public class Player
 		return cities;
 	}
 	
+	public int getTrains()
+	{
+		return trains;
+	}
+	
+	public int getTrainCardsNum()
+	{
+		int sum = 0;
+		for(Integer num : hand.values())
+			sum+=num;
+		return sum;
+	}
 }
