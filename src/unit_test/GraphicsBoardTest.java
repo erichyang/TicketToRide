@@ -41,7 +41,6 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 		window.setResizable(false);
 		window.getContentPane().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
-
 		while (true)
 			test.repaint();
 
