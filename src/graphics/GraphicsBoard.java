@@ -29,7 +29,7 @@ public class GraphicsBoard extends Graphics implements View
 		try
 		{
 			background = ImageIO.read(new File("game_files\\background.jpg"));
-			canvas = ImageIO.read(new File("game_files\\canvas.png"));
+			canvas = ImageIO.read(new File("game_files\\canvas.jpg"));
 		} catch (IOException e)
 		{
 		}
