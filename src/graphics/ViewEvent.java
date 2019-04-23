@@ -12,7 +12,8 @@ public class ViewEvent extends AWTEvent{
 	/**
 	 * 
 	 */
-	public static final long serialVersionUID = 2886537750102927307L;
+
+	private static final long serialVersionUID = 2886537750102927307L;
 	public Queue<Player> players;
 	public Deck gameDeck;
 	public Graph map;
@@ -28,5 +29,20 @@ public class ViewEvent extends AWTEvent{
 		gameDeck = GameDeck;
 		players = playerQueue;
 		visible = vis;
+	}
+	
+	public Player[] getSortedPlayer(int index)
+	{
+		Player[] arr = new Player[4];
+		arr[0] = players.poll();
+		players.offer(arr[0]);
+		arr[1] = players.poll();
+		players.offer(arr[1]);
+		arr[2] = players.poll();
+		players.offer(arr[2]);
+		arr[3] = players.poll();
+		players.offer(arr[3]);
+		return null;
+		
 	}
 }

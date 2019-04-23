@@ -18,7 +18,7 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage background;
 	private static BufferedImage canvas;
 
-	// leader board
+	// leader board 
 	private int points[];
 	private int trains[];
 	private int tickets[];
@@ -86,6 +86,9 @@ public class GraphicsBoard extends Graphics implements View
 		ViewEvent update = (ViewEvent)e;
 		graph.update(update.map);
 		player.update(update.players);
+		visible = update.visible;
+		
+		
 	}
 
 //	- listener:PlayerEventListener

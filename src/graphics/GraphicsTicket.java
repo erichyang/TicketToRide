@@ -36,4 +36,10 @@ public class GraphicsTicket extends Graphics
 		g.drawString("" + val, cord.x+50, cord.y+175);
 		g.setStroke(new BasicStroke());
 	}
+
+	@Override
+	public void update(Object obj)
+	{
+		
+	}
 }
