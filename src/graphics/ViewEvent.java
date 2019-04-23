@@ -33,11 +33,10 @@ public class ViewEvent extends AWTEvent{
 		visible = vis;
 	}
 	
-	public Set<Player> getSortedPlayer(int index)
+	public Set<Player> getSortedPlayer()
 	{
 		Set<Player> pSet = new TreeSet<Player>((a,b) -> b.getPoints()-a.getPoints());
-		for(Player player : players)
-			pSet.add(player);
+		players.forEach((p)-> pSet.add(p));
 		return pSet;
 	}
 }
