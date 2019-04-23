@@ -42,6 +42,7 @@ public abstract class Graphics
 	
 //	public PlayerEvent contains(int x, int y);
 	public abstract void draw(Graphics2D g);
+	public abstract void update(Object obj);
 	
 	protected Image color2Image(String color)
 	{

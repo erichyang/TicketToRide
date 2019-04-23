@@ -70,7 +70,7 @@ public class GraphicsBoard extends Graphics implements View
 	@Override
 	public void observe(ViewEvent event)
 	{
-		
+		update(event);
 	}
 
 	@Override
@@ -78,6 +78,14 @@ public class GraphicsBoard extends Graphics implements View
 	{
 		// return the color of the double rail
 		return "THIS ISNT DONE YET";
+	}
+
+	@Override
+	public void update(Object e)
+	{
+		ViewEvent update = (ViewEvent)e;
+		graph.update(update.map);
+		player.update(update.players);
 	}
 
 //	- listener:PlayerEventListener

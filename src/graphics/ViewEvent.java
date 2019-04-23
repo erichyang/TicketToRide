@@ -29,5 +29,4 @@ public class ViewEvent extends AWTEvent{
 		players = playerQueue;
 		visible = vis;
 	}
-	
 }
