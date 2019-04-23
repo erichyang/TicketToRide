@@ -29,4 +29,19 @@ public class ViewEvent extends AWTEvent{
 		players = playerQueue;
 		visible = vis;
 	}
+	
+	public Player[] getSortedPlayer(int index)
+	{
+		Player[] arr = new Player[4];
+		arr[0] = players.poll();
+		players.offer(arr[0]);
+		arr[1] = players.poll();
+		players.offer(arr[1]);
+		arr[2] = players.poll();
+		players.offer(arr[2]);
+		arr[3] = players.poll();
+		players.offer(arr[3]);
+		
+		
+	}
 }
