@@ -75,7 +75,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	public void setView(View observe)
 	{
 		observer = observe;
-		observer.observe(new  ViewEvent(2,this,players,GameDeck,graph));
+		observer.observe(new  ViewEvent(2,this,players,GameDeck,graph,visibleCards));
 	}
 
 	public void onPlayerEvent(PlayerEvent e)
