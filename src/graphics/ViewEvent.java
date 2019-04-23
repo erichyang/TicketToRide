@@ -2,6 +2,8 @@ package graphics;
 
 import java.awt.AWTEvent;
 import java.util.Queue;
+import java.util.Set;
+import java.util.TreeSet;
 
 import core.Deck;
 import core.Player;
@@ -31,18 +33,11 @@ public class ViewEvent extends AWTEvent{
 		visible = vis;
 	}
 	
-	public Player[] getSortedPlayer(int index)
+	public Set<Player> getSortedPlayer(int index)
 	{
-		Player[] arr = new Player[4];
-		arr[0] = players.poll();
-		players.offer(arr[0]);
-		arr[1] = players.poll();
-		players.offer(arr[1]);
-		arr[2] = players.poll();
-		players.offer(arr[2]);
-		arr[3] = players.poll();
-		players.offer(arr[3]);
-		return null;
-		
+		Set<Player> pSet = new TreeSet<Player>((a,b) -> b.getPoints()-a.getPoints());
+		for(Player player : players)
+			pSet.add(player);
+		return pSet;
 	}
 }

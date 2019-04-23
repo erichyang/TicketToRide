@@ -85,8 +85,9 @@ public class GraphicsBoard extends Graphics implements View
 	{
 		ViewEvent update = (ViewEvent)e;
 		graph.update(update.map);
-		player.update(update.players);
+		player.update(update.players.peek());
 		visible = update.visible;
+		
 		
 		
 	}

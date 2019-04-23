@@ -44,17 +44,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 
 		while (true)
 			test.repaint();
-//		Set<Player> pSet = new TreeSet<Player>((a,b) -> b.getPoints()-a.getPoints());
-//		Player p1 = new Player("p1",null,null);
-//		p1.addPoints(1);
-//		Player p2 = new Player("p2",null,null);
-//		p2.addPoints(2);
-//		Player p3 = new Player("p3",null,null);
-//		p3.addPoints(3);
-//		pSet.add(p1);
-//		pSet.add(p2);
-//		pSet.add(p3);
-//		pSet.forEach((p)-> System.out.println(p.getPoints()));
+
 	}
 
 	public GraphicsBoardTest() throws FileNotFoundException
