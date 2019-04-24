@@ -164,9 +164,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}else if(eventID%10 == 6 || eventID%10 == 7){
 			int num = eventID;
 			while(num >1) {
-				PlayerEvent p1 = new PlayerEvent(num%10);
-				p1.setWeight(0);
-				onPlayerEvent(p1);
+				PlayerEvent ticketEvent = new PlayerEvent(num%10);
+				ticketEvent.setWeight(0);
+				onPlayerEvent(ticketEvent);
 				num = num/10;
 			}
 		}
