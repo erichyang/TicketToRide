@@ -48,7 +48,7 @@ public class TextRunner
 			if (choice == -2)
 				break;
 
-			PlayerEvent plEv = new PlayerEvent(pl, choice);
+			PlayerEvent plEv = new PlayerEvent(choice);
 			game.onPlayerEvent(plEv);
 
 			printPlayerHand(pl);
