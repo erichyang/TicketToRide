@@ -121,6 +121,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		{
 			getCurrentPlayer().addTicket(tickets.pop());
 		} else if (eventID == 7) {
+			getCurrentPlayer().addTicket(tickets.pop());
 			tickets.add(tickets.size()-1,getCurrentPlayer().throwTicket());
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
@@ -160,8 +161,16 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			source.addRail(rail);
 			
-		} else
-			throw new IllegalArgumentException("invalid GameEvent ID number");
+		}else if(eventID%10 == 6 || eventID%10 == 7){
+			int num = eventID;
+			while(num >1) {
+				PlayerEvent p1 = new PlayerEvent(num%10);
+				p1.setWeight(0);
+				onPlayerEvent(p1);
+				num = num/10;
+			}
+		}
+			else throw new IllegalArgumentException("invalid GameEvent ID number");
 
 		roundWeight += e.getWeight();
 
