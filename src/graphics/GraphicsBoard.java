@@ -4,6 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +16,7 @@ import javax.imageio.ImageIO;
 
 import core.Player;
 
-public class GraphicsBoard extends Graphics implements View
+public class GraphicsBoard extends Graphics implements View, MouseListener
 {
 //	private PlayerEventListener listener;
 	private GraphicsGraph graph;
@@ -22,7 +24,8 @@ public class GraphicsBoard extends Graphics implements View
 	private String[] visible;
 	private static BufferedImage background;
 	private static BufferedImage canvas;
-
+	private String color;
+	
 	// leader board 
 	private int points[];
 	private int trains[];
@@ -50,6 +53,7 @@ public class GraphicsBoard extends Graphics implements View
 		trainCards = new int[4];
 		visible = new String[6];
 		visible[5] = "Back";
+		color = "";
 	}
 
 	@Override
@@ -90,7 +94,7 @@ public class GraphicsBoard extends Graphics implements View
 	public String color()
 	{
 		// return the color of the double rail
-		return "THIS ISNT DONE YET";
+		return color;
 	}
 
 	@Override
@@ -114,6 +118,23 @@ public class GraphicsBoard extends Graphics implements View
 			trainCards[i] = temp.getTrainCardsNum();
 		}
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		//PlayerEvent pEvent = graph.co
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
 
 //	- listener:PlayerEventListener
 //	- graph:GraphicsGraph
