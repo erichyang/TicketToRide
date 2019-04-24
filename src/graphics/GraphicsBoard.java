@@ -23,11 +23,12 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage background;
 	private static BufferedImage canvas;
 
-	// leader board 
-	private int points[];
-	private int trains[];
-	private int tickets[];
-	private int trainCards[];
+	// leader board
+	private Color[] list;
+	private int[] points;
+	private int[] trains;
+	private int[] tickets;
+	private int[] trainCards;
 
 	static
 	{
@@ -44,6 +45,7 @@ public class GraphicsBoard extends Graphics implements View
 	{
 		graph = new GraphicsGraph();
 		player = new GraphicsPlayer();
+		list = new Color[4];
 		points = new int[4];
 		trains = new int[4];
 		tickets = new int[4];
@@ -64,20 +66,24 @@ public class GraphicsBoard extends Graphics implements View
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
 		player.draw(g);
-		
+
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
 		for (int i = 0; i < visible.length; i++)
 			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
-		//1500 - 1900, 130
-		g.setFont(new Font("Seriff",Font.BOLD,64));
-		for(int i = 0; i < 4; i++)
+		// 1500 - 1900, 130
+		g.setFont(new Font("Seriff", Font.BOLD, 64));
+		g.setColor(Color.LIGHT_GRAY);
+		for (int i = 0; i < 4; i++)
 		{
-			g.drawString("" + points[i], 1500 + i * 50, 100);
-			g.drawString("" + trains[i], 1500 + i * 50, 150);
-			g.drawString("" + tickets[i], 1500 + i * 50, 200);
-			g.drawString("" + trainCards[i], 1500 + i * 50, 250);
+			g.setColor(list[i]);
+			g.fillRect(1475, 150 + i*100, 50, 50);
+			g.drawString("" + points[i], 1550 + i * 100, 200);
+			g.drawString("" + trains[i], 1550 + i * 100, 300);
+			g.drawString("" + tickets[i], 1550 + i * 100, 400);
+			g.drawString("" + trainCards[i], 1550 + i * 100, 500);
 		}
+		g.setColor(Color.black);
 	}
 
 	@Override
@@ -96,18 +102,34 @@ public class GraphicsBoard extends Graphics implements View
 	@Override
 	public void update(Object e)
 	{
-		ViewEvent update = (ViewEvent)e;
+		ViewEvent update = (ViewEvent) e;
 		graph.update(update.map);
 		player.update(update.players.peek());
 //		visible = update.visible;
-		for(int i = 0; i < update.visible.length; i++)
+		for (int i = 0; i < update.visible.length; i++)
 			visible[i] = update.visible[i];
 		visible[5] = "Back";
-		
+
 		Iterator<Player> iter = update.getSortedPlayer().iterator();
-		for(int i = 0; i < update.getSortedPlayer().size(); i++)
+		for (int i = 0; i < update.getSortedPlayer().size(); i++)
 		{
 			Player temp = iter.next();
+			switch (temp.getName())
+			{
+			case ("Smash Boy"):
+				list[i] = (Color.yellow);
+				break;
+			case ("Rail Island Z"):
+				list[i] = (Color.green);
+				break;
+			case ("TeeWee"):
+				list[i] = (new Color(142, 68, 173));
+				break;
+			case ("Cleveland"):
+				list[i] = (Color.red);
+				break;
+			default: list[i] = Color.black;
+			}
 			points[i] = temp.getPoints();
 			trains[i] = temp.getTrains();
 			tickets[i] = temp.getTickets().size();
