@@ -2,11 +2,14 @@ package graphics;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import core.PlayerEvent;
 
 public abstract class Graphics
 {
@@ -40,7 +43,7 @@ public abstract class Graphics
 		}
 	}
 	
-//	public PlayerEvent contains(int x, int y);
+	public abstract PlayerEvent contains(Point2D.Float cord);
 	public abstract void draw(Graphics2D g);
 	public abstract void update(Object obj);
 	
