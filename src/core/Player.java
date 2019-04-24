@@ -71,7 +71,7 @@ public class Player
 		
 		if(trains<num) return null;
 		//System.out.println(hand.get(color));
-		System.out.println("COLOR: "+color+ " RAIL: " + rail);
+		//System.out.println("COLOR: "+color+ " RAIL: " + rail);
 		int amount = hand.get(color);
 		if(amount + hand.get("Wild") < num)
 			return null;
@@ -79,26 +79,26 @@ public class Player
 		ArrayList<String> usedCards = new ArrayList<>();
 		
 		if(num <= amount) {
-			System.out.println("A");
+			//System.out.println("A");
 			for(int i =0; i < num; i++)
 				usedCards.add(color);
 			hand.put(color, amount-num);
 		}
 		if(num > amount)
 		{
-			System.out.println("B");
+			//System.out.println("B");
 			int wildNum =num-amount;
-			System.out.println("Wnum: "+wildNum);
+			//System.out.println("Wnum: "+wildNum);
 			hand.put("Wild", wildNum);
 			for(int i =0; i < wildNum; i++) {
-				System.out.println("i: "+i+ "Wnum: "+wildNum);
+				//System.out.println("i: "+i+ "Wnum: "+wildNum);
 				usedCards.add("Wild");
 			}
 			hand.put(color, 0);
 			for(int i =0; i < amount; i++)
 				usedCards.add(color);
 		}
-		System.out.println("usedCards: " + usedCards + "amount: "+ amount + "num: "+num);
+		//System.out.println("usedCards: " + usedCards + "amount: "+ amount + "num: "+num);
 		return usedCards;
 	}
 	
@@ -126,7 +126,6 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
-		rail.setOwner(this.name);
 		//playerGraph.add(rail.getCityA(), rail);
 		addPoints(rail.getLength());
 		

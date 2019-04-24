@@ -69,7 +69,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), (input.length ==5) ? input[4]: input[4]+";"+input[5]));
 			}
 		}
-		//System.out.println(graph.EdgeList().size()/2 + 7);
+		
+	    //System.out.println(graph.indexList());
 	}
 
 	public void setView(View observe)
@@ -126,7 +127,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
 		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8) {	
-			Player source = (Player) e.getSource();
+			Player current = getCurrentPlayer();
 			Rail rail = graph.getRail((eventID-8)/10);
 			String origColor = rail.getColor();
 			
@@ -135,22 +136,30 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				//System.out.println("A");
 			}
 			else if(eventID%10 == 9) {
-				System.out.println(rail.getColor());
+				//System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 				//System.out.println("B");
 			}
 			else throw new IllegalArgumentException("invalid GameEvent ID number"); 
 			
-			System.out.println(rail.toString());
+			//System.out.println(rail.toString());
 			
 			if(rail.getColor().equals("Gray")) {
-				System.out.println("gray rail "+ rail);
+				//System.out.println("gray rail "+ rail);
 				String color = observer.color();
 				rail.setColor(color);
+			}		
+			
+			ArrayList<String> usedCards = current.useCards(rail);
+			
+			if(origColor.split(";")[0].equals(rail.getColor()) && rail.getOwnerName(0) == (null)) {
+				rail.setOwner(getCurrentPlayer().getName(),0);
+			}else if(origColor.split(";")[1].equals(rail.getColor()) && rail.getOwnerName(1) == (null)) {
+				rail.setOwner(getCurrentPlayer().getName(),1);
+			}else {
+				System.out.println("not enough cards");
+				return;
 			}
-			
-			
-			ArrayList<String> usedCards = source.useCards(rail);
 			rail.setColor(origColor);
 			
 			if (usedCards == null) {
@@ -159,7 +168,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			}
 			
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
-			source.addRail(rail);
+			current.addRail(rail);
 			
 		}else if(eventID%10 == 6 || eventID%10 == 7){
 			int num = eventID;

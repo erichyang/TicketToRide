@@ -23,7 +23,7 @@ public class PlayerEvent extends AWTEvent
 
 	public PlayerEvent( int id)
 	{
-		super(null,id);
+		super(new Object(),id);
 		setWeight(id);
 	}
 	

@@ -17,7 +17,7 @@ public class TextRunner
 		TicketToRide game = new TicketToRide();
 		Deck decks = game.getDeck();
 		Scanner sc = new Scanner(System.in);
-		gameEvent(game, decks, sc);
+		//gameEvent(game, decks, sc);
 		playerEvent(game, decks, sc);
 	}
 
@@ -48,7 +48,7 @@ public class TextRunner
 			if (choice == -2)
 				break;
 
-			PlayerEvent plEv = new PlayerEvent(pl, choice);
+			PlayerEvent plEv = new PlayerEvent(choice);
 			game.onPlayerEvent(plEv);
 
 			printPlayerHand(pl);
