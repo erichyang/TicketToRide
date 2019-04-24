@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Point2D.Float;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 
 import core.Player;
+import core.PlayerEvent;
 
 public class GraphicsBoard extends Graphics implements View, MouseListener
 {
@@ -157,6 +159,11 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
+
+	public PlayerEvent contains(Float cord) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 //	- listener:PlayerEventListener
 //	- graph:GraphicsGraph

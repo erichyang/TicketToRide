@@ -6,8 +6,11 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Float;
 
-public class GraphicsCity extends Graphics
+import core.PlayerEvent;
+
+public class GraphicsCity
 {
 	private String name;
 	private Point2D.Float cord;
@@ -33,11 +36,5 @@ public class GraphicsCity extends Graphics
 	public Point2D.Float getCord()
 	{
 		return cord;
-	}
-
-	@Override
-	public void update(Object obj)
-	{
-		//nothing to update cities are final
 	}
 }

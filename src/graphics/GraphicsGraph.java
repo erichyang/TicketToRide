@@ -4,10 +4,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Float;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import core.PlayerEvent;
 import core.graph.Graph;
 
 public class GraphicsGraph extends Graphics
@@ -79,5 +81,11 @@ public class GraphicsGraph extends Graphics
 			case("Cleveland"): rails[i].setOwner(Color.red); break;
 			default: break;
 			}
+	}
+
+	@Override
+	public PlayerEvent contains(Float cord) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

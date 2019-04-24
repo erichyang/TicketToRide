@@ -7,6 +7,7 @@ import java.awt.geom.Point2D.Float;
 import java.util.ArrayList;
 
 import core.Player;
+import core.PlayerEvent;
 import core.Ticket;
 
 public class GraphicsPlayer extends Graphics
@@ -50,5 +51,11 @@ public class GraphicsPlayer extends Graphics
 		ArrayList<Ticket> core = update.getTickets();
 		for(int i = 0; i < tickets.size(); i++)
 			tickets.add(new GraphicsTicket(new Point2D.Float(850 + i*50, 800), core.get(i).getPointCount(), core.get(i).getCities().substring(0,core.get(i).getCities().indexOf(" ")),core.get(i).getCities().substring(core.get(i).getCities().indexOf(" "))));
+	}
+
+	@Override
+	public PlayerEvent contains(Float cord) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

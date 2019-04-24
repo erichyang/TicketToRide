@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Float;
+
+import core.PlayerEvent;
 
 public class GraphicsTicket extends Graphics
 {
@@ -41,5 +44,10 @@ public class GraphicsTicket extends Graphics
 	public void update(Object obj)
 	{
 		
+	}
+
+	@Override
+	public PlayerEvent contains(Float click) {
+
 	}
 }
