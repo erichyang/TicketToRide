@@ -127,10 +127,10 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
-		if(rail.isDouble()) {
-			
+		if(rail.isDouble() && !rail.getOwnerName().contains(",")) {
+			rail.setOwner(rail.getOwnerName()+","+getName());
 		}
-		rail.setOwner(this.name);
+		else rail.setOwner(this.name);
 		//playerGraph.add(rail.getCityA(), rail);
 		addPoints(rail.getLength());
 		
@@ -156,6 +156,10 @@ public class Player
 			cities.remove(aLocation);
 			cities.remove(bLocation);
 			cities.add(mergeGroup);
+		}
+		
+		if(rail.isDouble()) {
+			
 		}
 	}
 	
