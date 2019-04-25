@@ -58,7 +58,6 @@ public class TextRunner
 
 	private static void gameEvent(TicketToRide game, Deck decks, Scanner sc) throws FileNotFoundException
 	{
-
 		Player pl = game.getCurrentPlayer();
 		System.out.print("GameEvent: ");
 

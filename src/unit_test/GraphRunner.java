@@ -26,6 +26,7 @@ public class GraphRunner
 			printLongest(simpleGraph);
 			printMap(simpleGraph);
 		}
+		sc.close();
 	}
 
 	private static void addRoute(String str[], Graph tempGraph)

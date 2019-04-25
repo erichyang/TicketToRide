@@ -12,13 +12,10 @@ import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import core.Player;
 import core.PlayerEvent;
 import core.TicketToRide;
 import graphics.GraphicsBoard;

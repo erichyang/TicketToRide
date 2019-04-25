@@ -7,12 +7,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import core.graph.Graph;
 import core.graph.Rail;
 
 public class Player
 {
 	//private Graph playerGraph;
+	@SuppressWarnings("unused")
 	private GameEventListener listen;
 	private int trains;
 	private int points;

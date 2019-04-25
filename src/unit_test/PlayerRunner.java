@@ -45,13 +45,14 @@ public class PlayerRunner
 				break;
 			case 5:
 				System.out.print("Choose cards to remove: ");
-				String[] cardData = input.nextLine().split("\\|");
+//				String[] cardData = input.nextLine().split("\\|");
 //				player.useCards(cardData[0], Integer.parseInt(cardData[1]));
 				break;
 			}
 			printPlayerHand(player);
 			System.out.println("1 - Ticket, 2 - Train, 3 - Points, 4 - Rails, 5 - Use Cards");
 		} while (input.hasNext());
+		input.close();
 	}
 
 	private static void printPlayerHand(Player pl)

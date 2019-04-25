@@ -1,7 +1,5 @@
 package core;
 
-import java.util.Arrays;
-
 public class Ticket {
 
 	private String city1;

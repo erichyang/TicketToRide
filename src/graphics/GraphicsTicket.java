@@ -51,6 +51,7 @@ public class GraphicsTicket extends Graphics
 	{
 		boolean doEvent = (this.cord.x <= cord.x && this.cord.x + 125 >= cord.x) && (this.cord.y <= cord.y && this.cord.y + 200 >= cord.y);
 		if(doEvent)
-			return new PlayerEvent(-2);
+			return new PlayerEvent(Integer.MAX_VALUE);
+		return null;
 	}
 }

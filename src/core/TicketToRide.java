@@ -71,6 +71,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}
 		
 	    //System.out.println(graph.indexList());
+		sc.close();
 	}
 
 	public void setView(View observe)
