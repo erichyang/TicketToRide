@@ -138,7 +138,7 @@ public class Graph {
 			return "result [path=" + path + ", dis=" + dis + ", set=" + set + "]";
 		}
 	}
-
+	
 //	public static List<Rail> path;
 //	public static int dis;
 //	public static Set<Rail> set;

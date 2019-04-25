@@ -1,13 +1,11 @@
 package core.graph;
 
-import java.util.Arrays;
-
 public class Rail {
 	private int length;
 	private String cityA;
 	private String cityB;
 	private String color;
-	private String[] owners;
+	private String ownerName;
 	private boolean isDouble;
 	private boolean seen;
 	
@@ -18,16 +16,15 @@ public class Rail {
 		isDouble = isDoubleRail;
 		color = railColor;
 		seen = false;
-		owners = new String[(isDouble) ? 2:1];
+		ownerName = "";
 	}
 	
 	public void setSeen(boolean hasSeen){
 		seen = hasSeen;
 	}
 	
-	public void setOwner(String owner, int index){
-		System.out.println("OWNERS"+Arrays.toString(owners));
-		owners[index] = owner;
+	public void setOwner(String owner){
+		ownerName = owner;
 	}
 	
 	public Rail inverse() {
@@ -66,8 +63,8 @@ public class Rail {
 		this.color = color;
 	}
 
-	public String getOwnerName(int index) {
-		return owners[index];
+	public String getOwnerName() {
+		return ownerName;
 	}
 
 	public boolean isDouble() {
@@ -98,7 +95,7 @@ public class Rail {
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + (isDouble ? 1231 : 1237);
 		result = prime * result + length;
-		result = prime * result + ((owners.equals(null)) ? 0 : owners.hashCode());
+		result = prime * result + ((ownerName.equals("")) ? 0 : ownerName.hashCode());
 		result = prime * result + (seen ? 1231 : 1237);
 		return result;
 	}
@@ -139,11 +136,11 @@ public class Rail {
 		if (length != other.length) {
 			return false;
 		}
-		if (owners == null) {
-			if (other.owners != null) {
+		if (ownerName == null) {
+			if (other.ownerName != null) {
 				return false;
 			}
-		} else if (!owners.equals(other.owners)) {
+		} else if (!ownerName.equals(other.ownerName)) {
 			return false;
 		}
 		if (seen != other.seen) {
@@ -153,6 +150,6 @@ public class Rail {
 	}
 
 	public String toString() {
-		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+"\n" + "isDouble: " + isDouble;
+		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+"\n";
 	}
 }

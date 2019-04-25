@@ -47,10 +47,7 @@ public class GraphicsTicket extends Graphics
 	}
 
 	@Override
-	public PlayerEvent contains(Float cord)
-	{
-		boolean doEvent = (this.cord.x <= cord.x && this.cord.x + 125 >= cord.x) && (this.cord.y <= cord.y && this.cord.y + 200 >= cord.y);
-		if(doEvent)
-			return new PlayerEvent(-2);
+	public PlayerEvent contains(Float click) {
+
 	}
 }
