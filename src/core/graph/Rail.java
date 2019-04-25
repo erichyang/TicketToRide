@@ -26,7 +26,7 @@ public class Rail {
 	}
 	
 	public void setOwner(String owner, int index){
-		System.out.println("OWNERS"+Arrays.toString(owners));
+		//System.out.println("OWNERS"+Arrays.toString(owners));
 		owners[index] = owner;
 	}
 	
@@ -153,6 +153,6 @@ public class Rail {
 	}
 
 	public String toString() {
-		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+"\n" + "isDouble: " + isDouble;
+		return cityA +"-> "+cityB+", "+length+", "+isDouble+", "+color+" ," + "isDouble: " + isDouble+ " owners: "+ Arrays.toString(owners);
 	}
 }

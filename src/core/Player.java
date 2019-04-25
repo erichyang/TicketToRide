@@ -64,7 +64,6 @@ public class Player
 		//if not enough cards return false
 		//if enough cards, first draw from normal color, then draw from wild
 		if(contains(rail.getCityA(),rail.getCityB())) return null;
-		if(!rail.getOwnerName().equals("")) return null;
 		
 		String color = rail.getColor();
 		

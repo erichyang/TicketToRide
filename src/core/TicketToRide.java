@@ -152,6 +152,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			
 			ArrayList<String> usedCards = current.useCards(rail);
 			
+			System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
+			
 			if(origColor.split(";")[0].equals(rail.getColor()) && rail.getOwnerName(0) == (null)) {
 				rail.setOwner(getCurrentPlayer().getName(),0);
 			}else if(origColor.split(";")[1].equals(rail.getColor()) && rail.getOwnerName(1) == (null)) {
@@ -169,6 +171,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			current.addRail(rail);
+			current.addPoints(pointValues[rail.getLength()-1]);
 			
 		}else if(eventID%10 == 6 || eventID%10 == 7){
 			int num = eventID;

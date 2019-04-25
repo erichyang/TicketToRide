@@ -53,7 +53,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 		TicketToRide ttr = new TicketToRide();
 		ttr.setView(board);
 		for(int i: pEvents) {
-			ttr.onPlayerEvent(new PlayerEvent(ttr.getCurrentPlayer(),i));
+			ttr.onPlayerEvent(new PlayerEvent(i));
 		}
 	}
 	
