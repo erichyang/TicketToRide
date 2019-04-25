@@ -126,7 +126,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
 		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8) {	
-			Player source = (Player) e.getSource();
+			Player source = getCurrentPlayer();
 			Rail rail = graph.getRail((eventID-8)/10);
 			String origColor = rail.getColor();
 			

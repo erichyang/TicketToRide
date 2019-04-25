@@ -64,6 +64,7 @@ public class Player
 		//if not enough cards return false
 		//if enough cards, first draw from normal color, then draw from wild
 		if(contains(rail.getCityA(),rail.getCityB())) return null;
+		if(!rail.getOwnerName().equals("")) return null;
 		
 		String color = rail.getColor();
 		
@@ -126,7 +127,10 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
-		rail.setOwner(this.name);
+		if(rail.isDouble() && !rail.getOwnerName().contains(",")) {
+			rail.setOwner(rail.getOwnerName()+","+getName());
+		}
+		else rail.setOwner(this.name);
 		//playerGraph.add(rail.getCityA(), rail);
 		addPoints(rail.getLength());
 		
@@ -152,6 +156,10 @@ public class Player
 			cities.remove(aLocation);
 			cities.remove(bLocation);
 			cities.add(mergeGroup);
+		}
+		
+		if(rail.isDouble()) {
+			
 		}
 	}
 	
