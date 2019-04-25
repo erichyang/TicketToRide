@@ -23,7 +23,7 @@ public class PlayerEvent extends AWTEvent
 
 	public PlayerEvent( int id)
 	{
-		super(null, id);
+		super(new Object(),id);
 		setWeight(id);
 	}
 	
@@ -43,7 +43,6 @@ public class PlayerEvent extends AWTEvent
 	}
 	
 	public PlayerEvent reEvent() {
-
 		 PlayerEvent clone = new PlayerEvent(this.getID());
 		 clone.setWeight(-2);	
 		 this.consume();
