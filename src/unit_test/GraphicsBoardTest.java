@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import core.GameEvent;
 import core.PlayerEvent;
 import core.TicketToRide;
 import graphics.GraphicsBoard;
@@ -52,6 +53,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 		for(int i: pEvents) {
 			ttr.onPlayerEvent(new PlayerEvent(i));
 		}
+		ttr.onGameEvent(new GameEvent(3,ttr));
 	}
 	
 	@Override
