@@ -37,8 +37,6 @@ public class cordsCreator extends JPanel implements MouseListener
 //	private double x;
 //	private double y;
 	
-	private GraphicsGraph graph;
-	
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		cordsCreator test = new cordsCreator();
@@ -70,7 +68,7 @@ public class cordsCreator extends JPanel implements MouseListener
 	
 	public cordsCreator() throws FileNotFoundException
 	{
-		graph = new GraphicsGraph();
+		new GraphicsGraph();
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(new File("game_files\\cities\\map.ttr"));
 		cities = new GraphicsCity[in.nextInt()];

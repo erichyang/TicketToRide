@@ -7,12 +7,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import core.graph.Graph;
 import core.graph.Rail;
 
 public class Player
 {
 	//private Graph playerGraph;
+	@SuppressWarnings("unused")
 	private GameEventListener listen;
 	private int trains;
 	private int points;
@@ -64,7 +64,6 @@ public class Player
 		//if not enough cards return false
 		//if enough cards, first draw from normal color, then draw from wild
 		if(contains(rail.getCityA(),rail.getCityB())) return null;
-		if(!rail.getOwnerName().equals("")) return null;
 		
 		String color = rail.getColor();
 		

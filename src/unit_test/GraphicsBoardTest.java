@@ -12,13 +12,10 @@ import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import core.Player;
 import core.PlayerEvent;
 import core.TicketToRide;
 import graphics.GraphicsBoard;
@@ -53,7 +50,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 		TicketToRide ttr = new TicketToRide();
 		ttr.setView(board);
 		for(int i: pEvents) {
-			ttr.onPlayerEvent(new PlayerEvent(ttr.getCurrentPlayer(),i));
+			ttr.onPlayerEvent(new PlayerEvent(i));
 		}
 	}
 	

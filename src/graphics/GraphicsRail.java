@@ -3,7 +3,10 @@ package graphics;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D.Float;
 import java.util.Arrays;
+
+import core.PlayerEvent;
 
 public class GraphicsRail extends Graphics
 {
@@ -179,5 +182,12 @@ public class GraphicsRail extends Graphics
 	public void setOwner(Color owner)
 	{
 		this.owner = owner;
+	}
+
+	@Override
+	public PlayerEvent contains(Float cord)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
