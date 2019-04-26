@@ -25,6 +25,14 @@ public class GraphicsTicket extends Graphics
 		this.cityB = cityB;
 	}
 	
+	public GraphicsTicket(Point2D.Float float1, int val, String cities)
+	{
+		this.cord = float1;
+		this.val = val;
+		this.cityA = cities.substring(0, cities.indexOf(","));
+		this.cityB = cities.substring(cities.indexOf(","));
+	}
+
 	public void draw(Graphics2D g)
 	{
 		g.setColor(new Color(244, 158, 66));
