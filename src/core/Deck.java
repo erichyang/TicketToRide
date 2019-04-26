@@ -42,6 +42,7 @@ public class Deck
 
 	public String getCard()
 	{
+		if(deck.isEmpty()) return "";
 		String card = deck.pop();
 		if (deck.isEmpty())
 			listen.onGameEvent(new GameEvent(1, this));
