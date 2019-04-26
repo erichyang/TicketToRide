@@ -34,7 +34,6 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 	private int[] trains;
 	private int[] tickets;
 	private int[] trainCards;
-
 	static
 	{
 		try
@@ -60,7 +59,6 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 		color = "";
 	}
 
-	@Override
 	public void draw(Graphics2D g)
 	{
 		g.drawImage(background, 0, 0, 1920, 1080, null);
@@ -83,11 +81,12 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 		for (int i = 0; i < 4; i++)
 		{
 			g.setColor(list[i]);
-			g.fillRect(1475, 150 + i*100, 50, 50);
-			g.drawString("" + points[i], 1550 + i * 100, 200);
-			g.drawString("" + trains[i], 1550 + i * 100, 300);
-			g.drawString("" + tickets[i], 1550 + i * 100, 400);
-			g.drawString("" + trainCards[i], 1550 + i * 100, 500);
+			g.fillRect(1475, 150 + i * 100, 50, 50);
+
+			g.drawString("" + points[i], 1550, 200 + i * 100);
+			g.drawString("" + trains[i], 1650, 200 + i * 100);
+			g.drawString("" + tickets[i], 1750, 200 + i * 100);
+			g.drawString("" + trainCards[i], 1850, 200 + i * 100);
 		}
 		g.setColor(Color.black);
 	}
@@ -120,6 +119,7 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 		for (int i = 0; i < update.getSortedPlayer().size(); i++)
 		{
 			Player temp = iter.next();
+//			System.out.println(update.getSortedPlayer().size());
 			switch (temp.getName())
 			{
 			case ("Smash Boy"):
@@ -134,7 +134,8 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 			case ("Cleveland"):
 				list[i] = (Color.red);
 				break;
-			default: list[i] = Color.black;
+			default:
+				list[i] = Color.black;
 			}
 			points[i] = temp.getPoints();
 			trains[i] = temp.getTrains();
@@ -144,23 +145,33 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		//PlayerEvent pEvent = graph.co
+	public void mouseReleased(MouseEvent e)
+	{
+		// PlayerEvent pEvent = graph.co
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e)
+	{
+	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e)
+	{
+	}
 
-	public PlayerEvent contains(Float cord) {
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
+	}
+
+	public PlayerEvent contains(Float cord)
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -246,4 +246,7 @@ public class Player
 			sum+=num;
 		return sum;
 	}
+	public String toString() {
+		return getName()+" Points: "+ getPoints();
+	}
 }
