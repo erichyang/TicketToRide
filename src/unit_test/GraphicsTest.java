@@ -7,8 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
@@ -21,20 +19,19 @@ import core.TicketToRide;
 import graphics.GraphicsBoard;
 
 @SuppressWarnings("serial")
-public class GraphicsBoardTest extends JPanel implements MouseListener
+public class GraphicsTest extends JPanel
 {
 	public static JFrame window;
-	public GraphicsBoard board;
+	public static GraphicsBoard board;
 
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		GraphicsBoardTest test = new GraphicsBoardTest();
+		GraphicsTest test = new GraphicsTest();
 		window = new JFrame("Graphics Graph");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(1920, 1080);
 		window.setVisible(true);
 		window.add(test);
-		window.addMouseListener(test);
 		window.setResizable(false);
 		window.getContentPane().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
@@ -43,15 +40,16 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 
 	}
 
-	public GraphicsBoardTest() throws FileNotFoundException
+	public GraphicsTest() throws FileNotFoundException
 	{
 		board = new GraphicsBoard();
+		window.addMouseListener(board);
 		int[] pEvents = {1,2,3,1,2,3,1,2,3,158,159};
 		TicketToRide ttr = new TicketToRide();
 		ttr.setView(board);
-		for(int i: pEvents) {
+		
+		for(int i: pEvents)
 			ttr.onPlayerEvent(new PlayerEvent(i));
-		}
 	}
 	
 	@Override
@@ -69,40 +67,5 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 		g.draw(new Line2D.Double(x, y - 5, x, y + 5));
 		g.setStroke(new BasicStroke(3));
 		g.setColor(Color.BLACK);
-		repaint();
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0)
-	{
-		System.out.println(arg0);
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0)
-	{
-		// TODO Auto-generated method stub
-
 	}
 }

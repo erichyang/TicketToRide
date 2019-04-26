@@ -1,9 +1,12 @@
 package graphics;
 
 import java.awt.AWTEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
-import java.util.TreeSet;
 
 import core.Deck;
 import core.Player;
@@ -33,10 +36,19 @@ public class ViewEvent extends AWTEvent{
 		visible = vis;
 	}
 	
-	public Set<Player> getSortedPlayer()
+	public ArrayList<Player> getSortedPlayer()
 	{
-		Set<Player> pSet = new TreeSet<Player>((a,b) -> b.getPoints()-a.getPoints());
-		players.forEach((p)-> pSet.add(p));
+		ArrayList<Player> pSet = new ArrayList<Player>(); //unsorted
+		for(Player p: players) {
+			pSet.add(p);
+		}
+		Collections.sort(pSet, new Comparator<Player>() {
+			@Override
+			public int compare(Player o1, Player o2) {
+				return o2.getPoints() - o1.getPoints();
+			}
+		});
+		System.out.println(pSet);
 		return pSet;
 	}
 }
