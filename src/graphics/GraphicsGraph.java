@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Float;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -100,9 +99,12 @@ public class GraphicsGraph extends Graphics
 	}
 
 	@Override
-	public PlayerEvent contains(Float cord)
+	public PlayerEvent contains(Point2D.Float cord)
 	{
-		// TODO Auto-generated method stub
+		for(GraphicsRail rail : rails) {
+			PlayerEvent r = rail.contains(cord);
+			if(r != null) return r;
+		}
 		return null;
 	}
 }
