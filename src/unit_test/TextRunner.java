@@ -17,8 +17,9 @@ public class TextRunner
 		TicketToRide game = new TicketToRide();
 		Deck decks = game.getDeck();
 		Scanner sc = new Scanner(System.in);
-//		gameEvent(game, decks, sc);
+		gameEvent(game, decks, sc);
 		playerEvent(game, decks, sc);
+		sc.close();
 	}
 
 	private static void printPlayerHand(Player pl)
