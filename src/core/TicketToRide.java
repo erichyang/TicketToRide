@@ -77,7 +77,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	public void setView(View observe)
 	{
 		observer = observe;
-		observer.observe(new  ViewEvent(2,this,players,GameDeck,graph,visibleCards));
+		observer.observe(new  ViewEvent(2,this,players,GameDeck,graph,visibleCards,tickets));
 	}
 
 	public void onPlayerEvent(PlayerEvent e)
@@ -137,7 +137,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				//System.out.println("A");
 			}
 			else if(eventID%10 == 9) {
-				//System.out.println(rail.getColor());
+				System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 				//System.out.println("B");
 			}
@@ -161,6 +161,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				rail.setOwner(getCurrentPlayer().getName(),1);
 			}else {
 				System.out.println("not enough cards");
+				rail.setColor(origColor);
 				return;
 			}
 			rail.setColor(origColor);
@@ -191,7 +192,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		
 		if (roundWeight == 2)
 			nextRound();
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards));
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
 	}
 
 	private void checkVis() {
@@ -261,7 +262,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				winner = p;
 			}
 		}
-		observer.observe(new ViewEvent(1, this, players, GameDeck, graph,visibleCards));
+		observer.observe(new ViewEvent(1, this, players, GameDeck, graph,visibleCards,tickets));
 		return winner;
 	}
 
