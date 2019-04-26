@@ -137,7 +137,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				//System.out.println("A");
 			}
 			else if(eventID%10 == 9) {
-				//System.out.println(rail.getColor());
+				System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 				//System.out.println("B");
 			}
@@ -161,6 +161,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				rail.setOwner(getCurrentPlayer().getName(),1);
 			}else {
 				System.out.println("not enough cards");
+				rail.setColor(origColor);
 				return;
 			}
 			rail.setColor(origColor);
