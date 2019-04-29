@@ -2,7 +2,6 @@ package graphics;
 
 import java.util.ArrayList;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 
 import core.PlayerEvent;
@@ -11,6 +10,7 @@ import core.Ticket;
 public class GraphicsTicketSelections extends Graphics
 {
 	private ArrayList<GraphicsTicket> selection;
+	private static boolean[] flip;
 	private static String idCat;
 	
 	public GraphicsTicketSelections(ArrayList<Ticket> selection)
@@ -21,11 +21,17 @@ public class GraphicsTicketSelections extends Graphics
 			this.selection.add(new GraphicsTicket(new Float(800+moving,800), ticket.getPointCount(), ticket.getCities()));
 			moving += selection.size()/2000;
 		}
+		flip = new boolean[selection.size()];
 	}
 
 	@Override
 	public PlayerEvent contains(Float cord)
-	{		
+	{	
+		int moving = selection.size()/2000;
+		if(cord.y >= 800 && cord.y <= 925)
+		{
+			
+		}
 		return null;
 	}
 
