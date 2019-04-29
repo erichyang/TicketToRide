@@ -184,7 +184,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				num = num/10;
 			}
 		}
-			else throw new IllegalArgumentException("invalid GameEvent ID number");
+			else throw new IllegalArgumentException("invalid PlayerEvent ID number");
 
 		roundWeight += e.getWeight();
 
@@ -192,7 +192,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		
 		if (roundWeight == 2)
 			nextRound();
-		//observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
 	}
 
 	private void checkVis() {
@@ -230,12 +230,15 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			System.out.println(endGame());
 		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
+		
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
 	}
 
 	public void nextRound()
 	{
 		roundWeight = 0;
 		players.offer(players.poll());
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
 	}
 
 	public Graph getGraph()

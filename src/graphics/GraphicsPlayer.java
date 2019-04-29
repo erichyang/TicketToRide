@@ -48,6 +48,8 @@ public class GraphicsPlayer extends Graphics
 	@Override
 	public void update(Object obj)
 	{
+		tickets.clear();
+		hand.clear();
 		Player update = (Player)obj;
 		//System.out.println(update.getTrainCardsNum());
 		ArrayList<Ticket> core = update.getTickets();
