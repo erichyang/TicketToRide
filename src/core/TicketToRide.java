@@ -141,7 +141,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				rail.setColor(rail.getColor().split(";")[1]);
 				//System.out.println("B");
 			}
-			else throw new IllegalArgumentException("invalid PlayerEvent ID number"); 
+			else throw new IllegalArgumentException("invalid GameEvent ID number"); 
 			
 			//System.out.println(rail.toString());
 			
@@ -192,7 +192,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		
 		if (roundWeight == 2)
 			nextRound();
-		//observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
 	}
 
 	private void checkVis() {
@@ -200,7 +200,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		for(String card : visibleCards)
 			if(card.equals("Wild")) count++;
 		if(count>=3) 
-			this.onGameEvent(new GameEvent(2, this));
+			this.onGameEvent(new GameEvent(3, this));
 	}
 
 	public void onGameEvent(GameEvent e)
@@ -262,7 +262,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				winner = p;
 			}
 		}
-		//observer.observe(new ViewEvent(1, this, players, GameDeck, graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(1, this, players, GameDeck, graph,visibleCards,tickets));
 		return winner;
 	}
 

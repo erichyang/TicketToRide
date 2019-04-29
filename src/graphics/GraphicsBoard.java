@@ -26,7 +26,6 @@ public class GraphicsBoard extends Graphics implements View
 	private String[] visible;
 	private static BufferedImage background;
 	private static BufferedImage canvas;
-	private static BufferedImage ticket;
 	private String color;
 
 	// leader board
@@ -41,7 +40,6 @@ public class GraphicsBoard extends Graphics implements View
 		{
 			background = ImageIO.read(new File("game_files\\background.jpg"));
 			canvas = ImageIO.read(new File("game_files\\canvas.jpg"));
-			ticket = ImageIO.read(new File("game_files\\cards\\ticket_card_back.jpg"));
 		} catch (IOException e)
 		{
 		}
@@ -72,14 +70,11 @@ public class GraphicsBoard extends Graphics implements View
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
 		player.draw(g);
-		
+
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
 		for (int i = 0; i < visible.length; i++)
 			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
-		
-		g.drawImage(ticket, 1500, 650, 200, 125, null);
-		
 		// 1500 - 1900, 130
 		g.setFont(new Font("Seriff", Font.BOLD, 64));
 		g.setColor(Color.LIGHT_GRAY);
