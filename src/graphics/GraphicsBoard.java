@@ -94,6 +94,7 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 	@Override
 	public void observe(ViewEvent event)
 	{
+		System.out.println(event);
 		update(event);
 	}
 

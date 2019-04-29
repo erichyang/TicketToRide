@@ -19,16 +19,16 @@ public class GraphicsPlayer extends Graphics
 	{
 		tickets = new ArrayList<GraphicsTicket>();
 		hand = new ArrayList<String>();
-//		tickets.add(new GraphicsTicket(new Point2D.Float(850,800), 10, "Your house", "School"));
-//		hand.add("Red");
-//		hand.add("Blue");
-//		hand.add("Black");
+		tickets.add(new GraphicsTicket(new Point2D.Float(850,800), 10, "Your house", "School"));
+		hand.add("Red");
+		hand.add("Blue");
+		hand.add("Black");
 	}
 
 	public void draw(Graphics2D g)
 	{
 
-//		g.fillRect(0,0,1000,1000);
+		//g.fillRect(0,0,1000,1000);
 		int moving = 0;
 		for (GraphicsTicket ticket : tickets)
 			ticket.draw(g);
@@ -49,7 +49,7 @@ public class GraphicsPlayer extends Graphics
 	{
 		Player update = (Player)obj;
 		ArrayList<Ticket> core = update.getTickets();
-		for(int i = 0; i < tickets.size(); i++)
+		for(int i = 0; i < core.size(); i++)
 			tickets.add(new GraphicsTicket(new Point2D.Float(850 + i*50, 800), core.get(i).getPointCount(),core.get(i).getCities()));
 	}
 
