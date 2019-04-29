@@ -5,6 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import core.Player;
 import core.PlayerEvent;
@@ -53,6 +54,12 @@ public class GraphicsPlayer extends Graphics
 		ArrayList<Ticket> core = update.getTickets();
 		for(int i = 0; i < tickets.size(); i++)
 			tickets.add(new GraphicsTicket(new Point2D.Float(850 + i*50, 800), core.get(i).getPointCount(),core.get(i).getCities()));
+		HashMap<String,Integer>pHand = update.getHand();
+		pHand.keySet().forEach((key)->{
+			for(int i=0; i<pHand.get(key); i++) {
+				hand.add(key);
+			}
+		});
 	}
 
 	@Override
