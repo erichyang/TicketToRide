@@ -56,7 +56,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		while (sc.hasNextLine())
 			tickets.add(new Ticket(sc.nextLine()));
 
-		visibleCards = GameDeck.getVisibleCards();	
+		visibleCards = GameDeck.getVisibleCards();
+		checkVis();
 		
 		graph = new Graph();
 		sc = new Scanner(new File("game_files\\cities\\graph.in"));
@@ -113,9 +114,12 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				roundWeight++;
 			}
 			
-			currentPlayer.addCards(card);
+//			if(card == null ) {
+//				return;
+//			}
 			visibleCards[index] = GameDeck.getCard();
 			checkVis();
+			currentPlayer.addCards(card);
 		} else if (eventID == 5)
 		{
 			currentPlayer.addCards(GameDeck.getCard());
@@ -199,8 +203,13 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int count =0;
 		for(String card : visibleCards)
 			if(card.equals("Wild")) count++;
-		if(count>=3) 
-			this.onGameEvent(new GameEvent(3, this));
+		if(count>=3) {
+			if(GameDeck.disWildCheck()) {
+				this.onGameEvent(new GameEvent(3, this));
+				System.out.println("heh");
+			}
+			else this.onGameEvent(new GameEvent(2, this));
+		}
 	}
 
 	public void onGameEvent(GameEvent e)
@@ -224,6 +233,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				GameDeck.addDiscardedCard(visibleCards[i]);
 				visibleCards[i] = GameDeck.getCard();
 			}
+			checkVis();
 		} else if (eventID == 3)
 		{
 //			endGame();
@@ -231,7 +241,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 		
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(3, this, players, GameDeck, graph,visibleCards,tickets));
 	}
 
 	public void nextRound()
@@ -252,6 +262,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	}
 
 	public Player endGame() {
+		for(int i=0; i<visibleCards.length ; i++) {
+			//visibleCards[i] = null;
+			System.out.println("HELP");
+		}
 		
 		players.forEach(player -> player.countTickets());
 

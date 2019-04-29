@@ -51,7 +51,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		board = new GraphicsBoard();
 		game = new TicketToRide();
 		game.setView(board);
-		game.onGameEvent(new GameEvent(3,game)); //end the game
+		//game.onGameEvent(new GameEvent(3,game)); //end the game
 	}
 	
 	@Override
