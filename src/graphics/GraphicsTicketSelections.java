@@ -10,6 +10,7 @@ import core.Ticket;
 public class GraphicsTicketSelections extends Graphics
 {
 	private ArrayList<GraphicsTicket> selection;
+	private static String idCat;
 	
 	public GraphicsTicketSelections(ArrayList<Ticket> selection)
 	{

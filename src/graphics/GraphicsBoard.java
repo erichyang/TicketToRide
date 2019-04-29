@@ -11,12 +11,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 
 import core.Player;
 import core.PlayerEvent;
+import core.Ticket;
 
 public class GraphicsBoard extends Graphics implements View
 {
@@ -27,14 +29,22 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage background;
 	private static BufferedImage canvas;
 	private static BufferedImage ticket;
+//	private static BufferedImage leaderboard;
+	
 	private String color;
-
+	private ViewEvent lastUpdate;
+	
 	// leader board
 	private Color[] list;
 	private int[] points;
 	private int[] trains;
 	private int[] tickets;
 	private int[] trainCards;
+
+	private boolean end;
+	
+	private GraphicsTicketSelections sel = new GraphicsTicketSelections(new ArrayList<Ticket>());
+	
 	static
 	{
 		try
@@ -42,6 +52,7 @@ public class GraphicsBoard extends Graphics implements View
 			background = ImageIO.read(new File("game_files\\background.jpg"));
 			canvas = ImageIO.read(new File("game_files\\canvas.jpg"));
 			ticket = ImageIO.read(new File("game_files\\cards\\ticket_card_back.jpg"));
+//			leaderboard = ImageIO.read(new File("game_files\\leaderboard.jpg"));
 		} catch (IOException e)
 		{
 		}
@@ -59,6 +70,8 @@ public class GraphicsBoard extends Graphics implements View
 		visible = new String[6];
 		visible[5] = "Back";
 		color = "";
+		sel = new GraphicsTicketSelections(new ArrayList<Ticket>());
+		end = false;
 	}
 
 	public void draw(Graphics2D g)
@@ -82,16 +95,17 @@ public class GraphicsBoard extends Graphics implements View
 		
 		// 1500 - 1900, 130
 		g.setFont(new Font("Seriff", Font.BOLD, 64));
+		g.setColor(new Color(226, 165, 83));
+		g.fillRect(1455, 0, 500, 450);
 		g.setColor(Color.LIGHT_GRAY);
 		for (int i = 0; i < 4; i++)
 		{
 			g.setColor(list[i]);
-			g.fillRect(1475, 150 + i * 100, 50, 50);
-
-			g.drawString("" + points[i], 1550, 200 + i * 100);
-			g.drawString("" + trains[i], 1650, 200 + i * 100);
-			g.drawString("" + tickets[i], 1750, 200 + i * 100);
-			g.drawString("" + trainCards[i], 1850, 200 + i * 100);
+			g.fillRect(1475, 50 + i * 100, 50, 50);
+			g.drawString("" + points[i], 1550, 100 + i * 100);
+			g.drawString("" + trains[i], 1650, 100 + i * 100);
+			g.drawString("" + tickets[i], 1750, 100 + i * 100);
+			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
 		g.setColor(Color.black);
 	}
@@ -99,6 +113,7 @@ public class GraphicsBoard extends Graphics implements View
 	@Override
 	public void observe(ViewEvent event)
 	{
+		lastUpdate = event;
 		update(event);
 	}
 
@@ -113,6 +128,8 @@ public class GraphicsBoard extends Graphics implements View
 	public void update(Object e)
 	{
 		ViewEvent update = (ViewEvent) e;
+		if(update.getID()==1)
+			end = true;
 		graph.update(update.map);
 		player.update(update.players.peek());
 //		visible = update.visible;
@@ -152,7 +169,9 @@ public class GraphicsBoard extends Graphics implements View
 
 	public PlayerEvent contains(Float cord)
 	{
-		if(cord.x >= 1255 && cord.x <= 1380)
+		if(end)
+			return null;
+		if(cord.x >= 1255 && cord.x <= 1455)
 		{
 			if(cord.y >= 0 && cord.y <= 125)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_ONE);
@@ -168,20 +187,11 @@ public class GraphicsBoard extends Graphics implements View
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
 		}
 		
+		if(cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775)
+		{
+			sel = new GraphicsTicketSelections(new ArrayList<Ticket>(lastUpdate.tickets));
+			sel.contains(cord);
+		}
 		return null;
 	}
-
-//	- listener:PlayerEventListener
-//	- graph:GraphicsGraph
-//	- player:GraphicsPlayer
-//	- tickets:Stack<GraphicsTicket>
-//	- visible:GraphicsString[5]
-//	- deck:Stack<GraphicsString>
-
-//	+ GraphicsBoard()
-//	+ paintComponent(Graphics):void
-//	+ setListener(PlayerEventListener listen):void
-//	+ beginGame():void + drawTrain():void
-//	+ drawTicket():void
-//	+ update(GameEvent):void
 }

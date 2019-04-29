@@ -75,6 +75,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent arg0)
 	{
+//		System.out.println(arg0);
 	}
 
 	@Override
@@ -103,6 +104,6 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	{
 		PlayerEvent action = board.contains(new Point2D.Float(arg0.getX(),arg0.getY()));
 		if(action!=null)
-		game.onPlayerEvent(action);
+			game.onPlayerEvent(action);
 	}
 }
