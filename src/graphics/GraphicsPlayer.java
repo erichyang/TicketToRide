@@ -48,8 +48,9 @@ public class GraphicsPlayer extends Graphics
 	@Override
 	public void update(Object obj)
 	{
+		tickets.clear();
+		hand.clear();
 		Player update = (Player)obj;
-		//System.out.println(update.getTrainCardsNum());
 		ArrayList<Ticket> core = update.getTickets();
 		for(int i = 0; i < tickets.size(); i++)
 			tickets.add(new GraphicsTicket(new Point2D.Float(850 + i*50, 800), core.get(i).getPointCount(),core.get(i).getCities()));
