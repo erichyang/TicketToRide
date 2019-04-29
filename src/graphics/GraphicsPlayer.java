@@ -29,7 +29,7 @@ public class GraphicsPlayer extends Graphics
 	public void draw(Graphics2D g)
 	{
 
-		//g.fillRect(0,0,1000,1000);
+//		g.fillRect(0,0,1000,1000);
 		int moving = 0;
 		for (GraphicsTicket ticket : tickets)
 			ticket.draw(g);
@@ -51,7 +51,7 @@ public class GraphicsPlayer extends Graphics
 		Player update = (Player)obj;
 		//System.out.println(update.getTrainCardsNum());
 		ArrayList<Ticket> core = update.getTickets();
-		for(int i = 0; i < core.size(); i++)
+		for(int i = 0; i < tickets.size(); i++)
 			tickets.add(new GraphicsTicket(new Point2D.Float(850 + i*50, 800), core.get(i).getPointCount(),core.get(i).getCities()));
 		HashMap<String,Integer>pHand = update.getHand();
 		pHand.keySet().forEach((key)->{

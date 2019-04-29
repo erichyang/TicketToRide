@@ -55,7 +55,7 @@ public class GraphicsPlayerTest extends JPanel implements MouseListener
 		super.paintComponent(fakeG);
 		Graphics2D g = (Graphics2D) fakeG;
 		
-		graph.draw(g);
+//		graph.draw(g);
 		
 		player.draw(g);
 		

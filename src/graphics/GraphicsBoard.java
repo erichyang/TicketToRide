@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
 import core.Player;
 import core.PlayerEvent;
 
-public class GraphicsBoard extends Graphics implements View, MouseListener
+public class GraphicsBoard extends Graphics implements View
 {
 //	private PlayerEventListener listener;
 	private GraphicsGraph graph;
@@ -94,7 +94,6 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 	@Override
 	public void observe(ViewEvent event)
 	{
-		System.out.println(event);
 		update(event);
 	}
 
@@ -145,36 +144,25 @@ public class GraphicsBoard extends Graphics implements View, MouseListener
 		}
 	}
 
-	@Override
-	public void mouseReleased(MouseEvent e)
-	{
-		// PlayerEvent pEvent = graph.co
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e)
-	{
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e)
-	{
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e)
-	{
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e)
-	{
-	}
 
 	public PlayerEvent contains(Float cord)
 	{
-		// TODO Auto-generated method stub
+		if(cord.x >= 1255 && cord.x <= 1380)
+		{
+			if(cord.y >= 0 && cord.y <= 125)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_ONE);
+			if(cord.y >= 130 && cord.y <= 255)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_TWO);
+			if(cord.y >= 260 && cord.y <= 385)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_THREE);
+			if(cord.y >= 390 && cord.y <= 515)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FOUR);
+			if(cord.y >= 520 && cord.y <= 645)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FIVE);
+			if(cord.y >= 650 && cord.y <= 775)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
+		}
+		
 		return null;
 	}
 
