@@ -100,6 +100,12 @@ public class GraphicsBoard extends Graphics implements View
 		g.setColor(Color.LIGHT_GRAY);
 		for (int i = 0; i < 4; i++)
 		{
+			if(lastUpdate.getCurrentPlayer().equals(list[i]))
+			{
+				g.setStroke(new BasicStroke(10));
+				g.setColor(Color.magenta);
+				g.drawRect(1475, 50 + i * 100, 50, 50);		
+			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 50 + i * 100, 50, 50);
 			g.drawString("" + points[i], 1550, 100 + i * 100);
@@ -107,6 +113,7 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
+		
 		g.setColor(Color.black);
 	}
 
@@ -142,18 +149,19 @@ public class GraphicsBoard extends Graphics implements View
 		{
 			Player temp = iter.next();
 //			System.out.println(update.getSortedPlayer().size());
+			System.out.println(temp.getName());
 			switch (temp.getName())
 			{
-			case ("Smash Boy"):
+			case ("Smashboy"):
 				list[i] = (Color.yellow);
 				break;
-			case ("Rail Island Z"):
+			case ("Rail island Z"):
 				list[i] = (Color.green);
 				break;
-			case ("TeeWee"):
+			case ("Teewee"):
 				list[i] = (new Color(142, 68, 173));
 				break;
-			case ("Cleveland"):
+			case ("Cleveland Z"):
 				list[i] = (Color.red);
 				break;
 			default:
