@@ -80,13 +80,13 @@ public class GraphicsGraph extends Graphics
 					continue;
 				switch (update.getRail(i).getOwnerName(j))
 				{
-				case ("SmashBoy"):
+				case ("Smashboy"):
 					rails[i].setOwner(Color.yellow);
 					break;
-				case ("Rail Island Z"):
+				case ("Rail island Z"):
 					rails[i].setOwner(Color.green);
 					break;
-				case ("TeeWee"):
+				case ("Teewee"):
 					rails[i].setOwner(new Color(142, 68, 173));
 					break;
 				case ("Cleveland Z"):

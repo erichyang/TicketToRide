@@ -100,14 +100,17 @@ public class GraphicsBoard extends Graphics implements View
 		g.setColor(Color.LIGHT_GRAY);
 		for (int i = 0; i < 4; i++)
 		{
-			if(lastUpdate.getCurrentPlayer().equals(list[i]))
+			if (lastUpdate.getCurrentPlayer().equals(list[i]))
 			{
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.magenta);
-				g.drawRect(1475, 50 + i * 100, 50, 50);		
+				g.drawRect(1475, 50 + i * 100, 50, 50);
+				g.setColor(list[i]);
+				g.drawRect(5, 793, 1904, 253);
 			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 50 + i * 100, 50, 50);
+			
 			g.drawString("" + points[i], 1550, 100 + i * 100);
 			g.drawString("" + trains[i], 1650, 100 + i * 100);
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
