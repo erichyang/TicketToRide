@@ -197,6 +197,9 @@ public class GraphicsBoard extends Graphics implements View
 			if(cord.y >= 650 && cord.y <= 775)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
 		}
+		PlayerEvent pE = graph.contains(cord);
+		//System.out.println(pE);
+		if(pE != null) return pE;
 		
 		if(cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775)
 		{

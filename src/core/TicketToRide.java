@@ -57,7 +57,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			tickets.add(new Ticket(sc.nextLine()));
 
 		visibleCards = GameDeck.getVisibleCards();
-		checkVis();
 		
 		graph = new Graph();
 		sc = new Scanner(new File("game_files\\cities\\graph.in"));
@@ -72,6 +71,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}
 		
 	    //System.out.println(graph.indexList());
+		checkVis();
+		
 		sc.close();
 	}
 
