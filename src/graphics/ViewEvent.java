@@ -1,7 +1,7 @@
 package graphics;
 
-
 import java.awt.AWTEvent;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,14 +26,16 @@ public class ViewEvent extends AWTEvent
 	public Graph map;
 	public String[] visible;
 	public Stack<Ticket> tickets;
-	
+
 	public static int ROUND_END = 0;
 	public static int GAME_END = 1;
 	public static int START_GAME = 2;
 	public static int ROUND_CONT = 3;
-	
-	public ViewEvent(int ID, Object source, Queue<Player> playerQueue, Deck GameDeck, Graph graph,String[] vis, Stack<Ticket>ticketStack) {
-		super(source,ID);
+
+	public ViewEvent(int ID, Object source, Queue<Player> playerQueue, Deck GameDeck, Graph graph, String[] vis,
+			Stack<Ticket> ticketStack)
+	{
+		super(source, ID);
 		map = graph;
 		gameDeck = GameDeck;
 		players = playerQueue;
@@ -55,5 +57,22 @@ public class ViewEvent extends AWTEvent
 			}
 		});
 		return pSet;
+	}
+
+	public Color getCurrentPlayer()
+	{
+		switch (players.peek().getName())
+		{
+		case ("Smashboy"):
+			return (Color.yellow);
+		case ("Rail island Z"):
+			return (Color.green);
+		case ("Teewee"):
+			return (new Color(142, 68, 173));
+		case ("Cleveland Z"):
+			return (Color.red);
+		default:
+			return Color.black;
+		}
 	}
 }
