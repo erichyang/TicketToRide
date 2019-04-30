@@ -119,10 +119,15 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 //			}
 			visibleCards[index] = GameDeck.getCard();
 			checkVis();
-			currentPlayer.addCards(card);
-		} else if (eventID == 5)
+			if(currentPlayer.addCards(card) == null) {
+				return;
+			}
+		}
+		else if (eventID == 5)
 		{
-			currentPlayer.addCards(GameDeck.getCard());
+			if(currentPlayer.addCards(GameDeck.getCard()) == null) {
+				return;
+			}
 		} else if (eventID == 6)
 		{
 			getCurrentPlayer().addTicket(tickets.pop());
@@ -263,8 +268,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public Player endGame() {
 		for(int i=0; i<visibleCards.length ; i++) {
-			//visibleCards[i] = null;
-			System.out.println("HELP");
+			visibleCards[i] = null;
 		}
 		
 		players.forEach(player -> player.countTickets());

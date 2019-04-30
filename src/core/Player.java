@@ -103,9 +103,13 @@ public class Player
 	}
 	
 	
-	public void addCards(String color)
+	public String addCards(String color)
 	{
+		if(hand.get(color) == null) {
+			return null;
+		}
 		hand.put(color, hand.get(color)+1);
+		return color;
 	}
 	
 	
