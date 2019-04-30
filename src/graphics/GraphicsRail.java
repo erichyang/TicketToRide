@@ -3,6 +3,7 @@ package graphics;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D.Float;
 import java.util.Arrays;
 
@@ -18,9 +19,11 @@ public class GraphicsRail extends Graphics
 	private String[] colors;
 	private double[][] cords;
 	private Color owner;
+	private Line2D lin;
 
 	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
+		lin = null;
 		this.cityA = cityA;
 		this.cityB = cityB;
 		this.trains = trains;
@@ -102,17 +105,18 @@ public class GraphicsRail extends Graphics
 //				g.setColor(Color.CYAN);
 //				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
 				g.setColor(string2Color(colors[i]));
-
-				g.drawLine((int) (cords[i][0] + (-deltaX + 2 * deltaX * (i))),
+				
+				lin = new Line2D.Float((int)(cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
 						(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
 						(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
 //				System.out.println(Math.toDegrees(alpha) +"("+ deltaX+ ","+deltaY+")"+" "+"("+x+","+y+")");
 			} else
 			{
-				g.drawLine((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
+				lin = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
 			}
-
+			g.draw(lin);
+			//System.out.println(lin);
 			if (owner != null)
 			{
 				g.setColor(owner);
@@ -187,7 +191,9 @@ public class GraphicsRail extends Graphics
 	@Override
 	public PlayerEvent contains(Float cord)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		//System.out.println(cord+","+ lin.ptLineDist(cord));
+		if(lin != null && lin.ptLineDist(cord)<= 5) {
+			return new PlayerEvent(-2);
+		}else return null;
 	}
 }
