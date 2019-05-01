@@ -156,18 +156,19 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			//System.out.println(rail.toString());
 			
 			if(rail.getColor().equals("Gray")) {
-				//System.out.println("gray rail "+ rail);
+				System.out.println("gray rail "+ rail);
 				String color = observer.color();
 				rail.setColor(color);
 			}		
 			
-			ArrayList<String> usedCards = current.useCards(rail);
-			
 			System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
+			
+			ArrayList<String> usedCards = current.useCards(rail);
+
 			
 			if(origColor.split(";")[0].equals(rail.getColor()) && rail.getOwnerName(0) == (null)) {
 				rail.setOwner(getCurrentPlayer().getName(),0);
-			}else if(origColor.split(";")[1].equals(rail.getColor()) && rail.getOwnerName(1) == (null)) {
+			}else if(rail.isDouble() && origColor.split(";")[1].equals(rail.getColor()) && rail.getOwnerName(1) == (null)) {
 				rail.setOwner(getCurrentPlayer().getName(),1);
 			}else {
 				System.out.println("not enough cards");
@@ -178,6 +179,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			
 			if (usedCards == null) {
 				System.out.println("not enough cards");
+				rail.setColor(origColor);
 				return;
 			}
 			

@@ -72,6 +72,11 @@ public class Player
 		if(trains<num) return null;
 		//System.out.println(hand.get(color));
 		//System.out.println("COLOR: "+color+ " RAIL: " + rail);
+		if(hand.get(color) == null) {
+			System.out.println("BAD COLOR: "+color);
+			return null;
+		}
+		System.out.println(hand.get(color));
 		int amount = hand.get(color);
 		if(amount + hand.get("Wild") < num)
 			return null;
