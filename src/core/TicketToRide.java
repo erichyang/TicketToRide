@@ -27,14 +27,11 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	private Deck GameDeck;
 	private Stack<Ticket> tickets;
 	private String[] visibleCards;
-	private Queue<Ticket> ticketQueue;
 
 	public TicketToRide() throws FileNotFoundException
 	{
 		GameDeck = new Deck();
 		GameDeck.setListener(this);
-		
-		ticketQueue = new LinkedList<Ticket>();
 		
 		players = new LinkedList<Player>();
 		players.add(new Player("Rhail island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
@@ -86,6 +83,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void onPlayerEvent(PlayerEvent e)
 	{
+		System.out.println("ID "+e.getID());
 		if ((roundWeight + e.getWeight()) > 2)
 		{
 			System.out.println("invalid action");
@@ -133,11 +131,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			}
 		} else if (eventID == 6)
 		{
-			System.out.println("hello");
+			//System.out.println(tickets.peek());
 			getCurrentPlayer().addTicket(tickets.pop());
 		} else if (eventID == 7) {
-			getCurrentPlayer().addTicket(tickets.pop());
-			tickets.add(tickets.size()-1,getCurrentPlayer().throwTicket());
+			//tickets.add(0, tickets.pop());
+			Stack<Ticket> temp = new Stack<Ticket>();
+			temp.add(tickets.pop());
+			temp.addAll(tickets);
+			tickets = temp;
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
 		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8 && (eventID%10 == 8 || eventID%10 == 9)) {	
@@ -193,13 +194,19 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}else if(eventID%10 == 6 || eventID%10 == 7){
 			int num = eventID;
 			while(num >1) {
-				System.out.println("NUM:"+num + currentPlayer+currentPlayer.getTickets());
-				PlayerEvent ticketEvent = new PlayerEvent(num%10);
-				ticketEvent.setWeight(0);
-				onPlayerEvent(ticketEvent);
+//				System.out.println("NUM:"+num + currentPlayer+currentPlayer.getTickets());
+//				PlayerEvent ticketEvent = new PlayerEvent(num%10);
+//				ticketEvent.setWeight(0);
+//				onPlayerEvent(ticketEvent);
+				if(num%10 == 6) {
+					getCurrentPlayer().addTicket(tickets.pop());
+				}else {
+					Stack<Ticket> temp = new Stack<Ticket>();
+					temp.add(tickets.pop());
+					temp.addAll(tickets);
+					tickets = temp;
+				}
 				num = num/10;				
-				//onPlayerEvent(new PlayerEvent(num));
-				//System.out.println(roundWeight);
 			}
 		}
 			else throw new IllegalArgumentException("invalid PlayerEvent ID number");

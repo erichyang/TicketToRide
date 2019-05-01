@@ -17,7 +17,7 @@ public class Player
 	private int trains;
 	private int points;
 	private HashMap<String, Integer> hand;
-	private ArrayList<Ticket> tickets;
+	private ArrayList<Ticket> ticketList;
 	private String name;
 	private ArrayList<Set<String>> cities;
 	private boolean isFinalTurn;
@@ -37,7 +37,7 @@ public class Player
 		hand.put("Green", 0);
 		hand.put("Wild", 0);
 		//pink, red, black, blue, orange, white, yellow, green, wild
-		tickets = new ArrayList<>();
+		ticketList = new ArrayList<>();
 		name = playerName;
 		cities = new ArrayList<Set<String>>();
 		isFinalTurn = false;
@@ -125,13 +125,13 @@ public class Player
 
 	public ArrayList<Ticket> getTickets()
 	{
-		return tickets;
+		return ticketList;
 	}
 
-	public void setTickets(ArrayList<Ticket> tickets)
-	{
-		this.tickets = tickets;
-	}
+//	public void setTickets(ArrayList<Ticket> tickets)
+//	{
+//		this.tickets = tickets;
+//	}
 
 	public void addRail(Rail rail)
 	{
@@ -168,7 +168,7 @@ public class Player
 	}
 	
 	public void countTickets() {
-		tickets.forEach(ticket->addPoints((contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])?ticket.getPointCount():-ticket.getPointCount())));
+		ticketList.forEach(ticket->addPoints((contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])?ticket.getPointCount():-ticket.getPointCount())));
 	}
 
 	private int findCity(String city)
@@ -193,22 +193,19 @@ public class Player
 
 	public void addTicket(Ticket newTicket)
 	{
-		tickets.add(newTicket);
+		ticketList.add(newTicket);
+		System.out.println("tickeets: "+ticketList);
 	}
 
 	public void removeTicket(String ticketName)
 	{
-		for (int i = tickets.size() - 1; i >= 0; i--)
+		for (int i = ticketList.size() - 1; i >= 0; i--)
 		{
-			if (tickets.get(i).getCities().equals(ticketName))
+			if (ticketList.get(i).getCities().equals(ticketName))
 			{
-				tickets.remove(i);
+				ticketList.remove(i);
 			}
 		}
-	}
-	
-	public Ticket throwTicket() {
-		return tickets.remove(tickets.size()-1);
 	}
 
 	public void addPoints(int value)
