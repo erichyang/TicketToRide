@@ -103,26 +103,29 @@ public class GraphicsBoard extends Graphics implements View
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.magenta);
 				g.drawRect(1475, 50 + i * 100, 50, 50);
+				g.setColor(list[i]);
+				g.drawRect(5, 793, 1904, 253);
 			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 50 + i * 100, 50, 50);
+
 			g.drawString("" + points[i], 1550, 100 + i * 100);
 			g.drawString("" + trains[i], 1650, 100 + i * 100);
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
 
-		System.out.println("A: "+lastUpdate.players.peek());
-		if(lastUpdate.players.peek().getTickets().size() == 0)
+		System.out.println("A: " + lastUpdate.players.peek());
+		if (lastUpdate.players.peek().getTickets().size() == 0)
 		{
-			System.out.println("B: "+lastUpdate.players.peek());
+			System.out.println("B: " + lastUpdate.players.peek());
 			sel = drawStartTickets();
 			sel.setDraw(true);
 		}
-		
+
 		if (sel.getDraw())
 			sel.draw(g);
-		
+
 		g.setColor(Color.black);
 	}
 
@@ -207,6 +210,11 @@ public class GraphicsBoard extends Graphics implements View
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
 		}
 
+		PlayerEvent pE = graph.contains(cord);
+		// System.out.println(pE);
+		if (pE != null)
+			return pE;
+
 		if (cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775)
 		{
 //			System.out.println("Tickets selection");
@@ -229,5 +237,10 @@ public class GraphicsBoard extends Graphics implements View
 		for (int i = 0; i < 5; i++)
 			temp2.add(temp1.pop());
 		return new GraphicsTicketSelections(temp2, 5);
+	}
+
+	public void graphSetRails(Float cord)
+	{
+		graph.setRails(cord);
 	}
 }

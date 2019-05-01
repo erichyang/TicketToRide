@@ -101,10 +101,26 @@ public class GraphicsGraph extends Graphics
 	@Override
 	public PlayerEvent contains(Point2D.Float cord)
 	{
+		int count =0;
 		for(GraphicsRail rail : rails) {
 			PlayerEvent r = rail.contains(cord);
-			if(r != null) return r;
+			//System.out.println(r);
+			if(r != null) return new PlayerEvent(count*10+8);
+			count ++;
 		}
 		return null;
+	}
+	
+	public void setRails(Point2D.Float cord) {
+		for(int i = 0; i< rails.length; i++) {
+			//System.out.println("hello");
+			GraphicsRail rail = rails[i];
+			//System.out.println(rail.hovered);
+			if(rail.contains(cord) != null) {
+				rail.hovered = true;
+			}else {
+				rail.hovered = false;
+			}
+		}
 	}
 }
