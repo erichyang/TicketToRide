@@ -24,12 +24,12 @@ public class GraphicsTicketSelections extends Graphics
 //		System.out.println(selection);
 		this.num = num;
 		int moving;
-		moving = 192;
+		moving = 1920/num/2;
 		for (int i = 0; i < selection.size(); i++)
 		{
 			this.selection.add(new GraphicsTicket(new Float(moving, 400), selection.get(i).getPointCount(),
 					selection.get(i).getCities()));
-			moving += 350;
+			moving += 1920/num/1.2;
 //			System.out.println(selection.size());
 		}
 //		flip = new boolean[selection.size()];
