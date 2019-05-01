@@ -17,7 +17,6 @@ import java.io.FileNotFoundException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import core.GameEvent;
 import core.PlayerEvent;
 import core.TicketToRide;
 import graphics.GraphicsBoard;
@@ -73,7 +72,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		Point2D.Float point = new Point2D.Float();
 		
 		point.setLocation(x, y);
-		if(board.contains(point) != null){
+		if(board.containsPoint(point)){
 			//System.out.println(board.contains(point));
 			board.graphSetRails(point);
 			//System.out.println(point);

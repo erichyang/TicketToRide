@@ -55,6 +55,7 @@ public class GraphicsTicketSelections extends Graphics
 				else
 					idCat += "" + PlayerEvent.PLAYER_DISCARD_TICKET;
 //			System.out.println(idCat);
+			Arrays.fill(flip, true);
 			return new PlayerEvent(Integer.parseInt(idCat));
 		}
 		return null;

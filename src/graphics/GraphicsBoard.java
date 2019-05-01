@@ -115,10 +115,10 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
 
-		System.out.println("A: " + lastUpdate.players.peek());
+//		System.out.println("A: " + lastUpdate.players.peek());
 		if (lastUpdate.players.peek().getTickets().size() == 0)
 		{
-			System.out.println("B: " + lastUpdate.players.peek());
+//			System.out.println("B: " + lastUpdate.players.peek());
 			sel = drawStartTickets();
 			sel.setDraw(true);
 		}
@@ -221,6 +221,8 @@ public class GraphicsBoard extends Graphics implements View
 			@SuppressWarnings("unchecked")
 			Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
 			ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
+			if(temp1.size() < 3)
+				return null;
 			for (int i = 0; i < 3; i++)
 				temp2.add(temp1.pop());
 			sel = new GraphicsTicketSelections(temp2, 3);
@@ -242,5 +244,12 @@ public class GraphicsBoard extends Graphics implements View
 	public void graphSetRails(Float cord)
 	{
 		graph.setRails(cord);
+	}
+
+	public boolean containsPoint(Float point)
+	{
+		if(sel.getDraw())
+			return false;
+		return (graph.contains(point)!=null);
 	}
 }

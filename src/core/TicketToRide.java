@@ -3,6 +3,7 @@ package core;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -55,6 +56,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		while (sc.hasNextLine())
 			tickets.add(new Ticket(sc.nextLine()));
+		Collections.shuffle(tickets);
 
 		visibleCards = GameDeck.getVisibleCards();
 		
@@ -131,13 +133,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			}
 		} else if (eventID == 6)
 		{
+			System.out.println("hello");
 			getCurrentPlayer().addTicket(tickets.pop());
 		} else if (eventID == 7) {
 			getCurrentPlayer().addTicket(tickets.pop());
 			tickets.add(tickets.size()-1,getCurrentPlayer().throwTicket());
 			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
 			//If it is 0, then it is the second rail of a double rail
-		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8) {	
+		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8 && (eventID%10 == 8 || eventID%10 == 9)) {	
 			Player current = getCurrentPlayer();
 			Rail rail = graph.getRail((eventID-8)/10);
 			String origColor = rail.getColor();
@@ -186,15 +189,16 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			current.addRail(rail);
 			current.addPoints(pointValues[rail.getLength()-1]);
-			
+		
 		}else if(eventID%10 == 6 || eventID%10 == 7){
 			int num = eventID;
 			while(num >1) {
+				System.out.println("NUM:"+num + currentPlayer+currentPlayer.getTickets());
 				PlayerEvent ticketEvent = new PlayerEvent(num%10);
 				ticketEvent.setWeight(0);
 				onPlayerEvent(ticketEvent);
-				num = num/10;
-				onPlayerEvent(new PlayerEvent(num));
+				num = num/10;				
+				//onPlayerEvent(new PlayerEvent(num));
 				//System.out.println(roundWeight);
 			}
 		}
