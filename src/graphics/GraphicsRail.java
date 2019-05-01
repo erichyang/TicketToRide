@@ -18,13 +18,15 @@ public class GraphicsRail extends Graphics
 //	private double curvature;
 	private String[] colors;
 	private double[][] cords;
-	private Color owner;
-	private Line2D lin;
-	public boolean hovered;
+	private Color[] owners;
+	private Line2D[] lines;
+	public boolean[] hovered;
 
 	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
-		lin = null;
+		hovered = new boolean[(doubles) ? 2:1];
+		Arrays.fill(hovered, false);
+		lines = new Line2D[(doubles) ? 2:1];
 		this.cityA = cityA;
 		this.cityB = cityB;
 		this.trains = trains;
@@ -35,7 +37,7 @@ public class GraphicsRail extends Graphics
 		Arrays.fill(cords[0], -1);
 		if (cords.length == 2)
 			Arrays.fill(cords[1], -1);
-		owner = null;
+		owners = new Color[doubles ? 2 : 1];
 //		path = new Path2D[doubles ? 2 : 1];
 	}
 
@@ -97,7 +99,7 @@ public class GraphicsRail extends Graphics
 			{ length - 2, 2 }, 0));
 			g.setColor(string2Color(colors[i]));
 			
-			if(hovered) {
+			if(hovered[i]) {
 				g.setColor(g.getColor().darker());
 				//System.out.println("Triggered");
 			}
@@ -108,22 +110,22 @@ public class GraphicsRail extends Graphics
 //				g.setColor(Color.CYAN);
 //				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
 				g.setColor(string2Color(colors[i]));
-				if(hovered) g.setColor(g.getColor().darker());
+				if(hovered[i]) g.setColor(g.getColor().darker());
 				
-				lin = new Line2D.Float((int)(cords[i][0] + (-deltaX + 2 * deltaX * (i))),
+				lines[i] = new Line2D.Float((int)(cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
 						(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
 						(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
 //				System.out.println(Math.toDegrees(alpha) +"("+ deltaX+ ","+deltaY+")"+" "+"("+x+","+y+")");
 			} else
 			{
-				lin = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
+				lines[0] = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
 			}
-			g.draw(lin);
+			g.draw(lines[i]);
 			//System.out.println(lin);
-			if (owner != null)
+			if (owners[i] != null)
 			{
-				g.setColor(owner);
+				g.setColor(owners[i]);
 				g.setStroke(new BasicStroke(3));
 				if (doubles)
 				{
@@ -179,25 +181,28 @@ public class GraphicsRail extends Graphics
 	{
 		return cityB;
 	}
-
 	@Override
 	public void update(Object obj)
 	{
+
 		// TODO Auto-generated method stub
 
 	}
 
-	public void setOwner(Color owner)
+	public void setOwner(Color owner, int i)
 	{
-		this.owner = owner;
+		this.owners[i] = owner;
 	}
 
 	@Override
 	public PlayerEvent contains(Float cord)
 	{
 		//System.out.println(cord+","+ lin.ptLineDist(cord));
-		if(lin != null && lin.ptSegDist(cord)<= 1) {
+		if(lines[0] != null && lines[0].ptSegDist(cord)<= 3) {
 			return new PlayerEvent(-2);
+		}
+		else if(doubles && lines[1] != null && lines[1].ptSegDist(cord)<= 3) {
+			return new PlayerEvent(-3);
 		}else return null;
 	}
 	

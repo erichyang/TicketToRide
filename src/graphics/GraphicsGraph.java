@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import core.PlayerEvent;
@@ -81,16 +82,16 @@ public class GraphicsGraph extends Graphics
 				switch (update.getRail(i).getOwnerName(j))
 				{
 				case ("Smashboy"):
-					rails[i].setOwner(Color.yellow);
+					rails[i].setOwner(Color.yellow,j);
 					break;
 				case ("Rail island Z"):
-					rails[i].setOwner(Color.green);
+					rails[i].setOwner(Color.green,j);
 					break;
 				case ("Teewee"):
-					rails[i].setOwner(new Color(142, 68, 173));
+					rails[i].setOwner(new Color(142, 68, 173),j);
 					break;
 				case ("Cleveland Z"):
-					rails[i].setOwner(Color.red);
+					rails[i].setOwner(Color.red,j);
 					break;
 				default:
 					break;
@@ -105,7 +106,9 @@ public class GraphicsGraph extends Graphics
 		for(GraphicsRail rail : rails) {
 			PlayerEvent r = rail.contains(cord);
 			//System.out.println(r);
-			if(r != null) return new PlayerEvent(count*10+8);
+			
+			if(r != null && r.getID() == -2) return new PlayerEvent(count*10+8);
+			else if(r != null && r.getID() == -3) return new PlayerEvent(count*10+9);
 			count ++;
 		}
 		return null;
@@ -116,10 +119,14 @@ public class GraphicsGraph extends Graphics
 			//System.out.println("hello");
 			GraphicsRail rail = rails[i];
 			//System.out.println(rail.hovered);
-			if(rail.contains(cord) != null) {
-				rail.hovered = true;
-			}else {
-				rail.hovered = false;
+			if(rail.contains(cord) == null) {
+				Arrays.fill(rail.hovered, false);
+			}
+			else if(rail.contains(cord).getID() == -2) {
+				System.out.println(cord);
+				rail.hovered[0] = true;
+			}else if(rail.getDoubles() && rail.contains(cord).getID() == -3){
+				rail.hovered[1] = true;
 			}
 		}
 	}

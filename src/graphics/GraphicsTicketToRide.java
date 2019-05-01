@@ -61,23 +61,13 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		board.draw(g);
 		double x = MouseInfo.getPointerInfo().getLocation().getX() - window.getLocationOnScreen().x;
 		double y = MouseInfo.getPointerInfo().getLocation().getY() - window.getLocationOnScreen().y;
-		
+		board.graphSetRails(new Point2D.Float((float)x, (float)y));
 		g.setStroke(new BasicStroke(4));
 		g.setColor(new Color(129, 9, 255));
 		g.draw(new Line2D.Double(x - 5, y, x + 5, y));
 		g.draw(new Line2D.Double(x, y - 5, x, y + 5));
 		g.setStroke(new BasicStroke(3));
 		g.setColor(Color.BLACK);
-		
-		Point2D.Float point = new Point2D.Float();
-		
-		point.setLocation(x, y);
-		if(board.containsPoint(point)){
-			//System.out.println(board.contains(point));
-			board.graphSetRails(point);
-			//System.out.println(point);
-			//repaint();
-		}
 		repaint();
 	}
 
