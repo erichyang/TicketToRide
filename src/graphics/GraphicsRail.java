@@ -8,7 +8,6 @@ import java.awt.geom.Point2D.Float;
 import java.util.Arrays;
 
 import core.PlayerEvent;
-import javafx.scene.shape.Line;
 
 public class GraphicsRail extends Graphics
 {
