@@ -148,12 +148,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			
 			if(eventID%10 == 8) {
 				rail.setColor(rail.getColor().split(";")[0]);
-				//System.out.println("A");
 			}
 			else if(eventID%10 == 9) {
 				System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
-				//System.out.println("B");
 			}
 			else throw new IllegalArgumentException("invalid GameEvent ID number"); 
 			
@@ -194,10 +192,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}else if(eventID%10 == 6 || eventID%10 == 7){
 			int num = eventID;
 			while(num >1) {
-//				System.out.println("NUM:"+num + currentPlayer+currentPlayer.getTickets());
-//				PlayerEvent ticketEvent = new PlayerEvent(num%10);
-//				ticketEvent.setWeight(0);
-//				onPlayerEvent(ticketEvent);
 				if(num%10 == 6) {
 					getCurrentPlayer().addTicket(tickets.pop());
 				}else {
