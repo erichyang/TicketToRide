@@ -4,8 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.Point2D.Float;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Stack;
 
 import javax.imageio.ImageIO;
 
@@ -30,10 +29,10 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage canvas;
 	private static BufferedImage ticket;
 //	private static BufferedImage leaderboard;
-	
+
 	private String color;
 	private ViewEvent lastUpdate;
-	
+
 	// leader board
 	private Color[] list;
 	private int[] points;
@@ -42,9 +41,9 @@ public class GraphicsBoard extends Graphics implements View
 	private int[] trainCards;
 
 	private boolean end;
-	
-	private GraphicsTicketSelections sel = new GraphicsTicketSelections(new ArrayList<Ticket>());
-	
+
+	private GraphicsTicketSelections sel;
+
 	static
 	{
 		try
@@ -70,7 +69,6 @@ public class GraphicsBoard extends Graphics implements View
 		visible = new String[6];
 		visible[5] = "Back";
 		color = "";
-		sel = new GraphicsTicketSelections(new ArrayList<Ticket>());
 		end = false;
 	}
 
@@ -90,9 +88,9 @@ public class GraphicsBoard extends Graphics implements View
 		// 1300, 25
 		for (int i = 0; i < visible.length; i++)
 			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
-		
+
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
-	
+
 		// 1500 - 1900, 130
 		g.setFont(new Font("Seriff", Font.BOLD, 64));
 		g.setColor(new Color(226, 165, 83));
@@ -100,11 +98,11 @@ public class GraphicsBoard extends Graphics implements View
 		g.setColor(Color.LIGHT_GRAY);
 		for (int i = 0; i < 4; i++)
 		{
-			if(lastUpdate.getCurrentPlayer().equals(list[i]))
+			if (lastUpdate.getCurrentPlayer().equals(list[i]))
 			{
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.magenta);
-				g.drawRect(1475, 50 + i * 100, 50, 50);		
+				g.drawRect(1475, 50 + i * 100, 50, 50);
 			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 50 + i * 100, 50, 50);
@@ -113,6 +111,17 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
+
+		System.out.println("A: "+lastUpdate.players.peek());
+		if(lastUpdate.players.peek().getTickets().size() == 0)
+		{
+			System.out.println("B: "+lastUpdate.players.peek());
+			sel = drawStartTickets();
+			sel.setDraw(true);
+		}
+		
+		if (sel.getDraw())
+			sel.draw(g);
 		
 		g.setColor(Color.black);
 	}
@@ -135,7 +144,7 @@ public class GraphicsBoard extends Graphics implements View
 	public void update(Object e)
 	{
 		ViewEvent update = (ViewEvent) e;
-		if(update.getID()==1)
+		if (update.getID() == 1)
 			end = true;
 		graph.update(update.map);
 		player.update(update.players.peek());
@@ -149,7 +158,7 @@ public class GraphicsBoard extends Graphics implements View
 		{
 			Player temp = iter.next();
 //			System.out.println(update.getSortedPlayer().size());
-			System.out.println(temp.getName());
+//			System.out.println(temp.getName());
 			switch (temp.getName())
 			{
 			case ("Smashboy"):
@@ -174,32 +183,51 @@ public class GraphicsBoard extends Graphics implements View
 		}
 	}
 
-
 	public PlayerEvent contains(Float cord)
 	{
-		if(end)
+		if (end)
 			return null;
-		if(cord.x >= 1255 && cord.x <= 1455)
+
+		if (sel.getDraw())
+			return sel.contains(cord);
+
+		if (cord.x >= 1255 && cord.x <= 1455)
 		{
-			if(cord.y >= 0 && cord.y <= 125)
+			if (cord.y >= 0 && cord.y <= 125)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_ONE);
-			if(cord.y >= 130 && cord.y <= 255)
+			if (cord.y >= 130 && cord.y <= 255)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_TWO);
-			if(cord.y >= 260 && cord.y <= 385)
+			if (cord.y >= 260 && cord.y <= 385)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_THREE);
-			if(cord.y >= 390 && cord.y <= 515)
+			if (cord.y >= 390 && cord.y <= 515)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FOUR);
-			if(cord.y >= 520 && cord.y <= 645)
+			if (cord.y >= 520 && cord.y <= 645)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FIVE);
-			if(cord.y >= 650 && cord.y <= 775)
+			if (cord.y >= 650 && cord.y <= 775)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
 		}
-		
-		if(cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775)
+
+		if (cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775)
 		{
-			sel = new GraphicsTicketSelections(new ArrayList<Ticket>(lastUpdate.tickets));
+//			System.out.println("Tickets selection");
+			@SuppressWarnings("unchecked")
+			Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
+			ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
+			for (int i = 0; i < 3; i++)
+				temp2.add(temp1.pop());
+			sel = new GraphicsTicketSelections(temp2, 3);
 			sel.contains(cord);
 		}
 		return null;
+	}
+
+	public GraphicsTicketSelections drawStartTickets()
+	{
+		@SuppressWarnings("unchecked")
+		Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
+		ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
+		for (int i = 0; i < 5; i++)
+			temp2.add(temp1.pop());
+		return new GraphicsTicketSelections(temp2, 5);
 	}
 }

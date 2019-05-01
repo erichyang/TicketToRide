@@ -32,7 +32,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		GraphicsTicketToRide test = new GraphicsTicketToRide();
-		window = new JFrame("Graphics Graph");
+		window = new JFrame("Ticket to Ride");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(1920, 1080);
 		window.setVisible(true);
@@ -51,7 +51,6 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		board = new GraphicsBoard();
 		game = new TicketToRide();
 		game.setView(board);
-		//game.onGameEvent(new GameEvent(3,game)); //end the game
 	}
 	
 	@Override

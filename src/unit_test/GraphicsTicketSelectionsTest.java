@@ -49,7 +49,7 @@ public class GraphicsTicketSelectionsTest extends JPanel implements MouseListene
 		list.add(new Ticket(2, "A", "B"));
 		list.add(new Ticket(1, "B", "C"));
 		list.add(new Ticket(5, "C", "A"));
-		sel = new GraphicsTicketSelections(list);
+		sel = new GraphicsTicketSelections(list,3);
 	}
 	
 	@Override
@@ -68,6 +68,7 @@ public class GraphicsTicketSelectionsTest extends JPanel implements MouseListene
 		g.draw(new Line2D.Double(x, y - 5, x, y + 5));
 		g.setStroke(new BasicStroke(3));
 		g.setColor(Color.BLACK);
+		repaint();
 	}
 
 	@Override
