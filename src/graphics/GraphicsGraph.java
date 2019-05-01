@@ -110,4 +110,17 @@ public class GraphicsGraph extends Graphics
 		}
 		return null;
 	}
+	
+	public void setRails(Point2D.Float cord) {
+		for(int i = 0; i< rails.length; i++) {
+			//System.out.println("hello");
+			GraphicsRail rail = rails[i];
+			//System.out.println(rail.hovered);
+			if(rail.contains(cord) != null) {
+				rail.hovered = true;
+			}else {
+				rail.hovered = false;
+			}
+		}
+	}
 }

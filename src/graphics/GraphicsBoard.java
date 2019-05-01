@@ -208,4 +208,9 @@ public class GraphicsBoard extends Graphics implements View
 		}
 		return null;
 	}
+	
+	public void graphSetRails(Float cord) {
+		graph.setRails(cord);
+	}
+	
 }
