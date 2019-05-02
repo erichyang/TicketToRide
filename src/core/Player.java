@@ -104,9 +104,19 @@ public class Player
 				usedCards.add(color);
 		}
 		//System.out.println("usedCards: " + usedCards + "amount: "+ amount + "num: "+num);
+		if(!useTrains(rail.getLength())) return null;
 		return usedCards;
 	}
 	
+	public boolean useTrains(int num) {
+		if((trains - num )<= 2) {
+			listen.onGameEvent(new GameEvent(3,this));
+			return false;
+		}else{
+			trains -= num;
+			return true;
+		}
+	}
 	
 	public String addCards(String color)
 	{
