@@ -56,9 +56,9 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(board.getDraw() || board.ended()) {
-				return;
-			}
+//			if(board.getDraw() || !board.ended()) {
+//				return;
+//			}
 			game.onPlayerEvent(new PlayerEvent(num));
 		}		
 	}	
@@ -75,6 +75,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		board = new GraphicsBoard();
 		game = new TicketToRide();
 		game.setView(board);
+		initilizeKeyBindings();
 	}
 	
 	public void initilizeKeyBindings() {		
@@ -95,9 +96,6 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 				PLAYER_DRAW_FIVE);
 		getInputMap().put(KeyStroke.getKeyStroke(' '),"key SPACE");
 		getActionMap().put("key SPACE",
-				PLAYER_DRAW_DECK);
-		getInputMap().put(KeyStroke.getKeyStroke("T"),"key T");
-		getActionMap().put("key T",
 				PLAYER_DRAW_DECK);
 	}
 	
