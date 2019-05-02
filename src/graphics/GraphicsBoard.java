@@ -142,6 +142,10 @@ public class GraphicsBoard extends Graphics implements View
 		// return the color of the double rail
 		return color;
 	}
+	
+	public boolean ended() {
+		return end;
+	}
 
 	@Override
 	public void update(Object e)
@@ -184,6 +188,9 @@ public class GraphicsBoard extends Graphics implements View
 			tickets[i] = temp.getTickets().size();
 			trainCards[i] = temp.getTrainCardsNum();
 		}
+	}
+	public boolean getDraw() {
+		return sel != null && sel.getDraw();
 	}
 
 	public PlayerEvent contains(Float cord)

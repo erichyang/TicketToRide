@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -49,7 +48,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	}
 
 	private class playerAction extends AbstractAction{
-
+		
 		private int num;
 		
 		public playerAction(int num) {
@@ -57,25 +56,28 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(board.getDraw() || board.ended()) {
+				return;
+			}
 			game.onPlayerEvent(new PlayerEvent(num));
-		}
-		
-	}
-	
+		}		
+	}	
 	final playerAction PLAYER_DRAW_ONE = new playerAction(0);
 	final playerAction PLAYER_DRAW_TWO = new playerAction(1);
 	final playerAction PLAYER_DRAW_THREE = new playerAction(2);
 	final playerAction PLAYER_DRAW_FOUR = new playerAction(3);
 	final playerAction PLAYER_DRAW_FIVE = new playerAction(4);
 	final playerAction PLAYER_DRAW_DECK = new playerAction(5);
+	//final playerAction TICKET_SELECT = new playerAction();
 	
 	public GraphicsTicketToRide() throws FileNotFoundException
 	{
 		board = new GraphicsBoard();
 		game = new TicketToRide();
 		game.setView(board);
-		
-		
+	}
+	
+	public void initilizeKeyBindings() {		
 		getInputMap().put(KeyStroke.getKeyStroke("1"),"key 1");
 		getActionMap().put("key 1",
 				PLAYER_DRAW_ONE);
@@ -94,7 +96,9 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		getInputMap().put(KeyStroke.getKeyStroke(' '),"key SPACE");
 		getActionMap().put("key SPACE",
 				PLAYER_DRAW_DECK);
-		
+		getInputMap().put(KeyStroke.getKeyStroke("T"),"key T");
+		getActionMap().put("key T",
+				PLAYER_DRAW_DECK);
 	}
 	
 	@Override

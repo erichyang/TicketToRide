@@ -19,13 +19,13 @@ public class GraphicsTicketSelections extends Graphics
 	private static String idCat;
 	private boolean draw;
 	private boolean valid;
-	private int num;
+//	private int num;
 
 	public GraphicsTicketSelections(ArrayList<Ticket> selection, int num)
 	{
 		this.selection = new ArrayList<GraphicsTicket>();
 //		System.out.println(selection);
-		this.num = num;
+//		this.num = num;
 		int moving;
 		moving = 1920/num/2;
 		for (int i = 0; i < selection.size(); i++)
