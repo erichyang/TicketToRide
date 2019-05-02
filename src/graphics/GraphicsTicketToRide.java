@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;

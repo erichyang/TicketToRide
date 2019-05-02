@@ -288,6 +288,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public Player endGame()
 	{
+		
 		for (int i = 0; i < visibleCards.length; i++)
 		{
 			visibleCards[i] = null;

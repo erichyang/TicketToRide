@@ -90,12 +90,14 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
-
+		
+		
 		// 1500 - 1900, 130
 		g.setFont(new Font("Seriff", Font.BOLD, 60));
 		g.setColor(new Color(226, 165, 83));
 		g.fillRect(1455, 0, 500, 450);
 		g.setColor(Color.LIGHT_GRAY);
+		
 		for (int i = 0; i < 4; i++)
 		{
 			if (lastUpdate.getCurrentPlayer().equals(list[i]))
@@ -122,7 +124,14 @@ public class GraphicsBoard extends Graphics implements View
 			sel = drawStartTickets();
 			sel.setDraw(true);
 		}
-
+		
+		g.setFont(new Font("Seriff", Font.BOLD, 16));
+		g.setColor(Color.black);
+		g.drawString("points", 1540, 50);
+		g.drawString("trains", 1660, 50);
+		g.drawString("tickets", 1745, 50);
+		g.drawString("trainCards", 1825, 50);
+		
 		if (sel.getDraw())
 			sel.draw(g);
 
@@ -228,6 +237,10 @@ public class GraphicsBoard extends Graphics implements View
 			sel = new GraphicsTicketSelections(temp2, 3);
 			sel.contains(cord);
 		}
+		
+		player.contains(cord);
+		
+		
 		return null;
 	}
 

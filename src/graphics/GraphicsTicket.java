@@ -30,7 +30,7 @@ public class GraphicsTicket extends Graphics
 		this.cord = float1;
 		this.val = val;
 		this.cityA = cities.substring(0, cities.indexOf(","));
-		this.cityB = cities.substring(cities.indexOf(","));
+		this.cityB = cities.substring(cities.indexOf(",")+1);
 	}
 
 	public void draw(Graphics2D g)
@@ -70,5 +70,11 @@ public class GraphicsTicket extends Graphics
 		g.draw(new Rectangle((int)cord.x, (int)cord.y, 125, 200));
 		g.setColor(Color.black);
 		g.setStroke(new BasicStroke(3));
+	}
+	
+	@Override
+	public String toString()
+	{
+		return cityA + " " + cityB;
 	}
 }
