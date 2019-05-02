@@ -2,6 +2,9 @@ package graphics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D.Float;
 
@@ -60,6 +63,10 @@ public class GraphicsTicketSelections extends Graphics
 		}
 		return null;
 	}
+	
+//	public boolean containsPoint(Float cord) {
+//		
+//	}
 
 	@Override
 	public void draw(Graphics2D g)
@@ -76,7 +83,13 @@ public class GraphicsTicketSelections extends Graphics
 			if (val)
 				sum++;
 		valid = (sum >= 3) ? true : false;
+		g.setColor(new Color(244, 158, 66));
 		g.fillRect(800, 650, 200, 100);
+		g.setColor(Color.BLACK);
+		g.setStroke(new BasicStroke(10));
+		g.drawRect(800, 650, 200, 100);
+		g.setFont(new Font("Serif", Font.BOLD, 30));
+		g.drawString("DONE", 860, 710);
 	}
 
 	@Override

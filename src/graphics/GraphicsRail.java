@@ -93,22 +93,11 @@ public class GraphicsRail extends Graphics
 			double deltaX = 5 * Math.sin(alpha);
 			double deltaY = 5 * Math.cos(alpha);
 
-			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
-			{ length - 2, 2 }, 0));
-			g.setColor(string2Color(colors[i]));
-			
-			if(hovered[i] && owners[i] == null) {
-				g.setColor(g.getColor().darker());
-				//System.out.println("Triggered");
-			}
-			
+//			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
+//			{ length - 2, 2 }, 0));
+//			g.setColor(string2Color(colors[i]));
 			if (doubles)
 			{
-//				System.out.println(Arrays.toString(cords[i]));
-//				g.setColor(Color.CYAN);
-//				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
-				g.setColor(string2Color(colors[i]));
-				if(hovered[i]  && owners[i] == null) g.setColor(g.getColor().darker());
 				
 				lines[i] = new Line2D.Float((int)(cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
@@ -119,7 +108,17 @@ public class GraphicsRail extends Graphics
 			{
 				lines[0] = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
 			}
+			
+			if(hovered[i] && owners[i] == null) {
+				g.setColor(new Color(getContrastColor(string2Color(colors[i]))));
+				g.setStroke(new BasicStroke(13));
+				g.draw(lines[i]);
+			}
+			g.setColor(string2Color(colors[i]));
+			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
+					{ length - 2, 2 }, 0));
 			g.draw(lines[i]);
+			
 			//System.out.println(lin);
 			if (owners[i] != null)
 			{
@@ -141,6 +140,21 @@ public class GraphicsRail extends Graphics
 //		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
 //		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
 //		g.drawOval((int)cords[0][4], (int)cords[0][5], 5,5);
+	}
+//	private Color getContrastColor(Color color) {
+//		return new Color(255 - color.getRed(),255 - color.getBlue(),255 - color.getGreen());
+//		}
+	private int getContrastColor(Color color) {
+	    float[] hsb = new float[3];
+	    Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(),
+	    		hsb);
+	    if (hsb[2] < 0.5) {
+	    	hsb[2] = 0.7f;
+	    } else {
+	    	hsb[2] = 0.3f;
+	    }
+	    hsb[1] = hsb[1] * 0.2f;
+	    return Color.HSBtoRGB(hsb[0],hsb[1],hsb[2]);
 	}
 
 	private Color string2Color(String color)
