@@ -84,7 +84,7 @@ public class GraphicsGraph extends Graphics
 				case ("Smashboy"):
 					rails[i].setOwner(Color.yellow,j);
 					break;
-				case ("Rail island Z"):
+				case ("Rhail Island Z"):
 					rails[i].setOwner(Color.green,j);
 					break;
 				case ("Teewee"):
@@ -98,15 +98,12 @@ public class GraphicsGraph extends Graphics
 				}
 			}
 	}
-
 	@Override
 	public PlayerEvent contains(Point2D.Float cord)
 	{
 		int count =0;
 		for(GraphicsRail rail : rails) {
 			PlayerEvent r = rail.contains(cord);
-			//System.out.println(r);
-			
 			if(r != null && r.getID() == -2) return new PlayerEvent(count*10+8);
 			else if(r != null && r.getID() == -3) return new PlayerEvent(count*10+9);
 			count ++;
@@ -116,14 +113,11 @@ public class GraphicsGraph extends Graphics
 	
 	public void setRails(Point2D.Float cord) {
 		for(int i = 0; i< rails.length; i++) {
-			//System.out.println("hello");
 			GraphicsRail rail = rails[i];
-			//System.out.println(rail.hovered);
 			if(rail.contains(cord) == null) {
 				Arrays.fill(rail.hovered, false);
 			}
 			else if(rail.contains(cord).getID() == -2) {
-				System.out.println(cord);
 				rail.hovered[0] = true;
 			}else if(rail.getDoubles() && rail.contains(cord).getID() == -3){
 				rail.hovered[1] = true;

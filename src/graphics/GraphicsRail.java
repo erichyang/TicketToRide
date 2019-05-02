@@ -15,7 +15,6 @@ public class GraphicsRail extends Graphics
 	private int cityB;
 	private int trains;
 	private boolean doubles;
-//	private double curvature;
 	private String[] colors;
 	private double[][] cords;
 	private Color[] owners;
@@ -31,7 +30,6 @@ public class GraphicsRail extends Graphics
 		this.cityB = cityB;
 		this.trains = trains;
 		this.doubles = doubles;
-//		this.curvature = curvature;
 		colors = new String[(doubles) ? 2 : 1];
 		cords = new double[(doubles) ? 2 : 1][4];
 		Arrays.fill(cords[0], -1);
@@ -99,7 +97,7 @@ public class GraphicsRail extends Graphics
 			{ length - 2, 2 }, 0));
 			g.setColor(string2Color(colors[i]));
 			
-			if(hovered[i]) {
+			if(hovered[i] && owners[i] == null) {
 				g.setColor(g.getColor().darker());
 				//System.out.println("Triggered");
 			}
@@ -110,7 +108,7 @@ public class GraphicsRail extends Graphics
 //				g.setColor(Color.CYAN);
 //				g.drawLine((int)(cords[i][0]),(int) (cords[i][1]), (int)(cords[i][2]),(int)(cords[i][3]));
 				g.setColor(string2Color(colors[i]));
-				if(hovered[i]) g.setColor(g.getColor().darker());
+				if(hovered[i]  && owners[i] == null) g.setColor(g.getColor().darker());
 				
 				lines[i] = new Line2D.Float((int)(cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
@@ -184,9 +182,7 @@ public class GraphicsRail extends Graphics
 	@Override
 	public void update(Object obj)
 	{
-
-		// TODO Auto-generated method stub
-
+		return;
 	}
 
 	public void setOwner(Color owner, int i)
@@ -199,15 +195,17 @@ public class GraphicsRail extends Graphics
 	{
 		//System.out.println(cord+","+ lin.ptLineDist(cord));
 		if(lines[0] != null && lines[0].ptSegDist(cord)<= 3) {
+			//System.out.println(this);
 			return new PlayerEvent(-2);
 		}
 		else if(doubles && lines[1] != null && lines[1].ptSegDist(cord)<= 3) {
+			//System.out.println(this);
 			return new PlayerEvent(-3);
 		}else return null;
 	}
 	
-//	public boolean inBounds() {
-//		return (lin.pt)
-//	}
-	
+	public String toString() {
+		return cityA + "->"+cityB+" Owners: "+Arrays.toString(owners)
+		+"Colors: "+Arrays.toString(colors);
+	}
 }

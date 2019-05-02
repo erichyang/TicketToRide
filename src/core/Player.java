@@ -194,7 +194,7 @@ public class Player
 	public void addTicket(Ticket newTicket)
 	{
 		ticketList.add(newTicket);
-		System.out.println("tickeets: "+ticketList);
+		//System.out.println("tickeets: "+ticketList);
 	}
 
 	public void removeTicket(String ticketName)
