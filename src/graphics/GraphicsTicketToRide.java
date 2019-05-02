@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
@@ -14,12 +15,14 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import core.PlayerEvent;
 import core.TicketToRide;
-import graphics.GraphicsBoard;
 
 @SuppressWarnings("serial")
 public class GraphicsTicketToRide extends JPanel implements MouseListener
@@ -45,11 +48,53 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 
 	}
 
+	private class playerAction extends AbstractAction{
+
+		private int num;
+		
+		public playerAction(int num) {
+			this.num = num;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			game.onPlayerEvent(new PlayerEvent(num));
+		}
+		
+	}
+	
+	final playerAction PLAYER_DRAW_ONE = new playerAction(0);
+	final playerAction PLAYER_DRAW_TWO = new playerAction(1);
+	final playerAction PLAYER_DRAW_THREE = new playerAction(2);
+	final playerAction PLAYER_DRAW_FOUR = new playerAction(3);
+	final playerAction PLAYER_DRAW_FIVE = new playerAction(4);
+	final playerAction PLAYER_DRAW_DECK = new playerAction(5);
+	
 	public GraphicsTicketToRide() throws FileNotFoundException
 	{
 		board = new GraphicsBoard();
 		game = new TicketToRide();
 		game.setView(board);
+		
+		
+		getInputMap().put(KeyStroke.getKeyStroke("1"),"key 1");
+		getActionMap().put("key 1",
+				PLAYER_DRAW_ONE);
+		getInputMap().put(KeyStroke.getKeyStroke("2"),"key 2");
+		getActionMap().put("key 2",
+				PLAYER_DRAW_TWO);
+		getInputMap().put(KeyStroke.getKeyStroke("3"),"key 3");
+		getActionMap().put("key 3",
+				PLAYER_DRAW_THREE);
+		getInputMap().put(KeyStroke.getKeyStroke("4"),"key 4");
+		getActionMap().put("key 4",
+				PLAYER_DRAW_FOUR);
+		getInputMap().put(KeyStroke.getKeyStroke("5"),"key 5");
+		getActionMap().put("key 5",
+				PLAYER_DRAW_FIVE);
+		getInputMap().put(KeyStroke.getKeyStroke(' '),"key SPACE");
+		getActionMap().put("key SPACE",
+				PLAYER_DRAW_DECK);
+		
 	}
 	
 	@Override
@@ -105,4 +150,5 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		if(action!=null)
 			game.onPlayerEvent(action);
 	}
+	
 }
