@@ -92,7 +92,7 @@ public class GraphicsBoard extends Graphics implements View
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
 
 		// 1500 - 1900, 130
-		g.setFont(new Font("Seriff", Font.BOLD, 64));
+		g.setFont(new Font("Seriff", Font.BOLD, 60));
 		g.setColor(new Color(226, 165, 83));
 		g.fillRect(1455, 0, 500, 450);
 		g.setColor(Color.LIGHT_GRAY);
@@ -108,7 +108,7 @@ public class GraphicsBoard extends Graphics implements View
 			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 50 + i * 100, 50, 50);
-
+			
 			g.drawString("" + points[i], 1550, 100 + i * 100);
 			g.drawString("" + trains[i], 1650, 100 + i * 100);
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
@@ -167,7 +167,7 @@ public class GraphicsBoard extends Graphics implements View
 			case ("Smashboy"):
 				list[i] = (Color.yellow);
 				break;
-			case ("Rail island Z"):
+			case ("Rhail Island Z"):
 				list[i] = (Color.green);
 				break;
 			case ("Teewee"):

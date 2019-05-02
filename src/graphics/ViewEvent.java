@@ -65,7 +65,7 @@ public class ViewEvent extends AWTEvent
 		{
 		case ("Smashboy"):
 			return (Color.yellow);
-		case ("Rail island Z"):
+		case ("Rhail Island Z"):
 			return (Color.green);
 		case ("Teewee"):
 			return (new Color(142, 68, 173));
