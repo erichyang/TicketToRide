@@ -83,7 +83,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		// System.out.println("ID "+e.getID());
 		if ((roundWeight + e.getWeight()) > 2)
 		{
-			System.out.println("invalid action");
+			//System.out.println("invalid action");
 			return;
 		}
 
@@ -288,6 +288,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public Player endGame()
 	{
+		onPlayerEvent(new PlayerEvent(-1));
 		for (int i = 0; i < visibleCards.length; i++)
 		{
 			visibleCards[i] = null;
