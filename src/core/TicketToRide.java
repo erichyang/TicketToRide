@@ -18,7 +18,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 {
 
 	private static final int[] pointValues =
-	{ 0, 1, 2, 4, 7, 15, 21 };
+	{ 0, 1, 2, 4, 7, 10, 15};
 
 	private View observer;
 	private Graph graph;
@@ -81,7 +81,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void onPlayerEvent(PlayerEvent e)
 	{
-		System.out.println("ID "+e.getID());
+		//System.out.println("ID "+e.getID());
 		if ((roundWeight + e.getWeight()) > 2)
 		{
 			System.out.println("invalid action");
@@ -174,7 +174,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 						
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			current.addRail(rail);
-			current.addPoints(pointValues[rail.getLength()-1]);
+			current.addPoints(pointValues[rail.getLength()]);
 				
 			System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
 			
