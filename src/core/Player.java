@@ -146,7 +146,7 @@ public class Player
 	public void addRail(Rail rail)
 	{
 		//playerGraph.add(rail.getCityA(), rail);
-		addPoints(rail.getLength());
+		//addPoints(rail.getLength());
 		
 		String cityA = rail.getCityA();
 		String cityB = rail.getCityB();
