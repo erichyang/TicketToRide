@@ -12,7 +12,6 @@ import core.graph.Rail;
 public class Player
 {
 	//private Graph playerGraph;
-	@SuppressWarnings("unused")
 	private GameEventListener listen;
 	private int trains;
 	private int points;

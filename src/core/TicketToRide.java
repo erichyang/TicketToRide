@@ -17,9 +17,6 @@ import graphics.ViewEvent;
 public class TicketToRide implements GameEventListener, PlayerEventListener
 {
 
-	private static final int[] pointValues =
-	{ 0, 1, 2, 4, 7, 10, 15};
-
 	private View observer;
 	private Graph graph;
 	private Queue<Player> players;
@@ -32,7 +29,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	{
 		GameDeck = new Deck();
 		GameDeck.setListener(this);
-		
+
 		players = new LinkedList<Player>();
 		players.add(new Player("Rhail Island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
@@ -56,32 +53,34 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		Collections.shuffle(tickets);
 
 		visibleCards = GameDeck.getVisibleCards();
-		
+
 		graph = new Graph();
 		sc = new Scanner(new File("game_files\\cities\\graph.in"));
-		while (sc.hasNextLine()) {
+		while (sc.hasNextLine())
+		{
 			int num = sc.nextInt();
 			sc.nextLine();
-			for(int i=0; i<num; i++) {
+			for (int i = 0; i < num; i++)
+			{
 				String[] input = sc.nextLine().split(" ");
-				graph.add(input[0],
-				new Rail(input[0], input[1], Integer.parseInt(input[2]), Boolean.parseBoolean(input[3]), (input.length ==5) ? input[4]: input[4]+";"+input[5]));
+				graph.add(input[0], new Rail(input[0], input[1], Integer.parseInt(input[2]),
+						Boolean.parseBoolean(input[3]), (input.length == 5) ? input[4] : input[4] + ";" + input[5]));
 			}
-		}	
-	    //System.out.println(graph.indexList());		
+		}
+		// System.out.println(graph.indexList());
 		sc.close();
 	}
 
 	public void setView(View observe)
 	{
 		observer = observe;
-		observer.observe(new  ViewEvent(2,this,players,GameDeck,graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(2, this, players, GameDeck, graph, visibleCards, tickets));
 		checkVis();
 	}
 
 	public void onPlayerEvent(PlayerEvent e)
 	{
-		//System.out.println("ID "+e.getID());
+		// System.out.println("ID "+e.getID());
 		if ((roundWeight + e.getWeight()) > 2)
 		{
 			System.out.println("invalid action");
@@ -91,19 +90,21 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
-		if(eventID == -1) {
+		if (eventID == -1)
+		{
 			nextRound();
 			System.out.println("Forced Next Turn");
 			return;
-		}		
-		else if (eventID <= 4 && eventID >= 0)
+		} else if (eventID <= 4 && eventID >= 0)
 		{
-			//System.out.println("RoundWeight: "+roundWeight);
+			// System.out.println("RoundWeight: "+roundWeight);
 			int index = eventID;
 			String card = visibleCards[index];
 //			System.out.println("Card:"+ card);			
-			if(card == "Wild") {
-				if(roundWeight >0) {
+			if (card == "Wild")
+			{
+				if (roundWeight > 0)
+				{
 					this.onPlayerEvent(e.reEvent());
 					return;
 				}
@@ -112,104 +113,127 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			visibleCards[index] = GameDeck.getCard();
 			checkVis();
-			if(currentPlayer.addCards(card) == null) {
+			if (currentPlayer.addCards(card) == null)
+			{
 				return;
 			}
-		}
-		else if (eventID == 5)
+		} else if (eventID == 5)
 		{
-			if(currentPlayer.addCards(GameDeck.getCard()) == null) {
+			if (currentPlayer.addCards(GameDeck.getCard()) == null)
+			{
 				return;
 			}
 		} else if (eventID == 6)
 		{
 			getCurrentPlayer().addTicket(tickets.pop());
-		} else if (eventID == 7) {
+		} else if (eventID == 7)
+		{
 			Stack<Ticket> temp = new Stack<Ticket>();
 			temp.add(tickets.pop());
 			temp.addAll(tickets);
 			tickets = temp;
-			//eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the first rail of the double rail.
-			//If it is 0, then it is the second rail of a double rail
-		} else if (eventID <= 10*(graph.indexList().size()-1) + 8 && eventID >= 8 && (eventID%10 == 8 || eventID%10 == 9)) {	
+			// eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the
+			// first rail of the double rail.
+			// If it is 0, then it is the second rail of a double rail
+		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 8 && eventID >= 8
+				&& (eventID % 10 == 8 || eventID % 10 == 9))
+		{
 			Player current = getCurrentPlayer();
-			Rail rail = graph.getRail((eventID-8)/10);
+			Rail rail = graph.getRail((eventID - 8) / 10);
 			String origColor = rail.getColor();
-			
-			if(eventID%10 == 8) {
+
+			if (eventID % 10 == 8)
+			{
 				rail.setColor(rail.getColor().split(";")[0]);
-			}
-			else if(eventID%10 == 9) {
-				//System.out.println(rail.getColor());
+			} else if (eventID % 10 == 9)
+			{
+				// System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
-			}
-			else throw new IllegalArgumentException("invalid GameEvent ID number"); 
-			
-			//System.out.println(rail.toString());
-			
-			if(rail.getColor().equals("Gray")) {
-				System.out.println("gray rail "+ rail);
+			} else
+				throw new IllegalArgumentException("invalid GameEvent ID number");
+
+			// System.out.println(rail.toString());
+
+			if (rail.getColor().equals("Gray"))
+			{
+				System.out.println("gray rail " + rail);
 				String color = observer.color();
 				rail.setColor(color);
-			}					
-			//System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);			
+			}
+			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
 			ArrayList<String> usedCards = current.useCards(rail);
 
-			if (usedCards == null) {
+			if (usedCards == null)
+			{
 				System.out.println("not enough cards");
 				rail.setColor(origColor);
 				return;
 			}
-			
-			if(origColor.split(";")[0].equals(rail.getColor()) && rail.getOwnerName(0) == (null)) {
-				rail.setOwner(getCurrentPlayer().getName(),0);
-			}else if(rail.isDouble() && origColor.split(";")[1].equals(rail.getColor()) && rail.getOwnerName(1) == (null)) {
-				rail.setOwner(getCurrentPlayer().getName(),1);
-			}else {
+
+			if (origColor.split(";")[0].equals(rail.getColor()) && rail.getOwnerName(0) == (null))
+			{
+				rail.setOwner(getCurrentPlayer().getName(), 0);
+			} else if (rail.isDouble() && origColor.split(";")[1].equals(rail.getColor())
+					&& rail.getOwnerName(1) == (null))
+			{
+				rail.setOwner(getCurrentPlayer().getName(), 1);
+			} else
+			{
 				System.out.println("Already Owned");
 				rail.setColor(origColor);
 				return;
 			}
 			rail.setColor(origColor);
-						
+
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			current.addRail(rail);
-			current.addPoints(pointValues[rail.getLength()]);
-				
-			System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
+			final int[] pointValues =
+			{1, 2, 4, 7, 10, 15 };
 			
-		}else if(eventID%10 == 6 || eventID%10 == 7){
+			current.addPoints(pointValues[rail.getLength()-1]);
+
+			System.out.println("Rail: " + rail + " OrigColor: " + origColor);
+
+		} else if (eventID % 10 == 6 || eventID % 10 == 7)
+		{
 			int num = eventID;
-			while(num >1) {
-				if(num%10 == 6) {
+			while (num > 1)
+			{
+				if (num % 10 == 6)
+				{
 					getCurrentPlayer().addTicket(tickets.pop());
-				}else {
+				} else
+				{
 					Stack<Ticket> temp = new Stack<Ticket>();
 					temp.add(tickets.pop());
 					temp.addAll(tickets);
 					tickets = temp;
 				}
-				num = num/10;				
+				num = num / 10;
 			}
-		}
-			else throw new IllegalArgumentException("invalid PlayerEvent ID number");
+		} else
+			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 
 		roundWeight += e.getWeight();
-		//System.out.println(getCurrentPlayer().getPoints());		
+		// System.out.println(getCurrentPlayer().getPoints());
 		if (roundWeight == 2)
 			nextRound();
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets));
 	}
 
-	private void checkVis() {
-		int count =0;
-		for(String card : visibleCards)
-			if(card.equals("Wild")) count++;
-		if(count>=3) {
-			if(GameDeck.disWildCheck()) {
+	private void checkVis()
+	{
+		int count = 0;
+		for (String card : visibleCards)
+			if (card.equals("Wild"))
+				count++;
+		if (count >= 3)
+		{
+			if (GameDeck.disWildCheck())
+			{
 				this.onGameEvent(new GameEvent(3, this));
-			}
-			else this.onGameEvent(new GameEvent(2, this));
+			} else
+				this.onGameEvent(new GameEvent(2, this));
 		}
 	}
 
@@ -241,15 +265,15 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			System.out.println(endGame());
 		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
-		
-		observer.observe(new ViewEvent(3, this, players, GameDeck, graph,visibleCards,tickets));
+
+		observer.observe(new ViewEvent(3, this, players, GameDeck, graph, visibleCards, tickets));
 	}
 
 	public void nextRound()
 	{
 		roundWeight = 0;
 		players.offer(players.poll());
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets));
 	}
 
 	public Graph getGraph()
@@ -262,11 +286,13 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		return visibleCards;
 	}
 
-	public Player endGame() {
-		for(int i=0; i<visibleCards.length ; i++) {
+	public Player endGame()
+	{
+		for (int i = 0; i < visibleCards.length; i++)
+		{
 			visibleCards[i] = null;
 		}
-		
+
 		players.forEach(player -> player.countTickets());
 
 		Player winner = null;
@@ -279,7 +305,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				winner = p;
 			}
 		}
-		observer.observe(new ViewEvent(1, this, players, GameDeck, graph,visibleCards,tickets));
+		observer.observe(new ViewEvent(1, this, players, GameDeck, graph, visibleCards, tickets));
 		return winner;
 	}
 
