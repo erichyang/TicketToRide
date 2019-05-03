@@ -33,7 +33,7 @@ public class ViewEvent extends AWTEvent
 	public static int ROUND_CONT = 3;
 
 	public ViewEvent(int ID, Object source, Queue<Player> playerQueue, Deck GameDeck, Graph graph, String[] vis,
-			Stack<Ticket> ticketStack)
+			Stack<Ticket> ticketStack, int roundWeight)
 	{
 		super(source, ID);
 		map = graph;

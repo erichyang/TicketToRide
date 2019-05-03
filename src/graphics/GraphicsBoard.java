@@ -32,7 +32,8 @@ public class GraphicsBoard extends Graphics implements View
 
 	private String color;
 	private ViewEvent lastUpdate;
-
+	private Float mouseLoc;
+	
 	// leader board
 	private Color[] list;
 	private int[] points;
@@ -146,7 +147,7 @@ public class GraphicsBoard extends Graphics implements View
 	}
 
 	@Override
-	public String color()
+	public String color(int length)
 	{
 		// return the color of the double rail
 		return color;
@@ -242,6 +243,7 @@ public class GraphicsBoard extends Graphics implements View
 			for (int i = 0; i < 3; i++)
 				temp2.add(temp1.pop());
 			sel = new GraphicsTicketSelections(temp2, 3);
+			sel.setLoc(mouseLoc);
 			sel.contains(cord);
 		}
 		
@@ -258,12 +260,24 @@ public class GraphicsBoard extends Graphics implements View
 		ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
 		for (int i = 0; i < 5; i++)
 			temp2.add(temp1.pop());
-		return new GraphicsTicketSelections(temp2, 5);
+		GraphicsTicketSelections select = new GraphicsTicketSelections(temp2, 5);
+		select.setLoc(mouseLoc);
+		return select;
 	}
 
-	public void graphSetRails(Float cord)
+	public void graphSetRails()
 	{
-		graph.setRails(cord);
+		if(graph.contains(mouseLoc)!=null)
+		graph.setRails(mouseLoc);
+	}
+	
+	public void ticketCheck()
+	{
+		if(sel != null)sel.setLoc(mouseLoc);
+	}
+	
+	public void setLoc(Float loc) {
+		mouseLoc = loc;
 	}
 
 	public boolean containsPoint(Float point)

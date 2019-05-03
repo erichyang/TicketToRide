@@ -39,6 +39,13 @@ public class Deck
 	{
 		discard.add(card);
 	}
+	
+	public String getDiscardCard()
+	{
+		if(discard.isEmpty()) {
+			return "";
+		}else return discard.pop();
+	}
 
 	public String getCard()
 	{

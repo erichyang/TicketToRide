@@ -20,6 +20,7 @@ public class GraphicsTicketSelections extends Graphics
 	private boolean draw;
 	private boolean valid;
 	private int num;
+	public Float mouseLoc;
 
 	public GraphicsTicketSelections(ArrayList<Ticket> selection, int num)
 	{
@@ -35,19 +36,25 @@ public class GraphicsTicketSelections extends Graphics
 		}
 		valid = false;
 	}
+	
+	public void setLoc(Float loc) {
+		mouseLoc = loc;
+	}
 
 	@Override
 	public PlayerEvent contains(Float cord)
 	{
+//select
 		draw = true;
 		for (int i = 0; i < selection.size(); i++)
 //			System.out.println(selection.get(i).contains(cord));
 			if (selection.get(i).contains(cord) != null)
 				flip[i] = !flip[i];
-
-		if (cord.x >= 1500 && cord.x < 1700 && cord.y >= 500 && cord.y <= 600)
+//cancel
+		if (cord.x >= 1475 && cord.x < 1675 && cord.y >= 500 && cord.y <= 600) {
 			draw = false;
-		
+		}
+//done		
 		if (valid && cord.x > 1700 && cord.x <= 1900 && cord.y >= 500 && cord.y <= 600)
 		{
 			//1700, 500, 200, 100
@@ -82,15 +89,39 @@ public class GraphicsTicketSelections extends Graphics
 			if (val)
 				sum++;
 		valid = (sum >= 3) ? true : false;
+
+		Color cancelC = Color.BLACK;
+		Color doneC = Color.BLACK;
+		
+		if (mouseLoc != null && mouseLoc.x >= 1475 && mouseLoc.x < 1675 && mouseLoc.y >= 500 && mouseLoc.y <= 600) {
+			cancelC = Color.YELLOW;
+		}
+		if (mouseLoc != null && mouseLoc.x > 1700 && mouseLoc.x <= 1900 && mouseLoc.y >= 500 && mouseLoc.y <= 600) {
+			doneC = Color.YELLOW;
+		}
+		
+		drawCancel(g,cancelC);
+		drawDone(g,doneC);
+	}
+	
+	private void drawCancel(Graphics2D g, Color color) {
 		g.setColor(new Color(244, 158, 66));
-		g.fillRect(1500, 500, 400, 100);
-		g.setColor(Color.BLACK);
+		g.fillRect(1475, 500, 200, 100);
+		g.setColor(color);
+		g.setStroke(new BasicStroke(10));
+		g.drawRect(1475, 500, 200, 100);
+		g.setFont(new Font("Serif", Font.BOLD, 30));
+		g.drawString("CANCEL", 1510, 555);
+	}
+	
+	private void drawDone(Graphics2D g, Color color) {
+		g.setColor(new Color(244, 158, 66));
+		g.fillRect(1700, 500, 200, 100);
+		g.setColor(color);
 		g.setStroke(new BasicStroke(10));
 		g.drawRect(1700, 500, 200, 100);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
 		g.drawString("DONE", 1750, 555);
-		g.drawRect(1500, 500, 200, 100);
-		g.drawString("CANCEL", 1537, 555);
 	}
 
 	@Override
