@@ -30,7 +30,7 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage ticket;
 //	private static BufferedImage leaderboard;
 
-	private String color;
+	private boolean color;
 	private ViewEvent lastUpdate;
 
 	// leader board
@@ -43,6 +43,7 @@ public class GraphicsBoard extends Graphics implements View
 	private boolean end;
 
 	private GraphicsTicketSelections sel;
+	private GraphicsColorSelections col;
 
 	static
 	{
@@ -68,7 +69,7 @@ public class GraphicsBoard extends Graphics implements View
 		trainCards = new int[4];
 		visible = new String[6];
 		visible[5] = "Back";
-		color = "";
+		color = false;
 		end = false;
 	}
 
@@ -82,22 +83,23 @@ public class GraphicsBoard extends Graphics implements View
 		g.setColor(Color.black);
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
-		player.draw(g);
+		if (!end)
+			player.draw(g);
 
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
-		for (int i = 0; i < visible.length; i++)
-			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
-
+		if (!end)
+			for (int i = 0; i < visible.length; i++)
+				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
+		if(!end)
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
-		
-		
+
 		// 1500 - 1900, 130
 		g.setFont(new Font("Seriff", Font.BOLD, 60));
 		g.setColor(new Color(226, 165, 83));
 		g.fillRect(1455, 0, 500, 450);
 		g.setColor(Color.LIGHT_GRAY);
-		
+
 		for (int i = 0; i < 4; i++)
 		{
 			if (lastUpdate.getCurrentPlayer().equals(list[i]))
@@ -110,7 +112,7 @@ public class GraphicsBoard extends Graphics implements View
 			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 50 + i * 100, 50, 50);
-			
+
 			g.drawString("" + points[i], 1550, 100 + i * 100);
 			g.drawString("" + trains[i], 1650, 100 + i * 100);
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
@@ -131,11 +133,14 @@ public class GraphicsBoard extends Graphics implements View
 		g.drawString("trains", 1660, 50);
 		g.drawString("tickets", 1745, 50);
 		g.drawString("trainCards", 1825, 50);
-		
+
 		if (sel.getDraw())
 			sel.draw(g);
 
 		g.setColor(Color.black);
+		
+		if(col!=null&&col.getDraw())
+			col.draw(g);
 	}
 
 	@Override
@@ -146,19 +151,21 @@ public class GraphicsBoard extends Graphics implements View
 	}
 
 	@Override
-	public String color()
+	public String color(int length)
 	{
-		// return the color of the double rail
-		return color;
+		col = new GraphicsColorSelections(lastUpdate.getSuffColors(length));	
+		return col.getColor();
 	}
-	
-	public boolean ended() {
+
+	public boolean ended()
+	{
 		return end;
 	}
 
 	@Override
 	public void update(Object e)
 	{
+
 		ViewEvent update = (ViewEvent) e;
 		if (update.getID() == 1)
 			end = true;
@@ -198,7 +205,9 @@ public class GraphicsBoard extends Graphics implements View
 			trainCards[i] = temp.getTrainCardsNum();
 		}
 	}
-	public boolean getDraw() {
+
+	public boolean getDraw()
+	{
 		return sel != null && sel.getDraw();
 	}
 
@@ -237,17 +246,16 @@ public class GraphicsBoard extends Graphics implements View
 			@SuppressWarnings("unchecked")
 			Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
 			ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
-			if(temp1.size() < 3)
+			if (temp1.size() < 3)
 				return null;
 			for (int i = 0; i < 3; i++)
 				temp2.add(temp1.pop());
 			sel = new GraphicsTicketSelections(temp2, 3);
 			sel.contains(cord);
 		}
-		
+
 		player.contains(cord);
-		
-		
+
 		return null;
 	}
 
@@ -268,8 +276,8 @@ public class GraphicsBoard extends Graphics implements View
 
 	public boolean containsPoint(Float point)
 	{
-		if(sel.getDraw())
+		if (sel.getDraw())
 			return false;
-		return (graph.contains(point)!=null);
+		return (graph.contains(point) != null);
 	}
 }

@@ -61,7 +61,7 @@ public class GraphicsTicketSelections extends Graphics
 			Arrays.fill(flip, true);
 			return new PlayerEvent(Integer.parseInt(idCat));
 		}
-		System.out.println(draw);
+//		System.out.println(draw);
 		return null;
 	}
 

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -74,5 +75,28 @@ public class ViewEvent extends AWTEvent
 		default:
 			return Color.black;
 		}
+	}
+	
+	public ArrayList<String> getSuffColors(int demand)
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		HashMap<String, Integer> hand = players.peek().getHand();
+		if(hand.get("Pink")+hand.get("Wild")>demand)
+			result.add("Pink");
+		if(hand.get("White")+hand.get("Wild")>demand)
+			result.add("White");
+		if(hand.get("Blue")+hand.get("Wild")>demand)
+			result.add("Blue");
+		if(hand.get("Yellow")+hand.get("Wild")>demand)
+			result.add("Yellow");
+		if(hand.get("Orange")+hand.get("Wild")>demand)
+			result.add("Orange");
+		if(hand.get("Black")+hand.get("Wild")>demand)
+			result.add("Black");
+		if(hand.get("Red")+hand.get("Wild")>demand)
+			result.add("Red");
+		if(hand.get("Green")+hand.get("Wild")>demand)
+			result.add("Green");
+		return result;
 	}
 }
