@@ -232,8 +232,13 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			String card = visibleCards[i];
 			if (card.equals("Wild"))
 				count++;
-			else if(card.equals(""))
+			else if(card.equals("")) {
+				if(card.equals("Wild") && count >= 2) {
+					continue;
+				}
+				//System.out.println("hello");
 				visibleCards[i] = GameDeck.getDiscardCard();
+			}
 		}
 		if (count >= 3)
 		{
