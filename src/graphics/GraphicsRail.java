@@ -122,7 +122,7 @@ public class GraphicsRail extends Graphics
 			//System.out.println(lin);
 			if (owners[i] != null)
 			{
-				g.setColor(owners[i]);
+				g.setColor(owners[i].darker());
 				g.setStroke(new BasicStroke(3));
 				if (doubles)
 				{

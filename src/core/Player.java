@@ -72,7 +72,7 @@ public class Player
 		//System.out.println(hand.get(color));
 		//System.out.println("COLOR: "+color+ " RAIL: " + rail);
 		if(hand.get(color) == null) {
-			System.out.println("BAD COLOR: "+color);
+			System.out.println("BAD COLOR: " + color);
 			return null;
 		}
 		System.out.println(hand.get(color));
