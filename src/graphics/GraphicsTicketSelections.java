@@ -45,7 +45,10 @@ public class GraphicsTicketSelections extends Graphics
 			if (selection.get(i).contains(cord) != null)
 				flip[i] = !flip[i];
 
-		if (valid && cord.x >= 1700 && cord.x <= 1900 && cord.y >= 500 && cord.y <= 600)
+		if (cord.x >= 1500 && cord.x < 1700 && cord.y >= 500 && cord.y <= 600)
+			draw = false;
+		
+		if (valid && cord.x > 1700 && cord.x <= 1900 && cord.y >= 500 && cord.y <= 600)
 		{
 			//1700, 500, 200, 100
 			draw = false;
@@ -58,6 +61,7 @@ public class GraphicsTicketSelections extends Graphics
 			Arrays.fill(flip, true);
 			return new PlayerEvent(Integer.parseInt(idCat));
 		}
+		System.out.println(draw);
 		return null;
 	}
 
@@ -79,14 +83,14 @@ public class GraphicsTicketSelections extends Graphics
 				sum++;
 		valid = (sum >= 3) ? true : false;
 		g.setColor(new Color(244, 158, 66));
-		g.fillRect(1700, 500, 200, 100);
+		g.fillRect(1500, 500, 400, 100);
 		g.setColor(Color.BLACK);
 		g.setStroke(new BasicStroke(10));
 		g.drawRect(1700, 500, 200, 100);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
-		g.drawString("DONE", 1750, 550);
-		
-		
+		g.drawString("DONE", 1750, 555);
+		g.drawRect(1500, 500, 200, 100);
+		g.drawString("CANCEL", 1537, 555);
 	}
 
 	@Override
