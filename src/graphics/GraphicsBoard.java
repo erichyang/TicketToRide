@@ -289,7 +289,6 @@ public class GraphicsBoard extends Graphics implements View
 
 	public void graphSetRails()
 	{
-		if(graph.contains(mouseLoc)!=null)
 		graph.setRails(mouseLoc);
 	}
 	
