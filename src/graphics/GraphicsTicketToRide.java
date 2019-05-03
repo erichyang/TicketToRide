@@ -110,7 +110,8 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		board.draw(g);
 		double x = MouseInfo.getPointerInfo().getLocation().getX() - window.getLocationOnScreen().x;
 		double y = MouseInfo.getPointerInfo().getLocation().getY() - window.getLocationOnScreen().y;
-		board.graphSetRails(new Point2D.Float((float)x, (float)y));
+		board.setLoc(new Point2D.Float((float)x, (float)y));
+		board.graphSetRails();
 		g.setStroke(new BasicStroke(4));
 		g.setColor(new Color(129, 9, 255));
 		g.draw(new Line2D.Double(x - 5, y, x + 5, y));
@@ -129,8 +130,6 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	@Override
 	public void mouseEntered(MouseEvent arg0)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

@@ -74,7 +74,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	public void setView(View observe)
 	{
 		observer = observe;
-		observer.observe(new ViewEvent(2, this, players, GameDeck, graph, visibleCards, tickets));
+		observer.observe(new ViewEvent(2, this, players, GameDeck, graph, visibleCards, tickets,roundWeight));
 		checkVis();
 	}
 
@@ -157,7 +157,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			if (rail.getColor().equals("Gray"))
 			{
 				//System.out.println("gray rail " + rail);
-				String color = observer.color();
+				String color = observer.color(rail.getLength());
 				rail.setColor(color);
 			}
 			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
@@ -186,6 +186,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			rail.setColor(origColor);
 
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
+			checkVis();
 			current.addRail(rail);
 			final int[] pointValues =
 			{1, 2, 4, 7, 10, 15 };
@@ -218,15 +219,27 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		// System.out.println(getCurrentPlayer().getPoints());
 		if (roundWeight == 2)
 			nextRound();
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets));
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets,roundWeight));
 	}
 
 	private void checkVis()
 	{
 		int count = 0;
-		for (String card : visibleCards)
+//		for (String card : visibleCards)
+//			if (card.equals("Wild"))
+//				count++;
+		for(int i=0; i< visibleCards.length; i++) {
+			String card = visibleCards[i];
 			if (card.equals("Wild"))
 				count++;
+			else if(card.equals("")) {
+				if(card.equals("Wild") && count >= 2) {
+					continue;
+				}
+				//System.out.println("hello");
+				visibleCards[i] = GameDeck.getDiscardCard();
+			}
+		}
 		if (count >= 3)
 		{
 			if (GameDeck.disWildCheck())
@@ -266,14 +279,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 
-		observer.observe(new ViewEvent(3, this, players, GameDeck, graph, visibleCards, tickets));
+		observer.observe(new ViewEvent(3, this, players, GameDeck, graph, visibleCards, tickets,roundWeight));
 	}
 
 	public void nextRound()
 	{
 		roundWeight = 0;
 		players.offer(players.poll());
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets));
+		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets,roundWeight));
 	}
 
 	public Graph getGraph()
@@ -306,7 +319,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				winner = p;
 			}
 		}
-		observer.observe(new ViewEvent(1, this, players, GameDeck, graph, visibleCards, tickets));
+		observer.observe(new ViewEvent(1, this, players, GameDeck, graph, visibleCards, tickets,roundWeight));
 		return winner;
 	}
 

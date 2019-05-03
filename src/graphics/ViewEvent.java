@@ -27,6 +27,7 @@ public class ViewEvent extends AWTEvent
 	public Graph map;
 	public String[] visible;
 	public Stack<Ticket> tickets;
+	public int roundWeight;
 
 	public static int ROUND_END = 0;
 	public static int GAME_END = 1;
@@ -34,7 +35,7 @@ public class ViewEvent extends AWTEvent
 	public static int ROUND_CONT = 3;
 
 	public ViewEvent(int ID, Object source, Queue<Player> playerQueue, Deck GameDeck, Graph graph, String[] vis,
-			Stack<Ticket> ticketStack)
+			Stack<Ticket> ticketStack, int Weight)
 	{
 		super(source, ID);
 		map = graph;
@@ -42,6 +43,7 @@ public class ViewEvent extends AWTEvent
 		players = playerQueue;
 		visible = vis;
 		tickets = ticketStack;
+		roundWeight = Weight;
 	}
 
 	public ArrayList<Player> getSortedPlayer()

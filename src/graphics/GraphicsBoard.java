@@ -28,11 +28,13 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage background;
 	private static BufferedImage canvas;
 	private static BufferedImage ticket;
+	private int roundWeight;
 //	private static BufferedImage leaderboard;
 
 	private boolean color;
 	private ViewEvent lastUpdate;
-
+	private Float mouseLoc;
+	
 	// leader board
 	private Color[] list;
 	private int[] points;
@@ -88,10 +90,21 @@ public class GraphicsBoard extends Graphics implements View
 
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
+
 		if (!end)
 			for (int i = 0; i < visible.length; i++)
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 		if(!end)
+
+		for (int i = 0; i < visible.length; i++) {
+			g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
+			if(visible[i].equals("Wild") && roundWeight >0) {
+				g.setColor(new Color(0, 0, 0, 150));
+				g.fillRect(1255, 130 * i, 200, 125);
+			}
+		}
+		
+
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
 
 		// 1500 - 1900, 130
@@ -167,13 +180,15 @@ public class GraphicsBoard extends Graphics implements View
 	{
 
 		ViewEvent update = (ViewEvent) e;
+		roundWeight = update.roundWeight;
 		if (update.getID() == 1)
 			end = true;
 		graph.update(update.map);
 		player.update(update.players.peek());
 //		visible = update.visible;
-		for (int i = 0; i < update.visible.length; i++)
+		for (int i = 0; i < update.visible.length; i++) {
 			visible[i] = update.visible[i];
+		}
 		visible[5] = "Back";
 
 		Iterator<Player> iter = update.getSortedPlayer().iterator();
@@ -251,6 +266,7 @@ public class GraphicsBoard extends Graphics implements View
 			for (int i = 0; i < 3; i++)
 				temp2.add(temp1.pop());
 			sel = new GraphicsTicketSelections(temp2, 3);
+			sel.setLoc(mouseLoc);
 			sel.contains(cord);
 		}
 
@@ -266,12 +282,24 @@ public class GraphicsBoard extends Graphics implements View
 		ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
 		for (int i = 0; i < 5; i++)
 			temp2.add(temp1.pop());
-		return new GraphicsTicketSelections(temp2, 5);
+		GraphicsTicketSelections select = new GraphicsTicketSelections(temp2, 5);
+		select.setLoc(mouseLoc);
+		return select;
 	}
 
-	public void graphSetRails(Float cord)
+	public void graphSetRails()
 	{
-		graph.setRails(cord);
+		if(graph.contains(mouseLoc)!=null)
+		graph.setRails(mouseLoc);
+	}
+	
+	public void ticketCheck()
+	{
+		if(sel != null)sel.setLoc(mouseLoc);
+	}
+	
+	public void setLoc(Float loc) {
+		mouseLoc = loc;
 	}
 
 	public boolean containsPoint(Float point)
