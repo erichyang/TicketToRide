@@ -93,7 +93,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		if (eventID == -1)
 		{
 			nextRound();
-			System.out.println("Forced Next Turn");
+			//System.out.println("Forced Next Turn");
 			return;
 		} else if (eventID <= 4 && eventID >= 0)
 		{
@@ -156,7 +156,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			if (rail.getColor().equals("Gray"))
 			{
-				System.out.println("gray rail " + rail);
+				//System.out.println("gray rail " + rail);
 				String color = observer.color();
 				rail.setColor(color);
 			}
@@ -165,7 +165,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			if (usedCards == null)
 			{
-				System.out.println("not enough cards");
+				//System.out.println("not enough cards");
 				rail.setColor(origColor);
 				return;
 			}
@@ -179,7 +179,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				rail.setOwner(getCurrentPlayer().getName(), 1);
 			} else
 			{
-				System.out.println("Already Owned");
+				//System.out.println("Already Owned");
 				rail.setColor(origColor);
 				return;
 			}
@@ -192,7 +192,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			
 			current.addPoints(pointValues[rail.getLength()-1]);
 
-			System.out.println("Rail: " + rail + " OrigColor: " + origColor);
+			//System.out.println("Rail: " + rail + " OrigColor: " + origColor);
 
 		} else if (eventID % 10 == 6 || eventID % 10 == 7)
 		{
