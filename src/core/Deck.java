@@ -27,7 +27,7 @@ public class Deck
 		deck.push("Wild");
 		deck.push("Wild");
 		discard = new Stack<String>();
-		shuffle();
+		Collections.shuffle(deck);
 	}
 
 	public void setListener(GameEventListener GEL)
@@ -57,15 +57,10 @@ public class Deck
 		return drawCards;
 	}
 
-	public void shuffle()
-	{
-		Collections.shuffle(deck);
-	}
-
 	public void refillDeck()
 	{
 		deck.addAll(discard);
-		shuffle();
+		Collections.shuffle(deck);
 		discard.clear();
 	}
 
@@ -81,14 +76,13 @@ public class Deck
 	
 	public boolean disWildCheck() {
 		Stack<String> clone = (Stack<String>) discard.clone();
+		
 		int count =0;
 		while(clone.contains("Wild")) {
 			clone.remove("Wild");
 			count++;
 		}
-		System.out.println("CLONE: "+clone);
-		int size = clone.size();
-		clone.clear();
-		return (count >= 3) && (size <= 2) && deck.size() < 5;	
+		//System.out.println("CLONE: "+clone);
+		return (count >= 3) && (clone.size() <= 2) && deck.size() < 5;	
 	}
 }

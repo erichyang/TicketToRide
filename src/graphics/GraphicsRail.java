@@ -3,6 +3,7 @@ package graphics;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D.Float;
 import java.util.Arrays;
@@ -20,7 +21,6 @@ public class GraphicsRail extends Graphics
 	private Color[] owners;
 	private Line2D[] lines;
 	public boolean[] hovered;
-
 	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
 		hovered = new boolean[(doubles) ? 2:1];

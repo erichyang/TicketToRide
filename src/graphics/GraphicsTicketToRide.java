@@ -56,19 +56,21 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-//			if(board.getDraw() || !board.ended()) {
-//				return;
-//			}
+			//System.out.println(board.getDraw() || board.ended());
+			if(board.getDraw() || board.ended()) {
+				//System.out.println("two");
+				return;
+			}
+			//System.out.println("one");
 			game.onPlayerEvent(new PlayerEvent(num));
 		}		
 	}	
-	final playerAction PLAYER_DRAW_ONE = new playerAction(0);
-	final playerAction PLAYER_DRAW_TWO = new playerAction(1);
-	final playerAction PLAYER_DRAW_THREE = new playerAction(2);
-	final playerAction PLAYER_DRAW_FOUR = new playerAction(3);
-	final playerAction PLAYER_DRAW_FIVE = new playerAction(4);
-	final playerAction PLAYER_DRAW_DECK = new playerAction(5);
-	//final playerAction TICKET_SELECT = new playerAction();
+	 playerAction PLAYER_DRAW_ONE = new playerAction(0);
+	 playerAction PLAYER_DRAW_TWO = new playerAction(1);
+	 playerAction PLAYER_DRAW_THREE = new playerAction(2);
+	 playerAction PLAYER_DRAW_FOUR = new playerAction(3);
+	 playerAction PLAYER_DRAW_FIVE = new playerAction(4);
+	 playerAction PLAYER_DRAW_DECK = new playerAction(5);
 	
 	public GraphicsTicketToRide() throws FileNotFoundException
 	{
@@ -79,19 +81,19 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	}
 	
 	public void initilizeKeyBindings() {		
-		getInputMap().put(KeyStroke.getKeyStroke("1"),"key 1");
+		getInputMap().put(KeyStroke.getKeyStroke('1'),"key 1");
 		getActionMap().put("key 1",
 				PLAYER_DRAW_ONE);
-		getInputMap().put(KeyStroke.getKeyStroke("2"),"key 2");
+		getInputMap().put(KeyStroke.getKeyStroke('2'),"key 2");
 		getActionMap().put("key 2",
 				PLAYER_DRAW_TWO);
-		getInputMap().put(KeyStroke.getKeyStroke("3"),"key 3");
+		getInputMap().put(KeyStroke.getKeyStroke('3'),"key 3");
 		getActionMap().put("key 3",
 				PLAYER_DRAW_THREE);
-		getInputMap().put(KeyStroke.getKeyStroke("4"),"key 4");
+		getInputMap().put(KeyStroke.getKeyStroke('4'),"key 4");
 		getActionMap().put("key 4",
 				PLAYER_DRAW_FOUR);
-		getInputMap().put(KeyStroke.getKeyStroke("5"),"key 5");
+		getInputMap().put(KeyStroke.getKeyStroke('5'),"key 5");
 		getActionMap().put("key 5",
 				PLAYER_DRAW_FIVE);
 		getInputMap().put(KeyStroke.getKeyStroke(' '),"key SPACE");
