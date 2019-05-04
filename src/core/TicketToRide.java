@@ -157,10 +157,13 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			// System.out.println(rail.toString());
 
-			if (rail.getColor().split(";")[railNum].equals("Gray"))
+			if (rail.getColor().equals("Gray"))
 			{
 				System.out.println("gray rail " + rail);
 				String color = observer.color(rail.getLength());
+				if(color.equals("")) {
+					return;
+				}
 				rail.setColor(color);
 			}
 			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
@@ -181,14 +184,16 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				return;
 			}
 
-			if (origColor.split(";")[0].equals(rail.getColor()) && rail.getOwnerName(0) == (null))
+			if (origColor.split(";")[railNum].equals(rail.getColor()) && rail.getOwnerName(railNum) == (null))
 			{
-				rail.setOwner(getCurrentPlayer().getName(), 0);
-			} else if (rail.isDouble() && origColor.split(";")[1].equals(rail.getColor())
-					&& rail.getOwnerName(1) == (null))
-			{
-				rail.setOwner(getCurrentPlayer().getName(), 1);
-			} else
+				rail.setOwner(getCurrentPlayer().getName(), railNum);
+			}
+//			else if (rail.isDouble() && origColor.split(";")[1].equals(rail.getColor())
+//					&& rail.getOwnerName(1) == (null))
+//			{
+//				rail.setOwner(getCurrentPlayer().getName(), 1);
+//			}
+			else
 			{
 				//System.out.println("Already Owned");
 				rail.setColor(origColor);

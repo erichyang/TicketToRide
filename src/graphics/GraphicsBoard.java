@@ -177,7 +177,11 @@ public class GraphicsBoard extends Graphics implements View
 	@Override
 	public String color(int length)
 	{
-		col = new GraphicsColorSelections(lastUpdate.getSuffColors(length));	
+		ArrayList<String>colors = lastUpdate.getSuffColors(length);
+		if(colors.size() == 0) {
+			return "";
+		}
+		col = new GraphicsColorSelections(colors);	
 		return col.getColor();
 	}
 

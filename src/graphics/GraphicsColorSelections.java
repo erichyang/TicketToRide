@@ -21,7 +21,10 @@ public class GraphicsColorSelections extends Graphics
 	{
 		draw = true;
 		list = new ArrayList<Rectangle>();
-		available.toArray(colors);
+		colors = new String[available.size()];
+		for(int i=0; i< available.size(); i++) {
+			colors[i] = available.get(i);
+		}
 		int moving;
 		moving = 1920/available.size()/2;
 		for (int i = 0; i < available.size(); i++)
