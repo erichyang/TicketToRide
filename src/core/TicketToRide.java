@@ -141,22 +141,25 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			Player current = getCurrentPlayer();
 			Rail rail = graph.getRail((eventID - 8) / 10);
 			String origColor = rail.getColor();
+			int railNum =0;
 
 			if (eventID % 10 == 8)
 			{
+				railNum = 0;
 				rail.setColor(rail.getColor().split(";")[0]);
 			} else if (eventID % 10 == 9)
 			{
 				// System.out.println(rail.getColor());
+				railNum = 1;
 				rail.setColor(rail.getColor().split(";")[1]);
 			} else
 				throw new IllegalArgumentException("invalid GameEvent ID number");
 
 			// System.out.println(rail.toString());
 
-			if (rail.getColor().equals("Gray"))
+			if (rail.getColor().split(";")[railNum].equals("Gray"))
 			{
-				//System.out.println("gray rail " + rail);
+				System.out.println("gray rail " + rail);
 				String color = observer.color(rail.getLength());
 				rail.setColor(color);
 			}
@@ -166,6 +169,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			if (usedCards == null)
 			{
 				//System.out.println("not enough cards");
+				if(origColor.split(";")[railNum].equals("Gray")) {
+					if(railNum == 0) {
+						rail.setColor(rail.getColor()+";"+origColor.split(";")[1]);
+					}
+					else if(railNum == 1) {
+						rail.setColor(origColor.split(";")[1]+";"+rail.getColor());
+					}
+				}
 				rail.setColor(origColor);
 				return;
 			}
