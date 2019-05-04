@@ -28,6 +28,10 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage background;
 	private static BufferedImage canvas;
 	private static BufferedImage ticket;
+	private static BufferedImage trainIcon;
+	private static BufferedImage ticketIcon;
+	private static BufferedImage pointIcon;
+	private static BufferedImage trainCardIcon;
 	private int roundWeight;
 //	private static BufferedImage leaderboard;
 
@@ -54,6 +58,10 @@ public class GraphicsBoard extends Graphics implements View
 			background = ImageIO.read(new File("game_files\\background.jpg"));
 			canvas = ImageIO.read(new File("game_files\\canvas.jpg"));
 			ticket = ImageIO.read(new File("game_files\\cards\\ticket_card_back.jpg"));
+			trainIcon = ImageIO.read(new File("game_files\\Icons\\Train Icon.png"));
+			ticketIcon = ImageIO.read(new File("game_files\\Icons\\Ticket Icon.png"));
+			pointIcon = ImageIO.read(new File("game_files\\Icons\\Plus One Icon.png"));
+			trainCardIcon = ImageIO.read(new File("game_files\\Icons\\TrainCard Icon.JPG"));
 //			leaderboard = ImageIO.read(new File("game_files\\leaderboard.jpg"));
 		} catch (IOException e)
 		{
@@ -140,10 +148,13 @@ public class GraphicsBoard extends Graphics implements View
 		
 		g.setFont(new Font("Seriff", Font.BOLD, 16));
 		g.setColor(Color.black);
-		g.drawString("points", 1540, 50);
-		g.drawString("trains", 1660, 50);
-		g.drawString("tickets", 1745, 50);
-		g.drawString("trainCards", 1825, 50);
+		g.drawImage(pointIcon,1540, 0, 50, 50,null);
+		//g//.drawString("points", 1540, 50);
+		g.drawImage(trainIcon,1660, 0, 50, 50,null);
+		//g.drawString("tickets", 1745, 50);
+		g.drawImage(ticketIcon,1745, 0, 50, 50,null);
+		g.drawImage(trainCardIcon,1825, 0, 75, 50,null);
+		//g.drawString("trainCards", 1825, 50);
 
 		if (sel.getDraw()) {
 			sel.setLoc(mouseLoc);
