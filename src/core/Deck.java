@@ -90,6 +90,6 @@ public class Deck
 			count++;
 		}
 		//System.out.println("CLONE: "+clone);
-		return (count >= 3) && (clone.size() <= 2) && deck.size() < 5;	
+		return (count >= 3) && (clone.size() < 2) && deck.size() < 5;	
 	}
 }

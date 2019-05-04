@@ -20,9 +20,11 @@ public class Player
 	private String name;
 	private ArrayList<Set<String>> cities;
 	private boolean isFinalTurn;
+	private int numCompletedTickets;
 
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets)
 	{
+		numCompletedTickets =0;
 		trains = 45;
 		setPoints(0);
 		hand = new HashMap<>();
@@ -176,10 +178,26 @@ public class Player
 		}
 	}
 	
-	public void countTickets() {
-		ticketList.forEach(ticket->addPoints((contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])?ticket.getPointCount():-ticket.getPointCount())));
+	public int countTickets() {
+		int count =0;
+//			addPoints((contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])?ticket.getPointCount():-ticket.getPointCount()));
+		for(int i=0; i< ticketList.size(); i++) {	
+			Ticket ticket = ticketList.get(i);
+			if(contains(ticket.getCities().split(",")[0],ticket.getCities().split(",")[1])) {
+				count++;
+				addPoints(ticket.getPointCount());
+			}else {
+				addPoints(-ticket.getPointCount());
+			}
+		}
+		numCompletedTickets = count;
+		return count;
 	}
 
+	public int getComp() {
+		return numCompletedTickets;
+	}
+	
 	private int findCity(String city)
 	{
 

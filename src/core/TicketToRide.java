@@ -253,7 +253,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 					continue;
 				}
 				//System.out.println("hello");
-				visibleCards[i] = GameDeck.getDiscardCard();
+				else visibleCards[i] = GameDeck.getDiscardCard();
 			}
 		}
 		if (count >= 3)
@@ -323,7 +323,24 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			visibleCards[i] = null;
 		}
 
-		players.forEach(player -> player.countTickets());
+		int mostTickets = Integer.MIN_VALUE;
+		int longestPath = Integer.MIN_VALUE;
+//		players.forEach(player -> player.countTickets());
+		for(Player P: players) {
+			int num = P.countTickets();
+			int path = graph.LongestPath(P);
+			if(mostTickets< num) {
+				mostTickets = num;
+			}
+			if(longestPath<path) {
+				longestPath = path;
+			}
+		}
+		for(Player P: players) {
+			if(P.getComp() == mostTickets) {
+				P.addPoints(10);
+			}
+		}
 
 		Player winner = null;
 		int mostPoints = Integer.MIN_VALUE;
