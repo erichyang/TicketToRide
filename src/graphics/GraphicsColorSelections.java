@@ -1,9 +1,7 @@
 package graphics;
 
 import java.util.ArrayList;
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D.Float;
@@ -28,7 +26,7 @@ public class GraphicsColorSelections extends Graphics
 		int moving;
 		moving = 1920/available.size()/2;
 		for (int i = 0; i < available.size(); i++)
-			list.add(new Rectangle(moving*(i+1),850, 50,50));
+			list.add(new Rectangle(moving*(i+1),400, 100,100));
 	}
 
 	@Override
@@ -43,18 +41,12 @@ public class GraphicsColorSelections extends Graphics
 	@Override
 	public void draw(Graphics2D g)
 	{
-		for (Rectangle rect:list)
-			g.draw(rect);
-
-		g.setColor(new Color(244, 158, 66));
-		g.fillRect(1500, 500, 400, 100);
-		g.setColor(Color.BLACK);
-		g.setStroke(new BasicStroke(10));
-		g.drawRect(1700, 500, 200, 100);
-		g.setFont(new Font("Serif", Font.BOLD, 30));
-		g.drawString("DONE", 1750, 555);
-		g.drawRect(1500, 500, 200, 100);
-		g.drawString("CANCEL", 1537, 555);
+//		System.out.println(list);
+		for (int i =0; i < list.size(); i++)
+		{
+			g.setColor(string2Color(colors[i]));
+			g.fill(list.get(i));
+		}
 	}
 
 	@Override
@@ -76,5 +68,32 @@ public class GraphicsColorSelections extends Graphics
 	public String getColor()
 	{
 		return result;
+	}
+	
+	private Color string2Color(String color)
+	{
+		switch (color)
+		{
+		case ("Gray"):
+			return Color.gray;
+		case ("Pink"):
+			return Color.pink;
+		case ("White"):
+			return Color.white;
+		case ("Blue"):
+			return Color.blue;
+		case ("Yellow"):
+			return Color.yellow;
+		case ("Orange"):
+			return Color.orange;
+		case ("Black"):
+			return Color.black;
+		case ("Red"):
+			return Color.red;
+		case ("Green"):
+			return Color.green;
+		default:
+			return null;
+		}
 	}
 }

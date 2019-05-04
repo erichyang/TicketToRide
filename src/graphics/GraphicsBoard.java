@@ -35,7 +35,6 @@ public class GraphicsBoard extends Graphics implements View
 	private int roundWeight;
 //	private static BufferedImage leaderboard;
 
-	private boolean color;
 	private ViewEvent lastUpdate;
 	private Float mouseLoc;
 	
@@ -79,7 +78,6 @@ public class GraphicsBoard extends Graphics implements View
 		trainCards = new int[4];
 		visible = new String[6];
 		visible[5] = "Back";
-		color = false;
 		end = false;
 	}
 
@@ -177,11 +175,11 @@ public class GraphicsBoard extends Graphics implements View
 	@Override
 	public String color(int length)
 	{
-		ArrayList<String>colors = lastUpdate.getSuffColors(length);
+		ArrayList<String> colors = lastUpdate.getSuffColors(length);
 		if(colors.size() == 0) {
 			return "";
 		}
-		col = new GraphicsColorSelections(colors);	
+		col = new GraphicsColorSelections(colors);
 		return col.getColor();
 	}
 
