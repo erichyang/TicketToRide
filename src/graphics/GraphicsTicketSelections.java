@@ -6,6 +6,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 
 import core.PlayerEvent;
@@ -24,6 +25,7 @@ public class GraphicsTicketSelections extends Graphics
 
 	public GraphicsTicketSelections(ArrayList<Ticket> selection, int num)
 	{
+		mouseLoc = new Float(0,0);
 		this.selection = new ArrayList<GraphicsTicket>();
 		this.num = num;
 		int moving;
@@ -38,6 +40,7 @@ public class GraphicsTicketSelections extends Graphics
 	}
 	
 	public void setLoc(Float loc) {
+		if(loc != null)
 		mouseLoc = loc;
 	}
 
@@ -92,11 +95,11 @@ public class GraphicsTicketSelections extends Graphics
 
 		Color cancelC = Color.BLACK;
 		Color doneC = Color.BLACK;
-		
-		if (mouseLoc != null && mouseLoc.x >= 1475 && mouseLoc.x < 1675 && mouseLoc.y >= 500 && mouseLoc.y <= 600) {
+		if (selection.size() != 5 && mouseLoc.x >= 1475 && mouseLoc.x < 1675 && mouseLoc.y >= 500 && mouseLoc.y <= 600) {
+//			System.out.println(mouseLoc);
 			cancelC = Color.YELLOW;
 		}
-		if (mouseLoc != null && mouseLoc.x > 1700 && mouseLoc.x <= 1900 && mouseLoc.y >= 500 && mouseLoc.y <= 600) {
+		if (mouseLoc.x > 1700 && mouseLoc.x <= 1900 && mouseLoc.y >= 500 && mouseLoc.y <= 600) {
 			doneC = Color.YELLOW;
 		}
 		
@@ -112,6 +115,10 @@ public class GraphicsTicketSelections extends Graphics
 		g.drawRect(1475, 500, 200, 100);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
 		g.drawString("CANCEL", 1510, 555);
+		if(selection.size() == 5 ) {
+			g.setColor(new Color(0,0,0,150));
+			g.fillRect(1475, 500, 200, 100);
+		}
 	}
 	
 	private void drawDone(Graphics2D g, Color color) {

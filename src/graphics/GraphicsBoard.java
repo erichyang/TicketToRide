@@ -132,10 +132,8 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
 
-//		System.out.println("A: " + lastUpdate.players.peek());
 		if (lastUpdate.players.peek().getTickets().size() == 0)
 		{
-//			System.out.println("B: " + lastUpdate.players.peek());
 			sel = drawStartTickets();
 			sel.setDraw(true);
 		}
@@ -147,12 +145,14 @@ public class GraphicsBoard extends Graphics implements View
 		g.drawString("tickets", 1745, 50);
 		g.drawString("trainCards", 1825, 50);
 
-		if (sel.getDraw())
+		if (sel.getDraw()) {
+			sel.setLoc(mouseLoc);
 			sel.draw(g);
+		}
 
 		g.setColor(Color.black);
 		
-		if(col!=null&&col.getDraw())
+		if(col!=null && col.getDraw())
 			col.draw(g);
 	}
 
@@ -178,7 +178,6 @@ public class GraphicsBoard extends Graphics implements View
 	@Override
 	public void update(Object e)
 	{
-
 		ViewEvent update = (ViewEvent) e;
 		roundWeight = update.roundWeight;
 		if (update.getID() == 1)
@@ -266,7 +265,6 @@ public class GraphicsBoard extends Graphics implements View
 			for (int i = 0; i < 3; i++)
 				temp2.add(temp1.pop());
 			sel = new GraphicsTicketSelections(temp2, 3);
-			sel.setLoc(mouseLoc);
 			sel.contains(cord);
 		}
 
