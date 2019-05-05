@@ -101,6 +101,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			int index = eventID;
 			String card = visibleCards[index];
 //			System.out.println("Card:"+ card);			
+			if (card == "") return;
 			if (card == "Wild")
 			{
 				if (roundWeight > 0)
