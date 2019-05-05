@@ -79,7 +79,7 @@ public class Graph {
 		for (String key : p.cityList()) {
 			result res =DFS(key,p);
 			int distance = res.dis;
-			System.out.println(res);
+			//System.out.println(res);
 			if(distance > maxDis) maxDis = distance;
 		}
 		return maxDis;

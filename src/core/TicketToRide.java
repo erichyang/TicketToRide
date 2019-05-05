@@ -81,11 +81,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	public void onPlayerEvent(PlayerEvent e)
 	{
 		// System.out.println("ID "+e.getID());
-		if ((roundWeight + e.getWeight()) > 2)
-		{
-			//System.out.println("invalid action");
-			return;
-		}
+		if ((roundWeight + e.getWeight()) > 2) return;
 
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
@@ -119,10 +115,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			}
 		} else if (eventID == 5)
 		{
-			if (currentPlayer.addCards(GameDeck.getCard(false)) == null)
-			{
-				return;
-			}
+			if (currentPlayer.addCards(GameDeck.getCard(false)) == null) return;
 		} else if (eventID == 6)
 		{
 			getCurrentPlayer().addTicket(tickets.pop());
@@ -163,11 +156,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				//System.out.println("gray rail " + rail);
 				String color = observer.color(rail.getLength());
 				//System.out.println("Color:" + color);
-				if(color==null||color.equals("")) 
-				{
-					return;
-				}
-//				System.out.println("hello");
+				if(color==null||color.equals("")) return;
 				rail.setColor(color);
 			}
 			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
@@ -177,26 +166,18 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			{
 				//System.out.println("not enough cards");
 				if(origColor.split(";")[railNum].equals("Gray")) {
-					if(railNum == 0) {
+					if(railNum == 0) 
 						rail.setColor(rail.getColor()+";"+origColor.split(";")[1]);
-					}
-					else if(railNum == 1) {
+					else if(railNum == 1)
 						rail.setColor(origColor.split(";")[1]+";"+rail.getColor());
-					}
 				}
 				rail.setColor(origColor);
 				return;
 			}
 
 			if (origColor.split(";")[railNum].equals(rail.getColor()) && rail.getOwnerName(railNum) == (null))
-			{
 				rail.setOwner(getCurrentPlayer().getName(), railNum);
-			}
-//			else if (rail.isDouble() && origColor.split(";")[1].equals(rail.getColor())
-//					&& rail.getOwnerName(1) == (null))
-//			{
-//				rail.setOwner(getCurrentPlayer().getName(), 1);
-//			}
+
 			else
 			{
 				//System.out.println("Already Owned");
@@ -215,9 +196,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			{1, 2, 4, 7, 10, 15 };
 			
 			current.addPoints(pointValues[rail.getLength()-1]);
-
 			//System.out.println("Rail: " + rail + " OrigColor: " + origColor);
-
 		} else if (eventID % 10 == 6 || eventID % 10 == 7)
 		{
 			int num = eventID;
@@ -239,7 +218,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 
 		roundWeight += e.getWeight();
-		// System.out.println(getCurrentPlayer().getPoints());
 		if (roundWeight == 2)
 			nextRound();
 		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets,roundWeight));
@@ -260,7 +238,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			nullCount++;	
 			visibleCards[i] = GameDeck.getCard(count >= 2);
 			if(visibleCards[i].equals("Wild")) count++;
-			System.out.println(i+": "+ visibleCards[i]);
 			}
 		}
 		if(nullCount == 5 && roundWeight == 1) {
@@ -269,7 +246,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		if (count >= 3)
 		{
 			this.onGameEvent(new GameEvent(2, this));
-			//System.out.println("three Wilds");
 		}
 	}
 
@@ -344,24 +320,21 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			paths[index] = path;
 			ticketNum[index] = num;
 			
-			if(mostTickets< num) {
+			if(mostTickets< num)
 				mostTickets = num;
-			}
-			
-			if(longestPath<path) {
+
+			if(longestPath<path)
 				longestPath = path;
-			}
+
 			index++;
 		}
 		index =0;
 		for(Player P: players) {
-			if(P.getComp() == mostTickets) {
+			if(P.getComp() == mostTickets)
 				P.addPoints(10);
-			}
-			if(paths[index] ==  longestPath) {
+			if(paths[index] ==  longestPath)
 //				System.out.println(P + " , "+ paths[index]);
 				P.addPoints(15);
-			}
 			index++;
 		}
 
@@ -369,8 +342,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int mostPoints = Integer.MIN_VALUE;
 		for (Player p : players)
 		{
-			if (p.points() > mostPoints)
-			{
+			if (p.points() > mostPoints){
 				mostPoints = p.points();
 				winner = p;
 			}
