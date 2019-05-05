@@ -203,14 +203,16 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 			if (card.equals("")) {
 				nullCount++;
 				visibleCards[i] = GameDeck.getCard(count >= 2);
-				if (visibleCards[i].equals("Wild"))
-					count++;
+			if (visibleCards[i].equals("Wild"))
+				count++;
 			}
 		}
-		if (nullCount == 5 && roundWeight == 1)
-			this.onPlayerEvent(new PlayerEvent(-1));
+		if (nullCount + count == 5 && roundWeight == 1) {
+			System.out.println("uh oh");
+			onPlayerEvent(new PlayerEvent(-1));
+		}
 		if (count >= 3)
-			this.onGameEvent(new GameEvent(2, this));
+			onGameEvent(new GameEvent(2, this));
 	}
 
 	public void onGameEvent(GameEvent e) {
@@ -228,7 +230,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 				GameDeck.addDiscardedCard(visibleCards[i]);
 				visibleCards[i] = GameDeck.getCard(true);
 			}
-			// checkVis();
+			checkVis();
 		} else if (eventID == 3) {
 			endGame();
 			//System.out.println(endGame());
@@ -244,10 +246,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
 	}
 
-//	public Graph getGraph() {
-//		return graph;
-//	}
-
 	public String[] getVisCards() {
 		return visibleCards;
 	}
@@ -255,7 +253,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	public Player endGame() {
 		onPlayerEvent(new PlayerEvent(-1));
 		for (int i = 0; i < visibleCards.length; i++)
-			visibleCards[i] = null;
+			visibleCards[i] = "";
 
 		int mostTickets = Integer.MIN_VALUE;
 		int longestPath = Integer.MIN_VALUE;
@@ -302,8 +300,5 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	public Player getCurrentPlayer() {
 		return players.peek();
 	}
-//
-//	public Deck getDeck() {
-//		return GameDeck;
-//	}
+
 }

@@ -53,7 +53,7 @@ public class Deck
 			if(discard.isEmpty()) return "";
 			else refillDeck();
 		}
-		if(wilds) return getNonWild();
+		if(wilds && deckWildCheck() <= 3) return getNonWild();
 		String card = deck.pop();
 		if (deck.isEmpty())
 			listen.onGameEvent(new GameEvent(1, this));
@@ -69,7 +69,6 @@ public class Deck
 			}
 		}
 		deck.remove(temp);
-		System.out.println((temp.equals("") ? "EMPTY": temp));
 		return  temp;
 	}
 	
@@ -98,22 +97,11 @@ public class Deck
 		return discard;
 	}
 	
-//	public boolean disWildCheck() {
-//		Stack<String> clone = (Stack<String>) discard.clone();
-//		Stack<String>temp = new Stack<String>();
-//		int count =0;
-//		while(clone.contains("Wild")) {
-//			clone.remove("Wild");
-//			count++;
-//		}
-//		
-//		if(!discard.isEmpty() && discard.peek().equals("Wild")) {
-//			for(int i=0; i<count; i++)
-//				temp.push("Wild");
-//			temp.addAll(clone);
-//			discard = clone;
-//		}
-//		
-//		return clone.size() == 0;
-//	}
+	public int deckWildCheck() {
+		Stack<String> clone = (Stack<String>) discard.clone();
+		while(clone.contains("Wild")) {
+			clone.remove("Wild");
+		}		
+		return clone.size();
+	}
 }

@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
@@ -92,22 +93,18 @@ public class GraphicsRail extends Graphics
 
 			double deltaX = 5 * Math.sin(alpha);
 			double deltaY = 5 * Math.cos(alpha);
-
 //			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 //			{ length - 2, 2 }, 0));
 //			g.setColor(string2Color(colors[i]));
 			if (doubles)
-			{
-				
+			{			
 				lines[i] = new Line2D.Float((int)(cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
 						(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
 						(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
 //				System.out.println(Math.toDegrees(alpha) +"("+ deltaX+ ","+deltaY+")"+" "+"("+x+","+y+")");
 			} else
-			{
 				lines[0] = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
-			}
 			
 			if(hovered[i] && owners[i] == null) {
 				g.setColor(new Color(getContrastColor(string2Color(colors[i]))));
@@ -118,6 +115,11 @@ public class GraphicsRail extends Graphics
 			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 					{ length - 2, 2 }, 0));
 			g.draw(lines[i]);
+			if(hovered[i] && owners[i] == null) {
+				g.setColor(new Color(129, 9, 255));
+				g.setFont(new Font("Seriff", Font.BOLD,36));
+				g.drawString(""+trains, 40,750);
+			}
 			
 			//System.out.println(lin);
 			if (owners[i] != null)
@@ -131,9 +133,7 @@ public class GraphicsRail extends Graphics
 							(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
 							(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
 				} else
-				{
 					g.drawLine((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
-				}
 			}
 		}
 
