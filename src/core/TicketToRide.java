@@ -114,8 +114,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			visibleCards[index] = GameDeck.getCard(false);
 			checkVis();
-			if (currentPlayer.addCards(card) == null)
-			{
+			if (currentPlayer.addCards(card) == null){
 				return;
 			}
 		} else if (eventID == 5)
@@ -141,6 +140,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		{
 			Player current = getCurrentPlayer();
 			Rail rail = graph.getRail((eventID - 8) / 10);
+			Rail inverse = graph.getInverse(rail);
 			String origColor = rail.getColor();
 			int railNum =0;
 
@@ -160,9 +160,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			if (rail.getColor().equals("Gray"))
 			{
-				System.out.println("gray rail " + rail);
+				//System.out.println("gray rail " + rail);
 				String color = observer.color(rail.getLength());
-				System.out.println("Color:" + color);
+				//System.out.println("Color:" + color);
 				if(color==null||color.equals("")) 
 				{
 					return;
@@ -204,7 +204,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				return;
 			}
 			rail.setColor(origColor);
-
+			inverse.setColor(rail.getColor());
+			inverse.setOwner(rail.getOwnerName(0), 0);
+			inverse.setOwner(rail.getOwnerName(railNum), railNum);
+			
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			checkVis();
 			current.addRail(rail);
@@ -249,10 +252,19 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			String card = visibleCards[i];
 			if (card.equals("Wild"))
 				count++;
-			else if(card.equals("")) {
-					visibleCards[i] = GameDeck.getCard(count >= 2);
-					//if(count>=2 && visibleCards[i].equals("Wild")) visibleCards[i] ="";
+		}
+		int nullCount =0;
+		for(int i=0; i< visibleCards.length; i++) {
+			String card = visibleCards[i];
+			if(card.equals("")) {
+			nullCount++;	
+			visibleCards[i] = GameDeck.getCard(count >= 2);
+			if(visibleCards[i].equals("Wild")) count++;
+			System.out.println(i+": "+ visibleCards[i]);
 			}
+		}
+		if(nullCount == 5 && roundWeight == 1) {
+			this.onPlayerEvent(new PlayerEvent(-1));
 		}
 		if (count >= 3)
 		{
@@ -327,6 +339,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		for(Player P: players) {
 			int num = P.countTickets();
 			int path = graph.LongestPath(P);
+			System.out.println(P + " , "+ path);
 			
 			paths[index] = path;
 			ticketNum[index] = num;
@@ -346,6 +359,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				P.addPoints(10);
 			}
 			if(paths[index] ==  longestPath) {
+//				System.out.println(P + " , "+ paths[index]);
 				P.addPoints(15);
 			}
 			index++;

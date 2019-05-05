@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import core.GameEvent;
 import core.PlayerEvent;
 import core.TicketToRide;
 
@@ -62,6 +63,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 				return;
 			}
 			//System.out.println("one");
+			if(num == -1) game.onGameEvent(new GameEvent(3,this));
 			game.onPlayerEvent(new PlayerEvent(num));
 		}		
 	}	
@@ -71,6 +73,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	 playerAction PLAYER_DRAW_FOUR = new playerAction(3);
 	 playerAction PLAYER_DRAW_FIVE = new playerAction(4);
 	 playerAction PLAYER_DRAW_DECK = new playerAction(5);
+	 playerAction END_GAME = new playerAction(-1);
 	
 	public GraphicsTicketToRide() throws FileNotFoundException
 	{
@@ -80,7 +83,8 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		initilizeKeyBindings();
 	}
 	
-	public void initilizeKeyBindings() {		
+	public void initilizeKeyBindings() {
+		//System.out.println("hello");
 		getInputMap().put(KeyStroke.getKeyStroke('1'),"key 1");
 		getActionMap().put("key 1",
 				PLAYER_DRAW_ONE);
@@ -99,6 +103,9 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 		getInputMap().put(KeyStroke.getKeyStroke(' '),"key SPACE");
 		getActionMap().put("key SPACE",
 				PLAYER_DRAW_DECK);
+		getInputMap().put(KeyStroke.getKeyStroke("ctrl released ENTER") ,"ctrl enter");
+		getActionMap().put("ctrl enter",
+				END_GAME);
 	}
 	
 	@Override

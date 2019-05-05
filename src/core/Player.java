@@ -139,11 +139,6 @@ public class Player
 		return ticketList;
 	}
 
-//	public void setTickets(ArrayList<Ticket> tickets)
-//	{
-//		this.tickets = tickets;
-//	}
-
 	public void addRail(Rail rail)
 	{
 		//playerGraph.add(rail.getCityA(), rail);
@@ -279,6 +274,15 @@ public class Player
 			sum+=num;
 		return sum;
 	}
+	
+	public ArrayList<String> cityList(){
+		ArrayList<String> result = new ArrayList<String>();
+		for(Set<String>s: cities) {
+			result.addAll(s);
+		}
+		return result;
+	}
+	
 	public String toString() {
 		return getName()+" Points: "+ getPoints();
 	}

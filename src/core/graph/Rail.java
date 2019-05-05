@@ -86,8 +86,6 @@ public class Rail {
 		return this.getCityA().equals(otherRail.getCityB()) && 
 				this.getCityB().equals(otherRail.getCityA());
 	}
-	
-	
 
 	@Override
 	public int hashCode() {

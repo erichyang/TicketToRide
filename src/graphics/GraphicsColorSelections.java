@@ -41,7 +41,7 @@ public class GraphicsColorSelections extends Graphics
 	@Override
 	public void draw(Graphics2D g)
 	{
-//		System.out.println(list);
+		//System.out.println(list);
 		for (int i =0; i < list.size(); i++)
 		{
 			g.setColor(string2Color(colors[i]));
