@@ -40,7 +40,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		{
 			player.setListener(this);
 			for (int i = 0; i < 4; i++)
-				player.addCards(GameDeck.getCard());
+				player.addCards(GameDeck.getCard(false));
 		});
 
 		roundWeight = 0;
@@ -111,7 +111,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				roundWeight++;
 			}
 
-			visibleCards[index] = GameDeck.getCard();
+			visibleCards[index] = GameDeck.getCard(false);
 			checkVis();
 			if (currentPlayer.addCards(card) == null)
 			{
@@ -119,7 +119,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			}
 		} else if (eventID == 5)
 		{
-			if (currentPlayer.addCards(GameDeck.getCard()) == null)
+			if (currentPlayer.addCards(GameDeck.getCard(false)) == null)
 			{
 				return;
 			}
@@ -244,28 +244,19 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 	private void checkVis()
 	{
 		int count = 0;
-//		for (String card : visibleCards)
-//			if (card.equals("Wild"))
-//				count++;
 		for(int i=0; i< visibleCards.length; i++) {
 			String card = visibleCards[i];
 			if (card.equals("Wild"))
 				count++;
 			else if(card.equals("")) {
-				if(card.equals("Wild") && count >= 2) {
-					continue;
-				}
-				//System.out.println("hello");
-				else visibleCards[i] = GameDeck.getDiscardCard();
+					visibleCards[i] = GameDeck.getCard(count >= 2);
+					//if(count>=2 && visibleCards[i].equals("Wild")) visibleCards[i] ="";
 			}
 		}
 		if (count >= 3)
 		{
-			if (GameDeck.disWildCheck())
-			{
-				this.onGameEvent(new GameEvent(3, this));
-			} else
-				this.onGameEvent(new GameEvent(2, this));
+			this.onGameEvent(new GameEvent(2, this));
+			//System.out.println("three Wilds");
 		}
 	}
 
@@ -288,9 +279,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			for (int i = 0; i < visibleCards.length; i++)
 			{
 				GameDeck.addDiscardedCard(visibleCards[i]);
-				visibleCards[i] = GameDeck.getCard();
+				visibleCards[i] = GameDeck.getCard(true);
 			}
-			checkVis();
+			//checkVis();
 		} else if (eventID == 3)
 		{
 //			endGame();
@@ -329,20 +320,34 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int mostTickets = Integer.MIN_VALUE;
 		int longestPath = Integer.MIN_VALUE;
 //		players.forEach(player -> player.countTickets());
+		int[] paths = new int[players.size()];
+		int[] ticketNum = new int[players.size()];
+		int index =0;
 		for(Player P: players) {
 			int num = P.countTickets();
 			int path = graph.LongestPath(P);
+			
+			paths[index] = path;
+			ticketNum[index] = num;
+			
 			if(mostTickets< num) {
 				mostTickets = num;
 			}
+			
 			if(longestPath<path) {
 				longestPath = path;
 			}
+			index++;
 		}
+		index =0;
 		for(Player P: players) {
 			if(P.getComp() == mostTickets) {
 				P.addPoints(10);
 			}
+			if(paths[index] ==  longestPath) {
+				P.addPoints(15);
+			}
+			index++;
 		}
 
 		Player winner = null;
