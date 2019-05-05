@@ -80,8 +80,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 		if (eventID == -1) {
 			nextRound();
-			return;
-			
+			return;			
 		} else if (eventID <= 4 && eventID >= 0) {
 			int index = eventID;
 			String card = visibleCards[index];	
@@ -141,12 +140,11 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 			if (usedCards == null) {
 				// System.out.println("not enough cards");
-				if (origColor.split(";")[railNum].equals("Gray")) {
+				if (origColor.split(";")[railNum].equals("Gray"))
 					if (railNum == 0)
 						rail.setColor(rail.getColor() + ";" + origColor.split(";")[1]);
 					else if (railNum == 1)
 						rail.setColor(origColor.split(";")[1] + ";" + rail.getColor());
-				}
 				rail.setColor(origColor);
 				return;
 			}

@@ -110,18 +110,15 @@ public class GraphicsRail extends Graphics
 				g.setColor(new Color(getContrastColor(string2Color(colors[i]))));
 				g.setStroke(new BasicStroke(13));
 				g.draw(lines[i]);
+				g.setColor(new Color(129, 9, 255));
+				g.setFont(new Font("Seriff", Font.BOLD,36));
+				g.drawString(""+trains, 40,750);
 			}
 			g.setColor(string2Color(colors[i]));
 			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 					{ length - 2, 2 }, 0));
 			g.draw(lines[i]);
-			if(hovered[i] && owners[i] == null) {
-				g.setColor(new Color(129, 9, 255));
-				g.setFont(new Font("Seriff", Font.BOLD,36));
-				g.drawString(""+trains, 40,750);
-			}
-			
-			//System.out.println(lin);
+
 			if (owners[i] != null)
 			{
 				g.setColor(owners[i].darker());
