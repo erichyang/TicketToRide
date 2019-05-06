@@ -292,11 +292,9 @@ public class GraphicsBoard extends Graphics implements View
 			if (lastUpdate.map.getRail((pE.getID() - 8) / 10).getColor().contains("Gray"))
 			{
 				ArrayList<String> colors = lastUpdate
-						.getSuffColors(lastUpdate.map.getRail((pE.getID()-8) / 10).getLength());
+						.getSuffColors(lastUpdate.map.getRail((pE.getID()-8) / 10));
 				if (colors.size() == 0)
-				{
 					return null;
-				}
 				col = new GraphicsColorSelections(colors);
 				lastGrayRail = pE;
 			}
@@ -313,6 +311,7 @@ public class GraphicsBoard extends Graphics implements View
 				return null;
 			for (int i = 0; i < 3; i++)
 				temp2.add(temp1.pop());
+			if(roundWeight == 1) return null;
 			sel = new GraphicsTicketSelections(temp2, 3);
 			sel.contains(cord);
 		}
