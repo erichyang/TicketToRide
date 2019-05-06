@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
+
 import core.graph.Graph;
 import core.graph.Rail;
 import graphics.View;
@@ -252,8 +254,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		return visibleCards;
 	}
 
-	public Player endGame() {
+	public void endGame() {
 		onPlayerEvent(new PlayerEvent(-1));
+		HashMap<Integer,ArrayList<Player>> winners = new HashMap<Integer,ArrayList<Player>>();
+		
 		for (int i = 0; i < visibleCards.length; i++)
 			visibleCards[i] = "";
 
@@ -280,23 +284,36 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		}
 		index = 0;
 		for (Player P : players) {
-			if (P.getComp() == mostTickets)
+			if (P.getComp() == mostTickets) {
 				P.addPoints(10);
-			if (paths[index] == longestPath)
+				ArrayList<Player> newList = winners.get(2);
+				newList.add(P);
+				winners.put(2, newList);
+			}
+			if (paths[index] == longestPath) {
 				P.addPoints(15);
+				ArrayList<Player> newList = winners.get(1);
+				newList.add(P);
+				winners.put(1, newList);
+			}
 			index++;
 		}
-
-		Player winner = null;
+		
 		int mostPoints = Integer.MIN_VALUE;
-		for (Player p : players) {
-			if (p.points() > mostPoints) {
+		
+		for (Player p : players)
+			if (p.points() > mostPoints)
 				mostPoints = p.points();
-				winner = p;
+		
+		for (Player p : players)
+			if (p.points() == mostPoints) {
+				ArrayList<Player> newList = winners.get(0);
+				newList.add(p);
+				winners.put(0, newList);
 			}
-		}
+				
 		observer.observe(new ViewEvent(1, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
-		return winner;
+		System.out.println("reached");
 	}
 
 	public Player getCurrentPlayer() {
