@@ -128,18 +128,18 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 				throw new IllegalArgumentException("invalid GameEvent ID number");
 			// System.out.println(rail.toString());
 			if (rail.getColor().equals("Gray")) {
-				// System.out.println("gray rail " + rail);
+				System.out.println("gray rail " + rail);
 				String color = observer.color();
-				// System.out.println("Color:" + color);
+				System.out.println("Color:" + color);
 				if (color == null || color.equals(""))
 					return;
 				rail.setColor(color);
 			}
-			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
+			System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
 			ArrayList<String> usedCards = current.useCards(rail);
 
 			if (usedCards == null) {
-				// System.out.println("not enough cards");
+				 System.out.println("not enough cards");
 				if (origColor.split(";")[railNum].equals("Gray"))
 					if (railNum == 0)
 						rail.setColor(rail.getColor() + ";" + origColor.split(";")[1]);
@@ -148,11 +148,12 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 				rail.setColor(origColor);
 				return;
 			}
+			String col = origColor.split(";")[railNum];
 
-			if (origColor.split(";")[railNum].equals(rail.getColor()) && rail.getOwnerName(railNum) == (null))
+			if ((col.equals(rail.getColor()) || col.equals("Gray")) && rail.getOwnerName(railNum) == (null))
 				rail.setOwner(getCurrentPlayer().getName(), railNum);
 			else {
-				// System.out.println("Already Owned");
+				 System.out.println("Already Owned");
 				rail.setColor(origColor);
 				return;
 			}
