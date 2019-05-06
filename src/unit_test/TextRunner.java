@@ -18,7 +18,7 @@ public class TextRunner
 		//Deck decks = game.getDeck();
 		Scanner sc = new Scanner(System.in);
 		//gameEvent(game, decks, sc);
-		playerEvent(game, decks, sc);
+//		playerEvent(game, sc);
 		sc.close();
 	}
 
