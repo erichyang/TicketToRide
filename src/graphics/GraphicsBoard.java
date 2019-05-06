@@ -38,6 +38,7 @@ public class GraphicsBoard extends Graphics implements View
 	private ViewEvent lastUpdate;
 	private Float mouseLoc;
 	private String color;
+	private PlayerEvent lastGrayRail;
 
 	// leader board
 	private Color[] list;
@@ -257,6 +258,7 @@ public class GraphicsBoard extends Graphics implements View
 		{
 			col.contains(cord);
 			color = col.getColor();
+			return lastGrayRail;
 		}	
 		if (sel.getDraw())
 			return sel.contains(cord);
@@ -284,13 +286,13 @@ public class GraphicsBoard extends Graphics implements View
 			if ((color==null||color.equals(""))&&col==null&&lastUpdate.map.getRail(pE.getID() / 10 - 8).getColor().contains("Gray"))
 			{
 				ArrayList<String> colors = lastUpdate
-						.getSuffColors(lastUpdate.map.getRail(pE.getID() / 10 - 8).getLength());
+						.getSuffColors(lastUpdate.map.getRail((pE.getID()-8) / 10).getLength());
 				if (colors.size() == 0)
 				{
 					return null;
 				}
 				col = new GraphicsColorSelections(colors);
-				System.out.println("hello");
+				lastGrayRail = pE;
 			}
 			else
 				return pE;
