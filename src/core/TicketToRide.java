@@ -107,9 +107,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 			temp.add(tickets.pop());
 			temp.addAll(tickets);
 			tickets = temp;
-			/* eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the
+			/* eventID is rail number * 10 + 8 if number ends in 8, is a single rail or the
 			first rail of the double rail.
-			If it is 0, then it is the second rail of a double rail*/
+			If it is 9, then it is the second rail of a double rail*/
 		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 8 && eventID >= 8
 				&& (eventID % 10 == 8 || eventID % 10 == 9)) {
 			Player current = getCurrentPlayer();

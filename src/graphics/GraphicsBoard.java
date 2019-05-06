@@ -175,6 +175,12 @@ public class GraphicsBoard extends Graphics implements View
 
 		if (col != null && col.getDraw())
 			col.draw(g);
+		if(end) drawEndScreen(g);
+	}
+	
+	public void drawEndScreen(Graphics2D g) {
+		g.setColor(new Color(0, 0, 0, 150));
+		g.fillRect(5, 793, 1904, 253);
 	}
 
 	@Override
