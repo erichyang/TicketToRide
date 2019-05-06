@@ -304,7 +304,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		onPlayerEvent(new PlayerEvent(-1));
 		for (int i = 0; i < visibleCards.length; i++)
 		{
-			visibleCards[i] = null;
+			visibleCards[i] = "";
 		}
 
 		players.forEach(player -> player.countTickets());
