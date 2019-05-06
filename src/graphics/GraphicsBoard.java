@@ -148,7 +148,7 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
-
+		
 		if (lastUpdate.players.peek().getTickets().size() == 0)
 		{
 			sel = drawStartTickets();
@@ -289,7 +289,7 @@ public class GraphicsBoard extends Graphics implements View
 		// System.out.println(pE);
 
 		if (pE != null)
-			if ((color==null||color.equals(""))&&col==null&&lastUpdate.map.getRail(pE.getID() / 10 - 8).getColor().contains("Gray"))
+			if (lastUpdate.map.getRail((pE.getID() - 8) / 10).getColor().contains("Gray"))
 			{
 				ArrayList<String> colors = lastUpdate
 						.getSuffColors(lastUpdate.map.getRail((pE.getID()-8) / 10).getLength());
