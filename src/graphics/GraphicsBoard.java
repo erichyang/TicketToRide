@@ -91,7 +91,7 @@ public class GraphicsBoard extends Graphics implements View
 		g.drawRect(5, 5, 1240, 775);
 		g.setColor(g.getColor().darker());
 		g.setStroke(new BasicStroke(7));
-		g.drawRect(10, 10, 1232, 767);
+		g.drawRect(10, 10, 1231, 766);
 		g.setColor(Color.black);
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
