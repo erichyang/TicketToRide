@@ -74,6 +74,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	}
 
 	public void onPlayerEvent(PlayerEvent e) {
+		//endGame();
 		if ((roundWeight + e.getWeight()) > 2)
 			return;
 
@@ -256,7 +257,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 	public void endGame() {
 		onPlayerEvent(new PlayerEvent(-1));
-		HashMap<Integer,ArrayList<Player>> winners = new HashMap<Integer,ArrayList<Player>>();
 		
 		for (int i = 0; i < visibleCards.length; i++)
 			visibleCards[i] = "";
@@ -286,15 +286,11 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		for (Player P : players) {
 			if (P.getComp() == mostTickets) {
 				P.addPoints(10);
-				ArrayList<Player> newList = winners.get(2);
-				newList.add(P);
-				winners.put(2, newList);
+				P.setWins(true, 2);
 			}
 			if (paths[index] == longestPath) {
 				P.addPoints(15);
-				ArrayList<Player> newList = winners.get(1);
-				newList.add(P);
-				winners.put(1, newList);
+				P.setWins(true, 1);
 			}
 			index++;
 		}
@@ -306,14 +302,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 				mostPoints = p.points();
 		
 		for (Player p : players)
-			if (p.points() == mostPoints) {
-				ArrayList<Player> newList = winners.get(0);
-				newList.add(p);
-				winners.put(0, newList);
-			}
+			if (p.points() == mostPoints)
+				p.setWins(true, 0);
 				
 		observer.observe(new ViewEvent(1, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
-		System.out.println("reached");
 	}
 
 	public Player getCurrentPlayer() {

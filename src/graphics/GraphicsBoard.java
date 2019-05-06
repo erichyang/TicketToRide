@@ -170,10 +170,37 @@ public class GraphicsBoard extends Graphics implements View {
 	}
 
 	public void drawEndScreen(Graphics2D g) {
-		g.setColor(new Color(0, 0, 0, 150));
-		g.fillRect(5, 793, 1904, 253);
-		ArrayList<Player> winners = lastUpdate.getSortedPlayer();
-		System.out.println(lastUpdate.getID());
+		ArrayList<Player> winners = new ArrayList<Player>();
+		ArrayList<Player> path = new ArrayList<Player>();
+		ArrayList<Player> ticket = new ArrayList<Player>();
+		for(Player p: lastUpdate.players) {
+			if(!winners.contains(p) && p.getWin(0)) winners.add(p);
+			if(!path.contains(p) && p.getWin(1)) path.add(p);
+			if(!ticket.contains(p) && p.getWin(2)) ticket.add(p);
+		}
+		if(winners.size() == 1) {
+			Player winner = winners.get(0);
+			Color c;
+			if(winner.getName().equals("Smashboy")) c = Color.YELLOW;
+			else if(winner.getName().equals("Teewee")) c = new Color(142, 68, 173);
+			else if(winner.getName().equals("Rhail Island Z")) c = Color.GREEN;
+			else if(winner.getName().equals("Cleveland Z")) c = Color.RED;
+			else  c = Color.WHITE;
+			
+			c = new Color(c.getRed(),c.getGreen(),c.getBlue(),150);
+			g.setColor(c);
+			//c = Color.WHITE;
+			g.fillRect(5, 793, 1904, 253);
+			System.out.println(c);
+		}else {
+			System.out.println("other");
+			g.setColor(new Color(0, 0, 0, 150));
+			g.fillRect(5, 793, 1904, 253);
+		}
+		g.drawString("Winner:" + winners, 5, 810);
+		g.drawString("path:" + path, 5, 850);
+		g.drawString("ticket:" + ticket, 5, 900);
+		//System.out.println(lastUpdate.getID());
 	}
 
 	@Override
