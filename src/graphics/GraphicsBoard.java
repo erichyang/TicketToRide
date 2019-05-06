@@ -81,7 +81,10 @@ public class GraphicsBoard extends Graphics implements View {
 		g.setColor(new Color(214, 116, 25));
 		g.setStroke(new BasicStroke(15));
 		g.drawImage(canvas, 0, 0, 1240, 774, null);
-		g.drawRect(0, 0, 1240, 780);
+		g.drawRect(5, 5, 1240, 775);
+		g.setColor(g.getColor().darker());
+		g.setStroke(new BasicStroke(7));
+		g.drawRect(10, 10, 1232, 767);
 		g.setColor(Color.black);
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
@@ -90,12 +93,10 @@ public class GraphicsBoard extends Graphics implements View {
 
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
-
 		if (!end)
 			for (int i = 0; i < visible.length; i++)
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 		if (!end)
-
 			for (int i = 0; i < visible.length; i++) {
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 				if (visible[i].equals("Wild") && roundWeight > 0) {
