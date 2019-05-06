@@ -123,14 +123,15 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 				rail.setColor(rail.getColor().split(";")[0]);
 			} else if (eventID % 10 == 9) {
 				railNum = 1;
+				//System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 			} else
 				throw new IllegalArgumentException("invalid GameEvent ID number");
 			// System.out.println(rail.toString());
 			if (rail.getColor().equals("Gray")) {
-				System.out.println("gray rail " + rail);
+				//System.out.println("gray rail " + rail);
 				String color = observer.color();
-				System.out.println("Color:" + color);
+				//System.out.println("Color:" + color);
 				if (color == null || color.equals(""))
 					return;
 				rail.setColor(color);

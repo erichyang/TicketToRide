@@ -83,6 +83,7 @@ public class ViewEvent extends AWTEvent
 	{
 		ArrayList<String> result = new ArrayList<String>();
 		HashMap<String, Integer> hand = players.peek().getHand();
+		//System.out.println(""+players.peek() + players.peek().getHand());
 		if (hand.get("Pink") + hand.get("Wild") >= demand)
 			result.add("Pink");
 		if (hand.get("White") + hand.get("Wild") >= demand)
