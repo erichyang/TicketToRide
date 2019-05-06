@@ -37,7 +37,7 @@ public class Deck
 
 	public void addDiscardedCard(String card)
 	{
-		discard.add(card);
+		discard.add(0,card);
 	}
 	
 	public String getDiscardCard()
@@ -47,15 +47,31 @@ public class Deck
 		}else return discard.pop();
 	}
 
-	public String getCard()
+	public String getCard(boolean wilds)
 	{
-		if(deck.isEmpty()) return "";
+		if(deck.isEmpty()) {
+			if(discard.isEmpty()) return "";
+			else refillDeck();
+		}
+		if(wilds && deckWildCheck() <= 3) return getNonWild();
 		String card = deck.pop();
 		if (deck.isEmpty())
 			listen.onGameEvent(new GameEvent(1, this));
 		return card;
 	}
 
+	public String getNonWild(){
+		String temp ="";
+		for(String card: deck) {
+			if(!card.equals("Wild")) {
+				temp = card;
+				break;
+			}
+		}
+		deck.remove(temp);
+		return  temp;
+	}
+	
 	public String[] getVisibleCards()
 	{
 		String[] drawCards = new String[5];
@@ -81,15 +97,11 @@ public class Deck
 		return discard;
 	}
 	
-	public boolean disWildCheck() {
+	public int deckWildCheck() {
 		Stack<String> clone = (Stack<String>) discard.clone();
-		
-		int count =0;
 		while(clone.contains("Wild")) {
 			clone.remove("Wild");
-			count++;
-		}
-		//System.out.println("CLONE: "+clone);
-		return (count >= 3) && (clone.size() <= 2) && deck.size() < 5;	
+		}		
+		return clone.size();
 	}
 }

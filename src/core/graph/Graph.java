@@ -65,24 +65,21 @@ public class Graph {
 	public ArrayList<Rail>indexList(){
 		return indexList;
 	}
-//	public LinkedList<Rail> EdgeList() {
-//		LinkedList<Rail> RailList = new LinkedList<Rail>();
-//		for (String key : cityMap.keySet()) {
-//			RailList.addAll(cityMap.get(key));
-//		}
-//		// System.out.println(RailList);
-//		return RailList;
-//	}
 
-//	public int LongestPath(String city) {
-//		result firstPass = DFS(city);
-//		return DFS(firstPass.path.get(firstPass.path.size()-1).getCityB()).dis;
-//	}
+	public Rail getInverse(Rail r) {
+		for(String key: cityMap.keySet()) {
+			for(Rail rail: cityMap.get(key))
+				if(r.isInverse(rail)) return rail;
+		}
+		return null;
+	}
 	
 	public int LongestPath(Player p) {
 		int maxDis = Integer.MIN_VALUE;
-		for (String key : cityMap.keySet()) {
-			int distance = DFS(key,p).dis;
+		for (String key : p.cityList()) {
+			result res =DFS(key,p);
+			int distance = res.dis;
+			//System.out.println(res);
 			if(distance > maxDis) maxDis = distance;
 		}
 		return maxDis;
@@ -102,18 +99,19 @@ public class Graph {
 
 	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum,Player p) {
 		if(visited.contains(rail)) {
+			//System.out.println("visited: "+ p);
 			throw new AssertionError();
 		}
 		
 		visited.add(rail);
-		visited.add(rail.inverse());
+		visited.add(getInverse(rail));
 		path.add(rail);
 
 		result s = new result(new ArrayList<>(path), sum, new HashSet<>(visited));
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext()) {
 			Rail r = edgeIterator.next();
-			if (!visited.contains(r) || !p.contains(r.getCityA(),r.getCityB())) {
+			if (!visited.contains(r) && p.contains(r.getCityA(),r.getCityB())) {
 				result a = DFSVisit(r, visited, path, sum + r.getLength(),p);
 				if(a.dis > s.dis) {
 					s = a;

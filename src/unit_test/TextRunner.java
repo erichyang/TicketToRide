@@ -15,7 +15,7 @@ public class TextRunner
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		TicketToRide game = new TicketToRide();
-		Deck decks = game.getDeck();
+		//Deck decks = game.getDeck();
 		Scanner sc = new Scanner(System.in);
 		//gameEvent(game, decks, sc);
 		playerEvent(game, decks, sc);
