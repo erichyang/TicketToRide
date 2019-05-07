@@ -22,8 +22,10 @@ public class Player {
 	private boolean isFinalTurn;
 	private boolean[] winners;
 	private int numCompletedTickets;
+	private ArrayList<Rail> railList;
 
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets) {
+		railList = new ArrayList<Rail>();
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
@@ -72,9 +74,10 @@ public class Player {
 	public ArrayList<String> useCards(Rail rail) {
 		// if not enough cards return false
 		// if enough cards, first draw from normal color, then draw from wild
-		if (contains(rail.getCityA(), rail.getCityB()))
+		if (railList.contains(rail))
 			return null;
-
+		if (!useTrains(rail.getLength()))
+			return null;		
 		String color = rail.getColor();
 
 		int num = rail.getLength();
@@ -87,7 +90,7 @@ public class Player {
 			System.out.println("BAD COLOR: " + color);
 			return null;
 		}
-		System.out.println(hand.get(color));
+		//System.out.println(hand.get(color));
 		int amount = hand.get(color);
 		if (amount + hand.get("Wild") < num)
 			return null;
@@ -115,26 +118,22 @@ public class Player {
 		}
 		// System.out.println("usedCards: " + usedCards + "amount: "+ amount + "num:
 		// "+num);
-		if (!useTrains(rail.getLength()))
-			return null;
 		return usedCards;
 	}
 
 	public boolean useTrains(int num) {
-//		if ((trains - num) <= 2) {
-//			listen.onGameEvent(new GameEvent(3, this));
-//			return false;
-//		} else {
-//			trains -= num;
+		if(trains - num < 0) return false;
+		if ((trains - num) <= 2) listen.onGameEvent(new GameEvent(0, this));
+		
+		trains -= num;
+		return true;
+//		if(trains - num < 0) return false;
+//		trains -= num;
+//		if ((trains) <= 2) {
+//			finalTurn();
 //			return true;
 //		}
-		if(trains - num < 0) return false;
-		trains -= num;
-		if ((trains) <= 2) {
-			listen.onGameEvent(new GameEvent(3, this));
-			return false;
-		}
-		return true;
+//		return true;
 	}
 
 	public String addCards(String color) {
@@ -162,15 +161,15 @@ public class Player {
 
 		if (aLocation == -1 && bLocation == -1) {
 			cities.add(Stream.of(cityA, cityB).collect(Collectors.toSet()));
-			System.out.println(name+"A");
+			//System.out.println(name+"A");
 		}
 		else if (bLocation == -1) {
 			cities.get(aLocation).add(cityB);
-			System.out.println(name+"B");
+			//System.out.println(name+"B");
 		}
 		else if (aLocation == -1) {
 			cities.get(bLocation).add(cityA);
-			System.out.println(name+"C");
+			//System.out.println(name+"C");
 		}
 		else {
 			Set<String> aGroup = cities.get(aLocation);
@@ -182,9 +181,10 @@ public class Player {
 			if(aLocation<bLocation)cities.remove(bLocation-1);
 			else cities.remove(bLocation);
 			cities.add(mergeGroup);
-			System.out.println(name+"D");
+			//System.out.println(name+"D");
 		}
-		System.out.println(cities);
+		railList.add(rail);
+		//System.out.println(cities);
 	}
 
 	public int countTickets() {

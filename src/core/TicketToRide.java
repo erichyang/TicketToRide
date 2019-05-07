@@ -128,7 +128,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			 * first rail of the double rail. If it is 9, then it is the second rail of a
 			 * double rail
 			 */
-		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 8 && eventID >= 8
+		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 9 && eventID >= 8
 				&& (eventID % 10 == 8 || eventID % 10 == 9))
 		{
 			Player current = getCurrentPlayer();
@@ -144,33 +144,33 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			} else if (eventID % 10 == 9)
 			{
 				railNum = 1;
-				// System.out.println(rail.getColor());
+				//System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 			} else
 				throw new IllegalArgumentException("invalid GameEvent ID number");
-			// System.out.println(rail.toString());
+			//System.out.println(rail.toString());
 			if (rail.getColor().equals("Gray"))
 			{
-				// System.out.println("gray rail " + rail);
+				//System.out.println("gray rail " + rail);
 				String color = observer.color();
-				// System.out.println("Color:" + color);
+				//System.out.println("Color:" + color);
 				if (color == null || color.equals("")) {
 					rail.setColor(origColor);
 					return;
 				}
 				rail.setColor(color);
 			}
-			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
+			//System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
 			ArrayList<String> usedCards = current.useCards(rail);
 
 			if (usedCards == null)
 			{
-				// System.out.println("not enough cards");
+				//System.out.println("not enough cards");
 				if (origColor.split(";")[railNum].equals("Gray"))
 					if (railNum == 0)
 					{
-						// System.out.println(origColor);
-						rail.setColor(rail.getColor() + ";" + origColor.split(";")[1]);
+						//System.out.println(origColor);
+						rail.setColor(rail.getColor() + ";" + origColor.split(";")[railNum]);
 					} else if (railNum == 1)
 						rail.setColor(origColor.split(";")[1] + ";" + rail.getColor());
 				rail.setColor(origColor);
@@ -214,7 +214,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				num /= 10;
 			}
 		} else {
-			System.out.println(eventID);
+			//System.out.println(eventID);
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 		}
 		roundWeight += e.getWeight();
@@ -248,7 +248,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}
 		if (nullCount + count == 5 && roundWeight == 1)
 		{
-			System.out.println("uh oh");
+			//System.out.println("uh oh");
 			onPlayerEvent(new PlayerEvent(-1));
 		}
 		if (count >= 3)
@@ -261,7 +261,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		if (eventID == 0)
 		{
-			players.peek().finalTurn();
+			getCurrentPlayer().finalTurn();
 		} else if (eventID == 1)
 		{
 			if (e.getSource() instanceof Deck)
@@ -279,7 +279,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			checkVis();
 		} else if (eventID == 3)
 		{
-			endGame();
+			if(getCurrentPlayer().isFinalTurn())
+				endGame();
+			//else System.out.println(getCurrentPlayer());
 			// System.out.println(endGame());
 		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
