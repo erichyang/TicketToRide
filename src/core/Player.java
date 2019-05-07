@@ -166,7 +166,8 @@ public class Player {
 			mergeGroup.addAll(bGroup);
 
 			cities.remove(aLocation);
-			cities.remove(bLocation);
+			if(aLocation<bLocation)cities.remove(bLocation-1);
+			else cities.remove(bLocation);
 			cities.add(mergeGroup);
 		}
 	}
