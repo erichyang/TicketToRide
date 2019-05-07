@@ -192,6 +192,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		roundWeight += e.getWeight();
 		if (roundWeight == 2)
 			nextRound();
+		else checkVis();
 		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
 	}
 

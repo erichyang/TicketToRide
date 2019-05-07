@@ -194,11 +194,15 @@ public class GraphicsBoard extends Graphics implements View {
 			g.setColor(new Color(0, 0, 0, 150));
 			g.fillRect(5, 793, 1904, 253);
 		}
+		String winPut = winners.toString().replaceAll("\\[|\\]", "");
+		String pathPut = path.toString().replaceAll("\\[|\\]", "");
+		String tickPut = ticket.toString().replaceAll("\\[|\\]", "");
+		
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Seriff",Font.BOLD,36));
-		g.drawString("Winner:" + winners, 5, 820);
-		g.drawString("path:" + path, 5, 870);
-		g.drawString("ticket:" + ticket, 5, 940);
+		g.drawString("Winner: " + winPut, 15, 830);
+		g.drawString("Longest Path: " + pathPut, 15, 890);
+		g.drawString("Most Tickets: " + tickPut, 15, 950);
 		//System.out.println(lastUpdate.getID());
 	}
 
