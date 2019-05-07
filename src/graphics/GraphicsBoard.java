@@ -189,17 +189,16 @@ public class GraphicsBoard extends Graphics implements View {
 			
 			c = new Color(c.getRed(),c.getGreen(),c.getBlue(),150);
 			g.setColor(c);
-			//c = Color.WHITE;
 			g.fillRect(5, 793, 1904, 253);
-			System.out.println(c);
 		}else {
-			System.out.println("other");
 			g.setColor(new Color(0, 0, 0, 150));
 			g.fillRect(5, 793, 1904, 253);
 		}
-		g.drawString("Winner:" + winners, 5, 810);
-		g.drawString("path:" + path, 5, 850);
-		g.drawString("ticket:" + ticket, 5, 900);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Seriff",Font.BOLD,36));
+		g.drawString("Winner:" + winners, 5, 820);
+		g.drawString("path:" + path, 5, 870);
+		g.drawString("ticket:" + ticket, 5, 940);
 		//System.out.println(lastUpdate.getID());
 	}
 

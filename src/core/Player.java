@@ -266,6 +266,6 @@ public class Player {
 	}
 
 	public String toString() {
-		return getName() + " Points: " + getPoints();
+		return getName() + ": " + getPoints();
 	}
 }
