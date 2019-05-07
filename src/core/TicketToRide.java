@@ -155,8 +155,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				// System.out.println("gray rail " + rail);
 				String color = observer.color();
 				// System.out.println("Color:" + color);
-				if (color == null || color.equals(""))
+				if (color == null || color.equals("")) {
+					rail.setColor(origColor);
 					return;
+				}
 				rail.setColor(color);
 			}
 			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
