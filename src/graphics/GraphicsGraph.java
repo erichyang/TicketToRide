@@ -16,6 +16,7 @@ public class GraphicsGraph extends Graphics
 {
 	private GraphicsCity[] cities;
 	private GraphicsRail[] rails;
+	private static GraphicsRail last;
 //	private static BufferedImage map;
 
 //	static
@@ -77,51 +78,66 @@ public class GraphicsGraph extends Graphics
 		for (int i = 0; i < rails.length; i++)
 			for (int j = 0; j < ((update.getRail(i).isDouble()) ? 2 : 1); j++)
 			{
-				if(update.getRail(i).getOwnerName(j) == null)
+				if (update.getRail(i).getOwnerName(j) == null)
 					continue;
 				switch (update.getRail(i).getOwnerName(j))
 				{
 				case ("Smashboy"):
-					rails[i].setOwner(Color.yellow,j);
+					rails[i].setOwner(Color.yellow, j);
 					break;
 				case ("Rhail Island Z"):
-					rails[i].setOwner(Color.green,j);
+					rails[i].setOwner(Color.green, j);
 					break;
 				case ("Teewee"):
-					rails[i].setOwner(new Color(142, 68, 173),j);
+					rails[i].setOwner(new Color(142, 68, 173), j);
 					break;
 				case ("Cleveland Z"):
-					rails[i].setOwner(Color.red,j);
+					rails[i].setOwner(Color.red, j);
 					break;
 				default:
 					break;
 				}
 			}
 	}
+
 	@Override
 	public PlayerEvent contains(Point2D.Float cord)
 	{
-		int count =0;
-		for(GraphicsRail rail : rails) {
+		int count = 0;
+		for (GraphicsRail rail : rails)
+		{
+			last = rail;
 			PlayerEvent r = rail.contains(cord);
-			if(r != null && r.getID() == -2) return new PlayerEvent(count*10+8);
-			else if(r != null && r.getID() == -3) return new PlayerEvent(count*10+9);
-			count ++;
+			if (r != null && r.getID() == -2)
+				return new PlayerEvent(count * 10 + 8);
+			else if (r != null && r.getID() == -3)
+				return new PlayerEvent(count * 10 + 9);
+			last = null;
+			count++;
 		}
 		return null;
 	}
-	
-	public void setRails(Point2D.Float cord) {
-		for(int i = 0; i< rails.length; i++) {
+
+	public void setRails(Point2D.Float cord)
+	{
+		for (int i = 0; i < rails.length; i++)
+		{
 			GraphicsRail rail = rails[i];
-			if(rail.contains(cord) == null) {
+			if (rail.contains(cord) == null)
+			{
 				Arrays.fill(rail.hovered, false);
-			}
-			else if(rail.contains(cord).getID() == -2) {
+			} else if (rail.contains(cord).getID() == -2)
+			{
 				rail.hovered[0] = true;
-			}else if(rail.getDoubles() && rail.contains(cord).getID() == -3){
+			} else if (rail.getDoubles() && rail.contains(cord).getID() == -3)
+			{
 				rail.hovered[1] = true;
 			}
 		}
+	}
+
+	public static GraphicsRail lastRail()
+	{
+		return last;
 	}
 }

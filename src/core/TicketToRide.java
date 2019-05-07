@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
+
 import core.graph.Graph;
 import core.graph.Rail;
 import graphics.View;
@@ -72,6 +74,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	}
 
 	public void onPlayerEvent(PlayerEvent e) {
+		//endGame();
 		if ((roundWeight + e.getWeight()) > 2)
 			return;
 
@@ -107,9 +110,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 			temp.add(tickets.pop());
 			temp.addAll(tickets);
 			tickets = temp;
-			/* eventID is rail number * 10 + 8 if number ends in 9, is a single rail or the
+			/* eventID is rail number * 10 + 8 if number ends in 8, is a single rail or the
 			first rail of the double rail.
-			If it is 0, then it is the second rail of a double rail*/
+			If it is 9, then it is the second rail of a double rail*/
 		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 8 && eventID >= 8
 				&& (eventID % 10 == 8 || eventID % 10 == 9)) {
 			Player current = getCurrentPlayer();
@@ -123,33 +126,37 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 				rail.setColor(rail.getColor().split(";")[0]);
 			} else if (eventID % 10 == 9) {
 				railNum = 1;
+				//System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 			} else
 				throw new IllegalArgumentException("invalid GameEvent ID number");
 			// System.out.println(rail.toString());
 			if (rail.getColor().equals("Gray")) {
-				// System.out.println("gray rail " + rail);
+				//System.out.println("gray rail " + rail);
 				String color = observer.color();
-				// System.out.println("Color:" + color);
+				//System.out.println("Color:" + color);
 				if (color == null || color.equals(""))
 					return;
 				rail.setColor(color);
 			}
-			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
+			//System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
 			ArrayList<String> usedCards = current.useCards(rail);
 
 			if (usedCards == null) {
-				// System.out.println("not enough cards");
+				 //System.out.println("not enough cards");
 				if (origColor.split(";")[railNum].equals("Gray"))
-					if (railNum == 0)
+					if (railNum == 0) {
+						//System.out.println(origColor);
 						rail.setColor(rail.getColor() + ";" + origColor.split(";")[1]);
+					}
 					else if (railNum == 1)
 						rail.setColor(origColor.split(";")[1] + ";" + rail.getColor());
 				rail.setColor(origColor);
 				return;
 			}
+			String col = origColor.split(";")[railNum];
 
-			if (origColor.split(";")[railNum].equals(rail.getColor()) && rail.getOwnerName(railNum) == (null))
+			if ((col.equals(rail.getColor()) || col.equals("Gray")) && rail.getOwnerName(railNum) == (null))
 				rail.setOwner(getCurrentPlayer().getName(), railNum);
 			else {
 				// System.out.println("Already Owned");
@@ -248,8 +255,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		return visibleCards;
 	}
 
-	public Player endGame() {
+	public void endGame() {
 		onPlayerEvent(new PlayerEvent(-1));
+		
 		for (int i = 0; i < visibleCards.length; i++)
 			visibleCards[i] = "";
 
@@ -276,23 +284,28 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		}
 		index = 0;
 		for (Player P : players) {
-			if (P.getComp() == mostTickets)
+			if (P.getComp() == mostTickets) {
 				P.addPoints(10);
-			if (paths[index] == longestPath)
+				P.setWins(true, 2);
+			}
+			if (paths[index] == longestPath) {
 				P.addPoints(15);
+				P.setWins(true, 1);
+			}
 			index++;
 		}
-
-		Player winner = null;
+		
 		int mostPoints = Integer.MIN_VALUE;
-		for (Player p : players) {
-			if (p.points() > mostPoints) {
+		
+		for (Player p : players)
+			if (p.points() > mostPoints)
 				mostPoints = p.points();
-				winner = p;
-			}
-		}
+		
+		for (Player p : players)
+			if (p.points() == mostPoints)
+				p.setWins(true, 0);
+				
 		observer.observe(new ViewEvent(1, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
-		return winner;
 	}
 
 	public Player getCurrentPlayer() {

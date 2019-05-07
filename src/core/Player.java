@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,9 +20,12 @@ public class Player {
 	private String name;
 	private ArrayList<Set<String>> cities;
 	private boolean isFinalTurn;
+	private boolean[] winners;
 	private int numCompletedTickets;
 
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets) {
+		winners = new boolean[3];
+		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
 		trains = 45;
 		setPoints(0);
@@ -42,6 +46,14 @@ public class Player {
 		isFinalTurn = false;
 	}
 
+	public void setWins(boolean b, int index) {
+		winners[index] = b;
+	}
+	
+	public boolean getWin(int index) {
+		return winners[index];
+	}
+	
 	public boolean isFinalTurn() {
 		return isFinalTurn;
 	}
@@ -154,7 +166,8 @@ public class Player {
 			mergeGroup.addAll(bGroup);
 
 			cities.remove(aLocation);
-			cities.remove(bLocation);
+			if(aLocation<bLocation)cities.remove(bLocation-1);
+			else cities.remove(bLocation);
 			cities.add(mergeGroup);
 		}
 	}
@@ -254,6 +267,6 @@ public class Player {
 	}
 
 	public String toString() {
-		return getName() + " Points: " + getPoints();
+		return getName() + ": " + getPoints();
 	}
 }

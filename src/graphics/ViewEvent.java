@@ -13,6 +13,7 @@ import core.Deck;
 import core.Player;
 import core.Ticket;
 import core.graph.Graph;
+import core.graph.Rail;
 
 public class ViewEvent extends AWTEvent
 {
@@ -78,26 +79,30 @@ public class ViewEvent extends AWTEvent
 			return Color.black;
 		}
 	}
-	
-	public ArrayList<String> getSuffColors(int demand)
+
+	public ArrayList<String> getSuffColors(Rail rail)
 	{
 		ArrayList<String> result = new ArrayList<String>();
 		HashMap<String, Integer> hand = players.peek().getHand();
-		if(hand.get("Pink")+hand.get("Wild")>demand)
+		int demand = rail.getLength();
+		//System.out.println(""+players.peek() + players.peek().getHand());
+		if(players.peek().contains(rail.getCityA(), rail.getCityB()) || roundWeight == 1) return result;
+		
+		if (hand.get("Pink") + hand.get("Wild") >= demand)
 			result.add("Pink");
-		if(hand.get("White")+hand.get("Wild")>demand)
+		if (hand.get("White") + hand.get("Wild") >= demand)
 			result.add("White");
-		if(hand.get("Blue")+hand.get("Wild")>demand)
+		if (hand.get("Blue") + hand.get("Wild") >= demand)
 			result.add("Blue");
-		if(hand.get("Yellow")+hand.get("Wild")>demand)
+		if (hand.get("Yellow") + hand.get("Wild") >= demand)
 			result.add("Yellow");
-		if(hand.get("Orange")+hand.get("Wild")>demand)
+		if (hand.get("Orange") + hand.get("Wild") >= demand)
 			result.add("Orange");
-		if(hand.get("Black")+hand.get("Wild")>demand)
+		if (hand.get("Black") + hand.get("Wild") >= demand)
 			result.add("Black");
-		if(hand.get("Red")+hand.get("Wild")>demand)
+		if (hand.get("Red") + hand.get("Wild") >= demand)
 			result.add("Red");
-		if(hand.get("Green")+hand.get("Wild")>demand)
+		if (hand.get("Green") + hand.get("Wild") >= demand)
 			result.add("Green");
 		return result;
 	}
