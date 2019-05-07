@@ -121,13 +121,20 @@ public class Player {
 	}
 
 	public boolean useTrains(int num) {
-		if ((trains - num) <= 2) {
+//		if ((trains - num) <= 2) {
+//			listen.onGameEvent(new GameEvent(3, this));
+//			return false;
+//		} else {
+//			trains -= num;
+//			return true;
+//		}
+		if(trains - num < 0) return false;
+		trains -= num;
+		if ((trains) <= 2) {
 			listen.onGameEvent(new GameEvent(3, this));
 			return false;
-		} else {
-			trains -= num;
-			return true;
 		}
+		return true;
 	}
 
 	public String addCards(String color) {
