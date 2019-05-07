@@ -153,12 +153,18 @@ public class Player {
 		int aLocation = findCity(cityA);
 		int bLocation = findCity(cityB);
 
-		if (aLocation == -1 && bLocation == -1)
+		if (aLocation == -1 && bLocation == -1) {
 			cities.add(Stream.of(cityA, cityB).collect(Collectors.toSet()));
-		else if (bLocation == -1)
+			System.out.println(name+"A");
+		}
+		else if (bLocation == -1) {
 			cities.get(aLocation).add(cityB);
-		else if (aLocation == -1)
+			System.out.println(name+"B");
+		}
+		else if (aLocation == -1) {
 			cities.get(bLocation).add(cityA);
+			System.out.println(name+"C");
+		}
 		else {
 			Set<String> aGroup = cities.get(aLocation);
 			Set<String> bGroup = cities.get(bLocation);
@@ -169,7 +175,9 @@ public class Player {
 			if(aLocation<bLocation)cities.remove(bLocation-1);
 			else cities.remove(bLocation);
 			cities.add(mergeGroup);
+			System.out.println(name+"D");
 		}
+		System.out.println(cities);
 	}
 
 	public int countTickets() {

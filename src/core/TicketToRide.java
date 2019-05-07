@@ -212,8 +212,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				}
 				num /= 10;
 			}
-		} else
+		} else {
+			System.out.println(eventID);
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
+		}
 		roundWeight += e.getWeight();
 		if (roundWeight == 2)
 			nextRound();
