@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D.Float;
 import java.util.Arrays;
@@ -22,11 +21,12 @@ public class GraphicsRail extends Graphics
 	private Color[] owners;
 	private Line2D[] lines;
 	public boolean[] hovered;
+
 	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
-		hovered = new boolean[(doubles) ? 2:1];
+		hovered = new boolean[(doubles) ? 2 : 1];
 		Arrays.fill(hovered, false);
-		lines = new Line2D[(doubles) ? 2:1];
+		lines = new Line2D[(doubles) ? 2 : 1];
 		this.cityA = cityA;
 		this.cityB = cityB;
 		this.trains = trains;
@@ -97,26 +97,28 @@ public class GraphicsRail extends Graphics
 //			{ length - 2, 2 }, 0));
 //			g.setColor(string2Color(colors[i]));
 			if (doubles)
-			{			
-				lines[i] = new Line2D.Float((int)(cords[i][0] + (-deltaX + 2 * deltaX * (i))),
+			{
+				lines[i] = new Line2D.Float((int) (cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
 						(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
 						(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
 //				System.out.println(Math.toDegrees(alpha) +"("+ deltaX+ ","+deltaY+")"+" "+"("+x+","+y+")");
 			} else
-				lines[0] = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
-			
-			if(hovered[i] && owners[i] == null) {
+				lines[0] = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]),
+						(int) (cords[i][3]));
+
+			if (hovered[i] && owners[i] == null)
+			{
 				g.setColor(new Color(getContrastColor(string2Color(colors[i]))));
 				g.setStroke(new BasicStroke(13));
 				g.draw(lines[i]);
 				g.setColor(new Color(129, 9, 255));
-				g.setFont(new Font("Seriff", Font.BOLD,36));
-				g.drawString(""+trains, 40,750);
+				g.setFont(new Font("Seriff", Font.BOLD, 36));
+				g.drawString("" + trains, 40, 750);
 			}
 			g.setColor(string2Color(colors[i]));
 			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
-					{ length - 2, 2 }, 0));
+			{ length - 2, 2 }, 0));
 			g.draw(lines[i]);
 
 			if (owners[i] != null)
@@ -138,20 +140,23 @@ public class GraphicsRail extends Graphics
 //		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
 //		g.drawOval((int)cords[0][4], (int)cords[0][5], 5,5);
 	}
+
 //	private Color getContrastColor(Color color) {
 //		return new Color(255 - color.getRed(),255 - color.getBlue(),255 - color.getGreen());
 //		}
-	private int getContrastColor(Color color) {
-	    float[] hsb = new float[3];
-	    Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(),
-	    		hsb);
-	    if (hsb[2] < 0.5) {
-	    	hsb[2] = 0.7f;
-	    } else {
-	    	hsb[2] = 0.3f;
-	    }
-	    hsb[1] = hsb[1] * 0.2f;
-	    return Color.HSBtoRGB(hsb[0],hsb[1],hsb[2]);
+	private int getContrastColor(Color color)
+	{
+		float[] hsb = new float[3];
+		Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+		if (hsb[2] < 0.5)
+		{
+			hsb[2] = 0.7f;
+		} else
+		{
+			hsb[2] = 0.3f;
+		}
+		hsb[1] = hsb[1] * 0.2f;
+		return Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
 	}
 
 	private Color string2Color(String color)
@@ -190,6 +195,7 @@ public class GraphicsRail extends Graphics
 	{
 		return cityB;
 	}
+
 	@Override
 	public void update(Object obj)
 	{
@@ -204,19 +210,21 @@ public class GraphicsRail extends Graphics
 	@Override
 	public PlayerEvent contains(Float cord)
 	{
-		//System.out.println(cord+","+ lin.ptLineDist(cord));
-		if(lines[0] != null && lines[0].ptSegDist(cord)<= 3) {
-			//System.out.println(this);
+		// System.out.println(cord+","+ lin.ptLineDist(cord));
+		if (lines[0] != null && lines[0].ptSegDist(cord) <= 3)
+		{
+			// System.out.println(this);
 			return new PlayerEvent(-2);
-		}
-		else if(doubles && lines[1] != null && lines[1].ptSegDist(cord)<= 3) {
-			//System.out.println(this);
+		} else if (doubles && lines[1] != null && lines[1].ptSegDist(cord) <= 3)
+		{
+			// System.out.println(this);
 			return new PlayerEvent(-3);
-		}else return null;
+		} else
+			return null;
 	}
-	
-	public String toString() {
-		return cityA + "->"+cityB+" Owners: "+Arrays.toString(owners)
-		+"Colors: "+Arrays.toString(colors);
+
+	public String toString()
+	{
+		return cityA + "->" + cityB + " Owners: " + Arrays.toString(owners) + "Colors: " + Arrays.toString(colors);
 	}
 }

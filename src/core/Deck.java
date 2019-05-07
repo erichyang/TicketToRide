@@ -98,6 +98,7 @@ public class Deck
 	}
 	
 	public int deckWildCheck() {
+		@SuppressWarnings("unchecked")
 		Stack<String> clone = (Stack<String>) discard.clone();
 		while(clone.contains("Wild")) {
 			clone.remove("Wild");

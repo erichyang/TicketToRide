@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Queue;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
@@ -33,7 +32,6 @@ public class GraphicsBoard extends Graphics implements View {
 	private static BufferedImage pointIcon;
 	private static BufferedImage trainCardIcon;
 	private int roundWeight;
-	private ArrayList<Player> Winners;
 //	private static BufferedImage leaderboard;
 
 	private ViewEvent lastUpdate;
@@ -70,7 +68,6 @@ public class GraphicsBoard extends Graphics implements View {
 	public GraphicsBoard() throws FileNotFoundException {
 		graph = new GraphicsGraph();
 		player = new GraphicsPlayer();
-		Winners = null;
 		list = new Color[4];
 		points = new int[4];
 		trains = new int[4];
