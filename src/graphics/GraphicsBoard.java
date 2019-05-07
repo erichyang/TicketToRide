@@ -61,7 +61,7 @@ public class GraphicsBoard extends Graphics implements View {
 			trainIcon = ImageIO.read(new File("game_files\\Icons\\Train Icon.png"));
 			ticketIcon = ImageIO.read(new File("game_files\\Icons\\Ticket Icon.png"));
 			pointIcon = ImageIO.read(new File("game_files\\Icons\\Plus One Icon.png"));
-			trainCardIcon = ImageIO.read(new File("game_files\\Icons\\TrainCard Icon.JPG"));
+			trainCardIcon = ImageIO.read(new File("game_files\\Icons\\TrainCard Icon.png"));
 //			leaderboard = ImageIO.read(new File("game_files\\leaderboard.jpg"));
 		} catch (IOException e) {
 		}
