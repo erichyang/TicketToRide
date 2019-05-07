@@ -206,6 +206,11 @@ public class GraphicsRail extends Graphics
 	{
 		this.owners[i] = owner;
 	}
+	
+	public Color[] getOwners()
+	{
+		return owners;
+	}
 
 	@Override
 	public PlayerEvent contains(Float cord)
