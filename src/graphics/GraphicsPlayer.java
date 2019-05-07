@@ -35,19 +35,21 @@ public class GraphicsPlayer extends Graphics
 //		g.fillRect(0,0,1000,1000);
 		int moving = 0;
 //		System.out.println(tickets);
-		for (int i = iteration * 5; i < iteration * 5 + 5 && i < tickets.size(); i++) {
+		for (int i = iteration * 5; i < iteration * 5 + 5 && i < tickets.size(); i++)
+		{
 //			System.out.print(i);
 //			System.out.println(tickets.get(i) + " " + iteration);
 			tickets.get(i).draw(g);
 //		System.out.println();
-			if(tickets.size()>5) {
+			if (tickets.size() > 5)
+			{
 				g.setFont(new Font("Serif", Font.PLAIN, 24));
 				g.setColor(new Color(129, 9, 255));
-				g.drawString("Click to Scroll",1300,1027);
+				g.drawString("Click to Scroll", 1300, 1027);
 			}
 		}
 		AffineTransform af = new AffineTransform();
-		af.translate(150, 800);
+		af.translate(150, 820);
 		af.rotate(Math.toRadians(90));
 		for (int i = 0; i < hand.size(); i++)
 		{
@@ -67,7 +69,7 @@ public class GraphicsPlayer extends Graphics
 		Player update = (Player) obj;
 		ArrayList<Ticket> core = update.getTickets();
 		for (int i = 0; i < core.size(); i++)
-			tickets.add(new GraphicsTicket(new Point2D.Float(900 + i%5 * 200, 800), core.get(i).getPointCount(),
+			tickets.add(new GraphicsTicket(new Point2D.Float(900 + i % 5 * 200, 820), core.get(i).getPointCount(),
 					core.get(i).getCities()));
 		HashMap<String, Integer> pHand = update.getHand();
 		pHand.keySet().forEach((key) ->
@@ -89,9 +91,9 @@ public class GraphicsPlayer extends Graphics
 	{
 		iteration++;
 //		System.out.println(tickets.size());
-		if((iteration)*5==tickets.size())
+		if ((iteration) * 5 == tickets.size())
 			iteration--;
-		if(iteration*5>tickets.size())
+		if (iteration * 5 > tickets.size())
 			iteration = 0;
 	}
 }
