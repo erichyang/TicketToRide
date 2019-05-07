@@ -172,9 +172,12 @@ public class GraphicsBoard extends Graphics implements View
 		}
 
 		g.setColor(Color.black);
-
+		
 		if (col != null && col.getDraw())
+		{
 			col.draw(g);
+		}
+		
 		if(end) drawEndScreen(g);
 	}
 	

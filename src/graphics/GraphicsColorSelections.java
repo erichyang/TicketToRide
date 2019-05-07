@@ -1,6 +1,7 @@
 package graphics;
 
 import java.util.ArrayList;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -24,9 +25,10 @@ public class GraphicsColorSelections extends Graphics
 			colors[i] = available.get(i);
 		}
 		int moving;
-		moving = 1920/available.size()/2;
+		moving = (int) (1920/available.size()/2.25);
 		for (int i = 0; i < available.size(); i++)
-			list.add(new Rectangle(moving*(i+1),400, 100,100));
+			list.add(new Rectangle(850+moving*(i+1),850, 100,100));
+//			list.add(new Rectangle(moving*(i+1),1200, 100,100));
 	}
 
 	@Override
@@ -42,11 +44,17 @@ public class GraphicsColorSelections extends Graphics
 	public void draw(Graphics2D g)
 	{
 		//System.out.println(list);
+		g.setColor(Color.MAGENTA.darker().darker().darker());
+		g.setStroke(new BasicStroke(10));
+		g.fillRect((int)list.get(0).getX(), 850, (int) (list.get(list.size()-1).getX()-(int)list.get(0).getX()+(int)list.get(0).getWidth()), 100);
 		for (int i =0; i < list.size(); i++)
 		{
 			g.setColor(string2Color(colors[i]));
 			g.fill(list.get(i));
 		}
+		g.setColor(Color.MAGENTA.darker().darker().darker());
+		g.setStroke(new BasicStroke(10));
+		g.drawRect((int)list.get(0).getX(), 850, (int) (list.get(list.size()-1).getX()-(int)list.get(0).getX()+(int)list.get(0).getWidth()), 100);
 	}
 
 	@Override
