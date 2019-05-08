@@ -240,7 +240,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			nextRound();
 		else
 			checkVis();
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
+		observer.observe(new ViewEvent(3, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
 	}
 
 	private void checkVis()
