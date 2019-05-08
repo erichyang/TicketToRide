@@ -89,7 +89,7 @@ public class Player {
 		// System.out.println(hand.get(color));
 		// System.out.println("COLOR: "+color+ " RAIL: " + rail);
 		if (hand.get(color) == null) {
-			System.out.println("BAD COLOR: " + color);
+			//System.out.println("BAD COLOR: " + color);
 			return null;
 		}
 		//System.out.println(hand.get(color));
@@ -162,17 +162,17 @@ public class Player {
 
 		if (aLocation == -1 && bLocation == -1) {
 			cities.add(Stream.of(cityA, cityB).collect(Collectors.toSet()));
-			//System.out.println(name+"A");
+			System.out.println(name+"A");
 		}
 		else if (bLocation == -1) {
 			cities.get(aLocation).add(cityB);
-			//System.out.println(name+"B");
+			System.out.println(name+"B");
 		}
 		else if (aLocation == -1) {
 			cities.get(bLocation).add(cityA);
-			//System.out.println(name+"C");
+			System.out.println(name+"C");
 		}
-		else {
+		else if(aLocation != -1 && bLocation != -1){
 			Set<String> aGroup = cities.get(aLocation);
 			Set<String> bGroup = cities.get(bLocation);
 			Set<String> mergeGroup = new HashSet<String>(aGroup);
@@ -182,9 +182,11 @@ public class Player {
 			cities.remove(findCity(cityB));
 			cities.add(mergeGroup);
 			//System.out.println(name+"D");
+		}else {
+			System.out.println("uh oh");
 		}
 		railList.add(rail);
-		System.out.println(cities);
+		System.out.println("CITIES: "+cities);
 	}
 
 	public int countTickets() {
