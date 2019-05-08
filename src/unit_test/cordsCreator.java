@@ -28,7 +28,7 @@ public class cordsCreator extends JPanel implements MouseListener
 	/**
 	 * 
 	 */
-	
+
 //	private Timer timer;
 	private static final long serialVersionUID = -7201200387032484629L;
 	private GraphicsCity[] cities;
@@ -36,7 +36,7 @@ public class cordsCreator extends JPanel implements MouseListener
 	public JFrame window;
 //	private double x;
 //	private double y;
-	
+
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		cordsCreator test = new cordsCreator();
@@ -53,44 +53,44 @@ public class cordsCreator extends JPanel implements MouseListener
 				new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
 		test.repaint();
 	}
-	
+
 	static
 	{
 		try
 		{
 			map = ImageIO.read(new File("game_files\\cards\\ttr_board.jpg"));
-		}
-		catch(IOException e)
+		} catch (IOException e)
 		{
-		
+
 		}
 	}
-	
+
 	public cordsCreator() throws FileNotFoundException
 	{
 		new GraphicsGraph();
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(new File("game_files\\cities\\map.ttr"));
 		cities = new GraphicsCity[in.nextInt()];
-		for(int i = 0; i < cities.length; i++)
-			cities[in.nextInt()] = new GraphicsCity(in.next().replaceAll("_", " "), new Point2D.Float(in.nextInt(),in.nextInt()));
-		
+		for (int i = 0; i < cities.length; i++)
+			cities[in.nextInt()] = new GraphicsCity(in.next().replaceAll("_", " "),
+					new Point2D.Float(in.nextInt(), in.nextInt()));
+
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		double x = MouseInfo.getPointerInfo().getLocation().getX() - window.getLocationOnScreen().x;
 		double y = MouseInfo.getPointerInfo().getLocation().getY() - window.getLocationOnScreen().y;
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.drawImage(map, 0, 0, 1200,805, null);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(map, 0, 0, 1200, 805, null);
 		g2d.setStroke(new BasicStroke(3));
 		g2d.draw(new Line2D.Double(x - 5, y, x + 5, y));
 		g2d.draw(new Line2D.Double(x, y - 5, x, y + 5));
 		repaint();
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent arg0)
 	{
@@ -102,30 +102,30 @@ public class cordsCreator extends JPanel implements MouseListener
 	public void mouseEntered(MouseEvent arg0)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 //	public void draw(Graphics2D g)
 //	{
 //		g.drawImage(map, 0, 0, 1200,805, null);

@@ -37,41 +37,50 @@ public class Deck
 
 	public void addDiscardedCard(String card)
 	{
-		discard.add(0,card);
+		discard.add(0, card);
 	}
-	
+
 	public String getDiscardCard()
 	{
-		if(discard.isEmpty()) {
+		if (discard.isEmpty())
+		{
 			return "";
-		}else return discard.pop();
+		} else
+			return discard.pop();
 	}
 
 	public String getCard(boolean wilds)
 	{
-		if(deck.isEmpty()) {
-			if(discard.isEmpty()) return "";
-			else refillDeck();
+		if (deck.isEmpty())
+		{
+			if (discard.isEmpty())
+				return "";
+			else
+				refillDeck();
 		}
-		if(wilds && deckWildCheck() <= 3) return getNonWild();
+		if (wilds && deckWildCheck() <= 3)
+			return getNonWild();
 		String card = deck.pop();
 		if (deck.isEmpty())
 			listen.onGameEvent(new GameEvent(1, this));
 		return card;
 	}
 
-	public String getNonWild(){
-		String temp ="";
-		for(String card: deck) {
-			if(!card.equals("Wild")) {
+	public String getNonWild()
+	{
+		String temp = "";
+		for (String card : deck)
+		{
+			if (!card.equals("Wild"))
+			{
 				temp = card;
 				break;
 			}
 		}
 		deck.remove(temp);
-		return  temp;
+		return temp;
 	}
-	
+
 	public String[] getVisibleCards()
 	{
 		String[] drawCards = new String[5];
@@ -96,13 +105,15 @@ public class Deck
 	{
 		return discard;
 	}
-	
-	public int deckWildCheck() {
+
+	public int deckWildCheck()
+	{
 		@SuppressWarnings("unchecked")
 		Stack<String> clone = (Stack<String>) discard.clone();
-		while(clone.contains("Wild")) {
+		while (clone.contains("Wild"))
+		{
 			clone.remove("Wild");
-		}		
+		}
 		return clone.size();
 	}
 }

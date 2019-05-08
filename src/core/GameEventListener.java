@@ -1,5 +1,6 @@
 package core;
 
-public interface GameEventListener {
-	public abstract void onGameEvent( GameEvent e);
+public interface GameEventListener
+{
+	public abstract void onGameEvent(GameEvent e);
 }

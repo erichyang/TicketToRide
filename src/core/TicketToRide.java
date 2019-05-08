@@ -81,12 +81,18 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void onPlayerEvent(PlayerEvent e)
 	{
+		//System.out.println(e.getID());
 		if ((roundWeight + e.getWeight()) > 2)
 			return;
 
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
+		if (currentPlayer.isFinalTurn())
+		{
+			onGameEvent(new GameEvent(3, currentPlayer));
+		}
+		
 		if (eventID == -1)
 		{
 			nextRound();
@@ -128,10 +134,11 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			 * first rail of the double rail. If it is 9, then it is the second rail of a
 			 * double rail
 			 */
-		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 8 && eventID >= 8
+		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 9 && eventID >= 8
 				&& (eventID % 10 == 8 || eventID % 10 == 9))
 		{
-			Player current = getCurrentPlayer();
+			//System.out.println(eventID);
+
 			Rail rail = graph.getRail((eventID - 8) / 10);
 			Rail inverse = graph.getInverse(rail);
 			String origColor = rail.getColor();
@@ -140,11 +147,20 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			if (eventID % 10 == 8)
 			{
 				railNum = 0;
+				//System.out.println(rail);
+				if(rail.isDouble() && rail.getOwnerName(1) != null && rail.getOwnerName(1).equals(currentPlayer.getName())) {
+					//System.out.println("oops 1");
+					return;
+				}
 				rail.setColor(rail.getColor().split(";")[0]);
 			} else if (eventID % 10 == 9)
 			{
 				railNum = 1;
-				// System.out.println(rail.getColor());
+				if(rail.isDouble() && rail.getOwnerName(0) != null && rail.getOwnerName(0).equals(currentPlayer.getName())) {
+					//System.out.println("oops 2");
+					return;
+				}
+				//System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 			} else
 				throw new IllegalArgumentException("invalid GameEvent ID number");
@@ -154,14 +170,15 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				// System.out.println("gray rail " + rail);
 				String color = observer.color();
 				// System.out.println("Color:" + color);
-				if (color == null || color.equals("")) {
+				if (color == null || color.equals(""))
+				{
 					rail.setColor(origColor);
 					return;
 				}
 				rail.setColor(color);
 			}
 			// System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
-			ArrayList<String> usedCards = current.useCards(rail);
+			ArrayList<String> usedCards = currentPlayer.useCards(rail);
 
 			if (usedCards == null)
 			{
@@ -170,7 +187,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 					if (railNum == 0)
 					{
 						// System.out.println(origColor);
-						rail.setColor(rail.getColor() + ";" + origColor.split(";")[1]);
+						rail.setColor(rail.getColor() + ";" + origColor.split(";")[railNum]);
 					} else if (railNum == 1)
 						rail.setColor(origColor.split(";")[1] + ";" + rail.getColor());
 				rail.setColor(origColor);
@@ -179,7 +196,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			String col = origColor.split(";")[railNum];
 
 			if ((col.equals(rail.getColor()) || col.equals("Gray")) && rail.getOwnerName(railNum) == (null))
-				rail.setOwner(getCurrentPlayer().getName(), railNum);
+				rail.setOwner(currentPlayer.getName(), railNum);
 			else
 			{
 				rail.setColor(origColor);
@@ -192,9 +209,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 			usedCards.forEach(train -> GameDeck.addDiscardedCard(train));
 			checkVis();
-			current.addRail(rail);
+			currentPlayer.addRail(rail);
 
-			current.addPoints(pointValues[rail.getLength() - 1]);
+			currentPlayer.addPoints(pointValues[rail.getLength() - 1]);
 			// System.out.println("Rail: " + rail + " OrigColor: " + origColor);
 		} else if (eventID % 10 == 6 || eventID % 10 == 7)
 		{
@@ -203,7 +220,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			{
 				if (num % 10 == 6)
 				{
-					getCurrentPlayer().addTicket(tickets.pop());
+					currentPlayer.addTicket(tickets.pop());
 				} else
 				{
 					Stack<Ticket> temp = new Stack<Ticket>();
@@ -213,8 +230,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				}
 				num /= 10;
 			}
-		} else {
-			System.out.println(eventID);
+		} else
+		{
+			// System.out.println(eventID);
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 		}
 		roundWeight += e.getWeight();
@@ -222,7 +240,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			nextRound();
 		else
 			checkVis();
-		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
+		observer.observe(new ViewEvent(3, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
 	}
 
 	private void checkVis()
@@ -248,7 +266,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}
 		if (nullCount + count == 5 && roundWeight == 1)
 		{
-			System.out.println("uh oh");
+			// System.out.println("uh oh");
 			onPlayerEvent(new PlayerEvent(-1));
 		}
 		if (count >= 3)
@@ -261,7 +279,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		if (eventID == 0)
 		{
-			players.peek().finalTurn();
+			getCurrentPlayer().finalTurn();
+			//System.out.println(getCurrentPlayer());
+			//onPlayerEvent(new PlayerEvent(-1));
 		} else if (eventID == 1)
 		{
 			if (e.getSource() instanceof Deck)
@@ -280,6 +300,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		} else if (eventID == 3)
 		{
 			endGame();
+			//return;
+			// else System.out.println(getCurrentPlayer());
 			// System.out.println(endGame());
 		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
@@ -301,7 +323,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void endGame()
 	{
-		onPlayerEvent(new PlayerEvent(-1));
+		//onPlayerEvent(new PlayerEvent(-1));
 
 		for (int i = 0; i < visibleCards.length; i++)
 			visibleCards[i] = "";
