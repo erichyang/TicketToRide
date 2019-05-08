@@ -88,6 +88,11 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
+		if (currentPlayer.isFinalTurn())
+		{
+			onGameEvent(new GameEvent(3, currentPlayer));
+		}
+		
 		if (eventID == -1)
 		{
 			nextRound();
@@ -132,7 +137,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 9 && eventID >= 8
 				&& (eventID % 10 == 8 || eventID % 10 == 9))
 		{
-			System.out.println(eventID);
+			//System.out.println(eventID);
 
 			Rail rail = graph.getRail((eventID - 8) / 10);
 			Rail inverse = graph.getInverse(rail);
@@ -142,9 +147,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			if (eventID % 10 == 8)
 			{
 				railNum = 0;
-				System.out.println(rail);
+				//System.out.println(rail);
 				if(rail.isDouble() && rail.getOwnerName(1) != null && rail.getOwnerName(1).equals(currentPlayer.getName())) {
-					System.out.println("oops 1");
+					//System.out.println("oops 1");
 					return;
 				}
 				rail.setColor(rail.getColor().split(";")[0]);
@@ -152,7 +157,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			{
 				railNum = 1;
 				if(rail.isDouble() && rail.getOwnerName(0) != null && rail.getOwnerName(0).equals(currentPlayer.getName())) {
-					System.out.println("oops 2");
+					//System.out.println("oops 2");
 					return;
 				}
 				//System.out.println(rail.getColor());
@@ -230,11 +235,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			// System.out.println(eventID);
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 		}
-		if (currentPlayer.isFinalTurn())
-		{
-			onGameEvent(new GameEvent(3, currentPlayer));
-			return;
-		}
 		roundWeight += e.getWeight();
 		if (roundWeight == 2)
 			nextRound();
@@ -280,7 +280,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		if (eventID == 0)
 		{
 			getCurrentPlayer().finalTurn();
-			// System.out.println(getCurrentPlayer());
+			//System.out.println(getCurrentPlayer());
+			//onPlayerEvent(new PlayerEvent(-1));
 		} else if (eventID == 1)
 		{
 			if (e.getSource() instanceof Deck)
@@ -298,8 +299,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			checkVis();
 		} else if (eventID == 3)
 		{
-			if (getCurrentPlayer().isFinalTurn())
-				endGame();
+			endGame();
+			//return;
 			// else System.out.println(getCurrentPlayer());
 			// System.out.println(endGame());
 		} else
@@ -322,7 +323,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void endGame()
 	{
-		onPlayerEvent(new PlayerEvent(-1));
+		//onPlayerEvent(new PlayerEvent(-1));
 
 		for (int i = 0; i < visibleCards.length; i++)
 			visibleCards[i] = "";

@@ -31,7 +31,7 @@ public class Player
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
-		trains = 45;
+		trains = 7;
 		setPoints(0);
 		hand = new HashMap<>();
 		hand.put("Pink", 0);
@@ -82,10 +82,8 @@ public class Player
 	{
 		// if not enough cards return false
 		// if enough cards, first draw from normal color, then draw from wild
-		System.out.println("hello A");
 		if (railList.contains(rail))
 		{
-			System.out.println("hello");
 			return null;
 		}
 		if (!useTrains(rail.getLength()))
@@ -145,13 +143,6 @@ public class Player
 			listen.onGameEvent(new GameEvent(0, this));
 		trains -= num;
 		return true;
-//		if(trains - num < 0) return false;
-//		trains -= num;
-//		if ((trains) <= 2) {
-//			finalTurn();
-//			return true;
-//		}
-//		return true;
 	}
 
 	public String addCards(String color)
