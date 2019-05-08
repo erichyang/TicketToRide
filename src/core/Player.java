@@ -74,8 +74,10 @@ public class Player {
 	public ArrayList<String> useCards(Rail rail) {
 		// if not enough cards return false
 		// if enough cards, first draw from normal color, then draw from wild
-		if (railList.contains(rail))
+		if (railList.contains(rail)) {
+			System.out.println("hello");
 			return null;
+		}
 		if (!useTrains(rail.getLength()))
 			return null;		
 		String color = rail.getColor();
@@ -123,8 +125,7 @@ public class Player {
 
 	public boolean useTrains(int num) {
 		if(trains - num < 0) return false;
-		if ((trains - num) <= 2) listen.onGameEvent(new GameEvent(0, this));
-		
+		if ((trains - num) <= 2) listen.onGameEvent(new GameEvent(0, this));		
 		trains -= num;
 		return true;
 //		if(trains - num < 0) return false;
@@ -177,14 +178,13 @@ public class Player {
 			Set<String> mergeGroup = new HashSet<String>(aGroup);
 			mergeGroup.addAll(bGroup);
 
-			cities.remove(aLocation);
-			if(aLocation<bLocation)cities.remove(bLocation-1);
-			else cities.remove(bLocation);
+			cities.remove(findCity(cityA));
+			cities.remove(findCity(cityB));
 			cities.add(mergeGroup);
 			//System.out.println(name+"D");
 		}
 		railList.add(rail);
-		//System.out.println(cities);
+		System.out.println(cities);
 	}
 
 	public int countTickets() {
