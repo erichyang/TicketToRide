@@ -86,8 +86,10 @@ public class Player
 		{
 			return null;
 		}
-		if (!useTrains(rail.getLength()))
+		if (!useTrains(rail.getLength())) {
+			System.out.println("Not enough Trains");
 			return null;
+		}
 		String color = rail.getColor();
 
 		int num = rail.getLength();
@@ -98,13 +100,15 @@ public class Player
 		// System.out.println("COLOR: "+color+ " RAIL: " + rail);
 		if (hand.get(color) == null)
 		{
-			// System.out.println("BAD COLOR: " + color);
+			System.out.println("BAD COLOR: " + color);
 			return null;
 		}
 		// System.out.println(hand.get(color));
 		int amount = hand.get(color);
-		if (amount + hand.get("Wild") < num)
+		if (amount + hand.get("Wild") < num) {
+			System.out.println("not enough cards");
 			return null;
+		}
 
 		ArrayList<String> usedCards = new ArrayList<>();
 
