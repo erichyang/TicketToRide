@@ -21,21 +21,23 @@ public class GraphicsColorSelections extends Graphics
 		draw = true;
 		list = new ArrayList<Rectangle>();
 		colors = new String[available.size()];
-		for(int i=0; i< available.size(); i++) {
+		for (int i = 0; i < available.size(); i++)
+		{
 			colors[i] = available.get(i);
 		}
 		int moving;
-		moving = (int) (1920/available.size()/2.25);
+		moving = (int) (1920 / available.size() / 2.25);
 		for (int i = 0; i < available.size(); i++)
-			list.add(new Rectangle(850+moving*(i+1),850, 100,100));
+			list.add(new Rectangle(850 + (int) (moving * (i + 1) / 1.462), 850, 100, 100));
 //			list.add(new Rectangle(moving*(i+1),1200, 100,100));
 	}
 
 	@Override
 	public PlayerEvent contains(Float cord)
 	{
-		for(int i = 0; i < list.size(); i++)
-			if(list.get(i).contains(cord)) {
+		for (int i = 0; i < list.size(); i++)
+			if (list.get(i).contains(cord))
+			{
 				result = colors[i];
 				draw = false;
 			}
@@ -45,18 +47,22 @@ public class GraphicsColorSelections extends Graphics
 	@Override
 	public void draw(Graphics2D g)
 	{
-		//System.out.println(list);
+		// System.out.println(list);
 		g.setColor(Color.MAGENTA.darker().darker().darker());
 		g.setStroke(new BasicStroke(10));
-		g.fillRect((int)list.get(0).getX(), 850, (int) (list.get(list.size()-1).getX()-(int)list.get(0).getX()+(int)list.get(0).getWidth()), 100);
-		for (int i =0; i < list.size(); i++)
+		g.fillRect((int) list.get(0).getX(), 850,
+				(int) (list.get(list.size() - 1).getX() - (int) list.get(0).getX() + (int) list.get(0).getWidth()),
+				100);
+		for (int i = 0; i < list.size(); i++)
 		{
 			g.setColor(string2Color(colors[i]));
 			g.fill(list.get(i));
 		}
 		g.setColor(Color.MAGENTA.darker().darker().darker());
 		g.setStroke(new BasicStroke(10));
-		g.drawRect((int)list.get(0).getX(), 850, (int) (list.get(list.size()-1).getX()-(int)list.get(0).getX()+(int)list.get(0).getWidth()), 100);
+		g.drawRect((int) list.get(0).getX(), 850,
+				(int) (list.get(list.size() - 1).getX() - (int) list.get(0).getX() + (int) list.get(0).getWidth()),
+				100);
 	}
 
 	@Override
@@ -74,12 +80,12 @@ public class GraphicsColorSelections extends Graphics
 	{
 		this.draw = draw;
 	}
-	
+
 	public String getColor()
 	{
 		return result;
 	}
-	
+
 	private Color string2Color(String color)
 	{
 		switch (color)

@@ -85,9 +85,9 @@ public class ViewEvent extends AWTEvent
 		ArrayList<String> result = new ArrayList<String>();
 		HashMap<String, Integer> hand = players.peek().getHand();
 		int demand = rail.getLength();
-		//System.out.println(""+players.peek() + players.peek().getHand());
-		if(players.peek().hasRail(rail) ||  roundWeight == 1) return result;
-		
+		// System.out.println(""+players.peek() + players.peek().getHand());
+		if (players.peek().contains(rail.getCityA(), rail.getCityB()) || roundWeight == 1)
+			return result;
 		if (hand.get("Pink") + hand.get("Wild") >= demand)
 			result.add("Pink");
 		if (hand.get("White") + hand.get("Wild") >= demand)

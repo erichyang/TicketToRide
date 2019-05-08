@@ -23,7 +23,7 @@ public abstract class Graphics
 	private static BufferedImage green;
 	private static BufferedImage wild;
 	private static BufferedImage back;
-	
+
 	static
 	{
 		try
@@ -42,26 +42,39 @@ public abstract class Graphics
 		{
 		}
 	}
-	
+
 	public abstract PlayerEvent contains(Point2D.Float cord);
+
 	public abstract void draw(Graphics2D g);
+
 	public abstract void update(Object obj);
-	
+
 	protected Image color2Image(String color)
 	{
-		if(color == null) return back;
-		switch(color)
+		if (color == null)
+			return back;
+		switch (color)
 		{
-		case("Pink"): return pink;
-		case("White"): return white;
-		case("Blue"): return blue;
-		case("Yellow"): return yellow;
-		case("Orange"): return orange;
-		case("Black"): return black;
-		case("Red"): return red;
-		case("Green"): return green;
-		case("Wild"): return wild;
-		default: return back;
+		case ("Pink"):
+			return pink;
+		case ("White"):
+			return white;
+		case ("Blue"):
+			return blue;
+		case ("Yellow"):
+			return yellow;
+		case ("Orange"):
+			return orange;
+		case ("Black"):
+			return black;
+		case ("Red"):
+			return red;
+		case ("Green"):
+			return green;
+		case ("Wild"):
+			return wild;
+		default:
+			return back;
 		}
 //		Image returned = back;
 //		if(color.equals("Pink")) returned = pink;
