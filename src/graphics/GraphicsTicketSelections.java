@@ -20,6 +20,7 @@ public class GraphicsTicketSelections extends Graphics
 	private boolean draw;
 	private boolean valid;
 	private int num;
+	private boolean selected;
 	public Float mouseLoc;
 
 	public GraphicsTicketSelections(ArrayList<Ticket> selection, int num)
@@ -28,6 +29,7 @@ public class GraphicsTicketSelections extends Graphics
 		this.selection = new ArrayList<GraphicsTicket>();
 		this.num = num;
 		int moving;
+		selected = true;
 		moving = 1920 / num / 2;
 		for (int i = 0; i < selection.size(); i++)
 		{
@@ -63,6 +65,7 @@ public class GraphicsTicketSelections extends Graphics
 		{
 			// 1700, 500, 200, 100
 			draw = false;
+			selected = draw;
 			idCat = "";
 			for (int i = num - 1; i >= 0; i--)
 				if (flip[i])
@@ -118,7 +121,7 @@ public class GraphicsTicketSelections extends Graphics
 		g.setStroke(new BasicStroke(10));
 		g.drawRect(1475, 500, 200, 100);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
-		g.drawString("CANCEL", 1510, 555);
+		g.drawString("HIDE", 1530, 555);
 		if (selection.size() == 5)
 		{
 			g.setColor(new Color(0, 0, 0, 150));
@@ -151,5 +154,10 @@ public class GraphicsTicketSelections extends Graphics
 	public void setDraw(boolean draw)
 	{
 		this.draw = draw;
+	}
+	
+	public boolean getSelected()
+	{
+		return selected;
 	}
 }
