@@ -19,7 +19,8 @@ import core.Player;
 import core.PlayerEvent;
 import core.Ticket;
 
-public class GraphicsBoard extends Graphics implements View {
+public class GraphicsBoard extends Graphics implements View
+{
 //	private PlayerEventListener listener;
 	private GraphicsGraph graph;
 	private GraphicsPlayer player;
@@ -51,8 +52,10 @@ public class GraphicsBoard extends Graphics implements View {
 	private GraphicsTicketSelections sel;
 	private GraphicsColorSelections col;
 
-	static {
-		try {
+	static
+	{
+		try
+		{
 			background = ImageIO.read(new File("game_files\\background.jpg"));
 			canvas = ImageIO.read(new File("game_files\\canvas.jpg"));
 			ticket = ImageIO.read(new File("game_files\\cards\\ticket_card_back.jpg"));
@@ -61,11 +64,13 @@ public class GraphicsBoard extends Graphics implements View {
 			pointIcon = ImageIO.read(new File("game_files\\Icons\\Plus One Icon.png"));
 			trainCardIcon = ImageIO.read(new File("game_files\\Icons\\TrainCard Icon.png"));
 //			leaderboard = ImageIO.read(new File("game_files\\leaderboard.jpg"));
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 		}
 	}
 
-	public GraphicsBoard() throws FileNotFoundException {
+	public GraphicsBoard() throws FileNotFoundException
+	{
 		graph = new GraphicsGraph();
 		player = new GraphicsPlayer();
 		list = new Color[4];
@@ -78,7 +83,8 @@ public class GraphicsBoard extends Graphics implements View {
 		end = false;
 	}
 
-	public void draw(Graphics2D g) {
+	public void draw(Graphics2D g)
+	{
 		g.drawImage(background, 0, 0, 1920, 1080, null);
 		g.setColor(new Color(214, 116, 25));
 		g.setStroke(new BasicStroke(15));
@@ -99,9 +105,11 @@ public class GraphicsBoard extends Graphics implements View {
 			for (int i = 0; i < visible.length; i++)
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 		if (!end)
-			for (int i = 0; i < visible.length; i++) {
+			for (int i = 0; i < visible.length; i++)
+			{
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
-				if (visible[i].equals("Wild") && roundWeight > 0) {
+				if (visible[i].equals("Wild") && roundWeight > 0)
+				{
 					g.setColor(new Color(0, 0, 0, 150));
 					g.fillRect(1255, 130 * i, 200, 125);
 				}
@@ -115,14 +123,17 @@ public class GraphicsBoard extends Graphics implements View {
 		g.fillRect(1455, 0, 500, 450);
 		g.setColor(Color.LIGHT_GRAY);
 
-		for (int i = 0; i < 4; i++) {
-			if (lastUpdate.getCurrentPlayer().equals(list[i])) {
+		for (int i = 0; i < 4; i++)
+		{
+			if (lastUpdate.getCurrentPlayer().equals(list[i]))
+			{
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.BLACK);
 				g.drawRect(1475, 50 + i * 100, 50, 50);
 				g.setColor(list[i]);
 				g.drawRect(5, 793, 1904, 253);
-				if (sel != null && !sel.getDraw()) {
+				if (sel != null && !sel.getDraw())
+				{
 					g.setStroke(new BasicStroke(5));
 					g.setColor(g.getColor().darker().darker());
 					g.drawRect(7, 795, 1899, 250);
@@ -138,7 +149,8 @@ public class GraphicsBoard extends Graphics implements View {
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
 		}
 
-		if (lastUpdate.players.peek().getTickets().size() == 0) {
+		if (lastUpdate.players.peek().getTickets().size() == 0)
+		{
 			sel = drawStartTickets();
 			sel.setDraw(true);
 		}
@@ -153,7 +165,8 @@ public class GraphicsBoard extends Graphics implements View {
 		g.drawImage(trainCardIcon, 1825, 0, 75, 50, null);
 		// g.drawString("trainCards", 1825, 50);
 
-		if (sel.getDraw()) {
+		if (sel.getDraw())
+		{
 			sel.setLoc(mouseLoc);
 			sel.draw(g);
 		}
@@ -166,11 +179,13 @@ public class GraphicsBoard extends Graphics implements View {
 			drawEndScreen(g);
 	}
 
-	public void drawEndScreen(Graphics2D g) {
+	public void drawEndScreen(Graphics2D g)
+	{
 		ArrayList<Player> winners = new ArrayList<Player>();
 		ArrayList<Player> path = new ArrayList<Player>();
 		ArrayList<Player> ticket = new ArrayList<Player>();
-		for (Player p : lastUpdate.players) {
+		for (Player p : lastUpdate.players)
+		{
 			if (!winners.contains(p) && p.getWin(0))
 				winners.add(p);
 			if (!path.contains(p) && p.getWin(1))
@@ -178,7 +193,8 @@ public class GraphicsBoard extends Graphics implements View {
 			if (!ticket.contains(p) && p.getWin(2))
 				ticket.add(p);
 		}
-		if (winners.size() == 1) {
+		if (winners.size() == 1)
+		{
 			Player winner = winners.get(0);
 			Color c;
 			if (winner.getName().equals("Smashboy"))
@@ -195,7 +211,8 @@ public class GraphicsBoard extends Graphics implements View {
 			c = new Color(c.getRed(), c.getGreen(), c.getBlue(), 150);
 			g.setColor(c);
 			g.fillRect(5, 793, 1904, 253);
-		} else {
+		} else
+		{
 			g.setColor(new Color(0, 0, 0, 150));
 			g.fillRect(5, 793, 1904, 253);
 		}
@@ -212,25 +229,29 @@ public class GraphicsBoard extends Graphics implements View {
 	}
 
 	@Override
-	public void observe(ViewEvent event) {
+	public void observe(ViewEvent event)
+	{
 		lastUpdate = event;
 		update(event);
 	}
 
 	@Override
-	public String color() {
+	public String color()
+	{
 		String temp = color;
 		color = "";
 		col = null;
 		return temp;
 	}
 
-	public boolean ended() {
+	public boolean ended()
+	{
 		return end;
 	}
 
 	@Override
-	public void update(Object e) {
+	public void update(Object e)
+	{
 		ViewEvent update = (ViewEvent) e;
 		roundWeight = update.roundWeight;
 		if (update.getID() == 1)
@@ -238,17 +259,20 @@ public class GraphicsBoard extends Graphics implements View {
 		graph.update(update.map);
 		player.update(update.players.peek());
 //		visible = update.visible;
-		for (int i = 0; i < update.visible.length; i++) {
+		for (int i = 0; i < update.visible.length; i++)
+		{
 			visible[i] = update.visible[i];
 		}
 		visible[5] = "Back";
 
 		Iterator<Player> iter = update.getSortedPlayer().iterator();
-		for (int i = 0; i < update.getSortedPlayer().size(); i++) {
+		for (int i = 0; i < update.getSortedPlayer().size(); i++)
+		{
 			Player temp = iter.next();
 //			System.out.println(update.getSortedPlayer().size());
 //			System.out.println(temp.getName());
-			switch (temp.getName()) {
+			switch (temp.getName())
+			{
 			case ("Smashboy"):
 				list[i] = (Color.yellow);
 				break;
@@ -271,53 +295,22 @@ public class GraphicsBoard extends Graphics implements View {
 		}
 	}
 
-	public boolean getDraw() {
+	public boolean getDraw()
+	{
 		return sel != null && sel.getDraw();
 	}
 
-	public PlayerEvent contains(Float cord) {
+	public PlayerEvent contains(Float cord)
+	{
 		if (end)
 			return null;
 
-		if (col != null && col.getDraw()) {
-			col.contains(cord);
-			color = col.getColor();
-			return lastGrayRail;
-		}
 		if (sel.getDraw())
 			return sel.contains(cord);
 
-		if (cord.x >= 1255 && cord.x <= 1455) {
-			if (cord.y >= 0 && cord.y <= 125)
-				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_ONE);
-			if (cord.y >= 130 && cord.y <= 255)
-				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_TWO);
-			if (cord.y >= 260 && cord.y <= 385)
-				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_THREE);
-			if (cord.y >= 390 && cord.y <= 515)
-				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FOUR);
-			if (cord.y >= 520 && cord.y <= 645)
-				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FIVE);
-			if (cord.y >= 650 && cord.y <= 775)
-				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
-		}
-
-		PlayerEvent pE = graph.contains(cord);
-		// System.out.println(pE);
-
-		if (pE != null)
-			if (GraphicsGraph.lastRail().getOwners()[pE.getID() % 10 - 8] != null)
-				return pE;
-			else if (lastUpdate.map.getRail((pE.getID() - 8) / 10).getColor().contains("Gray")) {
-				ArrayList<String> colors = lastUpdate.getSuffColors(lastUpdate.map.getRail((pE.getID() - 8) / 10));
-				if (colors.size() == 0)
-					return null;
-				col = new GraphicsColorSelections(colors);
-				lastGrayRail = pE;
-			} else
-				return pE;
-
-		if (cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775) {
+//initial ticket
+		if (cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775)
+		{
 //			System.out.println("Tickets selection");
 			@SuppressWarnings("unchecked")
 			Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
@@ -334,10 +327,54 @@ public class GraphicsBoard extends Graphics implements View {
 
 		player.contains(cord);
 
+		// if selected then no
+		if (!sel.getDraw() && sel.getSelected())
+			return null;
+
+		if (cord.x >= 1255 && cord.x <= 1455)
+		{
+			if (cord.y >= 0 && cord.y <= 125)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_ONE);
+			if (cord.y >= 130 && cord.y <= 255)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_TWO);
+			if (cord.y >= 260 && cord.y <= 385)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_THREE);
+			if (cord.y >= 390 && cord.y <= 515)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FOUR);
+			if (cord.y >= 520 && cord.y <= 645)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FIVE);
+			if (cord.y >= 650 && cord.y <= 775)
+				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
+		}
+
+		if (col != null && col.getDraw())
+		{
+			col.contains(cord);
+			color = col.getColor();
+			return lastGrayRail;
+		}
+
+		PlayerEvent pE = graph.contains(cord);
+		// System.out.println(pE);
+
+		if (pE != null)
+			if (GraphicsGraph.lastRail().getOwners()[pE.getID() % 10 - 8] != null)
+				return pE;
+			else if (lastUpdate.map.getRail((pE.getID() - 8) / 10).getColor().contains("Gray"))
+			{
+				ArrayList<String> colors = lastUpdate.getSuffColors(lastUpdate.map.getRail((pE.getID() - 8) / 10));
+				if (colors.size() == 0)
+					return null;
+				col = new GraphicsColorSelections(colors);
+				lastGrayRail = pE;
+			} else
+				return pE;
+
 		return null;
 	}
 
-	public GraphicsTicketSelections drawStartTickets() {
+	public GraphicsTicketSelections drawStartTickets()
+	{
 		@SuppressWarnings("unchecked")
 		Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
 		ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
@@ -348,20 +385,24 @@ public class GraphicsBoard extends Graphics implements View {
 		return select;
 	}
 
-	public void graphSetRails() {
+	public void graphSetRails()
+	{
 		graph.setRails(mouseLoc);
 	}
 
-	public void ticketCheck() {
+	public void ticketCheck()
+	{
 		if (sel != null)
 			sel.setLoc(mouseLoc);
 	}
 
-	public void setLoc(Float loc) {
+	public void setLoc(Float loc)
+	{
 		mouseLoc = loc;
 	}
 
-	public boolean containsPoint(Float point) {
+	public boolean containsPoint(Float point)
+	{
 		if (sel.getDraw())
 			return false;
 		return (graph.contains(point) != null);
