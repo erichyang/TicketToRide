@@ -32,6 +32,7 @@ public class GraphicsBoard extends Graphics implements View {
 	private static BufferedImage pointIcon;
 	private static BufferedImage trainCardIcon;
 	private int roundWeight;
+	private boolean isDeckEmpty;
 //	private static BufferedImage leaderboard;
 
 	private ViewEvent lastUpdate;
@@ -76,6 +77,7 @@ public class GraphicsBoard extends Graphics implements View {
 		visible = new String[6];
 		visible[5] = "Back";
 		end = false;
+		isDeckEmpty = false;
 	}
 
 	public void draw(Graphics2D g) {
@@ -95,17 +97,23 @@ public class GraphicsBoard extends Graphics implements View {
 
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
-		if (!end)
-			for (int i = 0; i < visible.length; i++)
-				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
-		if (!end)
+		if (!end) {
 			for (int i = 0; i < visible.length; i++) {
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 				if (visible[i].equals("Wild") && roundWeight > 0) {
 					g.setColor(new Color(0, 0, 0, 150));
 					g.fillRect(1255, 130 * i, 200, 125);
 				}
+				else if(visible[i].equals("")) {
+					g.setColor(new Color(0, 0, 0, 150));
+					g.fillRect(1255, 130 * i, 200, 125);
+				}
 			}
+			if(isDeckEmpty) {
+				g.setColor(new Color(0, 0, 0, 150));
+				g.fillRect(1255, 130 * (visible.length-1), 200, 125);
+			}
+		}
 
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
 
@@ -233,6 +241,8 @@ public class GraphicsBoard extends Graphics implements View {
 	public void update(Object e) {
 		ViewEvent update = (ViewEvent) e;
 		roundWeight = update.roundWeight;
+		isDeckEmpty = update.gameDeck.getDeck().isEmpty();
+		//System.out.println(isDeckEmpty);
 		if (update.getID() == 1)
 			end = true;
 		graph.update(update.map);
