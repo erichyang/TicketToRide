@@ -236,7 +236,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		}
 		roundWeight += e.getWeight();
 		if (roundWeight == 2)
+		{
 			nextRound();
+		}
 		else
 			checkVis();
 		observer.observe(new ViewEvent(3, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
@@ -304,7 +306,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			// System.out.println(endGame());
 		} else
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
-
+		
 		observer.observe(new ViewEvent(3, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));
 	}
 
