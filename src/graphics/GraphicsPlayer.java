@@ -23,10 +23,6 @@ public class GraphicsPlayer extends Graphics
 	{
 		tickets = new ArrayList<GraphicsTicket>();
 		hand = new ArrayList<String>();
-//		tickets.add(new GraphicsTicket(new Point2D.Float(850,800), 10, "Your house", "School"));
-//		hand.add("Red");
-//		hand.add("Blue");
-//		hand.add("Black");
 		iteration = 0;
 	}
 
@@ -58,6 +54,7 @@ public class GraphicsPlayer extends Graphics
 			g.drawImage(color2Image(hand.get(i)), af, null);
 			af.translate(0, moving);
 		}
+		//g.drawString(iterator, x, y);
 	}
 
 	@Override
@@ -90,7 +87,6 @@ public class GraphicsPlayer extends Graphics
 	private void next()
 	{
 		iteration++;
-//		System.out.println(tickets.size());
 		if ((iteration) * 5 == tickets.size())
 			iteration--;
 		if (iteration * 5 > tickets.size())

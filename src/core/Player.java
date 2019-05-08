@@ -31,7 +31,7 @@ public class Player
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
-		trains = 45;
+		trains = 7;
 		setPoints(0);
 		hand = new HashMap<>();
 		hand.put("Pink", 0);
@@ -82,14 +82,14 @@ public class Player
 	{
 		// if not enough cards return false
 		// if enough cards, first draw from normal color, then draw from wild
-		System.out.println("hello A");
 		if (railList.contains(rail))
 		{
-			System.out.println("hello");
 			return null;
 		}
-		if (!useTrains(rail.getLength()))
+		if (!useTrains(rail.getLength())) {
+			System.out.println("Not enough Trains");
 			return null;
+		}
 		String color = rail.getColor();
 
 		int num = rail.getLength();
@@ -100,13 +100,15 @@ public class Player
 		// System.out.println("COLOR: "+color+ " RAIL: " + rail);
 		if (hand.get(color) == null)
 		{
-			// System.out.println("BAD COLOR: " + color);
+			System.out.println("BAD COLOR: " + color);
 			return null;
 		}
 		// System.out.println(hand.get(color));
 		int amount = hand.get(color);
-		if (amount + hand.get("Wild") < num)
+		if (amount + hand.get("Wild") < num) {
+			System.out.println("not enough cards");
 			return null;
+		}
 
 		ArrayList<String> usedCards = new ArrayList<>();
 
@@ -145,13 +147,6 @@ public class Player
 			listen.onGameEvent(new GameEvent(0, this));
 		trains -= num;
 		return true;
-//		if(trains - num < 0) return false;
-//		trains -= num;
-//		if ((trains) <= 2) {
-//			finalTurn();
-//			return true;
-//		}
-//		return true;
 	}
 
 	public String addCards(String color)
@@ -185,15 +180,16 @@ public class Player
 		if (aLocation == -1 && bLocation == -1)
 		{
 			cities.add(Stream.of(cityA, cityB).collect(Collectors.toSet()));
-			System.out.println(name + "A");
+			//System.out.println(name+"A");
+		}
+		else if(aLocation == bLocation) {
+			return;
 		} else if (bLocation == -1)
 		{
 			cities.get(aLocation).add(cityB);
-			System.out.println(name + "B");
 		} else if (aLocation == -1)
 		{
 			cities.get(bLocation).add(cityA);
-			System.out.println(name + "C");
 		} else if (aLocation != -1 && bLocation != -1)
 		{
 			Set<String> aGroup = cities.get(aLocation);
@@ -204,13 +200,12 @@ public class Player
 			cities.remove(findCity(cityA));
 			cities.remove(findCity(cityB));
 			cities.add(mergeGroup);
-			// System.out.println(name+"D");
-		} else
-		{
-			System.out.println("uh oh");
+			//System.out.println(name+"D");
+		}else {
+			//System.out.println("uh oh");
 		}
 		railList.add(rail);
-		System.out.println("CITIES: " + cities);
+		//System.out.println("CITIES: "+cities);
 	}
 
 	public int countTickets()
@@ -245,6 +240,10 @@ public class Player
 			if (cities.get(i).contains(city))
 				return i;
 		return -1;
+	}
+	
+	public boolean hasRail(Rail rail) {
+		return railList.contains(rail);
 	}
 
 	public boolean contains(String cityA, String cityB)
