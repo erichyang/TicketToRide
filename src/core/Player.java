@@ -141,11 +141,15 @@ public class Player
 
 	public boolean useTrains(int num)
 	{
-		if (trains - num < 0)
+		System.out.println(trains+" , "+num);
+		if (trains - num < 0) {
+			System.out.println("A");
 			return false;
-		if ((trains - num) <= 2)
+		}
+		if ((trains - num) <= 2) {
 			listen.onGameEvent(new GameEvent(0, this));
-		trains -= num;
+			System.out.println("B");
+		}
 		return true;
 	}
 
@@ -205,6 +209,7 @@ public class Player
 			//System.out.println("uh oh");
 		}
 		railList.add(rail);
+		trains -= rail.getLength();
 		//System.out.println("CITIES: "+cities);
 	}
 
