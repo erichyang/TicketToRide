@@ -104,23 +104,17 @@ public class GraphicsBoard extends Graphics implements View
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
 		if (!end) {
+			g.setColor(new Color(0, 0, 0, 150));
 			for (int i = 0; i < visible.length; i++)
 			{
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 				if (visible[i].equals("Wild") && roundWeight > 0)
-				{
-					g.setColor(new Color(0, 0, 0, 150));
 					g.fillRect(1255, 130 * i, 200, 125);
-				}
-				else if(visible[i].equals("")) {
-					g.setColor(new Color(0, 0, 0, 150));
+				else if(visible[i].equals(""))
 					g.fillRect(1255, 130 * i, 200, 125);
-				}
 			}
-			if(isDeckEmpty) {
-				g.setColor(new Color(0, 0, 0, 150));
+			if(isDeckEmpty)
 				g.fillRect(1255, 130 * (visible.length-1), 200, 125);
-			}
 		}
 
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
