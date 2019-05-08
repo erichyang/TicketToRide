@@ -1,5 +1,6 @@
 package graphics;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -41,6 +42,10 @@ public class GraphicsPlayer extends Graphics
 			{
 				g.setFont(new Font("Serif", Font.PLAIN, 24));
 				g.setColor(new Color(129, 9, 255));
+				g.fillRect(1280, 1000, 170, 50);
+				g.setColor(Color.BLACK);
+				g.setStroke(new BasicStroke(5));
+				g.drawRect(1280, 1000, 170, 50);
 				g.drawString("Click to Scroll", 1300, 1027);
 			}
 		}

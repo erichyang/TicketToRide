@@ -227,7 +227,6 @@ public class GraphicsBoard extends Graphics implements View
 		g.drawString("Winner: " + winPut, 15, 830);
 		g.drawString("Longest Path: " + pathPut, 15, 890);
 		g.drawString("Most Tickets: " + tickPut, 15, 950);
-		// System.out.println(lastUpdate.getID());
 	}
 
 	@Override
@@ -308,10 +307,8 @@ public class GraphicsBoard extends Graphics implements View
 	{
 		if (end)
 			return null;
-
 		if (sel.getDraw())
 			return sel.contains(cord);
-
 //initial ticket
 		if (cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775)
 		{
