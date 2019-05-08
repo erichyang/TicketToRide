@@ -81,7 +81,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void onPlayerEvent(PlayerEvent e)
 	{
-		System.out.println(e.getID());
+		//System.out.println(e.getID());
 		if ((roundWeight + e.getWeight()) > 2)
 			return;
 
@@ -132,6 +132,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		} else if (eventID <= 10 * (graph.indexList().size() - 1) + 9 && eventID >= 8
 				&& (eventID % 10 == 8 || eventID % 10 == 9))
 		{
+			System.out.println(eventID);
+
 			Rail rail = graph.getRail((eventID - 8) / 10);
 			Rail inverse = graph.getInverse(rail);
 			String origColor = rail.getColor();
@@ -140,10 +142,19 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			if (eventID % 10 == 8)
 			{
 				railNum = 0;
+				System.out.println(rail);
+				if(rail.isDouble() && rail.getOwnerName(1) != null && rail.getOwnerName(1).equals(currentPlayer.getName())) {
+					System.out.println("oops 1");
+					return;
+				}
 				rail.setColor(rail.getColor().split(";")[0]);
 			} else if (eventID % 10 == 9)
 			{
 				railNum = 1;
+				if(rail.isDouble() && rail.getOwnerName(0) != null && rail.getOwnerName(0).equals(currentPlayer.getName())) {
+					System.out.println("oops 2");
+					return;
+				}
 				//System.out.println(rail.getColor());
 				rail.setColor(rail.getColor().split(";")[1]);
 			} else
@@ -160,7 +171,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				}
 				rail.setColor(color);
 			}
-			//System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
+			System.out.println("Rail: "+ rail + " OrigColor: "+ origColor);
 			ArrayList<String> usedCards = currentPlayer.useCards(rail);
 
 			if (usedCards == null)

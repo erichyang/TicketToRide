@@ -163,15 +163,18 @@ public class Player {
 
 		if (aLocation == -1 && bLocation == -1) {
 			cities.add(Stream.of(cityA, cityB).collect(Collectors.toSet()));
-			System.out.println(name+"A");
+			//System.out.println(name+"A");
+		}
+		else if(aLocation == bLocation) {
+			return;
 		}
 		else if (bLocation == -1) {
 			cities.get(aLocation).add(cityB);
-			System.out.println(name+"B");
+			//System.out.println(name+"B");
 		}
 		else if (aLocation == -1) {
 			cities.get(bLocation).add(cityA);
-			System.out.println(name+"C");
+			//System.out.println(name+"C");
 		}
 		else if(aLocation != -1 && bLocation != -1){
 			Set<String> aGroup = cities.get(aLocation);
@@ -184,10 +187,10 @@ public class Player {
 			cities.add(mergeGroup);
 			//System.out.println(name+"D");
 		}else {
-			System.out.println("uh oh");
+			//System.out.println("uh oh");
 		}
 		railList.add(rail);
-		System.out.println("CITIES: "+cities);
+		//System.out.println("CITIES: "+cities);
 	}
 
 	public int countTickets() {
@@ -216,6 +219,10 @@ public class Player {
 			if (cities.get(i).contains(city))
 				return i;
 		return -1;
+	}
+	
+	public boolean hasRail(Rail rail) {
+		return railList.contains(rail);
 	}
 
 	public boolean contains(String cityA, String cityB) {

@@ -35,8 +35,10 @@ public class GraphicsColorSelections extends Graphics
 	public PlayerEvent contains(Float cord)
 	{
 		for(int i = 0; i < list.size(); i++)
-			if(list.get(i).contains(cord))
+			if(list.get(i).contains(cord)) {
 				result = colors[i];
+				draw = false;
+			}
 		return null;
 	}
 
