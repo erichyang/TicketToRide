@@ -334,7 +334,7 @@ public class GraphicsBoard extends Graphics implements View
 		// System.out.println(pE);
 
 		if (pE != null)
-			if(GraphicsGraph.lastRail().getOwners()[pE.getID()%10-8]!=null)
+			if (GraphicsGraph.lastRail().getOwners()[pE.getID() % 10 - 8] != null)
 				return pE;
 			else if (lastUpdate.map.getRail((pE.getID() - 8) / 10).getColor().contains("Gray"))
 			{

@@ -14,6 +14,7 @@ import graphics.GraphicsTicket;
 public class GraphicsTicketTest extends JPanel
 {
 	public GraphicsTicket ticket;
+
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		GraphicsTicketTest test = new GraphicsTicketTest();
@@ -22,17 +23,17 @@ public class GraphicsTicketTest extends JPanel
 		window.setSize(1920, 1080);
 		window.setVisible(true);
 		window.add(test);
-		
-		test.ticket = new GraphicsTicket(new Point2D.Float(1000,500), 21, "New York", "Seattle");
-		
+
+		test.ticket = new GraphicsTicket(new Point2D.Float(1000, 500), 21, "New York", "Seattle");
+
 		test.repaint();
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics fakeG)
 	{
-		Graphics2D g = (Graphics2D)fakeG;
-		
+		Graphics2D g = (Graphics2D) fakeG;
+
 		ticket.draw(g);
 	}
 }
