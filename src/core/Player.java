@@ -74,6 +74,7 @@ public class Player {
 	public ArrayList<String> useCards(Rail rail) {
 		// if not enough cards return false
 		// if enough cards, first draw from normal color, then draw from wild
+		System.out.println("hello A");
 		if (railList.contains(rail)) {
 			System.out.println("hello");
 			return null;

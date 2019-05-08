@@ -81,6 +81,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 	public void onPlayerEvent(PlayerEvent e)
 	{
+		System.out.println(e.getID());
 		if ((roundWeight + e.getWeight()) > 2)
 			return;
 
