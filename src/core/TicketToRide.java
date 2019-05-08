@@ -88,8 +88,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
 
-//		if (currentPlayer.isFinalTurn())
-//			onGameEvent(new GameEvent(3, currentPlayer));
+		if (currentPlayer.isFinalTurn()) {
+			//System.out.println(currentPlayer);
+			onGameEvent(new GameEvent(3, currentPlayer));
+		}
 		
 		if (eventID == -1)
 		{
