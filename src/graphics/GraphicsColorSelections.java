@@ -27,7 +27,7 @@ public class GraphicsColorSelections extends Graphics
 		int moving;
 		moving = (int) (1920/available.size()/2.25);
 		for (int i = 0; i < available.size(); i++)
-			list.add(new Rectangle(850+moving*(i+1),850, 100,100));
+			list.add(new Rectangle((int)(850+(moving*(i+1))/1.70),850, 100,100));
 //			list.add(new Rectangle(moving*(i+1),1200, 100,100));
 	}
 
