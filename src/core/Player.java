@@ -31,7 +31,7 @@ public class Player
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
-		trains = 7;
+		trains = 45;
 		setPoints(0);
 		hand = new HashMap<>();
 		hand.put("Pink", 0);

@@ -131,8 +131,11 @@ public class GraphicsBoard extends Graphics implements View
 			{
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.BLACK);
-				g.drawRect(1475, 50 + i * 100, 50, 50);
+				g.drawRect(1475, 60 + i * 100, 50, 50);
 				g.setColor(list[i]);
+				Font nameFont = new Font("Seriff",Font.BOLD,30);
+				g.setFont(nameFont);
+				g.drawString(player.getName(), 1900 - g.getFontMetrics(nameFont).stringWidth(player.getName()), 770);
 				g.drawRect(5, 793, 1904, 253);
 				if (sel != null && !sel.getDraw())
 				{
@@ -143,8 +146,9 @@ public class GraphicsBoard extends Graphics implements View
 				}
 			}
 			g.setColor(list[i]);
-			g.fillRect(1475, 50 + i * 100, 50, 50);
+			g.fillRect(1475, 60 + i * 100, 50, 50);
 
+			g.setFont(new Font("Seriff",Font.BOLD,48));
 			g.drawString("" + points[i], 1550, 100 + i * 100);
 			g.drawString("" + trains[i], 1650, 100 + i * 100);
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
@@ -215,7 +219,7 @@ public class GraphicsBoard extends Graphics implements View
 			g.fillRect(5, 793, 1904, 253);
 		} else
 		{
-			g.setColor(new Color(0, 0, 0, 150));
+			g.setColor(new Color(0, 0, 0, 100));
 			g.fillRect(5, 793, 1904, 253);
 		}
 		String winPut = winners.toString().replaceAll("\\[|\\]", "");

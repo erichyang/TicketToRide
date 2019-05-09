@@ -19,12 +19,18 @@ public class GraphicsPlayer extends Graphics
 	private ArrayList<GraphicsTicket> tickets;
 	private ArrayList<String> hand;
 	private int iteration;
+	private String name;
 
 	public GraphicsPlayer()
 	{
+		name = "";
 		tickets = new ArrayList<GraphicsTicket>();
 		hand = new ArrayList<String>();
 		iteration = 0;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	public void draw(Graphics2D g)
@@ -59,7 +65,10 @@ public class GraphicsPlayer extends Graphics
 			g.drawImage(color2Image(hand.get(i)), af, null);
 			af.translate(0, moving);
 		}
-		//g.drawString(iterator, x, y);
+		g.setColor(Color.BLACK);
+//		Font nameFont = new Font("Seriff",Font.BOLD,30);
+//		g.setFont(nameFont);
+//		g.drawString(name, 1900 - g.getFontMetrics(nameFont).stringWidth(name), 770);
 	}
 
 	@Override
@@ -69,6 +78,7 @@ public class GraphicsPlayer extends Graphics
 		tickets.clear();
 		hand.clear();
 		Player update = (Player) obj;
+		name = update.getName();
 		ArrayList<Ticket> core = update.getTickets();
 		for (int i = 0; i < core.size(); i++)
 			tickets.add(new GraphicsTicket(new Point2D.Float(900 + i % 5 * 200, 820), core.get(i).getPointCount(),
