@@ -334,4 +334,9 @@ public class Player
 	{
 		return getName() + ": " + getPoints();
 	}
+	
+	public boolean equals(Object obj) {
+		Player other = (Player)obj;
+		return name.equals(other.getName());
+	}
 }
