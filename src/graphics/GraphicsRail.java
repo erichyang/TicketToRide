@@ -112,7 +112,7 @@ public class GraphicsRail extends Graphics
 				g.setColor(new Color(getContrastColor(string2Color(colors[i]))));
 				g.setStroke(new BasicStroke(13));
 				g.draw(lines[i]);
-				g.setColor(new Color(129, 9, 255));
+				g.setColor(string2Color(colors[i]));
 				g.setFont(new Font("Seriff", Font.BOLD, 36));
 				g.drawString("" + trains, 40, 750);
 			}

@@ -128,12 +128,12 @@ public class GraphicsGraph extends Graphics
 			if (rail.contains(cord) == null || railhovered)
 			{
 				Arrays.fill(rail.hovered, false);
-			} else if (!railhovered && rail.contains(cord).getID() == -2)
+			} else if (rail.contains(cord).getID() == -2)
 			{
-				System.out.println(count++);
+				//System.out.println(count++);
 				rail.hovered[0] = true;
 				railhovered = true;
-			} else if (!railhovered && rail.getDoubles() && rail.contains(cord).getID() == -3)
+			} else if (rail.getDoubles() && rail.contains(cord).getID() == -3)
 			{
 				rail.hovered[1] = true;
 				railhovered = true;

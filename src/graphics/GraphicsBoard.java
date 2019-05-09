@@ -305,7 +305,9 @@ public class GraphicsBoard extends Graphics implements View
 			tickets[i] = temp.getTickets().size();
 			trainCards[i] = temp.getTrainCardsNum();
 			
-			if(temp.equals(update.getFirstPlayer()))
+			Player firstP = update.getFirstPlayer();
+			
+			if(firstP != null && temp.equals(firstP))
 				first = i;
 			else 
 				first = -1;
