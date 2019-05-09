@@ -134,7 +134,7 @@ public class GraphicsTicketSelections extends Graphics
 		g.setColor(new Color(244, 158, 66));
 		g.fillRect(1700, 500, 200, 100);
 		g.setColor(color);
-		g.setStroke(new BasicStroke(10));
+		g.setStroke(new BasicStroke(5));
 		g.drawRect(1700, 500, 200, 100);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
 		g.drawString("DONE", 1750, 555);

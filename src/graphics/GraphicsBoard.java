@@ -134,10 +134,12 @@ public class GraphicsBoard extends Graphics implements View
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.BLACK);
 				g.drawRect(1475, 60 + i * 100, 50, 50);
-				g.setColor(list[i]);
-				Font nameFont = new Font("Seriff",Font.BOLD,30);
-				g.setFont(nameFont);
-				g.drawString(player.getName(), 1900 - g.getFontMetrics(nameFont).stringWidth(player.getName()), 770);
+				if(!end) {
+					g.setColor(list[i]);
+					Font nameFont = new Font("Seriff",Font.BOLD,30);
+					g.setFont(nameFont);
+					g.drawString(player.getName(), 1900 - g.getFontMetrics(nameFont).stringWidth(player.getName()), 770);
+				}
 				g.drawRect(5, 793, 1904, 253);
 				if (sel != null && !sel.getDraw())
 				{
@@ -154,7 +156,7 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawString("" + trains[i], 1650, 100 + i * 100);
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
-			System.out.println("first " + first + " i " + i);
+			//System.out.println("first " + first + " i " + i);
 			if(first == i)
 				g.drawImage(crown, 100, 75 + i*100, 500, 500, null);
 		}

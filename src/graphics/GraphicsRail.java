@@ -135,10 +135,6 @@ public class GraphicsRail extends Graphics
 					g.drawLine((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]), (int) (cords[i][3]));
 			}
 		}
-
-//		g.drawOval((int)cords[0][0], (int)cords[0][1], 5,5);
-//		g.drawOval((int)cords[0][2], (int)cords[0][3], 5,5);
-//		g.drawOval((int)cords[0][4], (int)cords[0][5], 5,5);
 	}
 
 //	private Color getContrastColor(Color color) {
