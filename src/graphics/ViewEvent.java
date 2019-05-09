@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -61,6 +62,15 @@ public class ViewEvent extends AWTEvent
 			}
 		});
 		return pSet;
+	}
+	
+	public Player getFirstPlayer()
+	{
+		Iterator<Player> iter = getSortedPlayer().iterator();
+		Player temp = iter.next();
+		if(temp.getPoints()==iter.next().getPoints())
+			return null;
+		return temp;
 	}
 
 	public Color getCurrentPlayer()

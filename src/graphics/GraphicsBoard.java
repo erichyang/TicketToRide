@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
@@ -32,6 +31,7 @@ public class GraphicsBoard extends Graphics implements View
 	private static BufferedImage ticketIcon;
 	private static BufferedImage pointIcon;
 	private static BufferedImage trainCardIcon;
+	private static BufferedImage crown;
 	private int roundWeight;
 	private boolean isDeckEmpty;
 //	private static BufferedImage leaderboard;
@@ -47,6 +47,7 @@ public class GraphicsBoard extends Graphics implements View
 	private int[] trains;
 	private int[] tickets;
 	private int[] trainCards;
+	private int first;
 
 	private boolean end;
 
@@ -64,6 +65,7 @@ public class GraphicsBoard extends Graphics implements View
 			ticketIcon = ImageIO.read(new File("game_files\\Icons\\Ticket Icon.png"));
 			pointIcon = ImageIO.read(new File("game_files\\Icons\\Plus One Icon.png"));
 			trainCardIcon = ImageIO.read(new File("game_files\\Icons\\TrainCard Icon.png"));
+			crown = ImageIO.read(new File("game_files\\Icons\\CrownIcon.png"));
 //			leaderboard = ImageIO.read(new File("game_files\\leaderboard.jpg"));
 		} catch (IOException e)
 		{
@@ -147,12 +149,14 @@ public class GraphicsBoard extends Graphics implements View
 			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 60 + i * 100, 50, 50);
-
 			g.setFont(new Font("Seriff",Font.BOLD,48));
 			g.drawString("" + points[i], 1550, 100 + i * 100);
 			g.drawString("" + trains[i], 1650, 100 + i * 100);
 			g.drawString("" + tickets[i], 1750, 100 + i * 100);
 			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
+			System.out.println("first " + first + " i " + i);
+			if(first == i)
+				g.drawImage(crown, 100, 75 + i*100, 500, 500, null);
 		}
 
 		if (lastUpdate.players.peek().getTickets().size() == 0)
@@ -272,12 +276,13 @@ public class GraphicsBoard extends Graphics implements View
 		}
 		visible[5] = "Back";
 
-		Iterator<Player> iter = update.getSortedPlayer().iterator();
-		for (int i = 0; i < update.getSortedPlayer().size(); i++)
+		for (int i = 0; i < update.players.size(); i++)
 		{
-			Player temp = iter.next();
+			Player temp = update.players.peek();
+			update.players.offer(update.players.poll());
 //			System.out.println(update.getSortedPlayer().size());
 //			System.out.println(temp.getName());
+			
 			switch (temp.getName())
 			{
 			case ("Smashboy"):
@@ -299,6 +304,11 @@ public class GraphicsBoard extends Graphics implements View
 			trains[i] = temp.getTrains();
 			tickets[i] = temp.getTickets().size();
 			trainCards[i] = temp.getTrainCardsNum();
+			
+			if(temp.equals(update.getFirstPlayer()))
+				first = i;
+			else 
+				first = -1;
 		}
 	}
 
