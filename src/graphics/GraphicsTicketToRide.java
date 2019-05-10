@@ -130,7 +130,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent arg0)
 	{
-		// System.out.println(arg0);
+		//System.out.println(arg0);
 	}
 
 	@Override

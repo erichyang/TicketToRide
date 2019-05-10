@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D.Float;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -63,7 +64,7 @@ public class GraphicsBoard extends Graphics implements View
 			ticket = ImageIO.read(new File("game_files\\cards\\ticket_card_back.jpg"));
 			trainIcon = ImageIO.read(new File("game_files\\Icons\\Train Icon.png"));
 			ticketIcon = ImageIO.read(new File("game_files\\Icons\\Ticket Icon.png"));
-			pointIcon = ImageIO.read(new File("game_files\\Icons\\Plus One Icon.png"));
+			pointIcon = ImageIO.read(new File("game_files\\Icons\\CoinIcon.png"));
 			trainCardIcon = ImageIO.read(new File("game_files\\Icons\\TrainCard Icon.png"));
 			crown = ImageIO.read(new File("game_files\\Icons\\CrownIcon.png"));
 //			leaderboard = ImageIO.read(new File("game_files\\leaderboard.jpg"));
@@ -124,7 +125,7 @@ public class GraphicsBoard extends Graphics implements View
 		// 1500 - 1900, 130
 		g.setFont(new Font("Seriff", Font.BOLD, 60));
 		g.setColor(new Color(226, 165, 83));
-		g.fillRect(1455, 0, 500, 450);
+		drawStationBoard(g);
 		g.setColor(Color.LIGHT_GRAY);
 
 		for (int i = 0; i < 4; i++)
@@ -133,7 +134,7 @@ public class GraphicsBoard extends Graphics implements View
 			{
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.BLACK);
-				g.drawRect(1475, 60 + i * 100, 50, 50);
+				g.drawRect(1475, 90 + i * 100, 50, 50);
 				if(!end) {
 					g.setColor(list[i]);
 					Font nameFont = new Font("Seriff",Font.BOLD,30);
@@ -150,32 +151,32 @@ public class GraphicsBoard extends Graphics implements View
 				}
 			}
 			g.setColor(list[i]);
-			g.fillRect(1475, 60 + i * 100, 50, 50);
+			g.fillRect(1475, 90 + i * 100, 50, 50);
 			g.setFont(new Font("Seriff",Font.BOLD,48));
-			g.drawString("" + points[i], 1550, 100 + i * 100);
-			g.drawString("" + trains[i], 1650, 100 + i * 100);
-			g.drawString("" + tickets[i], 1750, 100 + i * 100);
-			g.drawString("" + trainCards[i], 1850, 100 + i * 100);
+			g.drawString("" + points[i], 1550, 130 + i * 100);
+			g.drawString("" + trains[i], 1650, 130 + i * 100);
+			g.drawString("" + tickets[i], 1750, 130 + i * 100);
+			g.drawString("" + trainCards[i], 1850, 130 + i * 100);
 			//System.out.println("first " + first + " i " + i);
 			if(first == i)
-				g.drawImage(crown, 100, 75 + i*100, 500, 500, null);
+				g.drawImage(crown, 100, 105 + i*100, 500, 500, null);
 		}
+
+		g.setFont(new Font("Seriff", Font.BOLD, 16));
+		g.setColor(Color.black);
+		g.drawImage(pointIcon, 1540, 25, 50, 50, null);
+		// g//.drawString("points", 1540, 50);
+		g.drawImage(trainIcon, 1660, 25, 50, 50, null);
+		// g.drawString("tickets", 1745, 50);
+		g.drawImage(ticketIcon, 1745, 25, 50, 50, null);
+		g.drawImage(trainCardIcon, 1825, 25, 75, 50, null);
+		// g.drawString("trainCards", 1825, 50);
 
 		if (lastUpdate.players.peek().getTickets().size() == 0)
 		{
 			sel = drawStartTickets();
 			sel.setDraw(true);
 		}
-
-		g.setFont(new Font("Seriff", Font.BOLD, 16));
-		g.setColor(Color.black);
-		g.drawImage(pointIcon, 1540, 0, 50, 50, null);
-		// g//.drawString("points", 1540, 50);
-		g.drawImage(trainIcon, 1660, 0, 50, 50, null);
-		// g.drawString("tickets", 1745, 50);
-		g.drawImage(ticketIcon, 1745, 0, 50, 50, null);
-		g.drawImage(trainCardIcon, 1825, 0, 75, 50, null);
-		// g.drawString("trainCards", 1825, 50);
 
 		if (sel.getDraw())
 		{
@@ -189,6 +190,22 @@ public class GraphicsBoard extends Graphics implements View
 			col.draw(g);
 		if (end)
 			drawEndScreen(g);
+	}
+	
+	public void drawStationBoard(Graphics2D g) {
+		g.setStroke(new BasicStroke(5));
+		g.setColor(new Color(244, 158, 66));
+		g.fillRect(1458, 80, 452, 380);
+		g.setColor(new Color(214, 116, 25).darker().darker());
+		g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 3));
+		g.drawLine(1458, 165, 1920, 165);
+		g.drawLine(1458,265, 1920, 265);
+		g.drawLine(1458,365, 1920, 365);
+		g.fillRect(1456, 20, 457, 60);
+		g.setColor(Color.BLACK);
+		g.setStroke(new BasicStroke(5));
+		g.drawRect(1458, 20, 452, 60);
+		g.drawRect(1458, 20, 452, 440);
 	}
 
 	public void drawEndScreen(Graphics2D g)
