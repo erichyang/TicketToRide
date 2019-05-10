@@ -159,7 +159,7 @@ public class GraphicsBoard extends Graphics implements View
 			g.drawString("" + trainCards[i], 1850, 130 + i * 100);
 			//System.out.println("first " + first + " i " + i);
 			if(first == i)
-				g.drawImage(crown, 100, 105 + i*100, 500, 500, null);
+				g.drawImage(crown, 1475, 92 + i*100, 50, 50, null);
 		}
 
 		g.setFont(new Font("Seriff", Font.BOLD, 16));
