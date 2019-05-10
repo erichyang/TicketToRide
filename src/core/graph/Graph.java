@@ -90,15 +90,19 @@ public class Graph
 
 	public int LongestPath(Player p)
 	{
+		result reresult = null;
 		int maxDis = Integer.MIN_VALUE;
 		for (String key : p.cityList())
 		{
 			result res = DFS(key, p);
 			int distance = res.dis;
 			//System.out.println(res);
-			if (distance > maxDis)
+			if (distance > maxDis) {
 				maxDis = distance;
+				reresult = res;
+			}
 		}
+		System.out.println(p.getName()+" RES: "+reresult);
 		return maxDis;
 	}
 
@@ -108,7 +112,11 @@ public class Graph
 		List<Rail> list = cityMap.get(city);
 		for (Rail r : list)
 		{
-			if(!p.hasRail(r)) continue;
+//			System.out.println(r);
+//			if(!p.hasRail(r)) {
+//				System.out.println("has");
+//				continue;
+//			}
 			result a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength(), p);
 			//System.out.println(a + "\n" + max);
 			if (a.dis > max.dis)
@@ -136,9 +144,12 @@ public class Graph
 		while (edgeIterator.hasNext())
 		{
 			Rail r = edgeIterator.next();
+			//System.out.println(r + " ,V: "+!visited.contains(r) +"H: "+ p.hasRail(r));
 			if (!visited.contains(r) && p.hasRail(r))
 			{
-				result a = DFSVisit(r, visited, path, sum + r.getLength(), p);
+	//			System.out.println(p+"Rail: "+r);
+//				result a = DFSVisit(r, visited, path, sum + r.getLength(), p);
+				result a = DFSVisit(r, visited, path, sum + r.getLength());
 				if (a.dis > s.dis)
 				{
 					s = a;
