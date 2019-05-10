@@ -339,7 +339,8 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		for (Player P : players)
 		{
 			int num = P.countTickets();
-			int path = graph.LongestPath(P);
+			int path = P.getGraph().LongestPath();
+			//System.out.println(P.getName()+" , "+path);
 
 			paths[index] = path;
 			ticketNum[index] = num;

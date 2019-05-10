@@ -115,7 +115,6 @@ public class Rail
 		result = prime * result + (isDouble ? 1231 : 1237);
 		result = prime * result + length;
 		result = prime * result + Arrays.hashCode(owners);
-		result = prime * result + (seen ? 1231 : 1237);
 		return result;
 	}
 
@@ -179,16 +178,13 @@ public class Rail
 		{
 			return false;
 		}
-		if (seen != other.seen)
-		{
-			return false;
-		}
 		return true;
 	}
 
 	public String toString()
 	{
-		return cityA + "-> " + cityB + ", " + length + ", " + isDouble + ", " + color + " ," + "isDouble: " + isDouble
-				+ " owners: " + Arrays.toString(owners);
+		return cityA + "-> " + cityB + ", " + length ;
+//				+ ", " + isDouble + ", " + color + " ," + "isDouble: " + isDouble
+//				+ " owners: " + Arrays.toString(owners);
 	}
 }
