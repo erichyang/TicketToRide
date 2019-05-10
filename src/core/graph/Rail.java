@@ -114,7 +114,7 @@ public class Rail
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + (isDouble ? 1231 : 1237);
 		result = prime * result + length;
-		result = prime * result + ((owners.equals(null)) ? 0 : owners.hashCode());
+		result = prime * result + Arrays.hashCode(owners);
 		result = prime * result + (seen ? 1231 : 1237);
 		return result;
 	}
