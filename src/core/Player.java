@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import core.graph.Graph;
 import core.graph.Rail;
 
 public class Player
@@ -23,11 +24,12 @@ public class Player
 	private boolean isFinalTurn;
 	private boolean[] winners;
 	private int numCompletedTickets;
-	private ArrayList<Rail> railList;
+	//private ArrayList<Rail> railList;
+	private Graph playerGraph;
 
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets)
 	{
-		railList = new ArrayList<Rail>();
+		//railList = new ArrayList<Rail>();
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
@@ -48,6 +50,7 @@ public class Player
 		name = playerName;
 		cities = new ArrayList<Set<String>>();
 		isFinalTurn = false;
+		playerGraph = new Graph();
 	}
 
 	public void setWins(boolean b, int index)
@@ -82,12 +85,12 @@ public class Player
 	{
 		// if not enough cards return false
 		// if enough cards, first draw from normal color, then draw from wild
-		if (railList.contains(rail))
+		if (playerGraph.indexList().contains(rail))
 		{
 			return null;
 		}
 		if (!useTrains(rail.getLength())) {
-			System.out.println("Not enough Trains");
+			//System.out.println("Not enough Trains");
 			return null;
 		}
 		String color = rail.getColor();
@@ -100,13 +103,13 @@ public class Player
 		// System.out.println("COLOR: "+color+ " RAIL: " + rail);
 		if (hand.get(color) == null)
 		{
-			System.out.println("BAD COLOR: " + color);
+			//System.out.println("BAD COLOR: " + color);
 			return null;
 		}
 		// System.out.println(hand.get(color));
 		int amount = hand.get(color);
 		if (amount + hand.get("Wild") < num) {
-			System.out.println("not enough cards");
+			//System.out.println("not enough cards");
 			return null;
 		}
 
@@ -141,14 +144,14 @@ public class Player
 
 	public boolean useTrains(int num)
 	{
-		System.out.println(trains+" , "+num);
+		//System.out.println(trains+" , "+num);
 		if (trains - num < 0) {
-			System.out.println("A");
+			//System.out.println("A");
 			return false;
 		}
 		if ((trains - num) <= 2) {
 			listen.onGameEvent(new GameEvent(0, this));
-			System.out.println("B");
+			//System.out.println("B");
 		}
 		return true;
 	}
@@ -208,11 +211,17 @@ public class Player
 		}else {
 			//System.out.println("uh oh");
 		}
-		railList.add(rail);
+		//railList.add(rail);
+		playerGraph.add(rail.getCityA(), rail);
+		//System.out.println(name+" Graph: "+playerGraph.indexList());
 		trains -= rail.getLength();
 		//System.out.println("CITIES: "+cities);
 	}
 
+	public Graph getGraph() {
+		return playerGraph;
+	}
+	
 	public int countTickets()
 	{
 		int count = 0;
@@ -248,7 +257,7 @@ public class Player
 	}
 	
 	public boolean hasRail(Rail rail) {
-		return railList.contains(rail);
+		return playerGraph.indexList().contains(rail);
 	}
 
 	public boolean contains(String cityA, String cityB)
