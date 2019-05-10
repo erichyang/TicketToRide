@@ -47,30 +47,25 @@ public class ViewEvent extends AWTEvent
 		tickets = ticketStack;
 		roundWeight = Weight;
 	}
-
-	public ArrayList<Player> getSortedPlayer()
-	{
-		ArrayList<Player> pSet = new ArrayList<Player>();
-		for (Player p : players)
-			pSet.add(p);
-		Collections.sort(pSet, new Comparator<Player>()
-		{
-			@Override
-			public int compare(Player o1, Player o2)
-			{
-				return o2.getPoints() - o1.getPoints();
-			}
-		});
-		return pSet;
-	}
 	
 	public Player getFirstPlayer()
 	{
-		Iterator<Player> iter = getSortedPlayer().iterator();
-		Player temp = iter.next();
-		if(temp.getPoints()==iter.next().getPoints())
+		ArrayList<Player> list = new ArrayList<Player>();
+		for (Player p : players)
+			list.add(p);
+		Player max = list.get(0);
+		for(Player item :list)
+			if(item.getPoints() > max.getPoints())
+				max = item;
+		
+		int count = 0;
+		for(Player item :list)
+			if(max.getPoints()==item.getPoints())
+				count++;
+		if(count > 1)
 			return null;
-		return temp;
+//		for(int )
+		return max;
 	}
 
 	public Color getCurrentPlayer()

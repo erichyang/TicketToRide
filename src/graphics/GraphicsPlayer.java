@@ -20,6 +20,7 @@ public class GraphicsPlayer extends Graphics
 	private ArrayList<String> hand;
 	private int iteration;
 	private String name;
+	private int hover;
 
 	public GraphicsPlayer()
 	{
@@ -27,6 +28,7 @@ public class GraphicsPlayer extends Graphics
 		tickets = new ArrayList<GraphicsTicket>();
 		hand = new ArrayList<String>();
 		iteration = 0;
+		hover = -1;
 	}
 	
 	public String getName() {
@@ -43,7 +45,7 @@ public class GraphicsPlayer extends Graphics
 //			System.out.print(i);
 //			System.out.println(tickets.get(i) + " " + iteration);
 			tickets.get(i).draw(g);
-//		System.out.println();
+//			System.out.println();
 			if (tickets.size() > 5)
 			{
 				g.setFont(new Font("Serif", Font.PLAIN, 24));
@@ -56,14 +58,18 @@ public class GraphicsPlayer extends Graphics
 			}
 		}
 		AffineTransform af = new AffineTransform();
-		af.translate(150, 820);
-		af.rotate(Math.toRadians(90));
+		
 		for (int i = 0; i < hand.size(); i++)
 		{
+			if(hover == i)
+				af.translate(150, 750);
+			else
+				af.translate(150, 820);
+			af.rotate(Math.toRadians(90));
 			moving = 800 / hand.size() * i;
 			af.translate(0, -moving);
 			g.drawImage(color2Image(hand.get(i)), af, null);
-			af.translate(0, moving);
+			af = new AffineTransform();
 		}
 		g.setColor(Color.BLACK);
 //		Font nameFont = new Font("Seriff",Font.BOLD,30);
@@ -89,11 +95,20 @@ public class GraphicsPlayer extends Graphics
 			for (int i = 0; i < pHand.get(key); i++)
 				hand.add(key);
 		});
+		hover = -1;
 	}
 
 	@Override
 	public PlayerEvent contains(Float cord)
 	{
+		hover = -1;
+		if(cord.x <= 850 && cord.y >= 820)
+			for(int i = 0; i < hand.size(); i++)
+				//150, 820
+				//translate on x moving
+				//moving = 800/hand.size()*i
+				if(cord.x >= 800/hand.size()*(i) + 25 &&cord.x <= 150 + 800/hand.size()*(i))
+					hover = i;
 		if (cord.x >= 885 && cord.y >= 800)
 			next();
 		return null;

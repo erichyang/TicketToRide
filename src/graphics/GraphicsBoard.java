@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D.Float;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -48,7 +47,7 @@ public class GraphicsBoard extends Graphics implements View
 	private int[] trains;
 	private int[] tickets;
 	private int[] trainCards;
-	private int first;
+	private Player first;
 
 	private boolean end;
 
@@ -101,23 +100,22 @@ public class GraphicsBoard extends Graphics implements View
 		g.setColor(Color.black);
 		g.setStroke(new BasicStroke(3));
 		graph.draw(g);
-		if (!end)
-			player.draw(g);
 
 		g.setStroke(new BasicStroke(15));
 		// 1300, 25
-		if (!end) {
+		if (!end)
+		{
 			g.setColor(new Color(0, 0, 0, 150));
 			for (int i = 0; i < visible.length; i++)
 			{
 				g.drawImage(color2Image(visible[i]), 1255, 130 * i, 200, 125, null);
 				if (visible[i].equals("Wild") && roundWeight > 0)
 					g.fillRect(1255, 130 * i, 200, 125);
-				else if(visible[i].equals(""))
+				else if (visible[i].equals(""))
 					g.fillRect(1255, 130 * i, 200, 125);
 			}
-			if(isDeckEmpty)
-				g.fillRect(1255, 130 * (visible.length-1), 200, 125);
+			if (isDeckEmpty)
+				g.fillRect(1255, 130 * (visible.length - 1), 200, 125);
 		}
 
 		g.drawImage(ticket, 1500, 650, 200, 125, null);
@@ -135,11 +133,13 @@ public class GraphicsBoard extends Graphics implements View
 				g.setStroke(new BasicStroke(10));
 				g.setColor(Color.BLACK);
 				g.drawRect(1475, 90 + i * 100, 50, 50);
-				if(!end) {
+				if (!end)
+				{
 					g.setColor(list[i]);
-					Font nameFont = new Font("Seriff",Font.BOLD,30);
+					Font nameFont = new Font("Seriff", Font.BOLD, 30);
 					g.setFont(nameFont);
-					g.drawString(player.getName(), 1900 - g.getFontMetrics(nameFont).stringWidth(player.getName()), 770);
+					g.drawString(player.getName(), 1900 - g.getFontMetrics(nameFont).stringWidth(player.getName()),
+							770);
 				}
 				g.drawRect(5, 793, 1904, 253);
 				if (sel != null && !sel.getDraw())
@@ -152,15 +152,18 @@ public class GraphicsBoard extends Graphics implements View
 			}
 			g.setColor(list[i]);
 			g.fillRect(1475, 90 + i * 100, 50, 50);
-			g.setFont(new Font("Seriff",Font.BOLD,48));
+			g.setFont(new Font("Seriff", Font.BOLD, 48));
 			g.drawString("" + points[i], 1550, 130 + i * 100);
 			g.drawString("" + trains[i], 1650, 130 + i * 100);
 			g.drawString("" + tickets[i], 1750, 130 + i * 100);
 			g.drawString("" + trainCards[i], 1850, 130 + i * 100);
-			//System.out.println("first " + first + " i " + i);
-			if(first == i)
-				g.drawImage(crown, 1475, 92 + i*100, 50, 50, null);
+//			System.out.println("first " + first + " i " + i);
+			if (first!=null&&first.getPoints()==points[i])
+				g.drawImage(crown, 1475, 92 + i * 100, 50, 50, null);
 		}
+
+		if (!end)
+			player.draw(g);
 
 		g.setFont(new Font("Seriff", Font.BOLD, 16));
 		g.setColor(Color.black);
@@ -188,19 +191,22 @@ public class GraphicsBoard extends Graphics implements View
 
 		if (col != null && col.getDraw())
 			col.draw(g);
+
 		if (end)
 			drawEndScreen(g);
 	}
-	
-	public void drawStationBoard(Graphics2D g) {
+
+	public void drawStationBoard(Graphics2D g)
+	{
 		g.setStroke(new BasicStroke(5));
 		g.setColor(new Color(244, 158, 66));
 		g.fillRect(1458, 80, 452, 380);
 		g.setColor(new Color(214, 116, 25).darker().darker());
-		g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 3));
+		g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]
+		{ 9 }, 3));
 		g.drawLine(1458, 165, 1920, 165);
-		g.drawLine(1458,265, 1920, 265);
-		g.drawLine(1458,365, 1920, 365);
+		g.drawLine(1458, 265, 1920, 265);
+		g.drawLine(1458, 365, 1920, 365);
 		g.fillRect(1456, 20, 457, 60);
 		g.setColor(Color.BLACK);
 		g.setStroke(new BasicStroke(5));
@@ -283,7 +289,7 @@ public class GraphicsBoard extends Graphics implements View
 		ViewEvent update = (ViewEvent) e;
 		roundWeight = update.roundWeight;
 		isDeckEmpty = update.gameDeck.getDeck().isEmpty();
-		//System.out.println(isDeckEmpty);
+		// System.out.println(isDeckEmpty);
 		if (update.getID() == 1)
 			end = true;
 		graph.update(update.map);
@@ -301,7 +307,7 @@ public class GraphicsBoard extends Graphics implements View
 			update.players.offer(update.players.poll());
 //			System.out.println(update.getSortedPlayer().size());
 //			System.out.println(temp.getName());
-			
+
 			switch (temp.getName())
 			{
 			case ("Smashboy"):
@@ -323,13 +329,10 @@ public class GraphicsBoard extends Graphics implements View
 			trains[i] = temp.getTrains();
 			tickets[i] = temp.getTickets().size();
 			trainCards[i] = temp.getTrainCardsNum();
-			
+
 			Player firstP = update.getFirstPlayer();
-			
-			if(firstP != null && temp.equals(firstP))
-				first = i;
-			else 
-				first = -1;
+			first = firstP;
+			System.out.println(temp.getPoints() + " " + first);
 		}
 	}
 
@@ -434,7 +437,13 @@ public class GraphicsBoard extends Graphics implements View
 
 	public void setLoc(Float loc)
 	{
+		playerCheck(loc);
 		mouseLoc = loc;
+	}
+
+	private void playerCheck(Float loc)
+	{
+		player.contains(loc);
 	}
 
 	public boolean containsPoint(Float point)
