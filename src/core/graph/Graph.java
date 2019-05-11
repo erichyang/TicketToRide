@@ -96,6 +96,7 @@ public class Graph
 		for (String key : cityMap.keySet())
 		{
 			result res = DFS(key);
+			System.out.println(res);
 			int distance = res.dis;
 			//System.out.println(res);
 			if (distance > maxDis) {
@@ -105,6 +106,7 @@ public class Graph
 		}
 		//System.out.println(" RES: "+reresult);
 		if(reresult != null) path.addAll(reresult.path);
+		System.out.println(maxDis);
 		return maxDis;
 	}
 	
@@ -116,6 +118,7 @@ public class Graph
 	{
 		result max = new result(null, -1, null);
 		List<Rail> list = cityMap.get(city);
+		//System.out.println(list);
 		for (Rail r : list)
 		{
 			result a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength());
@@ -144,7 +147,7 @@ public class Graph
 		while (edgeIterator.hasNext())
 		{
 			Rail r = edgeIterator.next();
-			//System.out.println(r + " ,V: "+!visited.contains(r) +"H: "+ p.hasRail(r));
+			//System.out.println(r + " ,V: "+!visited.contains(r));
 			if (!visited.contains(r))
 			{
 	//			System.out.println(p+"Rail: "+r);

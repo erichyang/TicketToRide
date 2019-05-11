@@ -104,7 +104,7 @@ public class Player
 		}
 		if (!useTrains(rail.getLength())) {
 			//System.out.println("Not enough Trains");
-			return null;
+			//return null;
 		}
 		String color = rail.getColor();
 
@@ -191,6 +191,8 @@ public class Player
 
 	public void addRail(Rail rail)
 	{
+		playerGraph.add(rail.getCityA(), rail);
+		
 		String cityA = rail.getCityA();
 		String cityB = rail.getCityB();
 
@@ -225,7 +227,6 @@ public class Player
 			//System.out.println("uh oh");
 		}
 		//railList.add(rail);
-		playerGraph.add(rail.getCityA(), rail);
 		//System.out.println(name+" Graph: "+playerGraph.indexList());
 		trains -= rail.getLength();
 		//System.out.println("CITIES: "+cities);

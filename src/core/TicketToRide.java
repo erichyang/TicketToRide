@@ -370,9 +370,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 				for(Rail r: P.getPath()) {
 					int railIndex = graph.indexList().indexOf(r);
 					if(railIndex == -1) railIndex = graph.indexList().indexOf(graph.getInverse(r));
-					railIndex*=10;
-					if(r.getOwnerName(0) != null && r.getOwnerName(0).equals(P.getName())) railIndex += 8;
-					else railIndex += 9;
+//					railIndex*=10;
+//					if(r.getOwnerName(0) != null && r.getOwnerName(0).equals(P.getName())) railIndex += 8;
+//					else if(r.isDouble() && r.getOwnerName(1) != null && r.getOwnerName(1).equals(P.getName()))railIndex += 9;
+//					else System.out.println(r+" "+r.getOwnerName(0)+r.getOwnerName(1));
 					pathList.add(railIndex);
 				}
 				//System.out.println("LIST: "+pathList);
