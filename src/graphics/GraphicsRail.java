@@ -21,9 +21,11 @@ public class GraphicsRail extends Graphics
 	private Color[] owners;
 	private Line2D[] lines;
 	public boolean[] hovered;
+	boolean[] path;
 
 	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
 	{
+		path = new boolean[(doubles) ? 2 : 1];
 		hovered = new boolean[(doubles) ? 2 : 1];
 		Arrays.fill(hovered, false);
 		lines = new Line2D[(doubles) ? 2 : 1];
@@ -38,6 +40,11 @@ public class GraphicsRail extends Graphics
 			Arrays.fill(cords[1], -1);
 		owners = new Color[doubles ? 2 : 1];
 //		path = new Path2D[doubles ? 2 : 1];
+	}
+	
+	public void setPath(int i) {
+		//System.out.println("Reached");
+		path[i] = true;
 	}
 
 	public boolean getDoubles()
@@ -121,10 +128,16 @@ public class GraphicsRail extends Graphics
 			{ length - 2, 2 }, 0));
 			g.draw(lines[i]);
 
+			//if(path[i]) System.out.println("O: " + owners[i]);
+			
 			if (owners[i] != null)
 			{
 				g.setColor(owners[i].darker());
-				g.setStroke(new BasicStroke(3));
+				if(path[i]) {
+					//System.out.println("JELLOS"+cityA+ " , " + cityB);
+					g.setStroke(new BasicStroke(10));
+				}
+				else g.setStroke(new BasicStroke(3));
 				if (doubles)
 				{
 					g.drawLine((int) (cords[i][0] + (-deltaX + 2 * deltaX * (i))),

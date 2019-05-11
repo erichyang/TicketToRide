@@ -18,6 +18,7 @@ public class Graph
 	// private final Set<Rail> MasterSet = new HashSet<Rail>();
 	private final ArrayList<Rail> indexList = new ArrayList<Rail>();
 	// want to make this recursive
+	private List<Rail> path = new ArrayList<Rail>();
 
 	public void add(String cityName, Rail rail)
 	{
@@ -102,8 +103,13 @@ public class Graph
 				reresult = res;
 			}
 		}
-		System.out.println(" RES: "+reresult);
+		//System.out.println(" RES: "+reresult);
+		if(reresult != null) path.addAll(reresult.path);
 		return maxDis;
+	}
+	
+	public List<Rail> getLongestPath(){
+		return path;
 	}
 
 	public result DFS(String city)

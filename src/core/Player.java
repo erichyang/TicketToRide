@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -26,10 +27,12 @@ public class Player
 	private int numCompletedTickets;
 	//private ArrayList<Rail> railList;
 	private Graph playerGraph;
+	private List<Rail> path;
 
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets)
 	{
 		//railList = new ArrayList<Rail>();
+		path = new ArrayList<Rail>();
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
@@ -53,6 +56,16 @@ public class Player
 		playerGraph = new Graph();
 	}
 
+	public int setPath() {
+		int pathlength = getGraph().LongestPath();
+		path = getGraph().getLongestPath();
+		return pathlength;
+	}
+	
+	public List<Rail> getPath(){
+		return path;
+	}
+	
 	public void setWins(boolean b, int index)
 	{
 		winners[index] = b;

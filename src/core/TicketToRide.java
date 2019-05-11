@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
@@ -339,7 +340,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		for (Player P : players)
 		{
 			int num = P.countTickets();
-			int path = P.getGraph().LongestPath();
+			int path = P.setPath();
 			//System.out.println(P.getName()+" , "+path);
 
 			paths[index] = path;
@@ -365,6 +366,17 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			{
 				P.addPoints(15);
 				P.setWins(true, 1);
+				List<Integer>pathList = new ArrayList<Integer>();
+				for(Rail r: P.getPath()) {
+					int railIndex = graph.indexList().indexOf(r);
+					if(railIndex == -1) railIndex = graph.indexList().indexOf(graph.getInverse(r));
+					railIndex*=10;
+					if(r.getOwnerName(0) != null && r.getOwnerName(0).equals(P.getName())) railIndex += 8;
+					else railIndex += 9;
+					pathList.add(railIndex);
+				}
+				//System.out.println("LIST: "+pathList);
+				observer.drawPath(pathList);
 			}
 			index++;
 		}

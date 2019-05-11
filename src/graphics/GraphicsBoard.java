@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
@@ -223,8 +224,9 @@ public class GraphicsBoard extends Graphics implements View
 		{
 			if (!winners.contains(p) && p.getWin(0))
 				winners.add(p);
-			if (!path.contains(p) && p.getWin(1))
+			if (!path.contains(p) && p.getWin(1)) {
 				path.add(p);
+			}
 			if (!ticket.contains(p) && p.getWin(2))
 				ticket.add(p);
 		}
@@ -262,6 +264,10 @@ public class GraphicsBoard extends Graphics implements View
 		g.drawString("Most Tickets: " + tickPut, 15, 950);
 	}
 
+	public void drawPath(List<Integer> path)
+	{
+		graph.setLongestPath(path);
+	}
 	@Override
 	public void observe(ViewEvent event)
 	{
