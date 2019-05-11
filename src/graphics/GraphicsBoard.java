@@ -338,7 +338,7 @@ public class GraphicsBoard extends Graphics implements View
 
 			Player firstP = update.getFirstPlayer();
 			first = firstP;
-			System.out.println(temp.getPoints() + " " + first);
+			//System.out.println(temp.getPoints() + " " + first);
 		}
 	}
 
