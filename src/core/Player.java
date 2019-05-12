@@ -36,7 +36,7 @@ public class Player
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
-		trains = 45;
+		trains = 1045;
 		setPoints(0);
 		hand = new HashMap<>();
 		hand.put("Pink", 0);
@@ -140,7 +140,7 @@ public class Player
 			// System.out.println("B");
 			int wildNum = num - amount;
 			// System.out.println("Wnum: "+wildNum);
-			hand.put("Wild", wildNum);
+			hand.put("Wild",hand.get("Wild")-wildNum);
 			for (int i = 0; i < wildNum; i++)
 			{
 				// System.out.println("i: "+i+ "Wnum: "+wildNum);

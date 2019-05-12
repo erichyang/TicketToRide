@@ -34,10 +34,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		GameDeck.setListener(this);
 
 		players = new LinkedList<Player>();
-		players.add(new Player("Rhail Island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
+//		players.add(new Player("Rhail Island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
+//		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
+//		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
 
 		players.forEach(player ->
 		{
@@ -88,11 +88,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
-
-		if (currentPlayer.isFinalTurn()) {
-			//System.out.println(currentPlayer);
-			onGameEvent(new GameEvent(3, currentPlayer));
-		}
 		
 		if (eventID == -1)
 		{
@@ -236,6 +231,12 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			// System.out.println(eventID);
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 		}
+		
+		if (currentPlayer.isFinalTurn()) {
+			//System.out.println(currentPlayer);
+			onGameEvent(new GameEvent(3, currentPlayer));
+		}
+		
 		roundWeight += e.getWeight();
 		if (roundWeight == 2)
 		{

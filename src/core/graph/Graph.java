@@ -96,7 +96,7 @@ public class Graph
 		for (String key : cityMap.keySet())
 		{
 			result res = DFS(key);
-			System.out.println(res);
+			//System.out.println(res);
 			int distance = res.dis;
 			//System.out.println(res);
 			if (distance > maxDis) {
@@ -106,7 +106,7 @@ public class Graph
 		}
 		//System.out.println(" RES: "+reresult);
 		if(reresult != null) path.addAll(reresult.path);
-		System.out.println(maxDis);
+		//System.out.println(maxDis);
 		return maxDis;
 	}
 	
@@ -122,9 +122,20 @@ public class Graph
 		for (Rail r : list)
 		{
 			result a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength());
+			//System.out.println(a);
+//			for(int i = a.path.size()-1; i>0; i--) {
+//				Rail r1 = a.path.get(i);
+//				Rail r2 = a.path.get(i-1);
+//				//System.out.println(r1.getCityA()+r2.getCityA());
+//				if(r1.getCityA().equals(r2.getCityA())) {
+//					//System.out.println("hello");
+//					a.path.remove(r1.getLength()<r2.getLength() ? i:i-1);
+//					a.dis -= r2.getLength();
+//				}
+//			}
 			if (a.dis > max.dis)
 			{
-				max = a;
+					max = a;
 			}
 		}
 		return max;
@@ -132,16 +143,14 @@ public class Graph
 
 	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum)
 	{
-
 		if (visited.contains(rail))
 		{
 			throw new AssertionError();
 		}
-
 		visited.add(rail);
 		visited.add(getInverse(rail));
 		path.add(rail);
-		
+		//System.out.println(path);	
 		result s = new result(new ArrayList<>(path), sum, new HashSet<>(visited));
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext())
@@ -152,14 +161,14 @@ public class Graph
 			{
 	//			System.out.println(p+"Rail: "+r);
 				result a = DFSVisit(r, visited, path, sum + r.getLength());
-				
+				//System.out.println("A"+a+"\nS"+s);
 				if (a.dis > s.dis)
 				{
+					//System.out.println("A:"+a.path+"\nS"+s.path);
 					s = a;
 				}
 			}
 		}
-
 		return s;
 	}
 
