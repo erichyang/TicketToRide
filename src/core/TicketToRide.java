@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
@@ -33,10 +34,10 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		GameDeck.setListener(this);
 
 		players = new LinkedList<Player>();
-		players.add(new Player("Rhail Island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
+//		players.add(new Player("Rhail Island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
+//		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
+//		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
 
 		players.forEach(player ->
 		{
@@ -87,11 +88,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		int eventID = e.getID();
 		Player currentPlayer = players.peek();
-
-		if (currentPlayer.isFinalTurn()) {
-			//System.out.println(currentPlayer);
-			onGameEvent(new GameEvent(3, currentPlayer));
-		}
 		
 		if (eventID == -1)
 		{
@@ -235,6 +231,12 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			// System.out.println(eventID);
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 		}
+		
+		if (currentPlayer.isFinalTurn()) {
+			//System.out.println(currentPlayer);
+			onGameEvent(new GameEvent(3, currentPlayer));
+		}
+		
 		roundWeight += e.getWeight();
 		if (roundWeight == 2)
 		{
@@ -339,7 +341,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 		for (Player P : players)
 		{
 			int num = P.countTickets();
-			int path = P.getGraph().LongestPath();
+			int path = P.setPath();
 			//System.out.println(P.getName()+" , "+path);
 
 			paths[index] = path;
@@ -365,6 +367,18 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 			{
 				P.addPoints(15);
 				P.setWins(true, 1);
+				List<Integer>pathList = new ArrayList<Integer>();
+				for(Rail r: P.getPath()) {
+					int railIndex = graph.indexList().indexOf(r);
+					if(railIndex == -1) railIndex = graph.indexList().indexOf(graph.getInverse(r));
+//					railIndex*=10;
+//					if(r.getOwnerName(0) != null && r.getOwnerName(0).equals(P.getName())) railIndex += 8;
+//					else if(r.isDouble() && r.getOwnerName(1) != null && r.getOwnerName(1).equals(P.getName()))railIndex += 9;
+//					else System.out.println(r+" "+r.getOwnerName(0)+r.getOwnerName(1));
+					pathList.add(railIndex);
+				}
+				//System.out.println("LIST: "+pathList);
+				observer.drawPath(pathList);
 			}
 			index++;
 		}

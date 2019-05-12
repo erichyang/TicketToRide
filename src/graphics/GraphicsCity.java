@@ -26,8 +26,8 @@ public class GraphicsCity
 		g.setStroke(new BasicStroke(2));
 		g.drawOval((int) cord.getX() - 11, (int) cord.getY() - 11, 22, 22);
 		g.setColor(new Color(129, 9, 255));
-		g.setFont(new Font("Seriff", Font.BOLD, 12));
-		g.drawString(name, (float) cord.getX() + 20, (float) cord.getY() + 15);
+		g.setFont(new Font("Seriff", Font.BOLD, 16));
+		g.drawString(name, (float) cord.getX() + 10, (float) cord.getY() + 15);
 	}
 
 	public Point2D.Float getCord()

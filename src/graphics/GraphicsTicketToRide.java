@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
@@ -31,7 +31,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	private GraphicsBoard board;
 	private TicketToRide game;
 
-	public static void main(String[] args) throws FileNotFoundException
+	public static void main(String[] args) throws IOException
 	{
 		GraphicsTicketToRide test = new GraphicsTicketToRide();
 		window = new JFrame("Ticket to Ride");
@@ -80,7 +80,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener
 	playerAction PLAYER_DRAW_DECK = new playerAction(5);
 	playerAction END_GAME = new playerAction(-1);
 
-	public GraphicsTicketToRide() throws FileNotFoundException
+	public GraphicsTicketToRide() throws IOException
 	{
 		board = new GraphicsBoard();
 		game = new TicketToRide();

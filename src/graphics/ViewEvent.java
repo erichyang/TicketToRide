@@ -3,10 +3,7 @@ package graphics;
 import java.awt.AWTEvent;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Queue;
 import java.util.Stack;
 

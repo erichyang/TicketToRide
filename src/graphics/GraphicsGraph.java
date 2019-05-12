@@ -7,10 +7,12 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import core.PlayerEvent;
 import core.graph.Graph;
+import core.graph.Rail;
 
 public class GraphicsGraph extends Graphics
 {
@@ -138,6 +140,16 @@ public class GraphicsGraph extends Graphics
 				rail.hovered[1] = true;
 				railhovered = true;
 			}
+		}
+	}
+	
+	public void setLongestPath(List<Integer> path) {
+		for(int i=0; i<path.size(); i++) {
+//			int num = path.get(i)%10;
+//			//System.out.println(rails[path.get(i)/10]);
+//			rails[path.get(i)/10].setPath((num == 8) ? 0:1);
+			rails[path.get(i)].setPath(0);
+			if(rails[path.get(i)].getDoubles()) rails[path.get(i)].setPath(1);
 		}
 	}
 

@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,7 +27,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 	public static JFrame window;
 	public GraphicsBoard board;
 
-	public static void main(String[] args) throws FileNotFoundException
+	public static void main(String[] args) throws IOException
 	{
 		GraphicsBoardTest test = new GraphicsBoardTest();
 		window = new JFrame("Graphics Graph");
@@ -44,7 +44,7 @@ public class GraphicsBoardTest extends JPanel implements MouseListener
 
 	}
 
-	public GraphicsBoardTest() throws FileNotFoundException
+	public GraphicsBoardTest() throws IOException
 	{
 		board = new GraphicsBoard();
 		int[] pEvents = {1,2,3,1,2,3,1,2,3,158,159};

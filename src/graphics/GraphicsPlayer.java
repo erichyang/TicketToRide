@@ -30,8 +30,9 @@ public class GraphicsPlayer extends Graphics
 		iteration = 0;
 		hover = -1;
 	}
-	
-	public String getName() {
+
+	public String getName()
+	{
 		return name;
 	}
 
@@ -58,10 +59,10 @@ public class GraphicsPlayer extends Graphics
 			}
 		}
 		AffineTransform af = new AffineTransform();
-		
+
 		for (int i = 0; i < hand.size(); i++)
 		{
-			if(hover == i)
+			if (hover == i)
 				af.translate(150, 750);
 			else
 				af.translate(150, 820);
@@ -87,8 +88,11 @@ public class GraphicsPlayer extends Graphics
 		name = update.getName();
 		ArrayList<Ticket> core = update.getTickets();
 		for (int i = 0; i < core.size(); i++)
-			tickets.add(new GraphicsTicket(new Point2D.Float(900 + i % 5 * 200, 820), core.get(i).getPointCount(),
+		{
+			tickets.add(new GraphicsTicket(new Point2D.Float(925 + i % 5 * 200, 820), core.get(i).getPointCount(),
 					core.get(i).getCities()));
+			tickets.get(i).update(update);
+		}
 		HashMap<String, Integer> pHand = update.getHand();
 		pHand.keySet().forEach((key) ->
 		{
@@ -101,14 +105,6 @@ public class GraphicsPlayer extends Graphics
 	@Override
 	public PlayerEvent contains(Float cord)
 	{
-		hover = -1;
-		if(cord.x <= 850 && cord.y >= 820)
-			for(int i = 0; i < hand.size(); i++)
-				//150, 820
-				//translate on x moving
-				//moving = 800/hand.size()*i
-				if(cord.x >= 800/hand.size()*(i) + 25 &&cord.x <= 150 + 800/hand.size()*(i))
-					hover = i;
 		if (cord.x >= 885 && cord.y >= 800)
 			next();
 		return null;
@@ -121,5 +117,17 @@ public class GraphicsPlayer extends Graphics
 			iteration--;
 		if (iteration * 5 > tickets.size())
 			iteration = 0;
+	}
+
+	public void hovers(Float cord)
+	{
+		hover = -1;
+		if (cord.x <= 850 && cord.y >= 820)
+			for (int i = 0; i < hand.size(); i++)
+				// 150, 820
+				// translate on x moving
+				// moving = 800/hand.size()*i
+				if (cord.x >= 800 / hand.size() * (i) + 25 && cord.x <= 150 + 800 / hand.size() * (i))
+					hover = i;
 	}
 }

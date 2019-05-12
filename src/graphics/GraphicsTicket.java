@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 
+import core.Player;
 import core.PlayerEvent;
 
 public class GraphicsTicket extends Graphics
@@ -16,6 +17,7 @@ public class GraphicsTicket extends Graphics
 	private int val;
 	private String cityA;
 	private String cityB;
+	private boolean completed;
 
 	public GraphicsTicket(Point2D.Float cord, int val, String cityA, String cityB)
 	{
@@ -23,6 +25,7 @@ public class GraphicsTicket extends Graphics
 		this.val = val;
 		this.cityA = cityA;
 		this.cityB = cityB;
+		completed = false;
 	}
 
 	public GraphicsTicket(Point2D.Float float1, int val, String cities)
@@ -31,11 +34,15 @@ public class GraphicsTicket extends Graphics
 		this.val = val;
 		this.cityA = cities.substring(0, cities.indexOf(","));
 		this.cityB = cities.substring(cities.indexOf(",") + 1);
+		completed = false;
 	}
 
 	public void draw(Graphics2D g)
 	{
-		g.setColor(new Color(244, 158, 66));
+		if(!completed)
+			g.setColor(new Color(244, 158, 66));
+		else
+			g.setColor(Color.green.darker().darker());
 		g.fill(new Rectangle((int) cord.x, (int) cord.y, 125, 200));
 		g.setColor(Color.black);
 		g.setStroke(new BasicStroke(3));
@@ -52,7 +59,12 @@ public class GraphicsTicket extends Graphics
 	@Override
 	public void update(Object obj)
 	{
-
+		Player temp = (Player)obj;
+		if(temp.contains(cityA, cityB))
+		{
+//			System.out.println(cityA + " " + cityB);
+			completed = true;
+		}
 	}
 
 	@Override
