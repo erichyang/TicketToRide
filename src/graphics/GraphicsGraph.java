@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 import core.PlayerEvent;
 import core.graph.Graph;
-import core.graph.Rail;
 
 public class GraphicsGraph extends Graphics
 {
@@ -123,14 +122,12 @@ public class GraphicsGraph extends Graphics
 	public void setRails(Point2D.Float cord)
 	{
 		boolean railhovered = false;
-		int count =0;
 		for (int i = 0; i < rails.length; i++)
 		{
 			GraphicsRail rail = rails[i];
 			if (rail.contains(cord) == null || railhovered)
-			{
 				Arrays.fill(rail.hovered, false);
-			} else if (rail.contains(cord).getID() == -2)
+			else if (rail.contains(cord).getID() == -2)
 			{
 				//System.out.println(count++);
 				rail.hovered[0] = true;
