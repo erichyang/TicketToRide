@@ -35,9 +35,9 @@ public class TicketToRide implements GameEventListener, PlayerEventListener
 
 		players = new LinkedList<Player>();
 //		players.add(new Player("Rhail Island Z", new ArrayList<String>(), new ArrayList<Ticket>()));
-		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
+//		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 //		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
-//		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
+		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
 
 		players.forEach(player ->
 		{
