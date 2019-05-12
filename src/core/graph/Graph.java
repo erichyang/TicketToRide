@@ -150,7 +150,7 @@ public class Graph
 		visited.add(rail);
 		visited.add(getInverse(rail));
 		path.add(rail);
-		//System.out.println(path);	
+//		System.out.println(path);	
 		result s = new result(new ArrayList<>(path), sum, new HashSet<>(visited));
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		while (edgeIterator.hasNext())
@@ -161,9 +161,11 @@ public class Graph
 			{
 	//			System.out.println(p+"Rail: "+r);
 				result a = DFSVisit(r, visited, path, sum + r.getLength());
-				//System.out.println("A"+a+"\nS"+s);
+				System.out.println("A"+a.path+"\nS"+s.path);
 				if (a.dis > s.dis)
 				{
+					//a.path.remove(s.path.size()-1);
+					System.out.println("DAMN");
 					//System.out.println("A:"+a.path+"\nS"+s.path);
 					s = a;
 				}
