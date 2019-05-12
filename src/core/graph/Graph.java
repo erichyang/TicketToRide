@@ -104,7 +104,7 @@ public class Graph
 				reresult = res;
 			}
 		}
-		System.out.println(cityMap);
+		//System.out.println(cityMap);
 		if(reresult != null) path.addAll(reresult.path);
 		//System.out.println(maxDis);
 		return maxDis;
