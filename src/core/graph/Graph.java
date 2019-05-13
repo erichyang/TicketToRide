@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import core.Player;
-
 public class Graph
 {
 
@@ -106,7 +104,7 @@ public class Graph
 		}
 		//System.out.println(cityMap);
 		if(reresult != null) path.addAll(reresult.path);
-		System.out.println(maxDis);
+		//System.out.println(maxDis);
 		return maxDis;
 	}
 	
@@ -122,17 +120,6 @@ public class Graph
 		for (Rail r : list)
 		{
 			result a = DFSVisit(r, new HashSet<>(), new ArrayList<>(), r.getLength());
-			//System.out.println(a);
-//			for(int i = a.path.size()-1; i>0; i--) {
-//				Rail r1 = a.path.get(i);
-//				Rail r2 = a.path.get(i-1);
-//				//System.out.println(r1.getCityA()+r2.getCityA());
-//				if(r1.getCityA().equals(r2.getCityA())) {
-//					//System.out.println("hello");
-//					a.path.remove(r1.getLength()<r2.getLength() ? i:i-1);
-//					a.dis -= r2.getLength();
-//				}
-//			}
 			if (a.dis > max.dis)
 			{
 					max = a;
@@ -170,7 +157,6 @@ public class Graph
 					if (a.dis > s.dis)
 					{
 						//a.path.remove(s.path.size()-1);
-						//System.out.println("DAMN");
 						//System.out.println("A:"+a.path+"\nS"+s.path);
 						s = a;
 						

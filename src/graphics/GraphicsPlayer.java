@@ -51,11 +51,11 @@ public class GraphicsPlayer extends Graphics
 			{
 				g.setFont(new Font("Serif", Font.PLAIN, 24));
 				g.setColor(new Color(129, 9, 255));
-				g.fillRect(1280, 1000, 170, 50);
+				g.fillRect(1300, 1000, 170, 50);
 				g.setColor(Color.BLACK);
 				g.setStroke(new BasicStroke(5));
-				g.drawRect(1280, 1000, 170, 50);
-				g.drawString("Click to Scroll", 1300, 1027);
+				g.drawRect(1300, 1000, 170, 50);
+				g.drawString("Click to Scroll", 1320, 1027);
 			}
 		}
 		AffineTransform af = new AffineTransform();

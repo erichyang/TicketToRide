@@ -251,8 +251,8 @@ public class GraphicsBoard extends Graphics implements View
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Seriff", Font.BOLD, 36));
 		g.drawString("Winner: " + winPut+" "+pointnum+" Points", 15, 830);
-		g.drawString("Longest Path: " + pathPut+"-"+disnum, 15, 890);
-		g.drawString("Most Tickets: " + tickPut+"-"+ compNum,15, 950);
+		g.drawString("Longest Path: " + pathPut+" , "+disnum, 15, 890);
+		g.drawString("Most Tickets: " + tickPut+" , "+ compNum,15, 950);
 	}
 
 	@Override
