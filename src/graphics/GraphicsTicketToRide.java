@@ -78,7 +78,7 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener {
 		board = new GraphicsBoard();
 		game = new TicketToRide();
 		game.setView(board);
-		initilizeKeyBindings();
+		//initilizeKeyBindings();
 	}
 
 	public void initilizeKeyBindings() {
