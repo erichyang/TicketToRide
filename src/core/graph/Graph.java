@@ -106,7 +106,7 @@ public class Graph
 		}
 		//System.out.println(cityMap);
 		if(reresult != null) path.addAll(reresult.path);
-		//System.out.println(maxDis);
+		System.out.println(maxDis);
 		return maxDis;
 	}
 	
@@ -149,29 +149,71 @@ public class Graph
 		}
 		visited.add(rail);
 		visited.add(getInverse(rail));
-		path.add(rail);
-		//System.out.println(path);	
-		result s = new result(new ArrayList<>(path), sum, new HashSet<>(visited));
+		ArrayList<Rail> tmpPath = new ArrayList<Rail>(path);
+		tmpPath.add(rail);
+		//path.add(rail);
+		System.out.println(path);	
+		result s = new result(new ArrayList<>(tmpPath), sum, new HashSet<>(visited));
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
-		while (edgeIterator.hasNext())
-		{
-			Rail r = edgeIterator.next();
-			if (!visited.contains(r))
+		
+		if ( !edgeIterator.hasNext())
+			path = new ArrayList<Rail>(tmpPath);
+		else {
+			while (edgeIterator.hasNext())
 			{
-	//			System.out.println(p+"Rail: "+r);
-				result a = DFSVisit(r, visited, path, sum + r.getLength());
-				//System.out.println("A"+a.path+"\nS"+s.path);
-				if (a.dis > s.dis)
+				Rail r = edgeIterator.next();
+				if (!visited.contains(r))
 				{
-					//a.path.remove(s.path.size()-1);
-					//System.out.println("DAMN");
-					//System.out.println("A:"+a.path+"\nS"+s.path);
-					s = a;
+					System.out.println("Rail: "+r);
+					result a = DFSVisit(r, visited, tmpPath, sum + r.getLength());
+					//System.out.println("A"+a.path+"\nS"+s.path);
+					if (a.dis > s.dis)
+					{
+						//a.path.remove(s.path.size()-1);
+						//System.out.println("DAMN");
+						System.out.println("A:"+a.path+"\nS"+s.path);
+						s = a;
+						
+						path = new  ArrayList<Rail>(tmpPath);					
+					}
 				}
 			}
 		}
 		return s;
 	}
+	
+//	public result DFSVisit(Rail rail, Set<Rail> visited, List<Rail> path, int sum)
+//	{
+//		if (visited.contains(rail))
+//		{
+//			throw new AssertionError();
+//		}
+//		visited.add(rail);
+//		visited.add(getInverse(rail));
+//		path.add(rail);
+//		System.out.println(path);	
+//		result s = new result(new ArrayList<>(path), sum, new HashSet<>(visited));
+//		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
+//		while (edgeIterator.hasNext())
+//		{
+//			Rail r = edgeIterator.next();
+//			if (!visited.contains(r))
+//			{
+//				System.out.println("Rail: "+r);
+//				result a = DFSVisit(r, visited, path, sum + r.getLength());
+//				//System.out.println("A"+a.path+"\nS"+s.path);
+//				if (a.dis > s.dis)
+//				{
+//					//a.path.remove(s.path.size()-1);
+//					//System.out.println("DAMN");
+//					System.out.println("A:"+a.path+"\nS"+s.path);
+//					s = a;
+//					
+//				}
+//			}
+//		}
+//		return s;
+//	}
 
 	static class result
 	{
