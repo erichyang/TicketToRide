@@ -152,7 +152,7 @@ public class Graph
 		ArrayList<Rail> tmpPath = new ArrayList<Rail>(path);
 		tmpPath.add(rail);
 		//path.add(rail);
-		System.out.println(path);	
+		//System.out.println(path);	
 		result s = new result(new ArrayList<>(tmpPath), sum, new HashSet<>(visited));
 		Iterator<Rail> edgeIterator = cityMap.get(rail.getCityB()).iterator();
 		
@@ -161,22 +161,24 @@ public class Graph
 		else {
 			while (edgeIterator.hasNext())
 			{
-				Rail r = edgeIterator.next();
+				Rail r = edgeIterator.next();		
 				if (!visited.contains(r))
 				{
-					System.out.println("Rail: "+r);
+					//System.out.println("Rail: "+r);
 					result a = DFSVisit(r, visited, tmpPath, sum + r.getLength());
 					//System.out.println("A"+a.path+"\nS"+s.path);
 					if (a.dis > s.dis)
 					{
 						//a.path.remove(s.path.size()-1);
 						//System.out.println("DAMN");
-						System.out.println("A:"+a.path+"\nS"+s.path);
+						//System.out.println("A:"+a.path+"\nS"+s.path);
 						s = a;
 						
 						path = new  ArrayList<Rail>(tmpPath);					
 					}
 				}
+				visited.add(r);
+				visited.add(getInverse(r));
 			}
 		}
 		return s;
