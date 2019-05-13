@@ -177,7 +177,7 @@ public class Graph
 						path = new  ArrayList<Rail>(tmpPath);					
 					}
 				}
-				visited.add(r);
+	   			visited.add(r);
 				visited.add(getInverse(r));
 			}
 		}

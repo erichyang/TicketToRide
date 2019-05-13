@@ -29,15 +29,18 @@ public class Player
 	//private ArrayList<Rail> railList;
 	private Graph playerGraph;
 	private List<Rail> path;
+	private int dis;
 
 	public Player(String playerName, ArrayList<String> trainCards, ArrayList<Ticket> chosenTickets)
 	{
 		//railList = new ArrayList<Rail>();
+		dis =0;
 		path = new ArrayList<Rail>();
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
-		trains = 1045;
+		trains = 45;
+//		trains = 1045;
 		setPoints(0);
 		hand = new HashMap<>();
 		hand.put("Pink", 0);
@@ -59,8 +62,13 @@ public class Player
 
 	public int setPath() {
 		int pathlength = getGraph().LongestPath();
+		dis = pathlength;
 		path = getGraph().getLongestPath();
 		return pathlength;
+	}
+
+	public int getDis() {
+		return dis;
 	}
 	
 	public List<Rail> getPath(){
@@ -350,7 +358,7 @@ public class Player
 
 	public String toString()
 	{
-		return getName() + ": " + getPoints();
+		return getName();
 	}
 	
 	public boolean equals(Object obj) {
