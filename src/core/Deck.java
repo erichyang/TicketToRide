@@ -3,17 +3,14 @@ package core;
 import java.util.Collections;
 import java.util.Stack;
 
-public class Deck
-{
+public class Deck {
 	private static Stack<String> discard;
 	private static Stack<String> deck;
 	private GameEventListener listen;
 
-	public Deck()
-	{
+	public Deck() {
 		deck = new Stack<String>();
-		for (int i = 0; i < 11; i++)
-		{
+		for (int i = 0; i < 11; i++) {
 			deck.push("Pink");
 			deck.push("White");
 			deck.push("Blue");
@@ -30,29 +27,23 @@ public class Deck
 		Collections.shuffle(deck);
 	}
 
-	public void setListener(GameEventListener GEL)
-	{
+	public void setListener(GameEventListener GEL) {
 		listen = GEL;
 	}
 
-	public void addDiscardedCard(String card)
-	{
+	public void addDiscardedCard(String card) {
 		discard.add(0, card);
 	}
 
-	public String getDiscardCard()
-	{
-		if (discard.isEmpty())
-		{
+	public String getDiscardCard() {
+		if (discard.isEmpty()) {
 			return "";
 		} else
 			return discard.pop();
 	}
 
-	public String getCard(boolean wilds)
-	{
-		if (deck.isEmpty())
-		{
+	public String getCard(boolean wilds) {
+		if (deck.isEmpty()) {
 			if (discard.isEmpty())
 				return "";
 			else
@@ -66,13 +57,10 @@ public class Deck
 		return card;
 	}
 
-	public String getNonWild()
-	{
+	public String getNonWild() {
 		String temp = "";
-		for (String card : deck)
-		{
-			if (!card.equals("Wild"))
-			{
+		for (String card : deck) {
+			if (!card.equals("Wild")) {
 				temp = card;
 				break;
 			}
@@ -81,37 +69,31 @@ public class Deck
 		return temp;
 	}
 
-	public String[] getVisibleCards()
-	{
+	public String[] getVisibleCards() {
 		String[] drawCards = new String[5];
 		for (int i = 0; i < 5; i++)
 			drawCards[i] = deck.pop();
 		return drawCards;
 	}
 
-	public void refillDeck()
-	{
+	public void refillDeck() {
 		deck.addAll(discard);
 		Collections.shuffle(deck);
 		discard.clear();
 	}
 
-	public Stack<String> getDeck()
-	{
+	public Stack<String> getDeck() {
 		return deck;
 	}
 
-	public Stack<String> getDiscard()
-	{
+	public Stack<String> getDiscard() {
 		return discard;
 	}
 
-	public int deckWildCheck()
-	{
+	public int deckWildCheck() {
 		@SuppressWarnings("unchecked")
 		Stack<String> clone = (Stack<String>) discard.clone();
-		while (clone.contains("Wild"))
-		{
+		while (clone.contains("Wild")) {
 			clone.remove("Wild");
 		}
 		return clone.size();

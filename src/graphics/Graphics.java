@@ -11,8 +11,7 @@ import javax.imageio.ImageIO;
 
 import core.PlayerEvent;
 
-public abstract class Graphics
-{
+public abstract class Graphics {
 	private static BufferedImage pink;
 	private static BufferedImage white;
 	private static BufferedImage blue;
@@ -24,10 +23,8 @@ public abstract class Graphics
 	private static BufferedImage wild;
 	private static BufferedImage back;
 
-	static
-	{
-		try
-		{
+	static {
+		try {
 			pink = ImageIO.read(new File("game_files\\cards\\purple_train_card.jpg"));
 			white = ImageIO.read(new File("game_files\\cards\\white_train_card.jpg"));
 			blue = ImageIO.read(new File("game_files\\cards\\blue_train_card.jpg"));
@@ -38,8 +35,7 @@ public abstract class Graphics
 			green = ImageIO.read(new File("game_files\\cards\\green_train_card.jpg"));
 			wild = ImageIO.read(new File("game_files\\cards\\locomotive_train_card.png"));
 			back = ImageIO.read(new File("game_files\\cards\\card_back.jpg"));
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 		}
 	}
 
@@ -49,12 +45,10 @@ public abstract class Graphics
 
 	public abstract void update(Object obj);
 
-	protected Image color2Image(String color)
-	{
+	protected Image color2Image(String color) {
 		if (color == null)
 			return back;
-		switch (color)
-		{
+		switch (color) {
 		case ("Pink"):
 			return pink;
 		case ("White"):

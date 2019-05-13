@@ -7,19 +7,16 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
-public class GraphicsCity
-{
+public class GraphicsCity {
 	private String name;
 	private Point2D.Float cord;
 
-	public GraphicsCity(String name, Point2D.Float cord)
-	{
+	public GraphicsCity(String name, Point2D.Float cord) {
 		this.name = name;
 		this.cord = cord;
 	}
 
-	public void draw(Graphics2D g)
-	{
+	public void draw(Graphics2D g) {
 		g.setColor(new Color(244, 164, 66));
 		g.fill(new Ellipse2D.Double(cord.getX() - 10, cord.getY() - 10, 20, 20));
 		g.setColor(Color.BLACK);
@@ -30,8 +27,7 @@ public class GraphicsCity
 		g.drawString(name, (float) cord.getX() + 10, (float) cord.getY() + 15);
 	}
 
-	public Point2D.Float getCord()
-	{
+	public Point2D.Float getCord() {
 		return cord;
 	}
 }

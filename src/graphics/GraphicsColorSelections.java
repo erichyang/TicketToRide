@@ -9,20 +9,17 @@ import java.awt.geom.Point2D.Float;
 
 import core.PlayerEvent;
 
-public class GraphicsColorSelections extends Graphics
-{
+public class GraphicsColorSelections extends Graphics {
 	private boolean draw;
 	private ArrayList<Rectangle> list;
 	private String[] colors;
 	private String result;
 
-	public GraphicsColorSelections(ArrayList<String> available)
-	{
+	public GraphicsColorSelections(ArrayList<String> available) {
 		draw = true;
 		list = new ArrayList<Rectangle>();
 		colors = new String[available.size()];
-		for (int i = 0; i < available.size(); i++)
-		{
+		for (int i = 0; i < available.size(); i++) {
 			colors[i] = available.get(i);
 		}
 		int moving;
@@ -33,11 +30,9 @@ public class GraphicsColorSelections extends Graphics
 	}
 
 	@Override
-	public PlayerEvent contains(Float cord)
-	{
+	public PlayerEvent contains(Float cord) {
 		for (int i = 0; i < list.size(); i++)
-			if (list.get(i).contains(cord))
-			{
+			if (list.get(i).contains(cord)) {
 				result = colors[i];
 				draw = false;
 			}
@@ -45,16 +40,14 @@ public class GraphicsColorSelections extends Graphics
 	}
 
 	@Override
-	public void draw(Graphics2D g)
-	{
+	public void draw(Graphics2D g) {
 		// System.out.println(list);
 		g.setColor(Color.MAGENTA.darker().darker().darker());
 		g.setStroke(new BasicStroke(10));
 		g.fillRect((int) list.get(0).getX(), 850,
 				(int) (list.get(list.size() - 1).getX() - (int) list.get(0).getX() + (int) list.get(0).getWidth()),
 				100);
-		for (int i = 0; i < list.size(); i++)
-		{
+		for (int i = 0; i < list.size(); i++) {
 			g.setColor(string2Color(colors[i]));
 			g.fill(list.get(i));
 		}
@@ -66,30 +59,24 @@ public class GraphicsColorSelections extends Graphics
 	}
 
 	@Override
-	public void update(Object obj)
-	{
+	public void update(Object obj) {
 		// not used
 	}
 
-	public boolean getDraw()
-	{
+	public boolean getDraw() {
 		return draw;
 	}
 
-	public void setDraw(boolean draw)
-	{
+	public void setDraw(boolean draw) {
 		this.draw = draw;
 	}
 
-	public String getColor()
-	{
+	public String getColor() {
 		return result;
 	}
 
-	private Color string2Color(String color)
-	{
-		switch (color)
-		{
+	private Color string2Color(String color) {
+		switch (color) {
 		case ("Gray"):
 			return Color.gray;
 		case ("Pink"):

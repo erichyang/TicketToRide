@@ -11,16 +11,14 @@ import java.awt.geom.Point2D.Float;
 import core.Player;
 import core.PlayerEvent;
 
-public class GraphicsTicket extends Graphics
-{
+public class GraphicsTicket extends Graphics {
 	private Point2D.Float cord;
 	private int val;
 	private String cityA;
 	private String cityB;
 	private boolean completed;
 
-	public GraphicsTicket(Point2D.Float cord, int val, String cityA, String cityB)
-	{
+	public GraphicsTicket(Point2D.Float cord, int val, String cityA, String cityB) {
 		this.cord = cord;
 		this.val = val;
 		this.cityA = cityA;
@@ -28,8 +26,7 @@ public class GraphicsTicket extends Graphics
 		completed = false;
 	}
 
-	public GraphicsTicket(Point2D.Float float1, int val, String cities)
-	{
+	public GraphicsTicket(Point2D.Float float1, int val, String cities) {
 		this.cord = float1;
 		this.val = val;
 		this.cityA = cities.substring(0, cities.indexOf(","));
@@ -37,9 +34,8 @@ public class GraphicsTicket extends Graphics
 		completed = false;
 	}
 
-	public void draw(Graphics2D g)
-	{
-		if(!completed)
+	public void draw(Graphics2D g) {
+		if (!completed)
 			g.setColor(new Color(244, 158, 66));
 		else
 			g.setColor(Color.green.darker().darker());
@@ -57,27 +53,23 @@ public class GraphicsTicket extends Graphics
 	}
 
 	@Override
-	public void update(Object obj)
-	{
-		Player temp = (Player)obj;
-		if(temp.contains(cityA, cityB))
-		{
+	public void update(Object obj) {
+		Player temp = (Player) obj;
+		if (temp.contains(cityA, cityB)) {
 //			System.out.println(cityA + " " + cityB);
 			completed = true;
 		}
 	}
 
 	@Override
-	public PlayerEvent contains(Float cord)
-	{
+	public PlayerEvent contains(Float cord) {
 		if ((this.cord.x <= cord.x && this.cord.x + 125 >= cord.x)
 				&& (this.cord.y <= cord.y && this.cord.y + 200 >= cord.y))
 			return new PlayerEvent(Integer.MAX_VALUE);
 		return null;
 	}
 
-	public void drawBorder(Graphics2D g)
-	{
+	public void drawBorder(Graphics2D g) {
 		g.setColor(Color.YELLOW);
 		g.setStroke(new BasicStroke(10));
 		g.draw(new Rectangle((int) cord.x, (int) cord.y, 125, 200));
@@ -86,8 +78,7 @@ public class GraphicsTicket extends Graphics
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return cityA + " " + cityB;
 	}
 }

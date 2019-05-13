@@ -13,8 +13,7 @@ import core.Ticket;
 import core.graph.Graph;
 import core.graph.Rail;
 
-public class ViewEvent extends AWTEvent
-{
+public class ViewEvent extends AWTEvent {
 
 	/**
 	 * 
@@ -34,8 +33,7 @@ public class ViewEvent extends AWTEvent
 	public static int ROUND_CONT = 3;
 
 	public ViewEvent(int ID, Object source, Queue<Player> playerQueue, Deck GameDeck, Graph graph, String[] vis,
-			Stack<Ticket> ticketStack, int Weight)
-	{
+			Stack<Ticket> ticketStack, int Weight) {
 		super(source, ID);
 		map = graph;
 		gameDeck = GameDeck;
@@ -44,31 +42,28 @@ public class ViewEvent extends AWTEvent
 		tickets = ticketStack;
 		roundWeight = Weight;
 	}
-	
-	public Player getFirstPlayer()
-	{
+
+	public Player getFirstPlayer() {
 		ArrayList<Player> list = new ArrayList<Player>();
 		for (Player p : players)
 			list.add(p);
 		Player max = list.get(0);
-		for(Player item :list)
-			if(item.getPoints() > max.getPoints())
+		for (Player item : list)
+			if (item.getPoints() > max.getPoints())
 				max = item;
-		
+
 		int count = 0;
-		for(Player item :list)
-			if(max.getPoints()==item.getPoints())
+		for (Player item : list)
+			if (max.getPoints() == item.getPoints())
 				count++;
-		if(count > 1)
+		if (count > 1)
 			return null;
 //		for(int )
 		return max;
 	}
 
-	public Color getCurrentPlayer()
-	{
-		switch (players.peek().getName())
-		{
+	public Color getCurrentPlayer() {
+		switch (players.peek().getName()) {
 		case ("Smashboy"):
 			return (Color.yellow);
 		case ("Rhail Island Z"):
@@ -82,8 +77,7 @@ public class ViewEvent extends AWTEvent
 		}
 	}
 
-	public ArrayList<String> getSuffColors(Rail rail)
-	{
+	public ArrayList<String> getSuffColors(Rail rail) {
 		ArrayList<String> result = new ArrayList<String>();
 		HashMap<String, Integer> hand = players.peek().getHand();
 		int demand = rail.getLength();

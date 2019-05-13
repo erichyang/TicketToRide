@@ -11,11 +11,9 @@ import java.awt.geom.Point2D.Float;
 import core.PlayerEvent;
 import core.Ticket;
 
-public class GraphicsTicketSelections extends Graphics
-{
+public class GraphicsTicketSelections extends Graphics {
 	private ArrayList<GraphicsTicket> selection;
-	private static boolean[] flip =
-	{ true, true, true, true, true };
+	private static boolean[] flip = { true, true, true, true, true };
 	private static String idCat;
 	private boolean draw;
 	private boolean valid;
@@ -23,16 +21,14 @@ public class GraphicsTicketSelections extends Graphics
 	private boolean selected;
 	public Float mouseLoc;
 
-	public GraphicsTicketSelections(ArrayList<Ticket> selection, int num)
-	{
+	public GraphicsTicketSelections(ArrayList<Ticket> selection, int num) {
 		mouseLoc = new Float(0, 0);
 		this.selection = new ArrayList<GraphicsTicket>();
 		this.num = num;
 		int moving;
 		selected = true;
 		moving = 1920 / num / 2;
-		for (int i = 0; i < selection.size(); i++)
-		{
+		for (int i = 0; i < selection.size(); i++) {
 			this.selection.add(new GraphicsTicket(new Float(moving, 825), selection.get(i).getPointCount(),
 					selection.get(i).getCities()));
 			moving += 1920 / num / 1.2;
@@ -40,15 +36,13 @@ public class GraphicsTicketSelections extends Graphics
 		valid = false;
 	}
 
-	public void setLoc(Float loc)
-	{
+	public void setLoc(Float loc) {
 		if (loc != null)
 			mouseLoc = loc;
 	}
 
 	@Override
-	public PlayerEvent contains(Float cord)
-	{
+	public PlayerEvent contains(Float cord) {
 //select
 		draw = true;
 		for (int i = 0; i < selection.size(); i++)
@@ -56,13 +50,11 @@ public class GraphicsTicketSelections extends Graphics
 			if (selection.get(i).contains(cord) != null)
 				flip[i] = !flip[i];
 //cancel
-		if (cord.x >= 1475 && cord.x < 1675 && cord.y >= 500 && cord.y <= 600)
-		{
+		if (cord.x >= 1475 && cord.x < 1675 && cord.y >= 500 && cord.y <= 600) {
 			draw = false;
 		}
 //done		
-		if (valid && cord.x > 1700 && cord.x <= 1900 && cord.y >= 500 && cord.y <= 600)
-		{
+		if (valid && cord.x > 1700 && cord.x <= 1900 && cord.y >= 500 && cord.y <= 600) {
 			// 1700, 500, 200, 100
 			draw = false;
 			selected = draw;
@@ -80,12 +72,10 @@ public class GraphicsTicketSelections extends Graphics
 	}
 
 	@Override
-	public void draw(Graphics2D g)
-	{
+	public void draw(Graphics2D g) {
 		g.setColor(new Color(0, 0, 0, 150));
 		g.fillRect(5, 793, 1904, 253);
-		for (int i = 0; i < selection.size(); i++)
-		{
+		for (int i = 0; i < selection.size(); i++) {
 			GraphicsTicket ticket = selection.get(i);
 			ticket.draw(g);
 			if (flip[i])
@@ -99,13 +89,12 @@ public class GraphicsTicketSelections extends Graphics
 
 		Color cancelC = Color.BLACK;
 		Color doneC = Color.BLACK;
-		if (selection.size() != 5 && mouseLoc.x >= 1475 && mouseLoc.x < 1675 && mouseLoc.y >= 500 && mouseLoc.y <= 600)
-		{
+		if (selection.size() != 5 && mouseLoc.x >= 1475 && mouseLoc.x < 1675 && mouseLoc.y >= 500
+				&& mouseLoc.y <= 600) {
 //			System.out.println(mouseLoc);
 			cancelC = Color.YELLOW;
 		}
-		if (mouseLoc.x > 1700 && mouseLoc.x <= 1900 && mouseLoc.y >= 500 && mouseLoc.y <= 600)
-		{
+		if (mouseLoc.x > 1700 && mouseLoc.x <= 1900 && mouseLoc.y >= 500 && mouseLoc.y <= 600) {
 			doneC = Color.YELLOW;
 		}
 
@@ -113,8 +102,7 @@ public class GraphicsTicketSelections extends Graphics
 		drawDone(g, doneC);
 	}
 
-	private void drawCancel(Graphics2D g, Color color)
-	{
+	private void drawCancel(Graphics2D g, Color color) {
 		g.setColor(new Color(244, 158, 66));
 		g.fillRect(1475, 500, 200, 100);
 		g.setColor(color);
@@ -122,15 +110,13 @@ public class GraphicsTicketSelections extends Graphics
 		g.drawRect(1475, 500, 200, 100);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
 		g.drawString("HIDE", 1530, 555);
-		if (selection.size() == 5)
-		{
+		if (selection.size() == 5) {
 			g.setColor(new Color(0, 0, 0, 150));
 			g.fillRect(1475, 500, 200, 100);
 		}
 	}
 
-	private void drawDone(Graphics2D g, Color color)
-	{
+	private void drawDone(Graphics2D g, Color color) {
 		g.setColor(new Color(244, 158, 66));
 		g.fillRect(1700, 500, 200, 100);
 		g.setColor(color);
@@ -141,23 +127,19 @@ public class GraphicsTicketSelections extends Graphics
 	}
 
 	@Override
-	public void update(Object obj)
-	{
+	public void update(Object obj) {
 		// not used
 	}
 
-	public boolean getDraw()
-	{
+	public boolean getDraw() {
 		return draw;
 	}
 
-	public void setDraw(boolean draw)
-	{
+	public void setDraw(boolean draw) {
 		this.draw = draw;
 	}
-	
-	public boolean getSelected()
-	{
+
+	public boolean getSelected() {
 		return selected;
 	}
 }

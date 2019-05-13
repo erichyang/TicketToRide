@@ -2,8 +2,7 @@ package core;
 
 import java.util.EventObject;
 
-public class GameEvent extends EventObject
-{
+public class GameEvent extends EventObject {
 	/**
 	 * 
 	 */
@@ -15,14 +14,12 @@ public class GameEvent extends EventObject
 
 	private int eventID;
 
-	public GameEvent(int ID, Object source)
-	{
+	public GameEvent(int ID, Object source) {
 		super(source);
 		eventID = ID;
 	}
 
-	public int getID()
-	{
+	public int getID() {
 		return eventID;
 	}
 }// lemme merge plss

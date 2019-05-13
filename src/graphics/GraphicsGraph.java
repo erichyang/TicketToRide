@@ -13,8 +13,7 @@ import java.util.Scanner;
 import core.PlayerEvent;
 import core.graph.Graph;
 
-public class GraphicsGraph extends Graphics
-{
+public class GraphicsGraph extends Graphics {
 	private GraphicsCity[] cities;
 	private GraphicsRail[] rails;
 	private static GraphicsRail last;
@@ -32,8 +31,7 @@ public class GraphicsGraph extends Graphics
 //		}
 //	}
 
-	public GraphicsGraph() throws FileNotFoundException
-	{
+	public GraphicsGraph() throws FileNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(new File("game_files\\cities\\map.ttr"));
 		cities = new GraphicsCity[in.nextInt()];
@@ -42,13 +40,11 @@ public class GraphicsGraph extends Graphics
 					new Point2D.Float(in.nextInt(), in.nextInt()));
 		rails = new GraphicsRail[in.nextInt()];
 //		System.out.println(rails.length);
-		for (int i = 0; i < rails.length; i++)
-		{
+		for (int i = 0; i < rails.length; i++) {
 			rails[in.nextInt() - 1] = new GraphicsRail(in.nextInt(), in.nextInt(), in.nextInt(), in.nextBoolean());
 			in.nextLine();
 
-			for (int j = 0 + ((rails[i].getDoubles()) ? 0 : 1); j < 2; j++)
-			{
+			for (int j = 0 + ((rails[i].getDoubles()) ? 0 : 1); j < 2; j++) {
 				rails[i].setColor(in.next());
 				GraphicsCity cityA = cities[rails[i].getCityA()];
 				GraphicsCity cityB = cities[rails[i].getCityB()];
@@ -60,8 +56,7 @@ public class GraphicsGraph extends Graphics
 		}
 	}
 
-	public void draw(Graphics2D g)
-	{
+	public void draw(Graphics2D g) {
 //		g.drawImage(map, 0, 0, 1200,805, null);
 		g.setStroke(new BasicStroke(3));
 		for (int i = 0; i < rails.length; i++)
@@ -72,17 +67,14 @@ public class GraphicsGraph extends Graphics
 	}
 
 	@Override
-	public void update(Object e)
-	{
+	public void update(Object e) {
 		// take all claimed rails in graph and tell graphic rails that they r claimed
 		Graph update = (Graph) e;
 		for (int i = 0; i < rails.length; i++)
-			for (int j = 0; j < ((update.getRail(i).isDouble()) ? 2 : 1); j++)
-			{
+			for (int j = 0; j < ((update.getRail(i).isDouble()) ? 2 : 1); j++) {
 				if (update.getRail(i).getOwnerName(j) == null)
 					continue;
-				switch (update.getRail(i).getOwnerName(j))
-				{
+				switch (update.getRail(i).getOwnerName(j)) {
 				case ("Smashboy"):
 					rails[i].setOwner(Color.yellow, j);
 					break;
@@ -102,11 +94,9 @@ public class GraphicsGraph extends Graphics
 	}
 
 	@Override
-	public PlayerEvent contains(Point2D.Float cord)
-	{
+	public PlayerEvent contains(Point2D.Float cord) {
 		int count = 0;
-		for (GraphicsRail rail : rails)
-		{
+		for (GraphicsRail rail : rails) {
 			last = rail;
 			PlayerEvent r = rail.contains(cord);
 			if (r != null && r.getID() == -2)
@@ -119,39 +109,35 @@ public class GraphicsGraph extends Graphics
 		return null;
 	}
 
-	public void setRails(Point2D.Float cord)
-	{
+	public void setRails(Point2D.Float cord) {
 		boolean railhovered = false;
-		for (int i = 0; i < rails.length; i++)
-		{
+		for (int i = 0; i < rails.length; i++) {
 			GraphicsRail rail = rails[i];
 			if (rail.contains(cord) == null || railhovered)
 				Arrays.fill(rail.hovered, false);
-			else if (rail.contains(cord).getID() == -2)
-			{
-				//System.out.println(count++);
+			else if (rail.contains(cord).getID() == -2) {
+				// System.out.println(count++);
 				rail.hovered[0] = true;
 				railhovered = true;
-			} else if (rail.getDoubles() && rail.contains(cord).getID() == -3)
-			{
+			} else if (rail.getDoubles() && rail.contains(cord).getID() == -3) {
 				rail.hovered[1] = true;
 				railhovered = true;
 			}
 		}
 	}
-	
+
 	public void setLongestPath(List<Integer> path) {
-		for(int i=0; i<path.size(); i++) {
+		for (int i = 0; i < path.size(); i++) {
 //			int num = path.get(i)%10;
 //			//System.out.println(rails[path.get(i)/10]);
 //			rails[path.get(i)/10].setPath((num == 8) ? 0:1);
 			rails[path.get(i)].setPath(0);
-			if(rails[path.get(i)].getDoubles()) rails[path.get(i)].setPath(1);
+			if (rails[path.get(i)].getDoubles())
+				rails[path.get(i)].setPath(1);
 		}
 	}
 
-	public static GraphicsRail lastRail()
-	{
+	public static GraphicsRail lastRail() {
 		return last;
 	}
 }

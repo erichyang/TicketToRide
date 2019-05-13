@@ -10,8 +10,7 @@ import java.util.Arrays;
 
 import core.PlayerEvent;
 
-public class GraphicsRail extends Graphics
-{
+public class GraphicsRail extends Graphics {
 	private int cityA;
 	private int cityB;
 	private int trains;
@@ -23,8 +22,7 @@ public class GraphicsRail extends Graphics
 	public boolean[] hovered;
 	boolean[] path;
 
-	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles)
-	{
+	public GraphicsRail(int cityA, int cityB, int trains, boolean doubles) {
 		path = new boolean[(doubles) ? 2 : 1];
 		hovered = new boolean[(doubles) ? 2 : 1];
 		Arrays.fill(hovered, false);
@@ -41,19 +39,17 @@ public class GraphicsRail extends Graphics
 		owners = new Color[doubles ? 2 : 1];
 //		path = new Path2D[doubles ? 2 : 1];
 	}
-	
+
 	public void setPath(int i) {
-		//System.out.println("Reached");
+		// System.out.println("Reached");
 		path[i] = true;
 	}
 
-	public boolean getDoubles()
-	{
+	public boolean getDoubles() {
 		return doubles;
 	}
 
-	public void setColor(String color)
-	{
+	public void setColor(String color) {
 //		System.out.println(color + " " + colors[0] + " " + colors.length);
 		if (colors[0] == null)
 			colors[0] = color;
@@ -61,8 +57,7 @@ public class GraphicsRail extends Graphics
 			colors[1] = color;
 	}
 
-	public void setCords(double x1, double y1, double x2, double y2)
-	{
+	public void setCords(double x1, double y1, double x2, double y2) {
 		int a = (cords[0][0] == -1) ? 0 : 1;
 		cords[a][0] = x1;
 		cords[a][1] = y1;
@@ -77,19 +72,16 @@ public class GraphicsRail extends Graphics
 //		path[a].closePath();
 	}
 
-	public double[][] getCords()
-	{
+	public double[][] getCords() {
 		return cords;
 	}
 
-	public void draw(Graphics2D g)
-	{
+	public void draw(Graphics2D g) {
 //		g.setStroke(new BasicStroke(3));
 //		g.setStroke(new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 //				{ 33, 3 }, 22));
 //		g.drawString(""+path.length, 1000, 500);
-		for (int i = 0; i < ((doubles) ? 2 : 1); i++)
-		{
+		for (int i = 0; i < ((doubles) ? 2 : 1); i++) {
 			double x = cords[i][0] - cords[i][2];
 			double y = cords[i][1] - cords[i][3];
 
@@ -103,8 +95,7 @@ public class GraphicsRail extends Graphics
 //			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
 //			{ length - 2, 2 }, 0));
 //			g.setColor(string2Color(colors[i]));
-			if (doubles)
-			{
+			if (doubles) {
 				lines[i] = new Line2D.Float((int) (cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
 						(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
@@ -114,8 +105,7 @@ public class GraphicsRail extends Graphics
 				lines[0] = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]),
 						(int) (cords[i][3]));
 
-			if (hovered[i] && owners[i] == null)
-			{
+			if (hovered[i] && owners[i] == null) {
 				g.setColor(new Color(getContrastColor(string2Color(colors[i]))));
 				g.setStroke(new BasicStroke(13));
 				g.draw(lines[i]);
@@ -124,22 +114,20 @@ public class GraphicsRail extends Graphics
 				g.drawString("" + trains, 40, 750);
 			}
 			g.setColor(string2Color(colors[i]));
-			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f, new float[]
-			{ length - 2, 2 }, 0));
+			g.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0f,
+					new float[] { length - 2, 2 }, 0));
 			g.draw(lines[i]);
 
-			//if(path[i]) System.out.println("O: " + owners[i]);
-			
-			if (owners[i] != null)
-			{
+			// if(path[i]) System.out.println("O: " + owners[i]);
+
+			if (owners[i] != null) {
 				g.setColor(owners[i].darker());
-				if(path[i]) {
-					//System.out.println("JELLOS"+cityA+ " , " + cityB);
+				if (path[i]) {
+					// System.out.println("JELLOS"+cityA+ " , " + cityB);
 					g.setStroke(new BasicStroke(10));
-				}
-				else g.setStroke(new BasicStroke(3));
-				if (doubles)
-				{
+				} else
+					g.setStroke(new BasicStroke(3));
+				if (doubles) {
 					g.drawLine((int) (cords[i][0] + (-deltaX + 2 * deltaX * (i))),
 							(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
 							(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
@@ -153,25 +141,20 @@ public class GraphicsRail extends Graphics
 //	private Color getContrastColor(Color color) {
 //		return new Color(255 - color.getRed(),255 - color.getBlue(),255 - color.getGreen());
 //		}
-	private int getContrastColor(Color color)
-	{
+	private int getContrastColor(Color color) {
 		float[] hsb = new float[3];
 		Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
-		if (hsb[2] < 0.5)
-		{
+		if (hsb[2] < 0.5) {
 			hsb[2] = 0.7f;
-		} else
-		{
+		} else {
 			hsb[2] = 0.3f;
 		}
 		hsb[1] = hsb[1] * 0.2f;
 		return Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
 	}
 
-	private Color string2Color(String color)
-	{
-		switch (color)
-		{
+	private Color string2Color(String color) {
+		switch (color) {
 		case ("Gray"):
 			return Color.gray;
 		case ("Pink"):
@@ -195,50 +178,41 @@ public class GraphicsRail extends Graphics
 		}
 	}
 
-	public int getCityA()
-	{
+	public int getCityA() {
 		return cityA;
 	}
 
-	public int getCityB()
-	{
+	public int getCityB() {
 		return cityB;
 	}
 
 	@Override
-	public void update(Object obj)
-	{
+	public void update(Object obj) {
 		return;
 	}
 
-	public void setOwner(Color owner, int i)
-	{
+	public void setOwner(Color owner, int i) {
 		this.owners[i] = owner;
 	}
 
-	public Color[] getOwners()
-	{
+	public Color[] getOwners() {
 		return owners;
 	}
 
 	@Override
-	public PlayerEvent contains(Float cord)
-	{
+	public PlayerEvent contains(Float cord) {
 		// System.out.println(cord+","+ lin.ptLineDist(cord));
-		if (lines[0] != null && lines[0].ptSegDist(cord) <= 3)
-		{
+		if (lines[0] != null && lines[0].ptSegDist(cord) <= 3) {
 			// System.out.println(this);
 			return new PlayerEvent(-2);
-		} else if (doubles && lines[1] != null && lines[1].ptSegDist(cord) <= 3)
-		{
+		} else if (doubles && lines[1] != null && lines[1].ptSegDist(cord) <= 3) {
 			// System.out.println(this);
 			return new PlayerEvent(-3);
 		} else
 			return null;
 	}
 
-	public String toString()
-	{
+	public String toString() {
 		return cityA + "->" + cityB + " Owners: " + Arrays.toString(owners) + "Colors: " + Arrays.toString(colors);
 	}
 }
