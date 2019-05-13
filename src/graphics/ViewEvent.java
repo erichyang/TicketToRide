@@ -3,6 +3,8 @@ package graphics;
 import java.awt.AWTEvent;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Queue;
 import java.util.Stack;
@@ -101,5 +103,21 @@ public class ViewEvent extends AWTEvent {
 		if (hand.get("Green") + hand.get("Wild") >= demand)
 			result.add("Green");
 		return result;
+	}
+	
+	public ArrayList<Player> getSortedPlayer()
+	{
+		ArrayList<Player> pSet = new ArrayList<Player>();
+		for (Player p : players)
+			pSet.add(p);
+		Collections.sort(pSet, new Comparator<Player>()
+		{
+			@Override
+			public int compare(Player o1, Player o2)
+			{
+				return o2.getPoints() - o1.getPoints();
+			}
+		});
+		return pSet;
 	}
 }

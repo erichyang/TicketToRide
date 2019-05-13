@@ -223,16 +223,17 @@ public class GraphicsBoard extends Graphics implements View {
 			g.setColor(new Color(0, 0, 0, 100));
 			g.fillRect(5, 793, 1904, 253);
 		}
-		String winPut = winners.toString().replaceAll("\\[|\\]", "");
+
+		String winPut = lastUpdate.getSortedPlayer().toString().replaceAll("\\[|\\]", "");
 		String pathPut = path.toString().replaceAll("\\[|\\]", "");
 		String tickPut = ticket.toString().replaceAll("\\[|\\]", "");
-		int pointnum = winners.get(0).getPoints();
+		//int pointnum = winners.get(0).getPoints();
 		int disnum = path.get(0).getDis();
 		int compNum = ticket.get(0).getComp();
 
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Seriff", Font.BOLD, 36));
-		g.drawString("Winner: " + winPut + " " + pointnum + " Points", 15, 830);
+		g.drawString("Winner: " + winPut, 15, 830);
 		g.drawString("Longest Path: " + pathPut + " , " + disnum, 15, 890);
 		g.drawString("Most Tickets: " + tickPut + " , " + compNum, 15, 950);
 	}
@@ -313,21 +314,26 @@ public class GraphicsBoard extends Graphics implements View {
 			return null;
 		if (sel.getDraw())
 			return sel.contains(cord);
-//initial ticket
-		if (cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775) {
-//			System.out.println("Tickets selection");
-			@SuppressWarnings("unchecked")
-			Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
-			ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
-			if (temp1.size() < 3)
-				return null;
-			for (int i = 0; i < 3; i++)
-				temp2.add(temp1.pop());
-			if (roundWeight == 1)
-				return null;
-			sel = new GraphicsTicketSelections(temp2, 3);
-			sel.contains(cord);
+		if (col != null && col.getDraw()) {
+			col.contains(cord);
+			color = col.getColor();
+			return lastGrayRail;
 		}
+//initial ticket
+			if (cord.x >= 1500 && cord.x <= 1700 && cord.y >= 650 && cord.y <= 775) {
+//			System.out.println("Tickets selection");
+				@SuppressWarnings("unchecked")
+				Stack<Ticket> temp1 = (Stack<Ticket>) lastUpdate.tickets.clone();
+				ArrayList<Ticket> temp2 = new ArrayList<Ticket>();
+				if (temp1.size() < 3)
+					return null;
+				for (int i = 0; i < 3; i++)
+					temp2.add(temp1.pop());
+				if (roundWeight == 1)
+					return null;
+				sel = new GraphicsTicketSelections(temp2, 3);
+				sel.contains(cord);
+			}
 
 		player.contains(cord);
 
@@ -348,12 +354,6 @@ public class GraphicsBoard extends Graphics implements View {
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_FIVE);
 			if (cord.y >= 650 && cord.y <= 775)
 				return new PlayerEvent(PlayerEvent.PLAYER_DRAW_DECK);
-		}
-
-		if (col != null && col.getDraw()) {
-			col.contains(cord);
-			color = col.getColor();
-			return lastGrayRail;
 		}
 
 		PlayerEvent pE = graph.contains(cord);

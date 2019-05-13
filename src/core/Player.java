@@ -155,6 +155,7 @@ public class Player {
 			return false;
 		}
 		if ((trains - num) <= 2) {
+			trains -= num;
 			listen.onGameEvent(new GameEvent(0, this));
 			// System.out.println("B");
 		}
@@ -315,7 +316,7 @@ public class Player {
 	}
 
 	public String toString() {
-		return getName();
+		return getName() + "Points: " + points;
 	}
 
 	public boolean equals(Object obj) {
