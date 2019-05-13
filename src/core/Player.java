@@ -147,7 +147,7 @@ public class Player {
 		}
 		// System.out.println("usedCards: " + usedCards + "amount: "+ amount + "num:
 		// "+num);
-		System.out.println(usedCards);
+		//System.out.println(usedCards);
 		return usedCards;
 	}
 
