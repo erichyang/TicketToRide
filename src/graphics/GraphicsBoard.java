@@ -224,7 +224,11 @@ public class GraphicsBoard extends Graphics implements View {
 			g.fillRect(5, 793, 1904, 253);
 		}
 
-		String winPut = lastUpdate.getSortedPlayer().toString().replaceAll("\\[|\\]", "");
+		String winPut = "";
+		//lastUpdate.getSortedPlayer().toString().replaceAll("\\[|\\]", "");
+		ArrayList<Player> sorted = lastUpdate.getSortedPlayer();
+		for(int i = 0; i < sorted.size(); i++)
+			winPut+= (i+1) + ". " + sorted.get(i).getName() + " " + sorted.get(i).getPoints() + " ";
 		String pathPut = path.toString().replaceAll("\\[|\\]", "");
 		String tickPut = ticket.toString().replaceAll("\\[|\\]", "");
 		//int pointnum = winners.get(0).getPoints();

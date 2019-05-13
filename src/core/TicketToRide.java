@@ -25,6 +25,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	private Stack<Ticket> tickets;
 	private String[] visibleCards;
 	private final int[] pointValues = { 1, 2, 4, 7, 10, 15 };
+	private boolean lastTurn;
 
 	public TicketToRide() throws FileNotFoundException {
 		GameDeck = new Deck();
@@ -35,7 +36,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		players.add(new Player("Cleveland Z", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Smashboy", new ArrayList<String>(), new ArrayList<Ticket>()));
 		players.add(new Player("Teewee", new ArrayList<String>(), new ArrayList<Ticket>()));
-
+		lastTurn = false;
 		players.forEach(player -> {
 			player.setListener(this);
 			for (int i = 0; i < 4; i++)
@@ -207,11 +208,6 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 			throw new IllegalArgumentException("invalid PlayerEvent ID number");
 		}
 
-		if (currentPlayer.isFinalTurn()) {
-			// System.out.println(currentPlayer);
-			onGameEvent(new GameEvent(3, currentPlayer));
-		}
-
 		roundWeight += e.getWeight();
 		if (roundWeight == 2) {
 			nextRound();
@@ -249,6 +245,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 		int eventID = e.getID();
 
 		if (eventID == 0) {
+			System.out.println(getCurrentPlayer());
 			getCurrentPlayer().finalTurn();
 			// System.out.println(getCurrentPlayer());
 			// onPlayerEvent(new PlayerEvent(-1));
@@ -275,6 +272,14 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	}
 
 	public void nextRound() {
+		if (getCurrentPlayer().isFinalTurn()) {
+			System.out.print("hello");
+			if(lastTurn)
+			// System.out.println(currentPlayer);
+			onGameEvent(new GameEvent(3, getCurrentPlayer()));
+			else lastTurn = true;
+		}
+
 		roundWeight = 0;
 		players.offer(players.poll());
 		observer.observe(new ViewEvent(0, this, players, GameDeck, graph, visibleCards, tickets, roundWeight));

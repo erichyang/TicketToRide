@@ -101,18 +101,20 @@ public class Player {
 		// if enough cards, first draw from normal color, then draw from wild
 		if (playerGraph.indexList().contains(rail))
 			return null;
-		if (!useTrains(rail.getLength()))
+		if (!useTrains(rail.getLength())) {
+			//System.out.println("oofs");
 			return null;
+		}
 		String color = rail.getColor();
 
 		int num = rail.getLength();
-
-		if (trains < num)
-			return null;
+//
+//		if (trains < num)
+//			return null;
 		// System.out.println(hand.get(color));
 		// System.out.println("COLOR: "+color+ " RAIL: " + rail);
 		if (hand.get(color) == null) {
-			// System.out.println("BAD COLOR: " + color);
+			System.out.println("BAD COLOR: " + color);
 			return null;
 		}
 		// System.out.println(hand.get(color));
@@ -145,6 +147,7 @@ public class Player {
 		}
 		// System.out.println("usedCards: " + usedCards + "amount: "+ amount + "num:
 		// "+num);
+		System.out.println(usedCards);
 		return usedCards;
 	}
 
@@ -155,9 +158,9 @@ public class Player {
 			return false;
 		}
 		if ((trains - num) <= 2) {
-			trains -= num;
+			//trains -= num;
 			listen.onGameEvent(new GameEvent(0, this));
-			// System.out.println("B");
+			//System.out.println("B");
 		}
 		return true;
 	}
@@ -316,7 +319,8 @@ public class Player {
 	}
 
 	public String toString() {
-		return getName() + "Points: " + points;
+		return getName();
+//		+ "Points: " + points;
 	}
 
 	public boolean equals(Object obj) {
