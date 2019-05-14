@@ -26,6 +26,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	private String[] visibleCards;
 	private final int[] pointValues = { 1, 2, 4, 7, 10, 15 };
 	private boolean lastTurn;
+	private Player finalp;
 
 	public TicketToRide() throws FileNotFoundException {
 		GameDeck = new Deck();
@@ -273,11 +274,16 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 
 	public void nextRound() {
 		if (getCurrentPlayer().isFinalTurn()) {
+//			finalp = getCurrentPlayer();
 			System.out.print("hello");
-			if(lastTurn)
+			if(lastTurn ) {
 			// System.out.println(currentPlayer);
-			onGameEvent(new GameEvent(3, getCurrentPlayer()));
-			else lastTurn = true;
+				if(finalp.equals(getCurrentPlayer())) onGameEvent(new GameEvent(3, getCurrentPlayer()));
+			}
+			else{
+				finalp = getCurrentPlayer();
+				lastTurn = true;
+			}
 		}
 
 		roundWeight = 0;

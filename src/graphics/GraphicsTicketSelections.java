@@ -13,7 +13,7 @@ import core.Ticket;
 
 public class GraphicsTicketSelections extends Graphics {
 	private ArrayList<GraphicsTicket> selection;
-	private static boolean[] flip = { true, true, true, true, true };
+	private static boolean[] flip = { true, true, true, true, true};
 	private static String idCat;
 	private boolean draw;
 	private boolean valid;

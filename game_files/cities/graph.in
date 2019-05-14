@@ -74,6 +74,6 @@ Las_Vegas Salt_Lake_City 3 false Orange
 Dallas El_Paso 4 false Red
 Oklahoma_City El_Paso 5 false Yellow
 Oklahoma_City Dallas 2 true Gray Gray
-Houston Dallas 2 true Gray Gray
+Houston Dallas 1 true Gray Gray
 Little_Rock Dallas 2 false Gray
 Atlanta New_Orleans 4 true Yellow Orange
