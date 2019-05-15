@@ -275,7 +275,7 @@ public class TicketToRide implements GameEventListener, PlayerEventListener {
 	public void nextRound() {
 		if (getCurrentPlayer().isFinalTurn()) {
 //			finalp = getCurrentPlayer();
-			System.out.print("hello");
+//			System.out.print("hello");
 			if(lastTurn ) {
 			// System.out.println(currentPlayer);
 				if(finalp.equals(getCurrentPlayer())) onGameEvent(new GameEvent(3, getCurrentPlayer()));

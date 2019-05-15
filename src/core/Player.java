@@ -19,7 +19,7 @@ public class Player {
 	private int trains;
 	private int points;
 	private HashMap<String, Integer> hand;
-	private ArrayList<Ticket> ticketList;
+	protected ArrayList<Ticket> ticketList;
 	private String name;
 	private ArrayList<Set<String>> cities;
 	private boolean isFinalTurn;
@@ -37,7 +37,7 @@ public class Player {
 		winners = new boolean[3];
 		Arrays.fill(winners, false);
 		numCompletedTickets = 0;
-		trains = 3;
+		trains = 45;
 //		trains = 1045;
 		setPoints(0);
 		hand = new HashMap<>();
@@ -326,5 +326,13 @@ public class Player {
 	public boolean equals(Object obj) {
 		Player other = (Player) obj;
 		return name.equals(other.getName());
+	}
+
+	public boolean contains(Ticket item)
+	{
+		String temp = item.getCities();
+		String cityA = temp.substring(0, temp.indexOf(','));
+		String cityB = temp.substring(temp.indexOf(',')+1);
+		return contains(cityA, cityB);
 	}
 }

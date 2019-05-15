@@ -66,19 +66,20 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener {
 		}
 	}
 
-	playerAction PLAYER_DRAW_ONE = new playerAction(0);
-	playerAction PLAYER_DRAW_TWO = new playerAction(1);
-	playerAction PLAYER_DRAW_THREE = new playerAction(2);
-	playerAction PLAYER_DRAW_FOUR = new playerAction(3);
-	playerAction PLAYER_DRAW_FIVE = new playerAction(4);
-	playerAction PLAYER_DRAW_DECK = new playerAction(5);
-	playerAction END_GAME = new playerAction(-1);
+	final playerAction PLAYER_DRAW_ONE = new playerAction(0);
+	final playerAction PLAYER_DRAW_TWO = new playerAction(1);
+	final playerAction PLAYER_DRAW_THREE = new playerAction(2);
+	final playerAction PLAYER_DRAW_FOUR = new playerAction(3);
+	final playerAction PLAYER_DRAW_FIVE = new playerAction(4);
+	final playerAction PLAYER_DRAW_DECK = new playerAction(5);
+	final playerAction PLAYER_DRAW_TICKET = new playerAction(666);
+	final playerAction END_GAME = new playerAction(-1);
 
 	public GraphicsTicketToRide() throws IOException {
 		board = new GraphicsBoard();
 		game = new TicketToRide();
 		game.setView(board);
-		//initilizeKeyBindings();
+//		initilizeKeyBindings();
 	}
 
 	public void initilizeKeyBindings() {
@@ -97,6 +98,8 @@ public class GraphicsTicketToRide extends JPanel implements MouseListener {
 		getActionMap().put("key SPACE", PLAYER_DRAW_DECK);
 		getInputMap().put(KeyStroke.getKeyStroke("ctrl released ENTER"), "ctrl enter");
 		getActionMap().put("ctrl enter", END_GAME);
+		getInputMap().put(KeyStroke.getKeyStroke('m'), "key m");
+		getActionMap().put("key m", PLAYER_DRAW_TICKET);
 	}
 
 	@Override
