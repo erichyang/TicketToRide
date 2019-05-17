@@ -100,7 +100,6 @@ public class GraphicsRail extends Graphics {
 						(int) (cords[i][1] - (-deltaY + 2 * deltaY * (i))),
 						(int) (cords[i][2] - deltaX + 2 * deltaX * (i)),
 						(int) (cords[i][3] - (-deltaY + 2 * deltaY * (i))));
-//				System.out.println(Math.toDegrees(alpha) +"("+ deltaX+ ","+deltaY+")"+" "+"("+x+","+y+")");
 			} else
 				lines[0] = new Line2D.Float((int) (cords[i][0]), (int) (cords[i][1]), (int) (cords[i][2]),
 						(int) (cords[i][3]));
